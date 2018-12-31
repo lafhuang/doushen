@@ -16,33 +16,25 @@ var load = function () {
                 striped: true, // 是否各行渐变色
                 bordered: true, // 是否显示边框
                 expandAll: false, // 是否全部展开
-                // toolbar : '#exampleToolbar',
+                singleSelect : false, // 设置为true将禁止多选
                 columns: [
+                    { // 列配置项
+                        checkbox : true
+                    },
                     {
                         title: '名称',
-                        valign: 'center',
-                        field: 'menuName',
-                        width: '20%'
+                        field: 'menuName'
                     },
-
                     {
                         title: '图标',
                         field: 'icon',
-                        align: 'center',
-                        valign: 'center',
-                        width : '5%',
                         formatter: function (item, index) {
-                            return item.icon == null ? ''
-                                : '<i class="' + item.icon
-                                + ' fa-lg"></i>';
+                            return item.icon == null ? '' : '<i class="' + item.icon + ' fa-lg"></i>';
                         }
                     },
                     {
                         title: '类型',
                         field: 'type',
-                        align: 'center',
-                        valign: 'center',
-                        width : '10%',
                         formatter: function (item, index) {
                             if (item.type === '0') {
                                 return '<span class="label label-primary">目录</span>';
@@ -57,21 +49,16 @@ var load = function () {
                     },
                     {
                         title: '地址',
-                        valign: 'center',
-                        width : '20%',
                         field: 'url'
                     },
                     {
                         title: '权限标识',
-                        valign: 'center',
-                        width : '20%',
                         field: 'perms'
                     },
                     {
                         title: '操作',
                         field: 'id',
-                        align: 'center',
-                        valign: 'center',
+                        align : 'center',
                         formatter: function (item, index) {
                             var e = '<a class="btn btn-primary btn-sm '
                                 + s_edit_h
