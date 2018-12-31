@@ -1,52 +1,52 @@
 DROP TABLE
     ent_music_song;
 /*==============================================================*/
-/* Table: ent_music_song                                       */
+/* Table: ent_music_song                                        */
 /*==============================================================*/
 CREATE TABLE
     ent_music_song
     (
         id SERIAL NOT NULL,
-        name TEXT NULL,n
+        name TEXT NULL,
         album_id INTEGER NULL,
-        issue_date DATE NULL,
-        language TEXT NULL,
-        type TEXT NULL,
-        style TEXT NULL,
-        cover TEXT NULL,
+        track_number INTEGER NULL,
+        LENGTH TEXT NULL,
+        size TEXT NULL,
+        audio_type TEXT NULL,
+        lyrics TEXT NULL,
         create_by INTEGER NULL,
         create_time TIMESTAMP NULL,
         update_by INTEGER NULL,
         update_time TIMESTAMP NULL,
-        CONSTRAINT PK_ent_music_song PRIMARY KEY (id)
+        CONSTRAINT PK_ENT_MUSIC_SONG PRIMARY KEY (id)
     );
 COMMENT ON TABLE ent_music_song
 IS
-    '专辑表';
+    '歌曲表';
 COMMENT ON column ent_music_song.id
 IS
     'ID';
 COMMENT ON column ent_music_song.name
 IS
-    '专辑名';
+    '歌曲名';
 COMMENT ON column ent_music_song.album_id
 IS
-    '歌手';
-COMMENT ON column ent_music_song.issue_date
+    '专辑';
+COMMENT ON column ent_music_song.track_number
 IS
-    '发行日期';
-COMMENT ON column ent_music_song.language
+    '音轨号';
+COMMENT ON column ent_music_song.length
 IS
-    '语言';
-COMMENT ON column ent_music_song.type
+    '时长';
+COMMENT ON column ent_music_song.size
 IS
-    '类型';
-COMMENT ON column ent_music_song.style
+    '文件大小';
+COMMENT ON column ent_music_song.audio_type
 IS
-    '风格';
-COMMENT ON column ent_music_song.cover
+    '音频格式';
+COMMENT ON column ent_music_song.lyrics
 IS
-    '封面';
+    '歌词';
 COMMENT ON column ent_music_song.create_by
 IS
     '创建用户';
