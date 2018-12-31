@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.system.mapper.MenuMapper">
+
+    <select id="queryUserPerms" parameterType="java.lang.Integer" resultType="java.lang.String">
+        SELECT
+            m.perms
+        FROM
+            sys_menu m
+        JOIN
+            sys_role_menu rm
+        ON
+            rm.menu_id = m.id
+        JOIN
+            sys_user_role ur
+        ON
+            ur.role_id = rm.role_id
+        WHERE
+            ur.user_id = #{userId}
+    </select>
+
+    <select id="queryMenuByUser" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.MenuEntity">
+        SELECT DISTINCT
+            m.id,
+            m.menu_name,
+            m.parent_id,
+            m.url,
+            m.perms,
+            m.type,
+            m.icon,
+            m.sort
+        FROM
+            sys_menu m
+        JOIN
+            sys_role_menu rm
+        ON
+            m.id = rm.menu_id
+        JOIN
+            sys_user_role ur
+        ON
+            ur.role_id = rm.role_id
+        WHERE
+            ur.user_id = #{userId}
+        AND m.type IN('0', '1')
+        ORDER BY
+            m.sort
+    </select>
+
+    <select id="list" parameterType="java.util.Map" resultType="info.doushen.system.entity.MenuEntity">
+        SELECT
+            id,
+            menu_name,
+            parent_id,
+            url,
+            perms,
+            type,
+            icon,
+            sort
+        FROM
+            sys_menu
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="menuName != null and menuName != ''"> and menu_name = #{menuName} </if>
+            <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+            <if test="url != null and url != ''"> and url = #{url} </if>
+            <if test="perms != null and perms != ''"> and perms = #{perms} </if>
+            <if test="type != null and type != ''"> and type = #{type} </if>
+            <if test="icon != null and icon != ''"> and icon = #{icon} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{limit} offset #{offset}
+        </if>
+    </select>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.MenuEntity">
+        SELECT
+            id,
+            menu_name,
+            parent_id,
+            url,
+            perms,
+            type,
+            icon,
+            sort
+        FROM
+            sys_menu
+        WHERE
+            id = #{id}
+    </select>
+
+    <insert id="save" parameterType="info.doushen.system.entity.MenuEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+            sys_menu
+            (
+                menu_name,
+                parent_id,
+                url,
+                perms,
+                type,
+                icon,
+                sort,
+                create_by,
+                create_time,
+                update_by,
+                update_time
+            )
+            VALUES
+            (
+                #{menuName},
+                #{parentId},
+                #{url},
+                #{perms},
+                #{type},
+                #{icon},
+                #{sort},
+                #{createBy},
+                CURRENT_TIMESTAMP,
+                #{updateBy},
+                CURRENT_TIMESTAMP
+            )
+    </insert>
+
+    <update id="update" parameterType="info.doushen.system.entity.MenuEntity">
+        UPDATE
+            sys_menu
+        SET
+            menu_name = #{menuName},
+            parent_id = #{parentId},
+            url = #{url},
+            perms = #{perms},
+            type = #{type},
+            icon = #{icon},
+            sort = #{sort},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>

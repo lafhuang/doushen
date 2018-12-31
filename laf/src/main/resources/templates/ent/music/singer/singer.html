@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+    xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/singer.css" rel="stylesheet" />
+<body class="white-bg" style="background:#fafafa;">
+    <div class="wrapper wrapper-content ">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+            <div class="mod_singer_tag" id="tag_box">
+                <div class="singer_tag__list" id="initial_div">
+                    <a href="javascript:;" class="singer_tag__item singer_tag__item--all singer_tag__item--select" data-key="index" data-id="-100" hidefocus="">全部</a>
+                    <a href="javascript:;" th:each="initial : ${initialList}" class="singer_tag__item" data-key="index" th:data-id="${initial.dictValue}" hidefocus="" th:text="${initial.dictName}"></a>
+                </div>
+                <div class="singer_tag__list" id="region_div">
+                    <a href="javascript:;" class="singer_tag__item singer_tag__item--all singer_tag__item--select" data-key="area" data-id="-100" hidefocus="">全部</a>
+                    <a href="javascript:;" th:each="region : ${regionList}" class="singer_tag__item" data-key="area" th:data-id="${region.dictValue}" hidefocus="" th:text="${region.dictName}">内地</a>
+                </div>
+                <div class="singer_tag__list" id="type_div">
+                    <a href="javascript:;" class="singer_tag__item singer_tag__item--all singer_tag__item--select" data-key="sex" data-id="-100" hidefocus="">全部</a>
+                    <a href="javascript:;" th:each="type : ${typeList}" class="singer_tag__item" data-key="sex" th:data-id="${type.dictValue}" hidefocus="" th:text="${type.dictName}">男歌手</a>
+                </div>
+            </div>
+
+            <div id="singerlist">
+                <div class="mod_singer_list">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1">
+            <button shiro:hasPermission="ent:music:singer:add" type="button"
+                    class="btn  btn-primary" onclick="add()">
+                <i class="fa fa-plus" aria-hidden="true"></i>添加
+            </button>
+        </div>
+
+    </div>
+    <div th:include="include :: footer"></div>
+    <script type="text/javascript" src="/js/appjs/ent/music/singer/singer.js"></script>
+</body>
+</html>

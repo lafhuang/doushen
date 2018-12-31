@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/singer_info.css" rel="stylesheet" />
+<style type="text/css">
+    h1, ul, li {
+        margin:0; padding:0
+    }
+</style>
+<body class="white-bg" style="background:#fafafa;">
+    <div class="wrapper wrapper-content ">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-8">
+            <div class="mod_data">
+                <span class="data__cover">
+                    <input type="hidden" id="id" th:value="${singer.id}">
+                <a class="js_goto_tab js_none_index" data-stat="y_new.singer.thistab.singer_pic" data-tab="index" th:href="@{'/ent/music/singer/info/'+${singer.id}}" style="display:none;">
+                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
+                </a>
+                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo js_index">
+                </span>
+
+                <div class="data__cont">
+                    <div class="data__name">
+                        <h1 class="data__name_txt js_none_index" style="display:none;"><a class="js_goto_tab" data-stat="y_new.singer.thistab.singer_name" th:title="${singer.enName}" data-tab="index" th:href="@{'/ent/music/singer/info/'+${singer.id}}" th:text="${singer.name}"></a></h1>
+                        <h1 style="margin:0; padding:0;" class="data__name_txt js_index" th:title="${singer.name}" th:text="@{' ' + ${singer.name}}"></h1>
+                    </div>
+                    <div class="data__desc" id="singer_desc">
+                        <div class="data__desc_txt" id="short_desc" th:text="'歌手：' + ${singer.name} + ' | 英文名：' + ${singer.enName} + ' | 出生日期：' + ${#dates.format(singer.birthday, 'yyyy-MM-dd')} + ' | ' + ${region_type}"></div>
+                    </div>
+                    <ul class="mod_data_statistic">
+                        <li class="data_statistic__item data_statistic__item--last">
+                            <a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${#lists.size(songList)}"></strong></a>
+                        </li>
+                        <li class="data_statistic__item data_statistic__item--last">
+                            <a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${#lists.size(albumList)}"</strong></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <button shiro:hasPermission="ent:music:singer:edit" type="button"
+                    class="btn  btn-primary" onclick="edit()">
+                <i class="fa fa-edit" aria-hidden="true"></i>编辑
+            </button>
+            <button shiro:hasPermission="ent:music:singer:singer" type="button"
+                    class="btn  btn-success" onclick="location='/ent/music/singer'">
+                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>返回
+            </button>
+        </div>
+
+    </div>
+    <div th:include="include :: footer"></div>
+    <script type="text/javascript" src="/js/appjs/ent/music/singer/info.js"></script>
+</body>
+</html>

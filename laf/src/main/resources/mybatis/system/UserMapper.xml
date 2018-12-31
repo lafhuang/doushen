@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.system.mapper.UserMapper">
+
+	<select id="getUserByUserName" parameterType="java.lang.String" resultType="info.doushen.system.entity.UserEntity">
+		SELECT
+		    id,
+		    user_name,
+		    password,
+		    status
+		FROM
+		    sys_user
+		WHERE
+		    user_name = #{userName}
+	</select>
+
+	<select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
+		SELECT
+		    COUNT(1)
+		FROM
+		    sys_user
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="deptId != null and deptId != ''"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
+			<if test="email != null and email != ''"> and email = #{email} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
+			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
+			<if test="address != null and address != ''"> and address = #{address} </if>
+			<if test="province != null and province != ''"> and province = #{province} </if>
+			<if test="city != null and city != ''"> and city = #{city} </if>
+			<if test="district != null and district != ''"> and district = #{district} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+		</where>
+	</select>
+
+	<select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.system.entity.UserEntity">
+		SELECT
+		    id,
+		    user_name,
+		    name,
+		    password,
+		    dept_id,
+		    email,
+		    mobile,
+		    sex,
+		    birth,
+		    pic_id,
+		    address,
+		    province,
+		    city,
+		    district,
+		    status,
+		    create_by,
+		    create_time,
+		    update_by,
+		    update_time
+		FROM
+		    sys_user
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="userName != null and userName != ''"> and user_name = #{userName} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="deptId != null and deptId != ''"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
+			<if test="email != null and email != ''"> and email = #{email} </if>
+			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
+			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
+			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
+			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
+			<if test="address != null and address != ''"> and address = #{address} </if>
+			<if test="province != null and province != ''"> and province = #{province} </if>
+			<if test="city != null and city != ''"> and city = #{city} </if>
+			<if test="district != null and district != ''"> and district = #{district} </if>
+			<if test="status != null and status != ''"> and status = #{status} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{limit} offset #{offset}
+		</if>
+	</select>
+
+	<select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.UserEntity">
+		SELECT
+		    id,
+		    user_name,
+		    name,
+		    password,
+		    dept_id,
+		    email,
+		    mobile,
+		    sex,
+		    birth,
+		    pic_id,
+		    address,
+		    province,
+		    city,
+		    district,
+		    status
+		FROM
+		    sys_user
+		WHERE
+		    id = #{id}
+	</select>
+
+	<update id="update" parameterType="info.doushen.system.entity.UserEntity">
+		UPDATE
+		    sys_user
+		<set>
+			<if test="userName != null">user_name = #{userName}, </if>
+			<if test="name != null">name = #{name}, </if>
+			<if test="password != null">password = #{password}, </if>
+			<if test="deptId != null">dept_id = #{deptId}, </if>
+			<if test="email != null">email = #{email}, </if>
+			<if test="mobile != null">mobile = #{mobile}, </if>
+			<if test="sex != null">sex = #{sex}, </if>
+			<if test="birth != null">birth = #{birth}, </if>
+			<if test="picId != null">pic_id = #{picId}, </if>
+			<if test="address != null">address = #{address}, </if>
+			<if test="province != null">province = #{province}, </if>
+			<if test="city != null">city = #{city}, </if>
+			<if test="district != null">district = #{district}, </if>
+			<if test="status != null">status = #{status}, </if>
+			update_by = #{updateBy},
+			update_time = CURRENT_TIMESTAMP
+		</set>
+		WHERE
+		    id = #{id}
+	</update>
+
+	<insert id="save" parameterType="info.doushen.system.entity.UserEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO
+		    sys_user
+		    (
+		        user_name,
+		        name,
+		        password,
+		        dept_id,
+		        email,
+		        mobile,
+		        sex,
+		        birth,
+		        pic_id,
+		        address,
+		        province,
+		        city,
+		        district,
+		        status,
+		        create_by,
+		        create_time,
+		        update_by,
+		        update_time
+		    )
+		    VALUES
+		    (
+		        #{userName},
+		        #{name},
+		        #{password},
+		        #{deptId},
+		        #{email},
+		        #{mobile},
+		        #{sex},
+		        #{birth},
+		        #{picId},
+		        #{address},
+		        #{province},
+		        #{city},
+		        #{district},
+		        #{status},
+		        #{createBy},
+		        CURRENT_TIMESTAMP,
+		        #{createBy},
+		        CURRENT_TIMESTAMP
+		    )
+	</insert>
+
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		    sys_user
+		WHERE
+		    id = #{id}
+	</delete>
+
+</mapper>

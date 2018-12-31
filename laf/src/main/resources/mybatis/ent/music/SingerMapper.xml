@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.ent.music.mapper.SingerMapper">
+
+    <select id="list" parameterType="java.util.Map" resultType="info.doushen.ent.music.entity.SingerEntity">
+        SELECT
+            id,
+            name,
+            en_name,
+            region,
+            initial,
+            birthday,
+            type,
+            star,
+            photo,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        FROM
+            ent_music_singer
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="enName != null and enName != ''"> and en_name = #{enName} </if>
+            <if test="region != null and region != ''"> and region = #{region} </if>
+            <if test="initial != null and initial != ''"> and initial = #{initial} </if>
+            <if test="type != null and type != ''"> and type = #{type} </if>
+        </where>
+        order by initial, name
+    </select>
+
+    <insert id="save" parameterType="info.doushen.ent.music.entity.SingerEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+            ent_music_singer
+            (
+                name,
+                en_name,
+                region,
+                initial,
+                birthday,
+                type,
+                star,
+                photo,
+                create_by,
+                create_time,
+                update_by,
+                update_time
+            )
+            VALUES
+            (
+                #{name},
+                #{enName},
+                #{region},
+                #{initial},
+                #{birthday},
+                #{type},
+                #{star},
+                #{photo},
+                #{createBy},
+                CURRENT_TIMESTAMP,
+                #{createBy},
+                CURRENT_TIMESTAMP
+            )
+    </insert>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.ent.music.entity.SingerEntity">
+        SELECT
+            id,
+            name,
+            en_name,
+            region,
+            initial,
+            birthday,
+            type,
+            star,
+            photo,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        FROM
+            ent_music_singer
+        WHERE
+            id = #{singerId}
+    </select>
+
+    <update id="update" parameterType="info.doushen.ent.music.entity.SingerEntity">
+        UPDATE
+            ent_music_singer
+        SET
+            name = #{name},
+            en_name = #{enName},
+            region = #{region},
+            initial = #{initial},
+            birthday = #{birthday},
+            type = #{type},
+            star = #{star},
+            photo = #{photo},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>

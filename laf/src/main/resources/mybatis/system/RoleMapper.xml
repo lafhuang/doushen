@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.system.mapper.RoleMapper">
+
+    <select id="list" parameterType="java.util.Map" resultType="info.doushen.system.entity.RoleEntity">
+        SELECT
+            id,
+            role_name,
+            role_sign,
+            role_desc
+        FROM
+            sys_role
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="roleName != null and roleName != ''"> and role_name = #{roleName} </if>
+            <if test="roleSign != null and roleSign != ''"> and role_sign = #{roleSign} </if>
+            <if test="roleDesc != null and roleDesc != ''"> and role_desc = #{roleDesc} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{limit} offset #{offset}
+        </if>
+    </select>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.RoleEntity">
+        SELECT
+            id,
+            role_name,
+            role_sign,
+            role_desc
+        FROM
+            sys_role
+        WHERE
+            id = #{id}
+    </select>
+
+    <update id="update" parameterType="info.doushen.system.entity.RoleEntity">
+        UPDATE
+            sys_role
+        SET
+            role_name = #{roleName},
+            role_sign = #{roleSign},
+            role_desc = #{roleDesc},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+    <insert id="save" parameterType="info.doushen.system.entity.RoleEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+            sys_role
+            (
+                role_name,
+                role_sign,
+                role_desc,
+                create_by,
+                create_time,
+                update_by,
+                update_time
+            )
+            VALUES
+            (
+                #{roleName},
+                #{roleSign},
+                #{roleDesc},
+                #{createBy},
+                CURRENT_TIMESTAMP,
+                #{createBy},
+                CURRENT_TIMESTAMP
+            )
+    </insert>
+
+    <delete id="remove" parameterType="java.lang.Integer">
+        DELETE
+        FROM
+            sys_role
+        WHERE
+            id = #{id}
+    </delete>
+
+</mapper>

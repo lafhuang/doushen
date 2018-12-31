@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.system.mapper.DictMapper">
+
+	<select id="listType" resultType="info.doushen.system.entity.DictEntity">
+		SELECT
+		    dict_type,
+		    description
+		FROM
+		    sys_dict
+		GROUP BY
+		    dict_type,
+		    description
+	</select>
+
+	<select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
+		SELECT
+		    COUNT(1)
+		FROM
+		    sys_dict
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
+			<if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
+			<if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
+			<if test="description != null and description != ''"> and description = #{description} </if>
+		</where>
+	</select>
+
+	<select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.system.entity.DictEntity">
+		SELECT
+		    id,
+		    dict_name,
+		    dict_value,
+		    dict_type,
+		    description,
+		    sort,
+		    create_by,
+		    create_time,
+		    update_by,
+		    update_time
+		FROM
+		    sys_dict
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
+			<if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
+			<if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
+			<if test="description != null and description != ''"> and description = #{description} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by dict_type, sort
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{limit} offset #{offset}
+		</if>
+	</select>
+
+	<insert id="save" parameterType="info.doushen.system.entity.DictEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO
+		    sys_dict
+		    (
+		        dict_name,
+		        dict_value,
+		        dict_type,
+		        description,
+		        sort,
+		        create_by,
+		        create_time,
+		        update_by,
+		        update_time
+		    )
+		    VALUES
+		    (
+		        #{dictName},
+		        #{dictValue},
+		        #{dictType},
+		        #{description},
+		        #{sort},
+		        #{createBy},
+		        CURRENT_TIMESTAMP,
+		        #{createBy},
+		        CURRENT_TIMESTAMP
+		    )
+	</insert>
+
+	<select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.DictEntity">
+		SELECT
+		    id,
+		    dict_name,
+		    dict_value,
+		    dict_type,
+		    description,
+		    sort,
+		    create_by,
+		    create_time,
+		    update_by,
+		    update_time
+		FROM
+		    sys_dict
+		WHERE
+		    id = #{id}
+	</select>
+
+	<delete id="remove" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+		    sys_dict
+		WHERE
+		    id = #{id}
+	</delete>
+
+	<update id="update" parameterType="info.doushen.system.entity.DictEntity">
+		UPDATE
+		    sys_dict
+		SET
+		    dict_name = #{dictName},
+		    dict_value = #{dictValue},
+		    dict_type = #{dictType},
+		    description = #{description},
+		    sort = #{sort},
+		    update_by = #{updateBy},
+		    update_time = CURRENT_TIMESTAMP
+		WHERE
+		    id = #{id}
+	</update>
+
+	<select id="queryDictByType" parameterType="java.lang.String" resultType="info.doushen.system.entity.DictEntity">
+		SELECT
+		    dict_name,
+		    dict_value
+		FROM
+		    sys_dict
+		WHERE
+		    dict_type = #{dictType}
+		ORDER BY
+		    sort
+	</select>
+
+</mapper>

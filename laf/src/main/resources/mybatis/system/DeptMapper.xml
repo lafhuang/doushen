@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.system.mapper.DeptMapper">
+
+	<select id="list" parameterType="java.util.Map" resultType="info.doushen.system.entity.DeptEntity">
+		SELECT
+		    id,
+		    dept_name,
+		    parent_id,
+		    sort
+		FROM
+		    sys_dept
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="deptName != null and deptName != ''"> and dept_name = #{deptName} </if>
+			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{limit} offset #{offset}
+		</if>
+	</select>
+
+	<select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.DeptEntity">
+		SELECT
+		    id,
+		    dept_name,
+		    parent_id,
+		    sort
+		FROM
+		    sys_dept
+		WHERE
+		    id = #{id}
+	</select>
+
+	<insert id="save" parameterType="info.doushen.system.entity.DeptEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO
+		    sys_dept
+		    (
+		        dept_name,
+		        parent_id,
+		        sort,
+		        create_by,
+		        create_time,
+		        update_by,
+		        update_time
+		    )
+		VALUES
+		    (
+		        #{deptName},
+		        #{parentId},
+		        #{sort},
+		        #{createBy},
+		        CURRENT_TIMESTAMP,
+		        #{createBy},
+		        CURRENT_TIMESTAMP
+		    )
+	</insert>
+
+</mapper>
