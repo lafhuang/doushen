@@ -3,7 +3,11 @@ package info.doushen.ent.music.controller;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
+import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Query;
+import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SingerService;
+import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SingerEntity;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
@@ -14,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +37,9 @@ public class SingerController extends BaseController {
 
     @Autowired
     private SingerService singerService;
+
+    @Autowired
+    private AlbumService albumService;
 
     @Autowired
     private DictService dictService;
@@ -119,8 +128,20 @@ public class SingerController extends BaseController {
 
         model.addAttribute("region_type", region_type);
 
-        model.addAttribute("songList", 100);
-        model.addAttribute("albumList", 100);
+        Map<String, Object> params = new HashMap<>();
+        params.put("limit", 5);
+        params.put("offset", 0);
+
+        params.put("singerId", singer.getId());
+
+        Query query = new Query(params);
+        PageUtils albumPage = albumService.pageAlbumList(query);
+
+        model.addAttribute("albumPage", albumPage);
+        model.addAttribute("songPage", new PageUtils(1000, new ArrayList<AlbumEntity>()));
+
+        //model.addAttribute("songList", 100);
+        // model.addAttribute("albumList", 100);
 
         return TEMPLATE_PREFIX + "info";
     }

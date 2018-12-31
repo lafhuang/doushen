@@ -7,17 +7,14 @@ import info.doushen.common.utils.PageUtils;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.entity.AlbumEntity;
-import info.doushen.ent.music.entity.SingerEntity;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
-import info.doushen.system.entity.RoleEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

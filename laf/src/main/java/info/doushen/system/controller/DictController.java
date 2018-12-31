@@ -121,4 +121,10 @@ public class DictController extends BaseController {
         }
     }
 
+    @GetMapping("/list/{type}")
+    @ResponseBody
+    public List<DictEntity> listType(@PathVariable("type") String type) {
+        return dictService.queryDictByType(type);
+    }
+
 }
