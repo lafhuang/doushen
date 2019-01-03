@@ -1,16 +1,26 @@
-package info.doushen.ent.music.biz;
+package info.doushen.ent.music.mapper;
 
-import info.doushen.common.utils.PageUtils;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.SongEntity;
+import info.doushen.ent.music.vo.SongVO;
+
+import java.util.List;
 
 /**
- * SongService
+ * SongMapper
  *
  * @author huangdou
- * @date 2019/1/1
+ * @date 2019/1/3
  */
-public interface SongService {
+public interface SongMapper {
+
+    /**
+     * 获取歌曲记录数
+     *
+     * @param query
+     * @return
+     */
+    int count(Query query);
 
     /**
      * 分页获取歌曲列表
@@ -18,7 +28,7 @@ public interface SongService {
      * @param query
      * @return
      */
-    PageUtils pageSongList(Query query);
+    List<SongVO> list(Query query);
 
     /**
      * 保存歌曲

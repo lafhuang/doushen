@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">歌曲：</label>
+							<div class="col-sm-8">
+								<input id="name" name="name" class="form-control" type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">歌手：</label>
+							<div class="col-sm-8">
+								<select id="singer" data-placeholder="选择歌手" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">专辑：</label>
+							<div class="col-sm-8">
+								<input type="hidden" id="albumId" name="albumId">
+								<select id="album" data-placeholder="选择专辑" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">音轨号：</label>
+							<div class="col-sm-8">
+								<input id="trackNumber" name="trackNumber" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">时长：</label>
+							<div class="col-sm-8">
+								<input id="length" name="length" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">文件大小：</label>
+							<div class="col-sm-8">
+								<input id="size" name="size" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">音频类型：</label>
+							<div class="col-sm-8">
+								<select id="audioType" name="audioType" data-placeholder="选择类别" class="form-control chosen-select">
+									<option th:each="type : ${audiolList}" th:value="${type.dictValue}" th:text="${type.dictName}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">歌词：</label>
+							<div class="col-sm-8">
+								<input id="lyrics" name="lyrics" class="form-control"
+									   type="text">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-8 col-sm-offset-3">
+								<button type="submit" class="btn btn-primary">提交</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/ent/music/song/add.js">
+</script>
+</body>
+</html>

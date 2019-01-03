@@ -1,102 +1,8 @@
 var request_prefix = "/ent/music/song";
 
-var singerMap;
-
-var album_type;
-var album_style;
-var album_language;
-
 $(function() {
-    loadSinger();
-    loadDict();
 	load();
 });
-
-function loadSinger() {
-    var data = {};
-
-    $.ajax({
-        type: 'post',
-        url : "/ent/music/singer/list",
-        data: JSON.stringify(data),
-        dataType: 'json',
-        cache:false,
-        async:false,
-        contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-			singerMap = {};
-
-			//加载数据
-			for (var i = 0; i < result.length; i++) {
-			    singerMap[result[i].id] = result[i].name;
-			}
-		}
-	});
-}
-
-function loadDict() {
-	$.ajax({
-        type: 'get',
-		url : "/system/dict/list/album_type",
-        dataType: 'json',
-        cache:false,
-        async:false,
-        contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
-            album_type = {};
-
-            //加载数据
-            for (var i = 0; i < result.length; i++) {
-                album_type[result[i].dictValue] = result[i].dictName;
-            }
-        }
-    });
-
-    $.ajax({
-        type: 'get',
-        url : "/system/dict/list/album_style",
-        dataType: 'json',
-        cache:false,
-        async:false,
-        contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
-            album_style = {};
-
-            //加载数据
-            for (var i = 0; i < result.length; i++) {
-                album_style[result[i].dictValue] = result[i].dictName;
-            }
-        }
-    });
-
-    $.ajax({
-        type: 'get',
-        url : "/system/dict/list/album_language",
-        dataType: 'json',
-        cache:false,
-        async:false,
-        contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
-            album_language = {};
-
-            //加载数据
-            for (var i = 0; i < result.length; i++) {
-                album_language[result[i].dictValue] = result[i].dictName;
-            }
-        }
-    });
-}
 
 function load() {
 	$('#exampleTable')
@@ -143,43 +49,32 @@ function load() {
 					},
 					{
 						field : 'name',
-						title : '专辑名'
+						title : '歌曲'
 					},
 					{
-						field : 'singerId',
-						title : '歌手',
-						formatter : function(value, row, index) {
-						    return "<a href='/ent/music/singer/info/" + value + "'>" + singerMap[value] + "</a>"
-						}
+						field : 'albumName',
+						title : '专辑'
 					},
 					{
-						field : 'issueDate',
-						title : '发行日期',
-						formatter : function(value, row, index) {
-						    return value.replace(" 00:00:00", "");
-						}
+						field : 'singerName',
+						title : '歌手'
 					},
 					{
-						field : 'language',
-						title : '语言',
-						formatter : function(value, row, index) {
-						    return album_language[value];
-						}
+						field : 'trackNumber',
+						title : '音轨号'
 					},
 					{
-						field : 'type',
-						title : '类型',
-                        formatter : function(value, row, index) {
-                            return album_type[value];
-                        }
+						field : 'length',
+						title : '时长'
 					},
 					{
-						field : 'style',
-						title : '风格',
-                        formatter : function(value, row, index) {
-                            return album_style[value];
-                        }
+						field : 'size',
+						title : '文件大小'
 					},
+                    {
+                        field : 'audioType',
+                        title : '音频类型'
+                    },
 					{
 						title : '操作',
 						field : 'id',
@@ -204,7 +99,7 @@ function add() {
 	// iframe层
 	layer.open({
 		type : 2,
-		title : '添加角色',
+		title : '添加歌曲',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '60%', '60%' ],

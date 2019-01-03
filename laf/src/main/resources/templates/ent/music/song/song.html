@@ -9,11 +9,11 @@
         <div class="ibox">
             <div class="ibox-body">
                 <div id="exampleToolbar" role="group">
-                    <button shiro:hasPermission="ent:music:album:add" type="button"
+                    <button shiro:hasPermission="ent:music:song:add" type="button"
                             class="btn btn-primary" onclick="add()">
                         <i class="fa fa-plus" aria-hidden="true"></i>添加
                     </button>
-                    <button shiro:hasPermission="ent:music:album:batchRemove" type="button"
+                    <button shiro:hasPermission="ent:music:song:batchRemove" type="button"
                             class="btn btn-danger" onclick="batchRemove()">
                         <i class="fa fa-trash" aria-hidden="true"></i>删除
                     </button>
@@ -30,12 +30,12 @@
 				var s_remove_h = 'hidden';
 			</script>
     </div>
-    <div shiro:hasPermission="ent:music:album:edit">
+    <div shiro:hasPermission="ent:music:song:edit">
         <script type="text/javascript">
 				s_edit_h = '';
 			</script>
     </div>
-    <div shiro:hasPermission="ent:music:album:remove">
+    <div shiro:hasPermission="ent:music:song:remove">
         <script type="text/javascript">
 				var s_remove_h = '';
 			</script>

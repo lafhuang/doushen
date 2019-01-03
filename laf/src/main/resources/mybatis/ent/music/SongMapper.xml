@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.ent.music.mapper.SongMapper">
+
+    <select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            ent_music_song
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.ent.music.vo.SongVO">
+        SELECT
+            song.id,
+            song.name,
+            song.album_id,
+            album.name  AS albumName,
+            singer.id   AS singerId,
+            singer.name AS singerName,
+            song.track_number,
+            song.length,
+            song.size,
+            song.audio_type,
+            song.lyrics,
+            song.create_by,
+            song.create_time,
+            song.update_by,
+            song.update_time
+        FROM
+            ent_music_song song
+        JOIN
+            ent_music_album album
+        ON
+            song.album_id = album.id
+        JOIN
+            ent_music_singer singer
+        ON
+            album.singer_id = singer.id
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{limit} offset #{offset}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="info.doushen.ent.music.entity.SongEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+            ent_music_song
+            (
+                name,
+                album_id,
+                track_number,
+                length,
+                size,
+                audio_type,
+                lyrics,
+                create_by,
+                create_time,
+                update_by,
+                update_time
+            )
+            VALUES
+            (
+                #{name},
+                #{albumId},
+                #{trackNumber},
+                #{length},
+                #{size},
+                #{audioType},
+                #{lyrics},
+                #{createBy},
+                CURRENT_TIMESTAMP,
+                #{createBy},
+                CURRENT_TIMESTAMP
+            )
+    </insert>
+
+</mapper>

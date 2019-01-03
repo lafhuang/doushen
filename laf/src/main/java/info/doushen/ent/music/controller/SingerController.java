@@ -7,7 +7,7 @@ import info.doushen.common.utils.PageUtils;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SingerService;
-import info.doushen.ent.music.entity.AlbumEntity;
+import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.SingerEntity;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +39,9 @@ public class SingerController extends BaseController {
 
     @Autowired
     private AlbumService albumService;
+
+    @Autowired
+    private SongService songService;
 
     @Autowired
     private DictService dictService;
@@ -71,7 +73,6 @@ public class SingerController extends BaseController {
     @Log("添加歌手")
     @GetMapping("/add")
     String add(Model model) {
-
         List<DictEntity> regionList = dictService.queryDictByType("singer_region");
         model.addAttribute("regionList", regionList);
 
@@ -128,20 +129,27 @@ public class SingerController extends BaseController {
 
         model.addAttribute("region_type", region_type);
 
-        Map<String, Object> params = new HashMap<>();
-        params.put("limit", 5);
-        params.put("offset", 0);
+        Map<String, Object> albumParams = new HashMap<>();
+        albumParams.put("limit", 5);
+        albumParams.put("offset", 0);
 
-        params.put("singerId", singer.getId());
+        albumParams.put("singerId", singer.getId());
 
-        Query query = new Query(params);
-        PageUtils albumPage = albumService.pageAlbumList(query);
+        Query albumQuery = new Query(albumParams);
+        PageUtils albumPage = albumService.pageAlbumList(albumQuery);
 
         model.addAttribute("albumPage", albumPage);
-        model.addAttribute("songPage", new PageUtils(1000, new ArrayList<AlbumEntity>()));
 
-        //model.addAttribute("songList", 100);
-        // model.addAttribute("albumList", 100);
+        Map<String, Object> songParams = new HashMap<>();
+        songParams.put("limit", 5);
+        songParams.put("offset", 0);
+
+        songParams.put("singerId", singer.getId());
+
+        Query songQuery = new Query(songParams);
+        PageUtils songPage = songService.pageSongList(songQuery);
+
+        model.addAttribute("songPage", songPage);
 
         return TEMPLATE_PREFIX + "info";
     }
