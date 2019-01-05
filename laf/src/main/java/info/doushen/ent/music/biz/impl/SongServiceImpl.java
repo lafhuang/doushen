@@ -39,4 +39,14 @@ public class SongServiceImpl implements SongService {
         return songMapper.save(song);
     }
 
+    @Override
+    public SongVO get(int id) {
+        return songMapper.get(id);
+    }
+
+    @Override
+    public int update(SongEntity song) {
+        return songMapper.update(song);
+    }
+
 }

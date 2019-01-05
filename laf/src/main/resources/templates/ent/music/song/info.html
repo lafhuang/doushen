@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/music-layout.css" rel="stylesheet" />
+<link href="/css/song_info.css" rel="stylesheet" />
+<style type="text/css">
+    h1, ul, li {
+        margin:0; padding:0
+    }
+</style>
+<body class="white-bg" style="background:#fafafa;">
+    <div class="wrapper wrapper-content ">
+        <div class="col-sm-1">
+
+        </div>
+        <div class="col-sm-10">
+            <div class="mod_data">
+                <span class="data__cover">
+                    <img th:src="${album.cover}" onerror="imgError();" th:alt="${album.name}" class="data__photo">
+                </span>
+                <div class="data__cont">
+                    <div class="data__name">
+                        <h1 class="data__name_txt" th:title="${song.name}" th:text="${song.name}"></h1>
+                    </div>
+                    <div class="data__singer" th:title="${song.singerName}">
+                        <i class="fa fa-user-o"></i>
+                        <a th:href="@{'/ent/music/singer/info/'+${song.singerId}}" th:title="${song.singerName}" class="data__singer_txt js_singer" data-stat="y_new.song.header.singername" itemprop="byArtist" th:text="@{' '+${song.singerName}+' '}"></a>
+                    </div>
+
+                    <ul class="data__info">
+                        <li class="data_info__item data_info__item--even">专辑：<a th:href="@{'/ent/music/album/info/'+${song.albumId}}" itemprop="inAlbum" class="js_album" data-stat="y_new.song.header.albumname" th:title="${song.albumName}" th:text="${song.albumName}"></a></li>
+                        <li class="data_info__item js_lan" style="" th:text="@{'语言：' + ${song.name}}"></li>
+                        <li class="data_info__item js_genre data_info__item--even" style="" th:text="@{'风格：' + ${song.name}}"></li>
+                        <li class="data_info__item js_public_time data_info__item--even" style="" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}">2007-04-17</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-1">
+
+        </div>
+
+    </div>
+    <div th:include="include :: footer"></div>
+</body>
+</html>

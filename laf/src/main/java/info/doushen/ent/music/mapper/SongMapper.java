@@ -38,4 +38,20 @@ public interface SongMapper {
      */
     int save(SongEntity song);
 
+    /**
+     * 获取歌曲信息
+     *
+     * @param id
+     * @return
+     */
+    SongVO get(int id);
+
+    /**
+     * 更新歌曲信息
+     *
+     * @param song
+     * @return
+     */
+    int update(SongEntity song);
+
 }

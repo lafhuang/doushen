@@ -2,21 +2,27 @@ var singerMap;
 var albumMap;
 
 $().ready(function() {
+    validateRule();
 
-    $('.summernote').summernote({
-		height : '220px',
-		lang : 'zh-CN',
-		callbacks: {
+    var lyrics = $("#lyrics").val();
+    $(".click2edit").html(lyrics);
+
+    $('.click2edit').summernote({
+        height : '220px',
+        lang : 'zh-CN',
+        callbacks: {
             onImageUpload: function(files, editor, $editable) {
                 sendFile(files);
             }
         }
-	});
-
-    validateRule();
+    });
 
     loadSinger();
 });
+
+var edit = function() {
+    $('.click2edit').summernote({focus: true});
+};
 
 function loadSinger() {
 
@@ -35,15 +41,25 @@ function loadSinger() {
             parent.layer.alert("Connection error");
         },success : function(data) {
 			//加载数据
+
+			var singerId = $("#singerId").val();
+
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+			    if (singerId == data[i].id) {
+			        html += '<option value="' + data[i].id + '" selected>' + data[i].name + '</option>'
+			    } else {
+				    html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+			    }
 			}
+
 			$("#singer").append(html);
+
+			loadAlbum(singerId);
 
 			$("#singer").editableSelect({
 			    effects: 'fade'
 			}).on('select.editable-select', function (e, li) {
-			    var singerId = li.val();
+			    singerId = li.val();
 			    console.log(singerId);
 			    if (singerId) {
 			        loadAlbum(singerId);
@@ -85,9 +101,15 @@ function loadAlbum(singerId) {
             parent.layer.alert("Connection error");
         },success : function(result) {
             //加载数据
+            var albumId = $("#albumId").val();
+
             var data = result.rows;
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+			    if (albumId == data[i].id) {
+                    html += '<option value="' + data[i].id + '" selected>' + data[i].name + '</option>'
+                } else {
+                    html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                }
 			}
 			$("#album").append(html);
 
@@ -122,7 +144,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/ent/music/song/save",
+		url : "/ent/music/song/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
@@ -168,7 +190,7 @@ function validateRule() {
 			},
 			size : {
 				required : true,
-                number : true
+				number : true
 			},
 			audioType : {
 				required : true

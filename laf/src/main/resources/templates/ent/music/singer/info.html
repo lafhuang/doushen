@@ -88,17 +88,17 @@
                                     <div class="songlist__number" th:text="${songStat.index+1}"></div>
 
                                     <div class="songlist__songname">
-                                        <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
-                                        <div class="mod_list_menu">
-                                            <a href="javascript:;" class="list_menu__item list_menu__play js_play" title="播放">
-                                                <i class="list_menu__icon_play"></i>
-                                                <span class="icon_txt">播放</span>
-                                            </a>
-                                            <a href="javascript:;" class="list_menu__item list_menu__down js_down" title="下载" aria-haspopup="true" data-target="menu_down">
-                                                <i class="list_menu__icon_down"></i>
-                                                <span class="icon_txt">下载</span>
-                                            </a>
-                                        </div>
+                                        <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
+                                        <!--<div class="mod_list_menu">-->
+                                            <!--<a href="javascript:;" class="list_menu__item list_menu__play js_play" title="播放">-->
+                                                <!--<i class="list_menu__icon_play"></i>-->
+                                                <!--<span class="icon_txt">播放</span>-->
+                                            <!--</a>-->
+                                            <!--<a href="javascript:;" class="list_menu__item list_menu__down js_down" title="下载" aria-haspopup="true" data-target="menu_down">-->
+                                                <!--<i class="list_menu__icon_down"></i>-->
+                                                <!--<span class="icon_txt">下载</span>-->
+                                            <!--</a>-->
+                                        <!--</div>-->
                                     </div>
                                     <div class="songlist__album">
                                         <a th:href="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>

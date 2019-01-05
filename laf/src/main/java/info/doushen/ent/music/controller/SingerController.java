@@ -141,7 +141,7 @@ public class SingerController extends BaseController {
         model.addAttribute("albumPage", albumPage);
 
         Map<String, Object> songParams = new HashMap<>();
-        songParams.put("limit", 5);
+        songParams.put("limit", 10);
         songParams.put("offset", 0);
 
         songParams.put("singerId", singerId);

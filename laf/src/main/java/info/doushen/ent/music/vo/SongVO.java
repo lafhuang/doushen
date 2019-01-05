@@ -26,6 +26,8 @@ public class SongVO extends BaseVO {
     private String singerName;
     /** 音轨号 */
     private int trackNumber;
+    /** 语言 */
+    private String language;
     /** 时长 */
     private String length;
     /** 文件大小 */

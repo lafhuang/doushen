@@ -20,6 +20,8 @@ public class SongEntity extends BaseEntity {
     private int albumId;
     /** 音轨号 */
     private int trackNumber;
+    /** 语言 */
+    private String language;
     /** 时长 */
     private String length;
     /** 文件大小 */

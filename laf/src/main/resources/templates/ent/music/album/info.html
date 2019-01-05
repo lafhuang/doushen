@@ -20,18 +20,17 @@
             <div class="mod_data">
                 <span class="data__cover">
                     <img th:src="${album.cover}" onerror="imgError();" th:alt="${album.name}" class="data__photo">
-                    <i class="data__cover_mask"></i>
                 </span>
                 <div class="data__cont">
                     <div class="data__name">
                         <h1 class="data__name_txt" th:title="${album.name}" th:text="${album.name}"></h1>
                     </div>
                     <div class="data__singer">
-                        <i class="icon_singer sprite"></i><a th:href="@{'/ent/music/singer/info/'+${album.singerId}}" class="js_singer data__singer_txt" itemprop="byArtist" data-stat="y_new.album.header.singername" th:title="${singer.name}" th:text="${singer.name}"></a>
+                        <i class="fa fa-user-o"></i><a th:href="@{'/ent/music/singer/info/'+${album.singerId}}" class="js_singer data__singer_txt" itemprop="byArtist" data-stat="y_new.album.header.singername" th:title="${singer.name}" th:text="@{' ' + ${singer.name} + ' '}"></a>
                     </div>
                     <ul class="data__info">
                         <li class="data_info__item" th:text="@{'风格：'+${albumStyle}}"></li>
-                        <li class="data_info__item data_info__item--even" th:text="@{'语种：'+${albumLanguage}}"></li>
+                        <li class="data_info__item data_info__item--even" th:text="@{'语言：'+${albumLanguage}}"></li>
                         <li class="data_info__item" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}"></li>
                         <li class="data_info__item" th:text="@{'类型：'+${albumType}}"></li>
                     </ul>
@@ -49,6 +48,7 @@
                             <li class="songlist__header_name">歌曲</li>
                             <li class="songlist__header_author">歌手</li>
                             <li class="songlist__header_time">时长</li>
+                            <li class="songlist__header_time">类型</li>
                         </ul>
                         <ul class="songlist__list">
                             <li>
@@ -85,6 +85,7 @@
                                         <a th:href="@{'/ent/music/singer/info/'+${singer.id}}" th:title="${singer.name}" class="singer_name" th:text="${singer.name}"></a>
                                     </div>
                                     <div class="songlist__time" th:text="${song.length}"></div>
+                                    <div class="songlist__type" th:text="${song.audioType}"></div>
                                     <div class="songlist__other">
                                     </div>
                                 </div>
@@ -102,6 +103,5 @@
 
     </div>
     <div th:include="include :: footer"></div>
-    <script type="text/javascript" src="/js/appjs/ent/music/album/info.js"></script>
 </body>
 </html>

@@ -49,15 +49,24 @@ function load() {
 					},
 					{
 						field : 'name',
-						title : '歌曲'
+						title : '歌曲',
+						formatter : function(value, row, index) {
+						    return "<a href='/ent/music/song/info/" + row.id + "'>" + value + "</a>"
+						}
 					},
 					{
 						field : 'albumName',
-						title : '专辑'
+						title : '专辑',
+						formatter : function(value, row, index) {
+                            return "<a href='/ent/music/album/info/" + row.albumId + "'>" + value + "</a>"
+                        }
 					},
 					{
 						field : 'singerName',
-						title : '歌手'
+						title : '歌手',
+                        formatter : function(value, row, index) {
+                            return "<a href='/ent/music/singer/info/" + row.singerId + "'>" + value + "</a>"
+                        }
 					},
 					{
 						field : 'trackNumber',
@@ -69,8 +78,11 @@ function load() {
 					},
 					{
 						field : 'size',
-						title : '文件大小'
-					},
+						title : '文件大小',
+                        formatter : function(value, row, index) {
+                            return value + " MB";
+                        }
+                    },
                     {
                         field : 'audioType',
                         title : '音频类型'
@@ -102,7 +114,7 @@ function add() {
 		title : '添加歌曲',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/add' // iframe的url
 	});
 }
@@ -131,10 +143,10 @@ function remove(id) {
 function edit(id) {
 	layer.open({
 		type : 2,
-		title : '角色修改',
+		title : '歌曲信息修改',
 		maxmin : true,
 		shadeClose : true, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/edit/' + id // iframe的url
 	});
 }

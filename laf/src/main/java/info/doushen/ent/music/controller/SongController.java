@@ -5,11 +5,14 @@ import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
 import info.doushen.common.utils.PageUtils;
 import info.doushen.common.utils.Query;
+import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SongService;
-import info.doushen.ent.music.entity.SingerEntity;
+import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SongEntity;
+import info.doushen.ent.music.vo.SongVO;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +38,9 @@ public class SongController extends BaseController {
     private SongService songService;
 
     @Autowired
+    private AlbumService albumService;
+
+    @Autowired
     private DictService dictService;
 
     @GetMapping()
@@ -56,8 +62,11 @@ public class SongController extends BaseController {
     @Log("添加歌曲")
     @GetMapping("/add")
     String add(Model model) {
+        List<DictEntity> languageList = dictService.queryDictByType("album_language");
+        model.addAttribute("languageList", languageList);
+
         List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
-        model.addAttribute("audiolList", audiolList);
+        model.addAttribute("audioList", audiolList);
         return TEMPLATE_PREFIX + "add";
     }
 
@@ -71,6 +80,53 @@ public class SongController extends BaseController {
             return Result.ok();
         }
         return Result.error();
+    }
+
+    @RequiresPermissions("ent:music:song:edit")
+    @Log("编辑歌曲")
+    @GetMapping("/edit/{id}")
+    String edit(Model model, @PathVariable("id") int id) {
+        SongVO song = songService.get(id);
+        model.addAttribute("song", song);
+
+        List<DictEntity> languageList = dictService.queryDictByType("album_language");
+        model.addAttribute("languageList", languageList);
+
+        List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
+        model.addAttribute("audioList", audiolList);
+
+        return TEMPLATE_PREFIX + "edit";
+    }
+
+    @RequiresPermissions("ent:music:song:edit")
+    @Log("更新歌曲")
+    @PostMapping("/update")
+    @ResponseBody
+    Result update(SongEntity song) {
+        song.setUpdateBy(getUserId());
+        if (songService.update(song) > 0) {
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
+    @GetMapping("/info/{id}")
+    @RequiresPermissions("ent:music:song:song")
+    String info(@PathVariable("id") int songId, Model model) {
+        SongVO song = songService.get(songId);
+        model.addAttribute("song", song);
+
+        AlbumEntity album = albumService.get(song.getAlbumId());
+        model.addAttribute("album", album);
+
+        List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
+        for (DictEntity dict : audiolList) {
+            if (StringUtils.equals(dict.getDictValue(), song.getAudioType())) {
+                model.addAttribute("audioType", dict.getDictName());
+            }
+        }
+
+        return TEMPLATE_PREFIX + "info";
     }
 
 }

@@ -28,6 +28,7 @@
             singer.id   AS singerId,
             singer.name AS singerName,
             song.track_number,
+            song.language,
             song.length,
             song.size,
             song.audio_type,
@@ -73,6 +74,7 @@
                 name,
                 album_id,
                 track_number,
+                language,
                 length,
                 size,
                 audio_type,
@@ -87,6 +89,7 @@
                 #{name},
                 #{albumId},
                 #{trackNumber},
+                #{language},
                 #{length},
                 #{size},
                 #{audioType},
@@ -97,5 +100,55 @@
                 CURRENT_TIMESTAMP
             )
     </insert>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.ent.music.vo.SongVO">
+        SELECT
+            song.id,
+            song.name,
+            song.album_id,
+            album.name  AS albumName,
+            singer.id   AS singerId,
+            singer.name AS singerName,
+            song.track_number,
+            song.language,
+            song.length,
+            song.size,
+            song.audio_type,
+            song.lyrics,
+            song.create_by,
+            song.create_time,
+            song.update_by,
+            song.update_time
+        FROM
+            ent_music_song song
+        JOIN
+            ent_music_album album
+        ON
+            song.album_id = album.id
+        JOIN
+            ent_music_singer singer
+        ON
+            album.singer_id = singer.id
+        WHERE
+            song.id = #{id}
+    </select>
+
+    <update id="update" parameterType="info.doushen.ent.music.entity.SongEntity">
+        UPDATE
+            ent_music_song
+        SET
+            name = #{name},
+            album_id = #{albumId},
+            track_number = #{trackNumber},
+            language = #{language},
+            length = #{length},
+            size = #{size},
+            audio_type = #{audioType},
+            lyrics = #{lyrics},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
 
 </mapper>
