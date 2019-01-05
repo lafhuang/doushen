@@ -49,4 +49,9 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         return roleMenuMapper.insertForAdmin(params);
     }
 
+    @Override
+    public int removeByMenuId(int menuId) {
+        return roleMenuMapper.removeByMenuId(menuId);
+    }
+
 }

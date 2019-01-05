@@ -133,7 +133,7 @@ public class SingerController extends BaseController {
         albumParams.put("limit", 5);
         albumParams.put("offset", 0);
 
-        albumParams.put("singerId", singer.getId());
+        albumParams.put("singerId", String.valueOf(singerId));
 
         Query albumQuery = new Query(albumParams);
         PageUtils albumPage = albumService.pageAlbumList(albumQuery);
@@ -144,7 +144,7 @@ public class SingerController extends BaseController {
         songParams.put("limit", 5);
         songParams.put("offset", 0);
 
-        songParams.put("singerId", singer.getId());
+        songParams.put("singerId", singerId);
 
         Query songQuery = new Query(songParams);
         PageUtils songPage = songService.pageSongList(songQuery);

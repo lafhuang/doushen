@@ -79,4 +79,12 @@ public interface MenuService {
      */
     List<MenuVO> getRoleMenu(int roleId);
 
+    /**
+     * 删除菜单
+     *
+     * @param id
+     * @return
+     */
+    int remove(int id);
+
 }

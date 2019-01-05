@@ -89,7 +89,7 @@ public class RoleController extends BaseController {
     @RequiresPermissions("system:role:remove")
     @PostMapping("/remove")
     @ResponseBody()
-    Result save(int id) {
+    Result remove(int id) {
         if (roleService.remove(id) > 0) {
             return Result.ok();
         } else {
@@ -102,8 +102,8 @@ public class RoleController extends BaseController {
     @PostMapping("/batchRemove")
     @ResponseBody
     Result batchRemove(@RequestParam("ids[]") int[] roleIdList) {
-        int r = roleService.batchremove(roleIdList);
-        if (r > 0) {
+        int result = roleService.batchremove(roleIdList);
+        if (result > 0) {
             return Result.ok();
         }
         return Result.error();

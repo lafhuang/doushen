@@ -61,4 +61,20 @@ public interface MenuMapper {
      */
     int update(MenuEntity menu);
 
+    /**
+     * 获取所有子菜单
+     *
+     * @param id
+     * @return
+     */
+    List<MenuEntity> querySubMenu(int id);
+
+    /**
+     * 删除菜单
+     *
+     * @param id
+     * @return
+     */
+    int remove(int id);
+
 }

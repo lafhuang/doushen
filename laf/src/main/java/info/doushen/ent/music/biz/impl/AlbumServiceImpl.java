@@ -38,4 +38,9 @@ public class AlbumServiceImpl implements AlbumService {
         return albumMapper.save(album);
     }
 
+    @Override
+    public AlbumEntity get(int albumId) {
+        return albumMapper.get(albumId);
+    }
+
 }

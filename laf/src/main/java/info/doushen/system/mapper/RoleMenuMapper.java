@@ -41,4 +41,12 @@ public interface RoleMenuMapper {
      */
     int insertForAdmin(Map<String, Integer> params);
 
+    /**
+     * 根据菜单id删除权限
+     *
+     * @param menuId
+     * @return
+     */
+    int removeByMenuId(int menuId);
+
 }

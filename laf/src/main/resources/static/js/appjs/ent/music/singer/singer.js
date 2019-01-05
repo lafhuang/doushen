@@ -51,7 +51,7 @@ function load() {
                     singerHtml += "    <li class='singer_list__item'>";
                     singerHtml += "        <div class='singer_list__item_box'>";
                     singerHtml += "            <a href='/ent/music/singer/info/" + singer.id + "' class='singer_list__cover js_singer' title='" + singer.name + "'>";
-                    singerHtml += "                <img class='singer_list__pic' alt='" + singer.name + "' src='" + singer.photo + "'>";
+                    singerHtml += "                <img onerror='imgError();' class='singer_list__pic' alt='" + singer.name + "' src='" + singer.photo + "'>";
                     singerHtml += "            </a>";
                     singerHtml += "            <h3 class='singer_list__title'>";
                     singerHtml += "                <a href='/ent/music/singer/info/" + singer.id + "' class='js_singer' title='" + singer.name + "'>" + singer.name + "</a>";

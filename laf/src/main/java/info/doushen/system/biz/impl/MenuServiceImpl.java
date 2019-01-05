@@ -114,4 +114,14 @@ public class MenuServiceImpl implements MenuService {
         return roleMenuList;
     }
 
+    @Override
+    public int remove(int id) {
+        List<MenuEntity> menuList = menuMapper.querySubMenu(id);
+        for (MenuEntity menu : menuList) {
+            menuMapper.remove(menu.getId());
+            roleMenuService.removeByMenuId(menu.getId());
+        }
+        return menuList.size();
+    }
+
 }

@@ -113,4 +113,16 @@ public class MenuController extends BaseController {
         return menuList;
     }
 
+    @Log("删除菜单")
+    @RequiresPermissions("system:menu:remove")
+    @PostMapping("/remove")
+    @ResponseBody()
+    Result remove(int id) {
+        if (menuService.remove(id) > 0) {
+            return Result.ok();
+        } else {
+            return Result.error(1, "删除失败");
+        }
+    }
+
 }

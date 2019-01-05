@@ -35,4 +35,12 @@ public interface RoleMenuService {
      */
     int saveForAdmin(int menuId);
 
+    /**
+     * 根据菜单id删除权限
+     *
+     * @param menuId
+     * @return
+     */
+    int removeByMenuId(int menuId);
+
 }

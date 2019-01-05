@@ -143,7 +143,10 @@ function load() {
 					},
 					{
 						field : 'name',
-						title : '专辑名'
+						title : '专辑名',
+                        formatter : function(value, row, index) {
+                            return "<a href='/ent/music/album/info/" + row.id + "'>" + value + "</a>"
+                        }
 					},
 					{
 						field : 'singerId',

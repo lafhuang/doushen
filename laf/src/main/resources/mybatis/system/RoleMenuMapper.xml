@@ -50,4 +50,12 @@
             )
     </insert>
 
+    <delete id="removeByMenuId" parameterType="java.lang.Integer">
+        DELETE
+        FROM
+            sys_role_menu
+        WHERE
+            menu_id = #{menuId}
+    </delete>
+
 </mapper>

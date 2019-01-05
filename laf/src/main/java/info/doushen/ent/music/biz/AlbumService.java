@@ -31,4 +31,12 @@ public interface AlbumService {
      */
     int save(AlbumEntity album);
 
+    /**
+     * 获取专辑信息
+     *
+     * @param albumId
+     * @return
+     */
+    AlbumEntity get(int albumId);
+
 }

@@ -6,15 +6,20 @@ import info.doushen.common.controller.BaseController;
 import info.doushen.common.utils.PageUtils;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
+import info.doushen.ent.music.biz.SingerService;
+import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
+import info.doushen.ent.music.entity.SingerEntity;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +37,12 @@ public class AlbumController extends BaseController {
 
     @Autowired
     private AlbumService albumService;
+
+    @Autowired
+    private SingerService singerService;
+
+    @Autowired
+    private SongService songService;
 
     @Autowired
     private DictService dictService;
@@ -77,6 +88,53 @@ public class AlbumController extends BaseController {
             return Result.ok();
         }
         return Result.error();
+    }
+
+    @GetMapping("/info/{id}")
+    @RequiresPermissions("ent:music:album:album")
+    String info(@PathVariable("id") int albumId, Model model) {
+        AlbumEntity album = albumService.get(albumId);
+        model.addAttribute("album", album);
+
+        SingerEntity singer = singerService.get(album.getSingerId());
+        model.addAttribute("singer", singer);
+
+        List<DictEntity> typeList = dictService.queryDictByType("album_type");
+        for (DictEntity dict : typeList) {
+            if (StringUtils.equals(dict.getDictValue(), album.getType())) {
+                model.addAttribute("albumType", dict.getDictName());
+                break;
+            }
+        }
+
+        List<DictEntity> styleList = dictService.queryDictByType("album_style");
+        for (DictEntity dict : styleList) {
+            if (StringUtils.equals(dict.getDictValue(), album.getStyle())) {
+                model.addAttribute("albumStyle", dict.getDictName());
+                break;
+            }
+        }
+
+        List<DictEntity> languageList = dictService.queryDictByType("album_language");
+        for (DictEntity dict : languageList) {
+            if (StringUtils.equals(dict.getDictValue(), album.getLanguage())) {
+                model.addAttribute("albumLanguage", dict.getDictName());
+                break;
+            }
+        }
+
+        Map<String, Object> songParams = new HashMap<>();
+        songParams.put("limit", 200);
+        songParams.put("offset", 0);
+
+        songParams.put("albumId", albumId);
+
+        Query songQuery = new Query(songParams);
+        PageUtils songPage = songService.pageSongList(songQuery);
+
+        model.addAttribute("songPage", songPage);
+
+        return TEMPLATE_PREFIX + "info";
     }
 
 }

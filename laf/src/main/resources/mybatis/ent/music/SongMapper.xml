@@ -7,11 +7,15 @@
         SELECT
             count(1)
         FROM
-            ent_music_song
+            ent_music_song song
+        <if test="singerId != null and singerId != ''">
+            JOIN ent_music_album album on song.album_id = album.id
+        </if>
         <where>
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+            <if test="singerId != null and singerId != ''"> and album.singer_id = #{singerId} </if>
         </where>
     </select>
 
@@ -46,6 +50,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+            <if test="singerId != null and singerId != ''"> and album.singer_id = #{singerId} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

@@ -20,9 +20,9 @@
                 <span class="data__cover">
                     <input type="hidden" id="id" th:value="${singer.id}">
                 <a class="js_goto_tab js_none_index" data-stat="y_new.singer.thistab.singer_pic" data-tab="index" th:href="@{'/ent/music/singer/info/'+${singer.id}}" style="display:none;">
-                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
+                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo" onerror="imgError();">
                 </a>
-                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo js_index">
+                    <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo js_index" onerror="imgError();">
                 </span>
 
                 <div class="data__cont">
@@ -37,11 +37,11 @@
                         <ul class="mod_data_statistic">
                             <li class="data_statistic__item data_statistic__item--last">
                                 <!--<a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${#lists.size(songList)}"></strong></a>-->
-                                <a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${songPage.total}"></strong></a>
+                                <a th:href="@{'/ent/music/song/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${songPage.total}"></strong></a>
                             </li>
                             <li class="data_statistic__item data_statistic__item--last">
                                 <!--<a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${#lists.size(albumList)}"</strong></a>-->
-                                <a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${albumPage.total}"></strong></a>
+                                <a th:href="@{'/ent/music/album/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${albumPage.total}"></strong></a>
                             </li>
                         </ul>
                     </div>
@@ -74,6 +74,7 @@
                             <li class="songlist__header_name">歌曲</li>
                             <li class="songlist__header_album">专辑</li>
                             <li class="songlist__header_time">时长</li>
+                            <li class="songlist__header_type">类型</li>
                         </ul>
 
                         <ul class="songlist__list">
@@ -84,7 +85,7 @@
                                         <input type="checkbox" class="songlist__checkbox">
                                     </div>
 
-                                    <div class="songlist__number" th:text="${songStat.index}"></div>
+                                    <div class="songlist__number" th:text="${songStat.index+1}"></div>
 
                                     <div class="songlist__songname">
                                         <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
@@ -100,9 +101,10 @@
                                         </div>
                                     </div>
                                     <div class="songlist__album">
-                                        <a th:href="@{'/ent/music/album/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>
+                                        <a th:href="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>
                                     </div>
                                     <div class="songlist__time" th:text="${song.length}"></div>
+                                    <div class="songlist__type" th:text="${song.audioType}"></div>
                                     <div class="songlist__other">
 
                                     </div>
@@ -123,14 +125,14 @@
                             <li th:each="album : ${albumPage.rows}" class="playlist__item" onmouseover="this.className=(this.className+' playlist__item--hover')">
                                 <div class="playlist__item_box">
                                     <div class="playlist__cover mod_cover">
-                                        <a th:href="@{'/ent/music/album/'+${album.id}}" class="js_album">
-                                            <img th:src="${album.cover}" th:alt="${album.name}" class="playlist__pic">
+                                        <a th:href="@{'/ent/music/album/info/'+${album.id}}" class="js_album">
+                                            <img th:src="${album.cover}" th:alt="${album.name}" class="playlist__pic" onerror="imgError();">
                                             <i class=" js_play"></i>
                                         </a>
                                     </div>
                                     <h4 class="playlist__title">
                                         <span class="playlist__title_txt">
-                                            <a th:href="@{'/ent/music/album/'+${album.id}}" th:title="${album.name}" class="js_album" th:text="${album.name}"></a>
+                                            <a th:href="@{'/ent/music/album/info/'+${album.id}}" th:title="${album.name}" class="js_album" th:text="${album.name}"></a>
                                         </span>
                                     </h4>
                                     <div class="playlist__other" th:text="${#dates.format(album.issueDate, 'yyyy-MM-dd')}"></div>

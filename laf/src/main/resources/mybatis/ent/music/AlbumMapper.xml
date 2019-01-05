@@ -84,4 +84,24 @@
             )
     </insert>
 
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.ent.music.entity.AlbumEntity">
+        SELECT
+            id,
+            name,
+            singer_id,
+            issue_date,
+            language,
+            type,
+            style,
+            cover,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        FROM
+            ent_music_album
+        WHERE
+            id = #{albumId}
+    </select>
+
 </mapper>

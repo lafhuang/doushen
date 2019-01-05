@@ -147,4 +147,45 @@
             id = #{id}
     </update>
 
+    <select id="querySubMenu" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.MenuEntity">
+        WITH
+            recursive menu AS
+            (
+                SELECT
+                    t1.*
+                FROM
+                    sys_menu t1
+                WHERE
+                    t1.id = #{menuId}
+                UNION
+                SELECT
+                    t2.*
+                FROM
+                    sys_menu t2
+                INNER JOIN
+                    menu AS t3
+                ON
+                    t3.id=t2.parent_id
+            )
+        SELECT
+            menu.id,
+            menu.menu_name,
+            menu.parent_id,
+            menu.url,
+            menu.perms,
+            menu.type,
+            menu.icon,
+            menu.sort
+        FROM
+            menu
+    </select>
+
+    <delete id="remove" parameterType="java.lang.Integer">
+        DELETE
+        FROM
+            sys_menu
+        WHERE
+            id = #{id}
+    </delete>
+
 </mapper>
