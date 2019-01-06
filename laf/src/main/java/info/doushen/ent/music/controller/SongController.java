@@ -116,6 +116,13 @@ public class SongController extends BaseController {
         SongVO song = songService.get(songId);
         model.addAttribute("song", song);
 
+        List<DictEntity> languageList = dictService.queryDictByType("album_language");
+        for (DictEntity dict : languageList) {
+            if (StringUtils.equals(dict.getDictValue(), song.getLanguage())) {
+                model.addAttribute("language", dict.getDictName());
+            }
+        }
+
         AlbumEntity album = albumService.get(song.getAlbumId());
         model.addAttribute("album", album);
 

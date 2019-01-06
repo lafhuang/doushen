@@ -31,10 +31,24 @@
 
                     <ul class="data__info">
                         <li class="data_info__item data_info__item--even">专辑：<a th:href="@{'/ent/music/album/info/'+${song.albumId}}" itemprop="inAlbum" class="js_album" data-stat="y_new.song.header.albumname" th:title="${song.albumName}" th:text="${song.albumName}"></a></li>
-                        <li class="data_info__item js_lan" style="" th:text="@{'语言：' + ${song.name}}"></li>
-                        <li class="data_info__item js_genre data_info__item--even" style="" th:text="@{'风格：' + ${song.name}}"></li>
+                        <li class="data_info__item js_lan" style="" th:text="@{'语言：' + ${language}}"></li>
                         <li class="data_info__item js_public_time data_info__item--even" style="" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}">2007-04-17</li>
                     </ul>
+                </div>
+            </div>
+
+            <div class="detail_layout">
+                <div class="detail_layout__main">
+                    <!--歌词_S-->
+                    <div class="mod_lyric">
+                        <div class="lyric__hd">
+                            <h2 class="lyric__tit">歌词</h2>
+                        </div>
+                        <div class="lyric__cont limit">
+                            <div class="lyric__cont_box" id="lrc_content" th:utext="${song.lyrics}"></div>
+                        </div>
+                    </div>
+                    <!--歌词_E-->
                 </div>
             </div>
 

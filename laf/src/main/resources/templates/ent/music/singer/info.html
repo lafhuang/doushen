@@ -60,10 +60,10 @@
             </div>
 
             <div class="js_tab" id="index_tab">
-                <div class="mod_part">
+                <div class="mod_part" id="song_part">
                     <div class="part__hd">
-                        <h2 class="part__tit">热门歌曲</h2>
-                        <a th:href="@{'/ent/music/song/singer/'+${singer.id}}" class="part__more js_goto_tab" data-stat="y_new.singer.index.song_all" data-tab="song">全部</a>
+                        <h2 class="part__tit">歌曲</h2>
+                        <a id="all_song_button" onclick="loadAllSong();" class="part__more js_goto_tab" data-stat="y_new.singer.index.song_all" data-tab="song">全部</a>
                     </div>
 
                     <div class="mod_songlist">
@@ -77,9 +77,8 @@
                             <li class="songlist__header_type">类型</li>
                         </ul>
 
-                        <ul class="songlist__list">
-
-                            <li mid="102388808" ix="0" th:each="song,songStat : ${songPage.rows}">
+                        <ul class="songlist__list" id="songlist">
+                            <li th:each="song,songStat : ${songPage.rows}">
                                 <div class="songlist__item" onmouseover="this.className=(this.className+' songlist__item--hover')" onmouseout="this.className=this.className.replace(/ songlist__item--hover/, '')">
                                     <div class="songlist__edit songlist__edit--check sprite">
                                         <input type="checkbox" class="songlist__checkbox">
@@ -115,10 +114,10 @@
 
                 </div>
 
-                <div class="mod_part">
+                <div class="mod_part" id="album_part">
                     <div class="part__hd">
                         <h2 class="part__tit">专辑</h2>
-                        <a th:href="@{'/ent/music/album/singer/'+${singer.id}}" class="part__more js_goto_tab" data-tab="album">全部</a>
+                        <a id="all_album_button" onclick="loadAllAlbum();" class="part__more js_goto_tab" data-tab="album">全部</a>
                     </div>
                     <div class="mod_playlist">
                         <ul class="playlist__list" id="albumlist">
@@ -136,7 +135,6 @@
                                         </span>
                                     </h4>
                                     <div class="playlist__other" th:text="${#dates.format(album.issueDate, 'yyyy-MM-dd')}"></div>
-                                    <a href="javascript:;" class="btn_operate_menu js_albumlist_more" data-type="2"><span class="icon_txt">更多</span></a>
                                 </div>
                             </li>
                         </ul>

@@ -144,7 +144,7 @@ public class SingerController extends BaseController {
         songParams.put("limit", 10);
         songParams.put("offset", 0);
 
-        songParams.put("singerId", singerId);
+        songParams.put("singerId", String.valueOf(singerId));
 
         Query songQuery = new Query(songParams);
         PageUtils songPage = songService.pageSongList(songQuery);

@@ -15,7 +15,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
-            <if test="singerId != null and singerId != ''"> and album.singer_id = #{singerId} </if>
+            <if test="singerId != null and singerId != ''"> and album.singer_id = to_number(#{singerId}, '9999999999999999999') </if>
         </where>
     </select>
 
@@ -51,7 +51,7 @@
             <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="name != null and name != ''"> and name = #{name} </if>
             <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
-            <if test="singerId != null and singerId != ''"> and album.singer_id = #{singerId} </if>
+            <if test="singerId != null and singerId != ''"> and album.singer_id = to_number(#{singerId}, '9999999999999999999') </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
