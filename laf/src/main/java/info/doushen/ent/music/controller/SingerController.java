@@ -1,5 +1,7 @@
 package info.doushen.ent.music.controller;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
@@ -8,7 +10,9 @@ import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SingerService;
 import info.doushen.ent.music.biz.SongService;
+import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SingerEntity;
+import info.doushen.ent.music.vo.SongVO;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -183,6 +189,56 @@ public class SingerController extends BaseController {
             return Result.ok();
         }
         return Result.error();
+    }
+
+    @RequiresPermissions("ent:music:singer:importAlbum")
+    @Log("歌手导入专辑")
+    @GetMapping("/importAlbum/{id}")
+    String importAlbum(Model model, @PathVariable("id") int id) {
+        model.addAttribute("singerId", id);
+        return TEMPLATE_PREFIX + "import_album";
+    }
+
+    @RequiresPermissions("ent:music:singer:importAlbum")
+    @Log("歌手专辑导入保存")
+    @PostMapping("/saveAlbum")
+    @ResponseBody
+    Result saveAlbum(@RequestParam("albumList") String albums) {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaType jt = mapper.getTypeFactory().constructParametricType(ArrayList.class, AlbumEntity.class);
+        List<AlbumEntity> albumList = null;
+        try {
+            albumList = mapper.readValue(albums, jt);
+            albumService.saveSingerAlbum(getUserId(), albumList);
+        } catch (IOException e) {
+            return Result.error();
+        }
+        return Result.ok();
+    }
+
+    @RequiresPermissions("ent:music:singer:importSong")
+    @Log("歌手导入歌曲")
+    @GetMapping("/importSong/{id}")
+    String importSong(Model model, @PathVariable("id") int id) {
+        model.addAttribute("singerId", id);
+        return TEMPLATE_PREFIX + "import_song";
+    }
+
+    @RequiresPermissions("ent:music:singer:importSong")
+    @Log("歌手歌曲导入保存")
+    @PostMapping("/saveSong")
+    @ResponseBody
+    Result saveSong(@RequestParam("songList") String songs) {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaType jt = mapper.getTypeFactory().constructParametricType(ArrayList.class, SongVO.class);
+        List<SongVO> songList = null;
+        try {
+            songList = mapper.readValue(songs, jt);
+            // songService.saveSingerSong(getUserId(), songList);
+        } catch (IOException e) {
+            return Result.error();
+        }
+        return Result.ok();
     }
 
 }

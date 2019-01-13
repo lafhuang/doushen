@@ -94,3 +94,27 @@ function loadAllSong() {
         }
     });
 }
+
+function importAlbum() {
+    var id = $("#id").val();
+	layer.open({
+		type : 2,
+		title : '导入专辑',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '65%', '65%' ],
+		content : request_prefix + '/importAlbum/' + id // iframe的url
+	});
+}
+
+function importSong() {
+    var id = $("#id").val();
+	layer.open({
+		type : 2,
+		title : '导入歌曲',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '65%', '65%' ],
+		content : request_prefix + '/importSong/' + id // iframe的url
+	});
+}

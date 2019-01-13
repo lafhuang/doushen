@@ -36,11 +36,9 @@
                     <div class="data__desc">
                         <ul class="mod_data_statistic">
                             <li class="data_statistic__item data_statistic__item--last">
-                                <!--<a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${#lists.size(songList)}"></strong></a>-->
                                 <a th:href="@{'/ent/music/song/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${songPage.total}"></strong></a>
                             </li>
                             <li class="data_statistic__item data_statistic__item--last">
-                                <!--<a href="//y.qq.com/n/yqq/singer/003aQYLo2x8izP.html" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${#lists.size(albumList)}"</strong></a>-->
                                 <a th:href="@{'/ent/music/album/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${albumPage.total}"></strong></a>
                             </li>
                         </ul>
@@ -53,6 +51,14 @@
                         <button shiro:hasPermission="ent:music:singer:singer" type="button"
                                 class="btn btn-success" onclick="location='/ent/music/singer'">
                             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>返回
+                        </button>
+                        <button shiro:hasPermission="ent:music:singer:importAlbum" type="button"
+                                class="btn btn-warning" onclick="importAlbum()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>导入专辑
+                        </button>
+                        <button shiro:hasPermission="ent:music:singer:importSong" type="button"
+                                class="btn btn-info" onclick="importSong()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>导入歌曲
                         </button>
                     </div>
                 </div>
@@ -88,16 +94,6 @@
 
                                     <div class="songlist__songname">
                                         <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
-                                        <!--<div class="mod_list_menu">-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__play js_play" title="播放">-->
-                                                <!--<i class="list_menu__icon_play"></i>-->
-                                                <!--<span class="icon_txt">播放</span>-->
-                                            <!--</a>-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__down js_down" title="下载" aria-haspopup="true" data-target="menu_down">-->
-                                                <!--<i class="list_menu__icon_down"></i>-->
-                                                <!--<span class="icon_txt">下载</span>-->
-                                            <!--</a>-->
-                                        <!--</div>-->
                                     </div>
                                     <div class="songlist__album">
                                         <a th:href="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>
