@@ -12,12 +12,15 @@
 					<form class="form-horizontal m-t" id="signupForm">
 						<input type="hidden" id="singerId" th:value="${singerId}">
 						<div class="form-group">
+							<div class="col-sm-2">
+								<a href="/download/album" class="btn btn-info">专辑模板下载</a>
+							</div>
 							<div class="col-sm-8">
 								<div class="file-loading">
 									<input id="template" name="template" type="file" multiple>
 								</div>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-2">
 								<button type="button" class="btn btn-warning" id="import-btn">导入</button>
 							</div>
 						</div>
