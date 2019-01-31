@@ -44,9 +44,6 @@ public class AlbumController extends BaseController {
     @Autowired
     private SongService songService;
 
-    @Autowired
-    private DictService dictService;
-
     @GetMapping()
     @RequiresPermissions("ent:music:album:album")
     String album() {
@@ -65,16 +62,7 @@ public class AlbumController extends BaseController {
     @RequiresPermissions("ent:music:album:add")
     @Log("添加专辑")
     @GetMapping("/add")
-    String add(Model model) {
-        List<DictEntity> typeList = dictService.queryDictByType("album_type");
-        model.addAttribute("typeList", typeList);
-
-        List<DictEntity> styleList = dictService.queryDictByType("album_style");
-        model.addAttribute("styleList", styleList);
-
-        List<DictEntity> languageList = dictService.queryDictByType("album_language");
-        model.addAttribute("languageList", languageList);
-
+    String add() {
         return TEMPLATE_PREFIX + "add";
     }
 
@@ -99,6 +87,7 @@ public class AlbumController extends BaseController {
         SingerEntity singer = singerService.get(album.getSingerId());
         model.addAttribute("singer", singer);
 
+        /*
         List<DictEntity> typeList = dictService.queryDictByType("album_type");
         for (DictEntity dict : typeList) {
             if (StringUtils.equals(dict.getDictValue(), album.getType())) {
@@ -122,6 +111,7 @@ public class AlbumController extends BaseController {
                 break;
             }
         }
+        */
 
         Map<String, Object> songParams = new HashMap<>();
         songParams.put("limit", 200);

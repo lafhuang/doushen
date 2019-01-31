@@ -207,7 +207,7 @@ function add() {
 	// iframe层
 	layer.open({
 		type : 2,
-		title : '添加角色',
+		title : '添加专辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '60%', '60%' ],
@@ -239,7 +239,7 @@ function remove(id) {
 function edit(id) {
 	layer.open({
 		type : 2,
-		title : '角色修改',
+		title : '修改专辑',
 		maxmin : true,
 		shadeClose : true, // 点击遮罩关闭层
 		area : [ '60%', '60%' ],

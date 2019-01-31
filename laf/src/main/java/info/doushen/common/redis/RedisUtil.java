@@ -91,9 +91,8 @@ public class RedisUtil {
      * @param key 键
      * @return 值
      */
-    public static Object get(String key, int indexdb) {
-        redisTemplate.indexdb.set(indexdb);
-        return key == null ? null : redisTemplate.opsForValue().get(key);
+    public static String get(String key) {
+        return key == null ? null : (String) redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -103,9 +102,8 @@ public class RedisUtil {
      * @param value 值
      * @return true成功 false失败
      */
-    public static boolean set(String key, Object value, int indexdb) {
+    public static boolean set(String key, Object value) {
         try {
-            redisTemplate.indexdb.set(indexdb);
             redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
@@ -390,7 +388,7 @@ public class RedisUtil {
      * @param end 结束  0 到 -1代表所有值
      * @return
      */
-    public static List<Object> listGet(String key, long start, long end) {
+    public static List listGet(String key, long start, long end) {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
@@ -539,6 +537,19 @@ public class RedisUtil {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    /**
+     * 根据key清除list
+     *
+     * @param key
+     */
+    public static void emptyList(String key) {
+        try {
+            redisTemplate.opsForList().leftPop(key);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

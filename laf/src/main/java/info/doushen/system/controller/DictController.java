@@ -1,5 +1,7 @@
 package info.doushen.system.controller;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import info.doushen.common.Constant;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -125,8 +129,22 @@ public class DictController extends BaseController {
     @GetMapping("/list/{type}")
     @ResponseBody
     public List<DictEntity> listType(@PathVariable("type") String type) {
-        List dictList = RedisUtil.listGet(Constant.DICT_CACHE_PREFIX + type, 0, -1);
-        return dictService.queryDictByType(type);
+        List<DictEntity> dictList = new ArrayList<>();
+
+        String value = RedisUtil.get(Constant.DICT_CACHE_PREFIX + type);
+        if (value != null) {
+            ObjectMapper mapper = new ObjectMapper();
+            JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, DictEntity.class);
+            try {
+                dictList = mapper.readValue(value, javaType);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            dictList = dictService.queryDictByType(type);
+        }
+
+        return dictList;
     }
 
 }

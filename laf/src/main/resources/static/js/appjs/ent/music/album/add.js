@@ -1,5 +1,3 @@
-var singerMap;
-
 $().ready(function() {
 
     initFileUpload();
@@ -10,7 +8,8 @@ $().ready(function() {
         $("#cover").val("");
     });
 
-    loadSinger();
+    //loadSinger();
+    loadDict();
 });
 
 function initFileUpload() {
@@ -130,11 +129,8 @@ function loadSinger() {
             parent.layer.alert("Connection error");
         },success : function(result) {
 
-			singerMap = {};
-
 			//加载数据
 			for (var i = 0; i < result.length; i++) {
-			    singerMap[result[i].id] = result[i].name;
 				html += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
 			}
 			$("#singer").append(html);
@@ -150,4 +146,112 @@ function loadSinger() {
             });
 		}
 	});
+}
+
+function loadDict() {
+    loadAlbumLanguage();
+    //loadAlbumType();
+    //loadAlbumStyle();
+}
+
+function loadAlbumLanguage() {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/album_language",
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+            }
+
+            $("#albumLanguage").append(html);
+
+            $("#albumLanguage").editableSelect({
+                effects: 'fade'
+            }).on('select.editable-select', function (e, li) {
+                console.log(li);
+                console.log(li.context);
+                console.log(li.val());
+                $("#language").val(li.val());
+            });
+
+            $("#albumLanguage").on('input propertychange', function() {
+                $("#language").val("");
+            });
+        }
+    });
+}
+
+function loadAlbumType() {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/album_type",
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+            }
+
+            $("#albumType").append(html);
+
+            $("#albumType").editableSelect({
+                effects: 'fade'
+            }).on('select.editable-select', function (e, li) {
+                $("#type").val(li.val());
+            });
+
+            $("#albumType").on('input propertychange', function() {
+                $("#type").val("");
+            });
+        }
+    });
+}
+
+function loadAlbumStyle() {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/album_style",
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+            }
+
+            $("#albumStyle").append(html);
+
+            $("#albumStyle").editableSelect({
+                effects: 'fade'
+            }).on('select.editable-select', function (e, li) {
+                $("#style").val(li.val());
+            });
+
+            $("#albumStyle").on('input propertychange', function() {
+                $("#style").val("");
+            });
+        }
+    });
 }
