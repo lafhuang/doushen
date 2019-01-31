@@ -1,29 +1,15 @@
 package info.doushen.system.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
-import info.doushen.common.Constant;
-import info.doushen.common.redis.RedisCacheManager;
-import info.doushen.common.redis.RedisManager;
-import info.doushen.common.redis.RedisSessionDAO;
-import info.doushen.system.listener.LafSessionListener;
 import info.doushen.system.shiro.UserRealm;
-import net.sf.ehcache.CacheManager;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.session.SessionListener;
-import org.apache.shiro.session.mgt.eis.MemorySessionDAO;
-import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 
 /**
@@ -35,6 +21,7 @@ import java.util.LinkedHashMap;
 @Configuration
 public class ShiroConfig {
 
+    /*
     @Value("${spring.redis.host}")
     private String host;
     @Value("${spring.redis.password}")
@@ -43,12 +30,11 @@ public class ShiroConfig {
     private int port;
     @Value("${spring.redis.timeout}")
     private int timeout;
-
     @Value("${spring.cache.type}")
     private String cacheType ;
-
     @Value("${server.session-timeout}")
     private int tomcatTimeout;
+    */
 
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanPostProcessor() {
@@ -96,6 +82,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         //设置realm.
         securityManager.setRealm(userRealm());
+        /*
         // 自定义缓存实现 使用redis
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
             securityManager.setCacheManager(rediscacheManager());
@@ -103,6 +90,7 @@ public class ShiroConfig {
             securityManager.setCacheManager(ehCacheManager());
         }
         securityManager.setSessionManager(sessionManager());
+        */
         return securityManager;
     }
 
@@ -131,6 +119,7 @@ public class ShiroConfig {
      *
      * @return
      */
+    /*
     @Bean
     public RedisManager redisManager() {
         RedisManager redisManager = new RedisManager();
@@ -141,6 +130,7 @@ public class ShiroConfig {
         redisManager.setPassword(password);
         return redisManager;
     }
+    */
 
     /**
      * cacheManager 缓存 redis实现
@@ -148,23 +138,28 @@ public class ShiroConfig {
      *
      * @return
      */
+    /*
     public RedisCacheManager rediscacheManager() {
         RedisCacheManager redisCacheManager = new RedisCacheManager();
         redisCacheManager.setRedisManager(redisManager());
         return redisCacheManager;
     }
+    */
 
     /**
      * RedisSessionDAO shiro sessionDao层的实现 通过redis
      * 使用的是shiro-redis开源插件
      */
+    /*
     @Bean
     public RedisSessionDAO redisSessionDAO() {
         RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
         redisSessionDAO.setRedisManager(redisManager());
         return redisSessionDAO;
     }
+    */
 
+    /*
     @Bean
     public SessionDAO sessionDAO() {
         if (Constant.CACHE_TYPE_REDIS.equals(cacheType)) {
@@ -173,10 +168,12 @@ public class ShiroConfig {
             return new MemorySessionDAO();
         }
     }
+    */
 
     /**
      * shiro session的管理
      */
+    /*
     @Bean
     public DefaultWebSessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
@@ -187,17 +184,22 @@ public class ShiroConfig {
         sessionManager.setSessionListeners(listeners);
         return sessionManager;
     }
+    */
 
+    /*
     @Bean
     public EhCacheManager ehCacheManager() {
         EhCacheManager em = new EhCacheManager();
         em.setCacheManager(cacheManager());
         return em;
     }
+    */
 
+    /*
     @Bean("cacheManager2")
     CacheManager cacheManager(){
         return CacheManager.create();
     }
+    */
 
 }

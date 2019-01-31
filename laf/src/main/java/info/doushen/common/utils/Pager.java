@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * PageUtils
+ * Pager
  *
  * @author huangdou
  * @date 2018/12/5
  */
-public class PageUtils implements Serializable {
+public class Pager implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,7 +18,7 @@ public class PageUtils implements Serializable {
     /** 集合 */
     private List<?> rows;
 
-    public PageUtils(int total, List<?> rows) {
+    public Pager(int total, List<?> rows) {
         this.total = total;
         this.rows = rows;
     }

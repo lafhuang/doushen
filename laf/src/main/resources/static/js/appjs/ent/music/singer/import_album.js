@@ -13,6 +13,11 @@ $().ready(function() {
         saveAlbum();
     })
 
+    $("#reset-btn").click(function() {
+        import_flag = true;
+        $("#exampleTable").html("");
+    })
+
 });
 
 function initFileUpload() {

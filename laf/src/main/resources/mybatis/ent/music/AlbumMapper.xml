@@ -104,4 +104,25 @@
             id = #{albumId}
     </select>
 
+    <select id="querySingerAlbum" parameterType="java.util.Map" resultType="info.doushen.ent.music.entity.AlbumEntity">
+        SELECT
+            id,
+            name,
+            singer_id,
+            issue_date,
+            language,
+            type,
+            style,
+            cover,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        FROM
+            ent_music_album
+        WHERE
+            singer_id = #{singerId}
+            and name = #{albumName}
+    </select>
+
 </mapper>

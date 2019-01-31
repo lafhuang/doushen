@@ -13,6 +13,11 @@ $().ready(function() {
         saveSong();
     })
 
+    $("#reset-btn").click(function() {
+        import_flag = true;
+        $("#exampleTable").html("");
+    })
+
 });
 
 function initFileUpload() {
@@ -40,11 +45,12 @@ function initFileUpload() {
                 html += "<thead>";
                 html += "    <tr>";
                 html += "        <th><div class=\"th-inner\">歌曲名</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">发行日期</div><div class=\"fht-cell\"></div></th>";
+                html += "        <th><div class=\"th-inner\">专辑</div><div class=\"fht-cell\"></div></th>";
+                html += "        <th><div class=\"th-inner\">音轨号</div><div class=\"fht-cell\"></div></th>";
                 html += "        <th><div class=\"th-inner\">语言</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">类型</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">风格</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">封面</div><div class=\"fht-cell\"></div></th>";
+                html += "        <th><div class=\"th-inner\">时长</div><div class=\"fht-cell\"></div></th>";
+                html += "        <th><div class=\"th-inner\">文件大小</div><div class=\"fht-cell\"></div></th>";
+                html += "        <th><div class=\"th-inner\">音频类型</div><div class=\"fht-cell\"></div></th>";
                 html += "    </tr>";
                 html += "</thead>";
                 html += "<tbody>";
@@ -55,13 +61,13 @@ function initFileUpload() {
                     }
 
                     html += "    <tr>";
-                    html += "        <td>" + album.name + "</td>";
-                    var issueDate = album.issueDate ? album.issueDate.substr(0, 10) : '-';
-                    html += "        <td>" + issueDate + "</td>";
-                    html += "        <td>" + album.language + "</td>";
-                    html += "        <td>" + album.type + "</td>";
-                    html += "        <td>" + album.style + "</td>";
-                    html += "        <td><img src=\"" + album.cover + "\" style=\"height:100px;width:100px;margin:5px;\"></td>";
+                    html += "        <td>" + song.name + "</td>";
+                    html += "        <td>" + song.albumName + "</td>";
+                    html += "        <td>" + song.trackNumber + "</td>";
+                    html += "        <td>" + song.language + "</td>";
+                    html += "        <td>" + song.length + "</td>";
+                    html += "        <td>" + song.size + "</td>";
+                    html += "        <td>" + song.audioType + "</td>";
                     html += "    </tr>";
                 }
                 html += "</tbody>";
@@ -77,26 +83,28 @@ function saveSong() {
 
     $("#exampleTable tbody tr").each(function() {
         var name = $(this).find("td:eq(0)").text();
-        var issueDate = $(this).find("td:eq(1)").text();
-        var language = $(this).find("td:eq(2)").text();
-        var type = $(this).find("td:eq(3)").text();
-        var style = $(this).find("td:eq(4)").text();
-        var cover = $(this).find("td:eq(5)").find("img").attr("src");
+        var albumName = $(this).find("td:eq(1)").text();
+        var trackNumber = $(this).find("td:eq(2)").text();
+        var language = $(this).find("td:eq(3)").text();
+        var length = $(this).find("td:eq(4)").text();
+        var size = $(this).find("td:eq(5)").text();
+        var audioType = $(this).find("td:eq(6)").text();
 
         var song = {
             "name" : name,
             "singerId" : singerId,
-            "issueDate" : issueDate,
+            "albumName" : albumName,
+            "trackNumber" : trackNumber,
             "language" : language,
-            "type" : type,
-            "style" : style,
-            "cover" : cover
+            "length" : length,
+            "size" : size,
+            "audioType" : audioType
         }
 
         songList.push(song);
     });
 
-    if (albumList.length == 0) {
+    if (songList.length == 0) {
         parent.layer.alert("未导入歌曲数据!");
         return;
     }

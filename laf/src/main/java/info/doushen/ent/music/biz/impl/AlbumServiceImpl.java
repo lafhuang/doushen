@@ -1,6 +1,6 @@
 package info.doushen.ent.music.biz.impl;
 
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.entity.AlbumEntity;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * AlbumServiceImpl
@@ -30,13 +31,13 @@ public class AlbumServiceImpl implements AlbumService {
     private DictService dictService;
 
     @Override
-    public PageUtils pageAlbumList(Query query) {
+    public Pager pageAlbumList(Query query) {
         int count = albumMapper.count(query);
         if (count == 0) {
-            return new PageUtils(count, new ArrayList<AlbumEntity>());
+            return new Pager(count, new ArrayList<AlbumEntity>());
         }
         List<AlbumEntity> albumList = albumMapper.list(query);
-        return new PageUtils(count, albumList);
+        return new Pager(count, albumList);
     }
 
     @Override
@@ -86,6 +87,11 @@ public class AlbumServiceImpl implements AlbumService {
         }
 
         return albumList.size();
+    }
+
+    @Override
+    public AlbumEntity querySingerAlbum(Map<String, Object> params) {
+        return albumMapper.querySingerAlbum(params);
     }
 
 }

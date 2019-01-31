@@ -76,4 +76,11 @@ public interface DictMapper {
      */
     List<DictEntity> queryDictByType(String dictType);
 
+    /**
+     * 获取所有数据字典
+     *
+     * @return
+     */
+    List<DictEntity> queryAll();
+
 }

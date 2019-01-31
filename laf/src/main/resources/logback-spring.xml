@@ -13,7 +13,7 @@
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>
-                log/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}.log
+                /Volumes/L.A.F./work/log/doushen/%d{yyyy-MM-dd}.log
             </FileNamePattern>
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">

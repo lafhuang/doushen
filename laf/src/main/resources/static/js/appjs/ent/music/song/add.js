@@ -4,7 +4,7 @@ var albumMap;
 $().ready(function() {
 
     $('.summernote').summernote({
-		height : '220px',
+		height : '500px',
 		lang : 'zh-CN',
 		callbacks: {
             onImageUpload: function(files, editor, $editable) {

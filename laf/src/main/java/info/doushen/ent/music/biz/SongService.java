@@ -1,9 +1,11 @@
 package info.doushen.ent.music.biz;
 
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.SongEntity;
 import info.doushen.ent.music.vo.SongVO;
+
+import java.util.List;
 
 /**
  * SongService
@@ -19,7 +21,7 @@ public interface SongService {
      * @param query
      * @return
      */
-    PageUtils pageSongList(Query query);
+    Pager pageSongList(Query query);
 
     /**
      * 保存歌曲
@@ -44,5 +46,14 @@ public interface SongService {
      * @return
      */
     int update(SongEntity song);
+
+    /**
+     * 导入歌手歌曲
+     *
+     * @param userId
+     * @param songList
+     * @return
+     */
+    int saveSingerSong(int userId, List<SongVO> songList);
 
 }

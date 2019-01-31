@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SingerService;
@@ -142,7 +142,7 @@ public class SingerController extends BaseController {
         albumParams.put("singerId", String.valueOf(singerId));
 
         Query albumQuery = new Query(albumParams);
-        PageUtils albumPage = albumService.pageAlbumList(albumQuery);
+        Pager albumPage = albumService.pageAlbumList(albumQuery);
 
         model.addAttribute("albumPage", albumPage);
 
@@ -153,7 +153,7 @@ public class SingerController extends BaseController {
         songParams.put("singerId", String.valueOf(singerId));
 
         Query songQuery = new Query(songParams);
-        PageUtils songPage = songService.pageSongList(songQuery);
+        Pager songPage = songService.pageSongList(songQuery);
 
         model.addAttribute("songPage", songPage);
 
@@ -234,7 +234,7 @@ public class SingerController extends BaseController {
         List<SongVO> songList = null;
         try {
             songList = mapper.readValue(songs, jt);
-            // songService.saveSingerSong(getUserId(), songList);
+            songService.saveSingerSong(getUserId(), songList);
         } catch (IOException e) {
             return Result.error();
         }

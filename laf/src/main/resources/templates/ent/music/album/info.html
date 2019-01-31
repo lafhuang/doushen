@@ -3,8 +3,8 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/css/music-layout.css" rel="stylesheet" />
-<link href="/css/album_info.css" rel="stylesheet" />
+<link href="/css/music_layout.css" rel="stylesheet" />
+<link href="/css/music_album_info.css" rel="stylesheet" />
 <style type="text/css">
     h1, ul, li {
         margin:0; padding:0
@@ -62,24 +62,6 @@
                                     <div class="songlist__number" th:text="${song.trackNumber}"></div>
                                     <div class="songlist__songname">
                                         <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
-                                        <!--<div class="mod_list_menu">-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__play js_play" title="播放">-->
-                                                <!--<i class="list_menu__icon_play"></i>-->
-                                                <!--<span class="icon_txt">播放</span>-->
-                                            <!--</a>-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__add js_fav" title="添加到歌单" aria-haspopup="true" data-target="menu_add">-->
-                                                <!--<i class="list_menu__icon_add"></i>-->
-                                                <!--<span class="icon_txt">添加到歌单</span>-->
-                                            <!--</a>-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__down js_down" title="下载" aria-haspopup="true" data-target="menu_down">-->
-                                                <!--<i class="list_menu__icon_down"></i>-->
-                                                <!--<span class="icon_txt">下载</span>-->
-                                            <!--</a>-->
-                                            <!--<a href="javascript:;" class="list_menu__item list_menu__share js_share" title="分享" aria-haspopup="true" data-aria="menu_share">-->
-                                                <!--<i class="list_menu__icon_share"></i>-->
-                                                <!--<span class="icon_txt">分享</span>-->
-                                            <!--</a>-->
-                                        <!--</div>-->
                                     </div>
                                     <div class="songlist__artist" th:title="${singer.name}">
                                         <a th:href="@{'/ent/music/singer/info/'+${singer.id}}" th:title="${singer.name}" class="singer_name" th:text="${singer.name}"></a>

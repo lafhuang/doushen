@@ -1,13 +1,14 @@
 package info.doushen.system.controller;
 
+import info.doushen.common.Constant;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.redis.RedisUtil;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
-import info.doushen.system.entity.MenuEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,10 +49,10 @@ public class DictController extends BaseController {
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("system:dict:dict")
-    public PageUtils list(@RequestParam Map<String, Object> params) {
+    public Pager list(@RequestParam Map<String, Object> params) {
         // 查询列表数据
         Query query = new Query(params);
-        PageUtils pageDict = dictService.pageDictList(query);
+        Pager pageDict = dictService.pageDictList(query);
         return pageDict;
     }
 
@@ -124,6 +125,7 @@ public class DictController extends BaseController {
     @GetMapping("/list/{type}")
     @ResponseBody
     public List<DictEntity> listType(@PathVariable("type") String type) {
+        List dictList = RedisUtil.listGet(Constant.DICT_CACHE_PREFIX + type, 0, -1);
         return dictService.queryDictByType(type);
     }
 

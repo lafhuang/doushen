@@ -3,7 +3,7 @@ package info.doushen.ent.music.controller;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
 import info.doushen.ent.music.biz.SongService;
@@ -52,9 +52,9 @@ public class SongController extends BaseController {
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("ent:music:song:song")
-    PageUtils list(@RequestParam Map<String, Object> params) {
+    Pager list(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
-        PageUtils pageSong = songService.pageSongList(query);
+        Pager pageSong = songService.pageSongList(query);
         return pageSong;
     }
 

@@ -3,8 +3,8 @@
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<link href="/css/music-layout.css" rel="stylesheet" />
-<link href="/css/singer_info.css" rel="stylesheet" />
+<link href="/css/music_layout.css" rel="stylesheet" />
+<link href="/css/music_singer_info.css" rel="stylesheet" />
 <style type="text/css">
     h1, ul, li {
         margin:0; padding:0
@@ -36,10 +36,10 @@
                     <div class="data__desc">
                         <ul class="mod_data_statistic">
                             <li class="data_statistic__item data_statistic__item--last">
-                                <a th:href="@{'/ent/music/song/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.song_tab" data-tab="song"><span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${songPage.total}"></strong></a>
+                                <span class="data_statistic__tit">单曲</span><strong class="data_statistic__number" th:text="${songPage.total}"></strong>
                             </li>
                             <li class="data_statistic__item data_statistic__item--last">
-                                <a th:href="@{'/ent/music/album/singer/'+${singer.id}}" class="js_goto_tab" data-stat="y_new.singer.header.album_tab" data-tab="album"><span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${albumPage.total}"></strong></a>
+                                <span class="data_statistic__tit">专辑</span><strong class="data_statistic__number" th:text="${albumPage.total}"></strong>
                             </li>
                         </ul>
                     </div>
@@ -69,7 +69,7 @@
                 <div class="mod_part" id="song_part">
                     <div class="part__hd">
                         <h2 class="part__tit">歌曲</h2>
-                        <a id="all_song_button" onclick="loadAllSong();" class="part__more js_goto_tab" data-stat="y_new.singer.index.song_all" data-tab="song">全部</a>
+                        <a id="all_song_button" onclick="loadAllSong();" class="part__more js_goto_tab" data-stat="y_new.singer.index.song_all" data-tab="song">全部<i class="icon_part_arrow sprite"></i></a>
                     </div>
 
                     <div class="mod_songlist">
@@ -113,7 +113,7 @@
                 <div class="mod_part" id="album_part">
                     <div class="part__hd">
                         <h2 class="part__tit">专辑</h2>
-                        <a id="all_album_button" onclick="loadAllAlbum();" class="part__more js_goto_tab" data-tab="album">全部</a>
+                        <a id="all_album_button" onclick="loadAllAlbum();" class="part__more js_goto_tab" data-tab="album">全部<i class="icon_part_arrow sprite"></i></a>
                     </div>
                     <div class="mod_playlist">
                         <ul class="playlist__list" id="albumlist">

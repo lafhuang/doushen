@@ -3,6 +3,7 @@ package info.doushen.ent.music.controller;
 import info.doushen.common.controller.BaseController;
 import info.doushen.ent.music.constant.MusicConstant;
 import info.doushen.ent.music.entity.AlbumEntity;
+import info.doushen.ent.music.vo.SongVO;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -81,8 +82,11 @@ public class MusicController extends BaseController {
 
             if (StringUtils.equals("album", type)) {
                 responseMap = parsingAlbum(pathname);
-            } else {
+            } else if (StringUtils.equals("song", type)) {
                 responseMap = parsingSong(pathname);
+            } else {
+                responseMap.put("code", "-1");
+                responseMap.put("msg", "未知导入类型!");
             }
 
             File templateFile = new File(pathname);
@@ -172,6 +176,9 @@ public class MusicController extends BaseController {
                 break;
             }
             String name = albumNameCell.getStringCellValue();
+            if (StringUtils.isEmpty(name)) {
+                break;
+            }
             album.setName(name);
 
             issueDateCell = albumRow.getCell(1);
@@ -179,6 +186,9 @@ public class MusicController extends BaseController {
                 break;
             }
             String issuDate = issueDateCell.getStringCellValue();
+            if (StringUtils.isEmpty(issuDate)) {
+                break;
+            }
             album.setIssueDate(format.parse(issuDate));
 
             languageCell = albumRow.getCell(2);
@@ -186,6 +196,9 @@ public class MusicController extends BaseController {
                 break;
             }
             String language = languageCell.getStringCellValue();
+            if (StringUtils.isEmpty(language)) {
+                break;
+            }
             album.setLanguage(language);
 
             typeCell = albumRow.getCell(3);
@@ -193,6 +206,9 @@ public class MusicController extends BaseController {
                 break;
             }
             String type = typeCell.getStringCellValue();
+            if (StringUtils.isEmpty(type)) {
+                break;
+            }
             album.setType(type);
 
             styleCell = albumRow.getCell(4);
@@ -200,16 +216,22 @@ public class MusicController extends BaseController {
                 break;
             }
             String style = styleCell.getStringCellValue();
+            if (StringUtils.isEmpty(style)) {
+                break;
+            }
             album.setStyle(style);
 
             coverCell = albumRow.getCell(5);
             if (coverCell != null) {
                 String coverUrl = coverCell.getStringCellValue();
 
-                String cover = downloadImg(coverUrl);
-                if (cover != null) {
-                    album.setCover(cover);
+                if (StringUtils.isNotEmpty(coverUrl)) {
+                    String cover = downloadImg(coverUrl);
+                    if (cover != null) {
+                        album.setCover(cover);
+                    }
                 }
+
             }
 
             albumList.add(album);
@@ -219,88 +241,161 @@ public class MusicController extends BaseController {
         resultMap.put("msg", "模板解析完成");
         resultMap.put("albumList", albumList);
 
+        if (is != null) {
+            is.close();
+        }
+
         return resultMap;
     }
 
-    Map<String, Object> parsingSong(String path) {
+    Map<String, Object> parsingSong(String path) throws IOException {
 
         Map<String, Object> resultMap = new HashMap<>();
 
-        InputStream is = null;
-        XSSFWorkbook workbook = null;
-        try {
-            is = new FileInputStream(path);
-            workbook = new XSSFWorkbook(is);
-            XSSFSheet sheet = workbook.getSheetAt(0);
+        InputStream is = new FileInputStream(path);
+        XSSFWorkbook workbook = new XSSFWorkbook(is);
+        XSSFSheet sheet = workbook.getSheetAt(0);
 
-            XSSFRow firstRow = sheet.getRow(0);
-            // 校验第一行格式
-            firstRow.getCell(0);
+        XSSFRow firstRow = sheet.getRow(0);
+        // 校验第一行格式
+        firstRow.getCell(0);
 
-            // 1.歌曲名 2.专辑 3.音轨号 4.语言 5.时长 6.文件大小 7.音频类型
-            XSSFCell songNameCell = firstRow.getCell(0);
-            String songNameTitle = songNameCell.getStringCellValue();
-            if (!StringUtils.equals(songNameTitle, MusicConstant.SONG_NAME)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell albumCell = firstRow.getCell(1);
-            String albumTitle = albumCell.getStringCellValue();
-            if (!StringUtils.equals(albumTitle, MusicConstant.SONG_ALBUM)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell trackCell = firstRow.getCell(2);
-            String trackTitle = trackCell.getStringCellValue();
-            if (!StringUtils.equals(trackTitle, MusicConstant.SONG_TRACK)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell languageCell = firstRow.getCell(3);
-            String languageTitle = languageCell.getStringCellValue();
-            if (!StringUtils.equals(languageTitle, MusicConstant.SONG_LANGUAGE)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell lengthCell = firstRow.getCell(4);
-            String lengthTitle = lengthCell.getStringCellValue();
-            if (!StringUtils.equals(lengthTitle, MusicConstant.SONG_LENGTH)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell sizeCell = firstRow.getCell(5);
-            String sizeTitle = sizeCell.getStringCellValue();
-            if (!StringUtils.equals(sizeTitle, MusicConstant.SONG_SIZE)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            XSSFCell audioTypeCell = firstRow.getCell(6);
-            String audioTypeTitle = audioTypeCell.getStringCellValue();
-            if (!StringUtils.equals(audioTypeTitle, MusicConstant.SONG_AUDIO_TYPE)) {
-                resultMap.put("code", "-1");
-                resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
-                return resultMap;
-            }
-
-            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
-
-            }
-
-        } catch (IOException e) {
+        // 1.歌曲名 2.专辑 3.音轨号 4.语言 5.时长 6.文件大小 7.音频类型
+        XSSFCell songNameCell = firstRow.getCell(0);
+        String songNameTitle = songNameCell.getStringCellValue();
+        if (!StringUtils.equals(songNameTitle, MusicConstant.SONG_NAME)) {
             resultMap.put("code", "-1");
-            resultMap.put("msg", "模板解析失败");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell albumCell = firstRow.getCell(1);
+        String albumTitle = albumCell.getStringCellValue();
+        if (!StringUtils.equals(albumTitle, MusicConstant.SONG_ALBUM)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell trackCell = firstRow.getCell(2);
+        String trackTitle = trackCell.getStringCellValue();
+        if (!StringUtils.equals(trackTitle, MusicConstant.SONG_TRACK)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell languageCell = firstRow.getCell(3);
+        String languageTitle = languageCell.getStringCellValue();
+        if (!StringUtils.equals(languageTitle, MusicConstant.SONG_LANGUAGE)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell lengthCell = firstRow.getCell(4);
+        String lengthTitle = lengthCell.getStringCellValue();
+        if (!StringUtils.equals(lengthTitle, MusicConstant.SONG_LENGTH)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell sizeCell = firstRow.getCell(5);
+        String sizeTitle = sizeCell.getStringCellValue();
+        if (!StringUtils.equals(sizeTitle, MusicConstant.SONG_SIZE)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        XSSFCell audioTypeCell = firstRow.getCell(6);
+        String audioTypeTitle = audioTypeCell.getStringCellValue();
+        if (!StringUtils.equals(audioTypeTitle, MusicConstant.SONG_AUDIO_TYPE)) {
+            resultMap.put("code", "-1");
+            resultMap.put("msg", "模板格式有误，请下载模板后重新上传!");
+            return resultMap;
+        }
+
+        List<SongVO> songList = new ArrayList();
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            XSSFRow songRow = sheet.getRow(i);
+
+            SongVO song = new SongVO();
+
+            songNameCell = songRow.getCell(0);
+            if (songNameCell == null) {
+                break;
+            }
+            String name = songNameCell.getStringCellValue();
+            if (StringUtils.isEmpty(name)) {
+                break;
+            }
+            song.setName(name);
+
+            albumCell = songRow.getCell(1);
+            if (albumCell == null) {
+                break;
+            }
+            String albumName = albumCell.getStringCellValue();
+            if (StringUtils.isEmpty(albumName)) {
+                break;
+            }
+            song.setAlbumName(albumName);
+
+            trackCell = songRow.getCell(2);
+            if (trackCell == null) {
+                break;
+            }
+            Double trackNumber = trackCell.getNumericCellValue();
+            song.setTrackNumber(trackNumber.intValue());
+
+            languageCell = songRow.getCell(3);
+            if (languageCell == null) {
+                break;
+            }
+            String language = languageCell.getStringCellValue();
+            if (StringUtils.isEmpty(language)) {
+                break;
+            }
+            song.setLanguage(language);
+
+            lengthCell = songRow.getCell(4);
+            if (lengthCell == null) {
+                break;
+            }
+            String length = lengthCell.getStringCellValue();
+            if (StringUtils.isEmpty(length)) {
+                break;
+            }
+            song.setLength(length);
+
+            sizeCell = songRow.getCell(5);
+            if (sizeCell == null) {
+                break;
+            }
+            Double size = sizeCell.getNumericCellValue();
+            song.setSize(String.valueOf(size));
+
+            audioTypeCell = songRow.getCell(6);
+            if (audioTypeCell == null) {
+                break;
+            }
+            String audioType = audioTypeCell.getStringCellValue();
+            if (StringUtils.isEmpty(audioType)) {
+                break;
+            }
+            song.setAudioType(audioType);
+
+            songList.add(song);
+        }
+
+        resultMap.put("code", "0");
+        resultMap.put("msg", "模板解析完成");
+        resultMap.put("songList", songList);
+
+        if (is != null) {
+            is.close();
         }
 
         return resultMap;

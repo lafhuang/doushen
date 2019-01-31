@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
  * @author huangdou
  * @date 2018/12/4
  */
+@Configuration
 public class DruidConfig {
 
     private Logger logger = LoggerFactory.getLogger(DruidConfig.class);

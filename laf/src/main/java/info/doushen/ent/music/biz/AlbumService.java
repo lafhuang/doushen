@@ -1,10 +1,11 @@
 package info.doushen.ent.music.biz;
 
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.AlbumEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * AlbumService
@@ -20,7 +21,7 @@ public interface AlbumService {
      * @param query
      * @return
      */
-    PageUtils pageAlbumList(Query query);
+    Pager pageAlbumList(Query query);
 
     /**
      * 保存专辑
@@ -46,5 +47,13 @@ public interface AlbumService {
      * @return
      */
     int saveSingerAlbum(int createUser, List<AlbumEntity> albumList);
+
+    /**
+     * 获取歌手专辑（歌手ID、专辑名）
+     *
+     * @param params
+     * @return
+     */
+    AlbumEntity querySingerAlbum(Map<String, Object> params);
 
 }

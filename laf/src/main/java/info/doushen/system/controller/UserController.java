@@ -4,7 +4,7 @@ import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
 import info.doushen.common.utils.MD5Utils;
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleService;
 import info.doushen.system.biz.UserService;
@@ -45,10 +45,10 @@ public class UserController extends BaseController {
 
     @GetMapping("/list")
     @ResponseBody
-    PageUtils list(@RequestParam Map<String, Object> params) {
+    Pager list(@RequestParam Map<String, Object> params) {
         // 查询列表数据
         Query query = new Query(params);
-        PageUtils userPage = userService.pageUserList(query);
+        Pager userPage = userService.pageUserList(query);
         return userPage;
     }
 

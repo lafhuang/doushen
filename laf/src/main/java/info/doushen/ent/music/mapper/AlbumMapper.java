@@ -4,6 +4,7 @@ import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.AlbumEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * AlbumMapper
@@ -44,5 +45,13 @@ public interface AlbumMapper {
      * @return
      */
     AlbumEntity get(int albumId);
+
+    /**
+     * 获取歌手专辑（歌手ID、专辑名）
+     *
+     * @param params
+     * @return
+     */
+    AlbumEntity querySingerAlbum(Map<String, Object> params);
 
 }

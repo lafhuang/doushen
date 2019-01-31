@@ -1,7 +1,7 @@
 package info.doushen.system.biz.impl;
 
 import info.doushen.common.utils.MD5Utils;
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DeptService;
 import info.doushen.system.biz.UserRoleService;
@@ -42,13 +42,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageUtils pageUserList(Query query) {
+    public Pager pageUserList(Query query) {
         int count = userMapper.count(query);
         if (count == 0) {
-            return new PageUtils(count, new ArrayList<UserEntity>());
+            return new Pager(count, new ArrayList<UserEntity>());
         }
         List<UserEntity> userList = userMapper.list(query);
-        return new PageUtils(count, userList);
+        return new Pager(count, userList);
     }
 
     @Override

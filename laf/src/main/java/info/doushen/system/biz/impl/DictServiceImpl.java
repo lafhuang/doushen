@@ -1,6 +1,6 @@
 package info.doushen.system.biz.impl;
 
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
@@ -29,13 +29,13 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public PageUtils pageDictList(Query query) {
+    public Pager pageDictList(Query query) {
         int count = dictMapper.count(query);
         if (count == 0) {
-            return new PageUtils(count, new ArrayList<DictEntity>());
+            return new Pager(count, new ArrayList<DictEntity>());
         }
         List<DictEntity> dictList = dictMapper.list(query);
-        return new PageUtils(count, dictList);
+        return new Pager(count, dictList);
     }
 
     @Override
@@ -69,6 +69,11 @@ public class DictServiceImpl implements DictService {
     @Override
     public List<DictEntity> queryDictByType(String dictType) {
         return dictMapper.queryDictByType(dictType);
+    }
+
+    @Override
+    public List<DictEntity> queryAll() {
+        return dictMapper.queryAll();
     }
 
 }

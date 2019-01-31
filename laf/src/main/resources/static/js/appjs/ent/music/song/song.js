@@ -1,8 +1,54 @@
 var request_prefix = "/ent/music/song";
 
+var song_language;
+var audio_type;
+
 $(function() {
+    loadDict();
 	load();
 });
+
+function loadDict() {
+	$.ajax({
+        type: 'get',
+		url : "/system/dict/list/audio_type",
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+
+            audio_type = {};
+
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                audio_type[result[i].dictValue] = result[i].dictName;
+            }
+        }
+    });
+
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/album_language",
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+
+            song_language = {};
+
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                song_language[result[i].dictValue] = result[i].dictName;
+            }
+        }
+    });
+}
 
 function load() {
 	$('#exampleTable')
@@ -73,6 +119,13 @@ function load() {
 						title : '音轨号'
 					},
 					{
+						field : 'language',
+						title : '语言',
+                        formatter : function(value, row, index) {
+                            return song_language[value];
+                        }
+					},
+					{
 						field : 'length',
 						title : '时长'
 					},
@@ -85,7 +138,10 @@ function load() {
                     },
                     {
                         field : 'audioType',
-                        title : '音频类型'
+                        title : '音频类型',
+                        formatter : function(value, row, index) {
+                            return audio_type[value];
+                        }
                     },
 					{
 						title : '操作',
@@ -114,7 +170,7 @@ function add() {
 		title : '添加歌曲',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
+		area : [ '100%', '100%' ],
 		content : request_prefix + '/add' // iframe的url
 	});
 }
@@ -146,7 +202,7 @@ function edit(id) {
 		title : '歌曲信息修改',
 		maxmin : true,
 		shadeClose : true, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
+		area : [ '100%', '100%' ],
 		content : request_prefix + '/edit/' + id // iframe的url
 	});
 }

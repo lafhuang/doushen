@@ -1,6 +1,6 @@
 package info.doushen.system.biz;
 
-import info.doushen.common.utils.PageUtils;
+import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.entity.DictEntity;
 
@@ -27,7 +27,7 @@ public interface DictService {
      * @param query
      * @return
      */
-    PageUtils pageDictList(Query query);
+    Pager pageDictList(Query query);
 
     /**
      * 保存数据字典
@@ -76,5 +76,12 @@ public interface DictService {
      * @return
      */
     List<DictEntity> queryDictByType(String dictType);
+
+    /**
+     * 获取所有数据字典
+     *
+     * @return
+     */
+    List<DictEntity> queryAll();
 
 }

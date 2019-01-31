@@ -30,7 +30,7 @@ public class MusicConstant {
     public static final String SONG_NAME = "歌曲名";
 
     /** 专辑 */
-    public static final String SONG_ALBUM = "歌曲名";
+    public static final String SONG_ALBUM = "专辑";
 
     /** 音轨号 */
     public static final String SONG_TRACK = "音轨号";

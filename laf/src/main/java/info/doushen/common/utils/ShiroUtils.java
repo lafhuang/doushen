@@ -2,12 +2,7 @@ package info.doushen.common.utils;
 
 import info.doushen.system.entity.UserEntity;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-
-import java.security.Principal;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * ShiroUtils
@@ -33,13 +28,5 @@ public class ShiroUtils {
     public static void logout() {
         getSubjct().logout();
     }
-
-    /*
-    public static List<Principal> getPrinciples() {
-        List<Principal> principals = null;
-        Collection<Session> sessions = sessionDAO.getActiveSessions();
-        return principals;
-    }
-    */
 
 }

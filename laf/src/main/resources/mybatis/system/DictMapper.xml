@@ -144,4 +144,18 @@
 		    sort
 	</select>
 
+	<select id="queryAll" resultType="info.doushen.system.entity.DictEntity">
+		SELECT
+			id,
+			dict_name,
+			dict_value,
+			dict_type,
+			description,
+			sort
+		FROM
+		    sys_dict
+		ORDER BY
+		    sort
+	</select>
+
 </mapper>
