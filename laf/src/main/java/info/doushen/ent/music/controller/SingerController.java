@@ -13,9 +13,6 @@ import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SingerEntity;
 import info.doushen.ent.music.vo.SongVO;
-import info.doushen.system.biz.DictService;
-import info.doushen.system.entity.DictEntity;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,21 +46,9 @@ public class SingerController extends BaseController {
     @Autowired
     private SongService songService;
 
-    @Autowired
-    private DictService dictService;
-
     @GetMapping()
     @RequiresPermissions("ent:music:singer:singer")
-    String singer(Model model) {
-        List<DictEntity> regionList = dictService.queryDictByType("singer_region");
-        model.addAttribute("regionList", regionList);
-
-        List<DictEntity> typeList = dictService.queryDictByType("singer_type");
-        model.addAttribute("typeList", typeList);
-
-        List<DictEntity> initialList = dictService.queryDictByType("singer_initial");
-        model.addAttribute("initialList", initialList);
-
+    String singer() {
         return TEMPLATE_PREFIX + "singer";
     }
 
@@ -78,16 +63,7 @@ public class SingerController extends BaseController {
     @RequiresPermissions("ent:music:singer:add")
     @Log("添加歌手")
     @GetMapping("/add")
-    String add(Model model) {
-        List<DictEntity> regionList = dictService.queryDictByType("singer_region");
-        model.addAttribute("regionList", regionList);
-
-        List<DictEntity> typeList = dictService.queryDictByType("singer_type");
-        model.addAttribute("typeList", typeList);
-
-        List<DictEntity> initialList = dictService.queryDictByType("singer_initial");
-        model.addAttribute("initialList", initialList);
-
+    String add() {
         return TEMPLATE_PREFIX + "add";
     }
 
@@ -108,32 +84,6 @@ public class SingerController extends BaseController {
     String info(@PathVariable("id") int singerId, Model model) {
         SingerEntity singer = singerService.get(singerId);
         model.addAttribute("singer", singer);
-
-        List<DictEntity> regionList = dictService.queryDictByType("singer_region");
-        model.addAttribute("regionList", regionList);
-
-        List<DictEntity> typeList = dictService.queryDictByType("singer_type");
-        model.addAttribute("typeList", typeList);
-
-        List<DictEntity> initialList = dictService.queryDictByType("singer_initial");
-        model.addAttribute("initialList", initialList);
-
-        StringBuffer region_type = new StringBuffer();
-        for (DictEntity dict : regionList) {
-            if (StringUtils.equals(dict.getDictValue(), singer.getRegion())) {
-                region_type.append(dict.getDictName());
-                break;
-            }
-        }
-
-        for (DictEntity dict : typeList) {
-            if (StringUtils.equals(dict.getDictValue(), singer.getType())) {
-                region_type.append(dict.getDictName());
-                break;
-            }
-        }
-
-        model.addAttribute("region_type", region_type);
 
         Map<String, Object> albumParams = new HashMap<>();
         albumParams.put("limit", 5);
@@ -166,15 +116,6 @@ public class SingerController extends BaseController {
     String edit(Model model, @PathVariable("id") int id) {
         SingerEntity singer = singerService.get(id);
         model.addAttribute("singer", singer);
-
-        List<DictEntity> regionList = dictService.queryDictByType("singer_region");
-        model.addAttribute("regionList", regionList);
-
-        List<DictEntity> typeList = dictService.queryDictByType("singer_type");
-        model.addAttribute("typeList", typeList);
-
-        List<DictEntity> initialList = dictService.queryDictByType("singer_initial");
-        model.addAttribute("initialList", initialList);
 
         return TEMPLATE_PREFIX + "edit";
     }

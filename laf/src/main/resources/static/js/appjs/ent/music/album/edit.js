@@ -1,15 +1,24 @@
+var album_cover = $("#album_cover").attr("src");
+var singerId = $("#singer").val();
+
+var album_language = $("#album_language").val();
+var album_type = $("#album_type").val();
+var album_style = $("#album_style").val();
+
 $().ready(function() {
 
     initFileUpload();
 
-	validateRule();
+    validateRule();
 
     $(".fileinput-remove-button").click(function() {
-        $("#cover").val("");
+        $("#cover").val(album_cover);
+        $("#album_cover").attr("src", album_cover);
     });
 
     loadSinger();
     loadDict();
+
 });
 
 function initFileUpload() {
@@ -23,40 +32,39 @@ function initFileUpload() {
         var res = data.response;
         if (res.code == '0') {
             $("#cover").val(res.msg);
+            $("#album_cover").attr("src", res.msg);
         }
     });
 }
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		update();
 	}
 });
 
-function save() {
+function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/ent/music/album/save",
+		url : "/ent/music/album/update",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
-			parent.layer.alert("Connection error");
+			alert("Connection error");
 		},
 		success : function(data) {
 			if (data.code == 0) {
-				parent.layer.msg("操作成功");
+				parent.layer.msg(data.msg);
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
-
 			} else {
-				parent.layer.alert(data.msg)
+				parent.layer.msg(data.msg);
 			}
 
 		}
 	});
-
 }
 
 function validateRule() {
@@ -131,7 +139,11 @@ function loadSinger() {
 
 			//加载数据
 			for (var i = 0; i < result.length; i++) {
-				html += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
+			    if (singerId == result[i].id) {
+			        html += '<option value="' + result[i].id + '" selected>' + result[i].name + '</option>'
+			    } else {
+			        html += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
+			    }
 			}
 			$("#singerId").html(html);
 			$("#singerId").selectpicker();
@@ -158,8 +170,13 @@ function load_album_dict(dict_type) {
             parent.layer.alert("Connection error");
         },success : function(result) {
             //加载数据
+            var dictValue = $("#"+dict_type+"_").val();
             for (var i = 0; i < result.length; i++) {
-                html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                if (dictValue == result[i].dictValue) {
+                    html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>';
+                } else {
+                   html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                }
             }
 
             $("#"+dict_type).html(html);

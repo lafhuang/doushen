@@ -51,6 +51,11 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    public int update(AlbumEntity album) {
+        return albumMapper.update(album);
+    }
+
+    @Override
     public int saveSingerAlbum(int createUser, List<AlbumEntity> albumList) {
         List<DictEntity> typeList = dictService.queryDictByType("album_type");
 

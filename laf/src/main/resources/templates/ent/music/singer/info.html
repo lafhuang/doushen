@@ -31,7 +31,11 @@
                         <h1 style="margin:0; padding:0;" class="data__name_txt js_index" th:title="${singer.name}" th:text="@{' ' + ${singer.name}}"></h1>
                     </div>
                     <div class="data__desc" id="singer_desc">
-                        <div class="data__desc_txt" id="short_desc" th:text="'歌手：' + ${singer.name} + ' | 英文名：' + ${singer.enName} + ' | 出生日期：' + ${#dates.format(singer.birthday, 'yyyy-MM-dd')} + ' | ' + ${region_type}"></div>
+                        <input type="hidden" id="singer_region" th:value="${singer.region}">
+                        <input type="hidden" id="singer_type" th:value="${singer.type}">
+                        <input type="hidden" id="singer_region_">
+                        <input type="hidden" id="singer_type_">
+                        <div class="data__desc_txt" id="short_desc" th:text="'歌手：' + ${singer.name} + ' | 英文名：' + ${singer.enName} + ' | 出生日期：' + ${#dates.format(singer.birthday, 'yyyy-MM-dd')} + ' | '"></div>
                     </div>
                     <div class="data__desc">
                         <ul class="mod_data_statistic">

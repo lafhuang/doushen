@@ -1,5 +1,43 @@
 var request_prefix = "/ent/music/singer"
 
+$().ready(function() {
+    initRegionType();
+});
+
+function initRegionType() {
+    load_dict("singer_region");
+    load_dict("singer_type");
+
+    var region = $("#singer_region_").val();
+    var type = $("#singer_type_").val();
+
+    var short_desc = $("#short_desc").text();
+    $("#short_desc").text(short_desc + region + type);
+}
+
+function load_dict(dict_type) {
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/" + dict_type,
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+            //加载数据
+            var dictValue = $("#"+dict_type).val();
+            for (var i = 0; i < result.length; i++) {
+                if (dictValue == result[i].dictValue) {
+                    $("#"+dict_type+"_").val(result[i].dictName);
+                    break;
+                }
+            }
+        }
+    });
+}
+
 function edit(id) {
     var id = $("#id").val();
 	layer.open({
@@ -7,7 +45,7 @@ function edit(id) {
 		title : '修改歌手信息',
 		maxmin : true,
 		shadeClose : false,
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/edit/' + id // iframe的url
 	});
 }

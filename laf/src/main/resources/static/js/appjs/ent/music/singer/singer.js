@@ -1,6 +1,7 @@
 var request_prefix = "/ent/music/singer";
 
 $(function() {
+    loadDict();
     load();
 
     $(".singer_tag__item").click(function(){
@@ -14,15 +15,15 @@ $(function() {
 
 function load() {
 
-    var initial = $("#initial_div").find("a.singer_tag__item--select").attr("data-id");
+    var initial = $("#singer_initial_div").find("a.singer_tag__item--select").attr("data-id");
     if (initial == "-100") {
         initial = '';
     }
-    var region = $("#region_div").find("a.singer_tag__item--select").attr("data-id");
+    var region = $("#singer_region_div").find("a.singer_tag__item--select").attr("data-id");
     if (region == "-100") {
         region = '';
     }
-    var type = $("#type_div").find("a.singer_tag__item--select").attr("data-id");
+    var type = $("#singer_type_div").find("a.singer_tag__item--select").attr("data-id");
     if (type == "-100") {
         type = '';
     }
@@ -68,6 +69,35 @@ function load() {
 
 }
 
+function loadDict() {
+    load_singer_dict("singer_initial");
+    load_singer_dict("singer_region");
+    load_singer_dict("singer_type");
+}
+
+function load_singer_dict(dict_type) {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/" + dict_type,
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+            //加载数据
+            html += '<a href="javascript:;" class="singer_tag__item singer_tag__item--all singer_tag__item--select" data-key="' + dict_type + '" data-id="-100" hidefocus="">全部</a>';
+            for (var i = 0; i < result.length; i++) {
+                html += '<a href=\"javascript:;\" class=\"singer_tag__item\" data-key=\"' + dict_type + '\" data-id=\"' + result[i].dictValue + '\" hidefocus=\"\">' + result[i].dictName + '</a>';
+            }
+
+            $("#"+dict_type+"_div").html(html);
+        }
+    });
+}
+
 function reLoad() {
     load();
 }
@@ -79,7 +109,7 @@ function add() {
 		title : '添加歌手',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/add'
 	});
 }

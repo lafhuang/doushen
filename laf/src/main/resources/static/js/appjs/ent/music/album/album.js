@@ -9,7 +9,8 @@ var album_language;
 $(function() {
     loadSinger();
     loadDict();
-	load();
+
+	setTimeout("load();",1000);
 });
 
 function loadSinger() {
@@ -210,7 +211,7 @@ function add() {
 		title : '添加专辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/add' // iframe的url
 	});
 }
@@ -242,7 +243,7 @@ function edit(id) {
 		title : '修改专辑',
 		maxmin : true,
 		shadeClose : true, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
+		area : [ '80%', '80%' ],
 		content : request_prefix + '/edit/' + id // iframe的url
 	});
 }

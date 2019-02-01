@@ -10,9 +10,6 @@ import info.doushen.ent.music.biz.SingerService;
 import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SingerEntity;
-import info.doushen.system.biz.DictService;
-import info.doushen.system.entity.DictEntity;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -73,6 +69,28 @@ public class AlbumController extends BaseController {
     Result save(AlbumEntity album) {
         album.setCreateBy(getUserId());
         if (albumService.save(album) > 0) {
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
+    @RequiresPermissions("ent:music:album:edit")
+    @Log("编辑专辑")
+    @GetMapping("/edit/{id}")
+    String edit(Model model, @PathVariable("id") int id) {
+        AlbumEntity album = albumService.get(id);
+        model.addAttribute("album", album);
+
+        return TEMPLATE_PREFIX + "edit";
+    }
+
+    @RequiresPermissions("ent:music:album:edit")
+    @Log("更新专辑")
+    @PostMapping("/update")
+    @ResponseBody
+    Result update(AlbumEntity album) {
+        album.setUpdateBy(getUserId());
+        if (albumService.update(album) > 0) {
             return Result.ok();
         }
         return Result.error();

@@ -28,11 +28,17 @@
                     <div class="data__singer">
                         <i class="fa fa-user-o"></i><a th:href="@{'/ent/music/singer/info/'+${album.singerId}}" class="js_singer data__singer_txt" itemprop="byArtist" data-stat="y_new.album.header.singername" th:title="${singer.name}" th:text="@{' ' + ${singer.name} + ' '}"></a>
                     </div>
+                    <input type="hidden" id="album_language" th:value="${album.language}">
+                    <input type="hidden" id="album_style" th:value="${album.style}">
+                    <input type="hidden" id="album_type" th:value="${album.type}">
+                    <input type="hidden" id="album_language_">
+                    <input type="hidden" id="album_style_">
+                    <input type="hidden" id="album_type_">
                     <ul class="data__info">
-                        <li class="data_info__item" th:text="@{'风格：'+${albumStyle}}"></li>
-                        <li class="data_info__item data_info__item--even" th:text="@{'语言：'+${albumLanguage}}"></li>
+                        <li class="data_info__item" id="album_style_li"></li>
+                        <li class="data_info__item data_info__item--even" id="album_language_li"></li>
                         <li class="data_info__item" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}"></li>
-                        <li class="data_info__item" th:text="@{'类型：'+${albumType}}"></li>
+                        <li class="data_info__item" id="album_type_li"></li>
                     </ul>
                 </div>
             </div>
@@ -85,5 +91,6 @@
 
     </div>
     <div th:include="include :: footer"></div>
+    <script type="text/javascript" src="/js/appjs/ent/music/album/info.js"></script>
 </body>
 </html>

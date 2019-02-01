@@ -33,16 +33,16 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">国家/地区：</label>
 							<div class="col-sm-8">
-								<select id="region" name="region" data-placeholder="选择国家地区" class="form-control chosen-select">
-									<option th:each="region : ${regionList}" th:value="${region.dictValue}" th:text="${region.dictName}" th:selected="${singer.region eq region.dictValue}"></option>
+								<input type="hidden" id="singer_region_" th:value="${singer.region}">
+								<select id="singer_region" name="region" title="选择国家地区" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">首字母：</label>
 							<div class="col-sm-8">
-								<select id="initial" name="initial" data-placeholder="选择首字母" class="form-control chosen-select">
-									<option th:each="initial : ${initialList}" th:value="${initial.dictValue}" th:text="${initial.dictName}" th:selected="${singer.initial eq initial.dictValue}"></option>
+								<input type="hidden" id="singer_initial_" th:value="${singer.initial}">
+								<select id="singer_initial" name="initial" title="选择首字母" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>
@@ -56,8 +56,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">类型：</label>
 							<div class="col-sm-8">
-								<select id="type" name="type" data-placeholder="选择类别" class="form-control chosen-select">
-									<option th:each="type : ${typeList}" th:value="${type.dictValue}" th:text="${type.dictName}" th:selected="${singer.type eq type.dictValue}"></option>
+								<input type="hidden" id="singer_type_" th:value="${singer.type}">
+								<select id="singer_type" name="type" title="选择类别" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>

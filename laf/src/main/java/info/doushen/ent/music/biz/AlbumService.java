@@ -40,6 +40,14 @@ public interface AlbumService {
     AlbumEntity get(int albumId);
 
     /**
+     * 更新专辑
+     *
+     * @param album
+     * @return
+     */
+    int update(AlbumEntity album);
+
+    /**
      * 导入歌手专辑
      *
      * @param createUser

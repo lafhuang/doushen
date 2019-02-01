@@ -19,18 +19,16 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">歌手：</label>
 							<div class="col-sm-8">
-								<input type="hidden" id="singerId" th:value="${song.singerId}">
-								<select id="singer" data-placeholder="选择歌手" class="form-control chosen-select"
-										tabindex="2" style="width: 100%">
+								<input type="hidden" id="song_singer" th:value="${song.singerId}">
+								<select id="singerId" name="singerId" title="选择歌手" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">专辑：</label>
 							<div class="col-sm-8">
-								<input type="hidden" id="albumId" name="albumId" th:value="${song.albumId}">
-								<select id="album" data-placeholder="选择专辑" class="form-control chosen-select"
-										tabindex="2" style="width: 100%">
+								<input type="hidden" id="song_album" th:value="${song.albumId}">
+								<select id="albumId" name="albumId" title="选择专辑" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>
@@ -44,8 +42,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">语言：</label>
 							<div class="col-sm-8">
-								<select id="language" name="language" data-placeholder="选择语言" class="form-control chosen-select">
-									<option th:each="language : ${languageList}" th:value="${language.dictValue}" th:text="${language.dictName}" th:selected="${song.language eq language.dictValue}"></option>
+								<input type="hidden" id="album_language_" th:value="${song.language}">
+								<select id="album_language" name="language" title="选择语言" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>
@@ -66,8 +64,8 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">音频类型：</label>
 							<div class="col-sm-8">
-								<select id="audioType" name="audioType" data-placeholder="选择类别" class="form-control chosen-select">
-									<option th:each="type : ${audioList}" th:value="${type.dictValue}" th:text="${type.dictName}" th:selected="${song.audioType eq type.dictValue}"></option>
+								<input type="hidden" id="audio_type_" th:value="${song.audioType}">
+								<select id="audio_type" name="audioType" title="选择类别" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 								</select>
 							</div>
 						</div>

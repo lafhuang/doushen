@@ -47,6 +47,14 @@ public interface AlbumMapper {
     AlbumEntity get(int albumId);
 
     /**
+     * 更新专辑
+     *
+     * @param album
+     * @return
+     */
+    int update(AlbumEntity album);
+
+    /**
      * 获取歌手专辑（歌手ID、专辑名）
      *
      * @param params

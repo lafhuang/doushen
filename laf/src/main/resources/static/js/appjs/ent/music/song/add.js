@@ -16,6 +16,7 @@ $().ready(function() {
     validateRule();
 
     loadSinger();
+    loadDict();
 });
 
 function loadSinger() {
@@ -36,38 +37,26 @@ function loadSinger() {
         },success : function(data) {
 			//加载数据
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
 			}
-			$("#singer").append(html);
+			$("#singer").html(html);
 
-			$("#singer").editableSelect({
-			    effects: 'fade'
-			}).on('select.editable-select', function (e, li) {
-			    var singerId = li.val();
-			    console.log(singerId);
-			    if (singerId) {
-			        loadAlbum(singerId);
-			    }
-            });
-
-			//点击事件
-			$("#singer").on('input propertychange', function() {
-			    $("#albumId").val("");
-			    $("#album").next().remove();
-			    $("#album").remove();
-
-			    var albumHtml = "<select id='album' data-placeholder='选择专辑' class='form-control chosen-select' tabindex='2' style='width: 100%'></select>";
-			    $("#albumId").after(albumHtml);
+            $("#singer").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+                loadAlbum();
             });
 
 		}
 	});
 }
 
-function loadAlbum(singerId) {
+function loadAlbum() {
+
+    $("#albumId").html("");
+    var singerId = $("#singer").val();
 
     var html = "";
-	var data = {
+
+    var data = {
 	    "offset" : 0,
 	    "limit" : 1000,
 	    "singerId" : singerId
@@ -87,23 +76,11 @@ function loadAlbum(singerId) {
             //加载数据
             var data = result.rows;
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
 			}
-			$("#album").append(html);
 
-			$("#album").editableSelect({
-			    effects: 'fade'
-			}).on('select.editable-select', function (e, li) {
-			    var albumId = li.val();
-			    if (albumId) {
-			        $("#albumId").val(albumId);
-			    }
-            });
-
-            //点击事件
-            $("#album").on('input propertychange', function() {
-                $("#albumId").val("");
-            });
+			$("#albumId").html(html);
+			$("#albumId").selectpicker('refresh');
         }
     });
 
@@ -198,4 +175,32 @@ function validateRule() {
             }
 		}
 	})
+}
+
+function loadDict() {
+    load_song_dict("album_language");
+    load_song_dict("audio_type");
+}
+
+function load_song_dict(dict_type) {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/" + dict_type,
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+            //加载数据
+            for (var i = 0; i < result.length; i++) {
+                html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+            }
+
+            $("#"+dict_type).html(html);
+            $("#"+dict_type).selectpicker();
+        }
+    });
 }

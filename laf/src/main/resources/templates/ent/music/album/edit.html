@@ -14,13 +14,13 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">专辑名：</label>
 								<div class="col-sm-8">
-									<input id="name" name="name" class="form-control"
-										type="text">
+									<input id="name" name="name" class="form-control" type="text" th:value="${album.name}">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">歌手：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="singer" th:value="${album.singerId}">
 									<select id="singerId" name="singerId" title="选择歌手" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 									</select>
 								</div>
@@ -29,12 +29,13 @@
 								<label class="col-sm-3 control-label">发行日期：</label>
 								<div class="col-sm-8">
 									<input type="text" class="laydate-icon layer-date form-control" id="issueDate" name="issueDate" placeholder="请选择发行日期"
-										   onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly"/>
+										   onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly" th:value="${#dates.format(album.issueDate, 'yyyy-MM-dd')}"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">语言：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="album_language_" th:value="${album.language}">
 									<select id="album_language" name="language" title="选择专辑语言" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 									</select>
 								</div>
@@ -42,6 +43,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">类型：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="album_type_" th:value="${album.type}">
 									<select id="album_type" name="type" title="选择专辑类型" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 									</select>
 								</div>
@@ -49,6 +51,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">风格：</label>
 								<div class="col-sm-8">
+									<input type="hidden" id="album_style_" th:value="${album.style}">
 									<select id="album_style" name="style" title="选择专辑风格" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 									</select>
 								</div>
@@ -56,10 +59,9 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">封面：</label>
 								<div class="col-sm-8">
-									<input id="cover" name="cover" type="hidden">
-									<div class="file-loading">
-										<input id="img" name="images" type="file" multiple>
-									</div>
+									<input id="cover" name="cover" type="hidden" th:value="${album.cover}">
+									<img id="album_cover" th:src="${album.cover}" th:alt="${album.name}" class="data__photo">
+									<input type="file" id="img" name="images" class="projectfile" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -77,8 +79,7 @@
 	<script type="text/javascript" src="/js/plugins/fileinput/fileinput.js" ></script>
 	<script type="text/javascript" src="/js/plugins/fileinput/zh.js" ></script>
 	<script type="text/javascript" src="/js/plugins/layer/laydate/laydate.js" ></script>
-	<script type="text/javascript" src="/js/appjs/ent/music/album/add.js">
-	</script>
+	<script type="text/javascript" src="/js/appjs/ent/music/album/edit.js"></script>
 </body>
 
 </html>

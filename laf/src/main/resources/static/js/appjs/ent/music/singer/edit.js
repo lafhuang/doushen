@@ -11,6 +11,8 @@ $().ready(function() {
         starCaptions: {1: '就那样', 2: '可以听听', 3: '还不错', 4: '喜欢', 5: '超爱'}
     });
 
+    loadDict();
+
     initFileUpload();
 
     validateRule();
@@ -114,4 +116,38 @@ function validateRule() {
             }
 		}
 	})
+}
+
+function loadDict() {
+    load_singer_dict("singer_initial");
+    load_singer_dict("singer_region");
+    load_singer_dict("singer_type");
+}
+
+function load_singer_dict(dict_type) {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/" + dict_type,
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+            //加载数据
+            var dictValue = $("#"+dict_type+"_").val();
+            for (var i = 0; i < result.length; i++) {
+                if (dictValue == result[i].dictValue) {
+                    html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>';
+                } else {
+                    html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>';
+                }
+            }
+
+            $("#"+dict_type).html(html);
+            $("#"+dict_type).selectpicker();
+        }
+    });
 }

@@ -1,6 +1,3 @@
-var singerMap;
-var albumMap;
-
 $().ready(function() {
     validateRule();
 
@@ -18,6 +15,7 @@ $().ready(function() {
     });
 
     loadSinger();
+    loadDict();
 });
 
 var edit = function() {
@@ -41,9 +39,7 @@ function loadSinger() {
             parent.layer.alert("Connection error");
         },success : function(data) {
 			//加载数据
-
-			var singerId = $("#singerId").val();
-
+			var singerId = $("#song_singer").val();
 			for (var i = 0; i < data.length; i++) {
 			    if (singerId == data[i].id) {
 			        html += '<option value="' + data[i].id + '" selected>' + data[i].name + '</option>'
@@ -52,29 +48,14 @@ function loadSinger() {
 			    }
 			}
 
-			$("#singer").append(html);
+			$("#singerId").html(html);
 
 			loadAlbum(singerId);
 
-			$("#singer").editableSelect({
-			    effects: 'fade'
-			}).on('select.editable-select', function (e, li) {
-			    singerId = li.val();
-			    console.log(singerId);
-			    if (singerId) {
-			        loadAlbum(singerId);
-			    }
-            });
-
-			//点击事件
-			$("#singer").on('input propertychange', function() {
-			    $("#albumId").val("");
-			    $("#album").next().remove();
-			    $("#album").remove();
-
-			    var albumHtml = "<select id='album' data-placeholder='选择专辑' class='form-control chosen-select' tabindex='2' style='width: 100%'></select>";
-			    $("#albumId").after(albumHtml);
-            });
+			$("#singerId").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+			    singerId = $("#singerId").val();
+			    loadAlbum(singerId);
+			});
 
 		}
 	});
@@ -101,9 +82,8 @@ function loadAlbum(singerId) {
             parent.layer.alert("Connection error");
         },success : function(result) {
             //加载数据
-            var albumId = $("#albumId").val();
-
             var data = result.rows;
+            var albumId = $("#song_album").val();
 			for (var i = 0; i < data.length; i++) {
 			    if (albumId == data[i].id) {
                     html += '<option value="' + data[i].id + '" selected>' + data[i].name + '</option>'
@@ -111,21 +91,9 @@ function loadAlbum(singerId) {
                     html += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
                 }
 			}
-			$("#album").append(html);
 
-			$("#album").editableSelect({
-			    effects: 'fade'
-			}).on('select.editable-select', function (e, li) {
-			    var albumId = li.val();
-			    if (albumId) {
-			        $("#albumId").val(albumId);
-			    }
-            });
-
-            //点击事件
-            $("#album").on('input propertychange', function() {
-                $("#albumId").val("");
-            });
+			$("#albumId").html(html);
+			$("#albumId").selectpicker('refresh');
         }
     });
 
@@ -133,11 +101,11 @@ function loadAlbum(singerId) {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		save();
+		update();
 	}
 });
 
-function save() {
+function update() {
 
     $("#lyrics").val($(".note-editable").html());
 
@@ -220,4 +188,37 @@ function validateRule() {
             }
 		}
 	})
+}
+
+function loadDict() {
+    load_song_dict("album_language");
+    load_song_dict("audio_type");
+}
+
+function load_song_dict(dict_type) {
+    var html = "";
+    $.ajax({
+        type: 'get',
+        url : "/system/dict/list/" + dict_type,
+        dataType: 'json',
+        cache:false,
+        async:false,
+        contentType:"application/json",
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },success : function(result) {
+            //加载数据
+            var dictValue = $("#"+dict_type+"_").val();
+            for (var i = 0; i < result.length; i++) {
+                if (dictValue == result[i].dictValue) {
+                    html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>';
+                } else {
+                   html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                }
+            }
+
+            $("#"+dict_type).html(html);
+            $("#"+dict_type).selectpicker();
+        }
+    });
 }

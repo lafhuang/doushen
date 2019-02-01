@@ -104,6 +104,23 @@
             id = #{albumId}
     </select>
 
+    <update id="update" parameterType="info.doushen.ent.music.entity.AlbumEntity">
+        UPDATE
+            ent_music_album
+        SET
+            name = #{name},
+            singer_id = #{singerId},
+            issue_date = #{issueDate},
+            language = #{language},
+            type = #{type},
+            style = #{style},
+            cover = #{cover},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
     <select id="querySingerAlbum" parameterType="java.util.Map" resultType="info.doushen.ent.music.entity.AlbumEntity">
         SELECT
             id,

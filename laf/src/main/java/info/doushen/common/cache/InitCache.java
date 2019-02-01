@@ -34,7 +34,7 @@ public class InitCache implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // 加载数据字典
-        initDict();
+        // initDict();
     }
 
     private void initDict() {

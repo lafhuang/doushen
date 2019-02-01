@@ -10,16 +10,12 @@ import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SongEntity;
 import info.doushen.ent.music.vo.SongVO;
-import info.doushen.system.biz.DictService;
-import info.doushen.system.entity.DictEntity;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,9 +36,6 @@ public class SongController extends BaseController {
     @Autowired
     private AlbumService albumService;
 
-    @Autowired
-    private DictService dictService;
-
     @GetMapping()
     @RequiresPermissions("ent:music:song:song")
     String song(Model model) {
@@ -61,12 +54,7 @@ public class SongController extends BaseController {
     @RequiresPermissions("ent:music:song:add")
     @Log("添加歌曲")
     @GetMapping("/add")
-    String add(Model model) {
-        List<DictEntity> languageList = dictService.queryDictByType("album_language");
-        model.addAttribute("languageList", languageList);
-
-        List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
-        model.addAttribute("audioList", audiolList);
+    String add() {
         return TEMPLATE_PREFIX + "add";
     }
 
@@ -89,12 +77,6 @@ public class SongController extends BaseController {
         SongVO song = songService.get(id);
         model.addAttribute("song", song);
 
-        List<DictEntity> languageList = dictService.queryDictByType("album_language");
-        model.addAttribute("languageList", languageList);
-
-        List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
-        model.addAttribute("audioList", audiolList);
-
         return TEMPLATE_PREFIX + "edit";
     }
 
@@ -116,6 +98,9 @@ public class SongController extends BaseController {
         SongVO song = songService.get(songId);
         model.addAttribute("song", song);
 
+        AlbumEntity album = albumService.get(song.getAlbumId());
+        model.addAttribute("album", album);
+        /*
         List<DictEntity> languageList = dictService.queryDictByType("album_language");
         for (DictEntity dict : languageList) {
             if (StringUtils.equals(dict.getDictValue(), song.getLanguage())) {
@@ -123,15 +108,13 @@ public class SongController extends BaseController {
             }
         }
 
-        AlbumEntity album = albumService.get(song.getAlbumId());
-        model.addAttribute("album", album);
-
         List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
         for (DictEntity dict : audiolList) {
             if (StringUtils.equals(dict.getDictValue(), song.getAudioType())) {
                 model.addAttribute("audioType", dict.getDictName());
             }
         }
+        */
 
         return TEMPLATE_PREFIX + "info";
     }
