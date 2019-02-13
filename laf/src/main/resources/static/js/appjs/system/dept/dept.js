@@ -14,16 +14,13 @@ function load() {
 				type : "GET", // 请求数据的ajax类型
 				url : request_prefix + '/list', // 请求数据的ajax的url
 				ajaxParams : {}, // 请求数据的ajax的data属性
-				expandColumn : '1', // 在哪一列上面显示展开按钮
+				expandColumn : '0', // 在哪一列上面显示展开按钮
 				striped : true, // 是否各行渐变色
 				bordered : true, // 是否显示边框
 				expandAll : false, // 是否全部展开
 				// toolbar : '#exampleToolbar',
 				columns : [
 					{
-                        checkbox : true
-                    },
-                    {
 						field : 'deptName',
 						title : '部门名称',
                         valign : 'center',
