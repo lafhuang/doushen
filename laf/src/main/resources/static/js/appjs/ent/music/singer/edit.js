@@ -2,6 +2,11 @@ var singer_photo = $("#singer_photo").attr("src");
 
 $().ready(function() {
 
+	laydate.render({
+		elem: '#birthday'
+		,theme: 'molv'
+	});
+
     $('#star').rating({
         language: 'zh',
         min: 0,

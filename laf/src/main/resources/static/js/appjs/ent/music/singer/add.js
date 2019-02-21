@@ -1,5 +1,10 @@
 $().ready(function() {
 
+	laydate.render({
+		elem: '#birthday'
+		,theme: 'molv'
+	});
+
     $('#star').rating({
         language: 'zh',
         min: 0,

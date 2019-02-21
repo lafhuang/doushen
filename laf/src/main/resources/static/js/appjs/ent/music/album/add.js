@@ -1,5 +1,10 @@
 $().ready(function() {
 
+	laydate.render({
+		elem: '#issueDate'
+		,theme: 'molv'
+	});
+
     initFileUpload();
 
 	validateRule();

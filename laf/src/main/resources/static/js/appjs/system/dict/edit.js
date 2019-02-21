@@ -19,39 +19,29 @@ function loadType() {
 
 			dictMap = {};
 
+			var dictType = $("#dict_type").val();
+
 			//加载数据
 			for (var i = 0; i < data.length; i++) {
 			    dictMap[data[i].dictType] = data[i].description;
-				html += '<option value="' + data[i].dictType + '">' + data[i].dictType + ' - ' + data[i].description + '</option>'
+				if (dictType == data[i].dictType) {
+					html += '<option value="' + data[i].dictType + '" selected>' + data[i].dictType + '</option>'
+				} else {
+					html += '<option value="' + data[i].dictType + '">' + data[i].dictType + '</option>'
+				}
 			}
-			$("#dictType").append(html);
 
-			$("#dictType").editableSelect({
-			    effects: 'fade'
-			}).on('select.editable-select', function (e, li) {
-			    var dictText = li.text();
-			    if ("选择类别" == dictText) {
-			        $("#dictType").val("");
-                    $("#description").val("");
-			        return;
-			    }
-			    var dictType = dictText.split(" - ");
-			    $("#dictType").val(dictType[0]);
-			    $("#description").val(dictType[1]);
-            });
+			$("#dictType").html(html);
+			$("#dictType").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+				var type = $("#dictType").val();
 
-			//点击事件
-			$("#dictType").on('input propertychange', function() {
-			    var type = $.trim($(this).val());
-                $(this).val(type);
-
-                var description = dictMap[type];
-                if (description) {
-                    $("#description").val(description);
-                } else {
-                    $("#description").val("");
-                }
-            });
+				var description = dictMap[type];
+				if (description) {
+					$("#description").val(description);
+				} else {
+					$("#description").val("");
+				}
+			});
 
 		}
 	});

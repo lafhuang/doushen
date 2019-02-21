@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="info.doushen.ent.video.mapper.MovieMapper">
+
+    <select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
+        SELECT
+            count(1)
+        FROM
+            ent_video_movie
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="cnName != null and cnName != ''"> and cn_name = #{cnName} </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.ent.video.entity.MovieEntity">
+        SELECT
+            id,
+            name,
+            cn_name,
+            source_name,
+            poster,
+            size,
+            length,
+            release_date,
+            medium,
+            encode,
+            audio_encode,
+            definition,
+            region,
+            movie_type,
+            language,
+            cn_subtitles,
+            imdb_url,
+            imdb_score,
+            douban_url,
+            douban_score,
+            discribe
+        FROM
+            ent_video_movie
+        <where>
+            <if test="id != null and id != ''"> and id = #{id} </if>
+            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="cnName != null and cnName != ''"> and cn_name = #{cnName} </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+            <otherwise>
+                order by id
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{limit} offset #{offset}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="info.doushen.ent.music.entity.SongEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT
+        INTO
+            ent_video_movie
+            (
+                name,
+                cn_name,
+                source_name,
+                poster,
+                size,
+                length,
+                release_date,
+                medium,
+                encode,
+                audio_encode,
+                definition,
+                region,
+                movie_type,
+                language,
+                cn_subtitles,
+                imdb_url,
+                imdb_score,
+                douban_url,
+                douban_score,
+                discribe,
+                create_by,
+                create_time,
+                update_by,
+                update_time
+            )
+            VALUES
+            (
+                #{name},
+                #{cnName},
+                #{sourceName},
+                #{poster},
+                #{size},
+                #{length},
+                #{releaseDate},
+                #{medium},
+                #{encode},
+                #{audioEncode},
+                #{definition},
+                #{region},
+                #{movieType},
+                #{language},
+                #{cnSubtitles},
+                #{imdbUrl},
+                #{imdbScore},
+                #{doubanUrl},
+                #{doubanScore},
+                #{discribe},
+                #{createBy},
+                CURRENT_TIMESTAMP,
+                #{createBy},
+                CURRENT_TIMESTAMP
+            )
+    </insert>
+
+    <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.ent.video.entity.MovieEntity">
+        SELECT
+            id,
+            name,
+            cn_name,
+            source_name,
+            poster,
+            size,
+            length,
+            release_date,
+            medium,
+            encode,
+            audio_encode,
+            definition,
+            region,
+            movie_type,
+            language,
+            cn_subtitles,
+            imdb_url,
+            imdb_score,
+            douban_url,
+            douban_score,
+            discribe
+        FROM
+            ent_video_movie
+        WHERE
+            id = #{id}
+    </select>
+
+    <update id="update" parameterType="info.doushen.ent.music.entity.SongEntity">
+        UPDATE
+            ent_music_song
+        SET
+            name = #{name},
+            album_id = #{albumId},
+            track_number = #{trackNumber},
+            language = #{language},
+            length = #{length},
+            size = #{size},
+            audio_type = #{audioType},
+            lyrics = #{lyrics},
+            update_by = #{updateBy},
+            update_time = CURRENT_TIMESTAMP
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>

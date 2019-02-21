@@ -23,10 +23,12 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">类型：</label>
-								<div class="col-sm-8">
-									<select id="dictType" name="dictType" data-placeholder="选择类别" th:value="${type}" class="form-control chosen-select"
-											tabindex="2" style="width: 100%">
-										<option value="">选择类别</option>
+								<input type="hidden" id="dictType" th:value="${type}">
+								<div class="col-sm-8" th:if="${type == null}">
+									<input id="dictType_0" name="dictType" class="form-control" type="text">
+								</div>
+								<div class="col-sm-8" th:if="${type != null}">
+									<select id="dictType_1" name="dictType" title="选择类别" class="form-control chosen-select" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
 									</select>
 								</div>
 							</div>

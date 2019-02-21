@@ -1,6 +1,3 @@
-var singerMap;
-var albumMap;
-
 $().ready(function() {
 
     $('.summernote').summernote({

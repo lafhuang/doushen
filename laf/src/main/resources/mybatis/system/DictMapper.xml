@@ -12,6 +12,8 @@
 		GROUP BY
 		    dict_type,
 		    description
+		ORDER BY
+		    dict_type
 	</select>
 
 	<select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">

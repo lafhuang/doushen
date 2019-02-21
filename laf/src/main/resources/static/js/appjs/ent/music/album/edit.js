@@ -7,6 +7,11 @@ var album_style = $("#album_style").val();
 
 $().ready(function() {
 
+	laydate.render({
+		elem: '#issueDate'
+		,theme: 'molv'
+	});
+
     initFileUpload();
 
     validateRule();

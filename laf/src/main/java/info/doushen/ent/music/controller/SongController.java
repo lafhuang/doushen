@@ -38,7 +38,7 @@ public class SongController extends BaseController {
 
     @GetMapping()
     @RequiresPermissions("ent:music:song:song")
-    String song(Model model) {
+    String song() {
         return TEMPLATE_PREFIX + "song";
     }
 
@@ -100,21 +100,6 @@ public class SongController extends BaseController {
 
         AlbumEntity album = albumService.get(song.getAlbumId());
         model.addAttribute("album", album);
-        /*
-        List<DictEntity> languageList = dictService.queryDictByType("album_language");
-        for (DictEntity dict : languageList) {
-            if (StringUtils.equals(dict.getDictValue(), song.getLanguage())) {
-                model.addAttribute("language", dict.getDictName());
-            }
-        }
-
-        List<DictEntity> audiolList = dictService.queryDictByType("audio_type");
-        for (DictEntity dict : audiolList) {
-            if (StringUtils.equals(dict.getDictValue(), song.getAudioType())) {
-                model.addAttribute("audioType", dict.getDictName());
-            }
-        }
-        */
 
         return TEMPLATE_PREFIX + "info";
     }
