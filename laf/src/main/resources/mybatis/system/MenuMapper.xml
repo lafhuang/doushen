@@ -60,13 +60,10 @@
         FROM
             sys_menu
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
             <if test="menuName != null and menuName != ''"> and menu_name = #{menuName} </if>
             <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
             <if test="url != null and url != ''"> and url = #{url} </if>
             <if test="perms != null and perms != ''"> and perms = #{perms} </if>
-            <if test="type != null and type != ''"> and type = #{type} </if>
-            <if test="icon != null and icon != ''"> and icon = #{icon} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

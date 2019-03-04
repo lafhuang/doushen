@@ -21,9 +21,6 @@
         FROM
             ent_music_singer
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="enName != null and enName != ''"> and en_name = #{enName} </if>
             <if test="region != null and region != ''"> and region = #{region} </if>
             <if test="initial != null and initial != ''"> and initial = #{initial} </if>
             <if test="type != null and type != ''"> and type = #{type} </if>

@@ -6,6 +6,9 @@ var audio_type;
 $(function() {
     loadDict();
 	load();
+
+	loadSinger();
+	loadAlbum();
 });
 
 function loadDict() {
@@ -79,8 +82,9 @@ function load() {
 						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						// name:$('#searchName').val(),
-						type : $('#searchName').val(),
+						name : $('#songName').val(),
+						albumId : $("#song_album").val(),
+						singerId : $("#song_singer").val()
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -158,6 +162,73 @@ function load() {
 						}
 					} ]
 			});
+}
+
+function loadSinger() {
+
+	var html = "<option value=''>选择歌手</option>";
+	var data = {};
+
+	$.ajax({
+		type: 'post',
+		url : "/ent/music/singer/list",
+		data: JSON.stringify(data),
+		dataType: 'json',
+		cache:false,
+		async:false,
+		contentType:"application/json",
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},success : function(data) {
+			//加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+			}
+			$("#song_singer").html(html);
+
+			$("#song_singer").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
+				loadAlbum();
+			});
+
+		}
+	});
+}
+
+function loadAlbum() {
+
+	$("#song_album").html("");
+	var singerId = $("#song_singer").val();
+
+	var html = "<option value=''>选择专辑</option>";
+
+	if (singerId != "") {
+		var data = {
+			"offset" : 0,
+			"limit" : 1000,
+			"singerId" : singerId
+		};
+
+		$.ajax({
+			type: 'get',
+			url : "/ent/music/album/list",
+			data: data,
+			dataType: 'json',
+			cache:false,
+			async:false,
+			contentType:"application/json",
+			error : function(request) {
+				parent.layer.alert("Connection error");
+			},success : function(result) {
+				//加载数据
+				var data = result.rows;
+				for (var i = 0; i < data.length; i++) {
+					html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+				}
+			}
+		});
+	}
+	$("#song_album").html(html);
+	$("#song_album").selectpicker('refresh');
 }
 
 function reLoad() {

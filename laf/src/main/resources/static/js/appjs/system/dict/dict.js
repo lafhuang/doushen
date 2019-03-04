@@ -4,7 +4,7 @@ $(function() {
 	load();
 });
 function selectLoad() {
-	var html = "";
+	var html = "<option value=\"\">全部类别</option>";
 	$.ajax({
 		url : request_prefix + '/type',
 		success : function(data) {
@@ -12,20 +12,17 @@ function selectLoad() {
 			for (var i = 0; i < data.length; i++) {
 				html += '<option value="' + data[i].dictType + '">' + data[i].description + '</option>'
 			}
-			$(".chosen-select").append(html);
-			$(".chosen-select").chosen({
-				maxHeight : 200
-			});
-			//点击事件
-			$('.chosen-select').on('change', function(e, params) {
-				console.log(params.selected);
+
+			$("#dict_type").html(html);
+			$("#dict_type").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
 				var opt = {
 					query : {
-						type : params.selected,
+						dictType : $("#dict_type").val(),
 					}
 				}
 				$('#exampleTable').bootstrapTable('refresh', opt);
 			});
+
 		}
 	});
 }
@@ -58,9 +55,7 @@ function load() {
 					return {
 						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
-						offset : params.offset,
-						// name:$('#searchName').val(),
-						type : $('#searchName').val(),
+						offset : params.offset
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

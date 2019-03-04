@@ -22,11 +22,7 @@
 		FROM
 		    sys_dict
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
-			<if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
 			<if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
 		</where>
 	</select>
 
@@ -45,11 +41,7 @@
 		FROM
 		    sys_dict
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="dictName != null and dictName != ''"> and dict_name = #{dictName} </if>
-			<if test="dictValue != null and dictValue != ''"> and dict_value = #{dictValue} </if>
 			<if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
-			<if test="description != null and description != ''"> and description = #{description} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">

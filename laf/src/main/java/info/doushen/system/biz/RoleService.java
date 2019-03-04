@@ -1,5 +1,7 @@
 package info.doushen.system.biz;
 
+import info.doushen.common.utils.Pager;
+import info.doushen.common.utils.Query;
 import info.doushen.system.entity.RoleEntity;
 import info.doushen.system.vo.RoleVO;
 
@@ -15,12 +17,20 @@ import java.util.Map;
 public interface RoleService {
 
     /**
-     * 获取角色列表
+     * 分页查询角色
      *
-     * @param params
+     * @param query
      * @return
      */
-    List<RoleEntity> list(Map<String, Object> params);
+    Pager pageRoleList(Query query);
+
+    /**
+     * 获取角色列表
+     *
+     * @param query
+     * @return
+     */
+    List<RoleEntity> list(Query query);
 
     /**
      * 获取角色

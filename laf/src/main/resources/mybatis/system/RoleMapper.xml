@@ -3,7 +3,17 @@
 
 <mapper namespace="info.doushen.system.mapper.RoleMapper">
 
-    <select id="list" parameterType="java.util.Map" resultType="info.doushen.system.entity.RoleEntity">
+    <select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
+        SELECT
+          COUNT(1)
+        FROM
+          sys_role
+        <where>
+            <if test="roleName != null and roleName != ''"> and role_name like CONCAT('%',#{roleName},'%') </if>
+        </where>
+    </select>
+
+    <select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.system.entity.RoleEntity">
         SELECT
             id,
             role_name,
@@ -12,10 +22,7 @@
         FROM
             sys_role
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="roleName != null and roleName != ''"> and role_name = #{roleName} </if>
-            <if test="roleSign != null and roleSign != ''"> and role_sign = #{roleSign} </if>
-            <if test="roleDesc != null and roleDesc != ''"> and role_desc = #{roleDesc} </if>
+            <if test="roleName != null and roleName != ''"> and role_name like CONCAT('%',#{roleName},'%') </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

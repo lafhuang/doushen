@@ -23,14 +23,8 @@ public class MainController extends BaseController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping({ "/", "" })
-    String welcome() {
-        return "redirect:/index";
-    }
-
-    @Log("请求访问主页")
-    @GetMapping({ "/index" })
-    String index(Model model) {
+    @GetMapping({ "/", "", "/index" })
+    String welcome(Model model) {
         List<Tree<MenuEntity>> menus = menuService.queryUserMenuTree(getUserId());
         model.addAttribute("menus", menus);
         model.addAttribute("name", getUser().getName());

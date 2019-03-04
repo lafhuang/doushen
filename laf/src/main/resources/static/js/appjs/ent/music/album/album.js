@@ -29,10 +29,14 @@ function loadSinger() {
         },success : function(result) {
 			singerMap = {};
 
+			var html = "<option value=''>选择歌手</option>";
 			//加载数据
 			for (var i = 0; i < result.length; i++) {
 			    singerMap[result[i].id] = result[i].name;
+				html += '<option value="' + result[i].id + '">' + result[i].name + '</option>'
 			}
+			$("#album_singer").html(html);
+			$("#album_singer").selectpicker();
 		}
 	});
 }
@@ -128,8 +132,8 @@ function load() {
 						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
-						// name:$('#searchName').val(),
-						type : $('#searchName').val(),
+						name : $('#albumName').val(),
+						singerId : $("#album_singer").val()
 					};
 				},
 				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

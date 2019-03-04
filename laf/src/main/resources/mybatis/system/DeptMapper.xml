@@ -12,7 +12,6 @@
 		FROM
 		    sys_dept
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
 			<if test="deptName != null and deptName != ''"> and dept_name = #{deptName} </if>
 			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
 		</where>
@@ -65,5 +64,59 @@
 		        CURRENT_TIMESTAMP
 		    )
 	</insert>
+
+	<update id="update" parameterType="info.doushen.system.entity.DeptEntity">
+		UPDATE
+			sys_dept
+		SET
+			dept_name = #{deptName},
+			parent_id = #{parentId},
+			sort = #{sort},
+			update_by = #{updateBy},
+			update_time = CURRENT_TIMESTAMP
+		WHERE
+		    id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.Integer">
+		DELETE
+		FROM
+			sys_dept dept
+		WHERE
+			dept.id IN
+						(
+						WITH
+							RECURSIVE T
+							(
+								id,
+								dept_name,
+								parent_id
+							) AS
+							(
+								SELECT
+									id,
+									dept_name,
+									parent_id
+								FROM
+									sys_dept
+								WHERE
+									id = #{id}
+								UNION ALL
+								SELECT
+									d.id,
+									d.dept_name,
+									d.parent_id
+								FROM
+									sys_dept d
+								JOIN
+									t
+								ON
+									d.parent_id = t.id
+							)
+						SELECT
+							id
+						FROM
+							t)
+	</delete>
 
 </mapper>

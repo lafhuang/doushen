@@ -44,4 +44,20 @@ public interface DeptService {
      */
     int save(DeptEntity dept);
 
+    /**
+     * 更新部门信息
+     *
+     * @param dept
+     * @return
+     */
+    int update(DeptEntity dept);
+
+    /**
+     * 删除部门及其子部门
+     *
+     * @param id
+     * @return
+     */
+    int remove(int id);
+
 }

@@ -3,6 +3,8 @@ package info.doushen.system.controller;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
+import info.doushen.common.utils.Pager;
+import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleService;
 import info.doushen.system.entity.RoleEntity;
 import info.doushen.system.vo.RoleVO;
@@ -12,8 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 /**
  * RoleController
@@ -39,8 +40,10 @@ public class RoleController extends BaseController {
     @RequiresPermissions("system:role:role")
     @GetMapping("/list")
     @ResponseBody()
-    List<RoleEntity> list() {
-        return roleService.list(new HashMap<>());
+    Pager list(@RequestParam Map<String, Object> params) {
+        Query query = new Query(params);
+        Pager rolePage = roleService.pageRoleList(query);
+        return rolePage;
     }
 
     @Log("编辑角色")

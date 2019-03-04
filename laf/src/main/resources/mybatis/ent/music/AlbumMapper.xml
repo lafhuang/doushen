@@ -9,10 +9,8 @@
         FROM
             ent_music_album
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="name != null and name != ''"> and name ~* #{name} </if>
             <if test="singerId != null and singerId != ''"> and singer_id = to_number(#{singerId}, '9999999999999999999') </if>
-            <if test="type != null and type != ''"> and type = #{type} </if>
         </where>
     </select>
 
@@ -33,10 +31,8 @@
         FROM
             ent_music_album
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
+            <if test="name != null and name != ''"> and name ~* #{name} </if>
             <if test="singerId != null and singerId != ''"> and singer_id = to_number(#{singerId}, '9999999999999999999') </if>
-            <if test="type != null and type != ''"> and type = #{type} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

@@ -79,7 +79,7 @@ public class UserController extends BaseController {
     @Log("添加用户")
     @GetMapping("/add")
     String add(Model model) {
-        List<RoleEntity> roles = roleService.list(new HashMap<>());
+        List<RoleEntity> roles = roleService.list(new Query(new HashMap<>()));
         model.addAttribute("roles", roles);
         return TEMPLATE_PREFIX + "add";
     }

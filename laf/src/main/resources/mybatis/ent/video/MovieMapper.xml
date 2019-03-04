@@ -9,9 +9,7 @@
         FROM
             ent_video_movie
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="cnName != null and cnName != ''"> and cn_name = #{cnName} </if>
+            <if test="name != null and name != ''"> and name ~* #{name} or cn_name ~* #{name} or source_name ~* #{name} </if>
         </where>
     </select>
 
@@ -41,9 +39,7 @@
         FROM
             ent_video_movie
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="cnName != null and cnName != ''"> and cn_name = #{cnName} </if>
+            <if test="name != null and name != ''"> and name ~* #{name} or cn_name ~* #{name} or source_name ~* #{name} </if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

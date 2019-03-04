@@ -21,21 +21,8 @@
 		FROM
 		    sys_user
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="userName != null and userName != ''"> and user_name = #{userName} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="name != null and name != ''"> and name like CONCAT('%',#{name},'%') </if>
 			<if test="deptId != null and deptId != ''"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
-			<if test="email != null and email != ''"> and email = #{email} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
-			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
-			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
-			<if test="address != null and address != ''"> and address = #{address} </if>
-			<if test="province != null and province != ''"> and province = #{province} </if>
-			<if test="city != null and city != ''"> and city = #{city} </if>
-			<if test="district != null and district != ''"> and district = #{district} </if>
-			<if test="status != null and status != ''"> and status = #{status} </if>
 		</where>
 	</select>
 
@@ -63,21 +50,8 @@
 		FROM
 		    sys_user
 		<where>
-			<if test="id != null and id != ''"> and id = #{id} </if>
-			<if test="userName != null and userName != ''"> and user_name = #{userName} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
-			<if test="password != null and password != ''"> and password = #{password} </if>
+			<if test="name != null and name != ''"> and name like CONCAT('%',#{name},'%') </if>
 			<if test="deptId != null and deptId != ''"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
-			<if test="email != null and email != ''"> and email = #{email} </if>
-			<if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
-			<if test="sex != null and sex != ''"> and sex = #{sex} </if>
-			<if test="birth != null and birth != ''"> and birth = #{birth} </if>
-			<if test="picId != null and picId != ''"> and pic_id = #{picId} </if>
-			<if test="address != null and address != ''"> and address = #{address} </if>
-			<if test="province != null and province != ''"> and province = #{province} </if>
-			<if test="city != null and city != ''"> and city = #{city} </if>
-			<if test="district != null and district != ''"> and district = #{district} </if>
-			<if test="status != null and status != ''"> and status = #{status} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">

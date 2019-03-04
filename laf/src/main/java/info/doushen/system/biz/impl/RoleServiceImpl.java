@@ -1,5 +1,7 @@
 package info.doushen.system.biz.impl;
 
+import info.doushen.common.utils.Pager;
+import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleMenuService;
 import info.doushen.system.biz.RoleService;
 import info.doushen.system.biz.UserRoleService;
@@ -13,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * RoleServiceImpl
@@ -35,8 +34,18 @@ public class RoleServiceImpl implements RoleService {
     private UserRoleService userRoleService;
 
     @Override
-    public List<RoleEntity> list(Map<String, Object> params) {
-        return roleMapper.list(params);
+    public Pager pageRoleList(Query query) {
+        int count = roleMapper.count(query);
+        if (count == 0) {
+            return new Pager(count, new ArrayList<RoleEntity>());
+        }
+        List<RoleEntity> roleList = roleMapper.list(query);
+        return new Pager(count, roleList);
+    }
+
+    @Override
+    public List<RoleEntity> list(Query query) {
+        return roleMapper.list(query);
     }
 
     @Override
@@ -56,7 +65,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<RoleEntity> list(int userId) {
         List<Integer> rolesIds = userRoleService.listRoleId(userId);
-        List<RoleEntity> roleList = roleMapper.list(new HashMap<>(16));
+        List<RoleEntity> roleList = roleMapper.list(new Query(new HashMap<>(16)));
         for (RoleEntity role : roleList) {
             role.setRoleSign("false");
             for (Integer roleId : rolesIds) {

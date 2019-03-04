@@ -42,4 +42,14 @@ public class DeptServiceImpl implements DeptService {
         return deptMapper.save(dept);
     }
 
+    @Override
+    public int update(DeptEntity dept) {
+        return deptMapper.update(dept);
+    }
+
+    @Override
+    public int remove(int id) {
+        return deptMapper.delete(id);
+    }
+
 }

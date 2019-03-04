@@ -8,15 +8,30 @@
     <div class="col-sm-12">
         <div class="ibox">
             <div class="ibox-body">
-                <div id="exampleToolbar" role="group">
-                    <button shiro:hasPermission="ent:music:album:add" type="button"
-                            class="btn btn-primary" onclick="add()">
-                        <i class="fa fa-plus" aria-hidden="true"></i>添加
-                    </button>
-                    <button shiro:hasPermission="ent:music:album:batchRemove" type="button"
-                            class="btn btn-danger" onclick="batchRemove()">
-                        <i class="fa fa-trash" aria-hidden="true"></i>删除
-                    </button>
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button shiro:hasPermission="ent:music:album:add" type="button"
+                                class="btn btn-primary" onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>添加
+                        </button>
+                        <button shiro:hasPermission="ent:music:album:batchRemove" type="button"
+                                class="btn btn-danger" onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad()">查询</button>
+                    </div>
+
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <input id="albumName" type="text" class="form-control"
+                               placeholder="专辑名">
+                    </div>
+
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <select data-placeholder="选择歌手" class="form-control chosen-select" data-actions-box="true" data-live-search="true" id="album_singer">
+                        </select>
+                    </div>
                 </div>
                 <table id="exampleTable" data-mobile-responsive="true">
                 </table>

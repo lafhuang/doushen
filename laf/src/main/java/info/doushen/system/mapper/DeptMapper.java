@@ -37,4 +37,20 @@ public interface DeptMapper {
      */
     int save(DeptEntity dept);
 
+    /**
+     * 更新部门
+     *
+     * @param dept
+     * @return
+     */
+    int update(DeptEntity dept);
+
+    /**
+     * 删除部门及其子部门
+     *
+     * @param id
+     * @return
+     */
+    int delete(int id);
+
 }

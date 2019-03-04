@@ -12,9 +12,8 @@
             JOIN ent_music_album album on song.album_id = album.id
         </if>
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+            <if test="name != null and name != ''"> and song.name ~* #{name} </if>
+            <if test="albumId != null and albumId != ''"> and song.album_id = to_number(#{albumId}, '9999999999999999999') </if>
             <if test="singerId != null and singerId != ''"> and album.singer_id = to_number(#{singerId}, '9999999999999999999') </if>
         </where>
     </select>
@@ -48,9 +47,8 @@
         ON
             album.singer_id = singer.id
         <where>
-            <if test="id != null and id != ''"> and id = #{id} </if>
-            <if test="name != null and name != ''"> and name = #{name} </if>
-            <if test="albumId != null and albumId != ''"> and album_id = #{albumId} </if>
+            <if test="name != null and name != ''"> and song.name ~* #{name} </if>
+            <if test="albumId != null and albumId != ''"> and song.album_id = to_number(#{albumId}, '9999999999999999999') </if>
             <if test="singerId != null and singerId != ''"> and album.singer_id = to_number(#{singerId}, '9999999999999999999') </if>
         </where>
         <choose>

@@ -1,6 +1,7 @@
 package info.doushen.system.controller;
 
 import info.doushen.common.Result;
+import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
 import info.doushen.system.biz.DeptService;
 import info.doushen.system.entity.DeptEntity;
@@ -49,7 +50,7 @@ public class DeptController extends BaseController {
     String add(@PathVariable("pId") int pId, Model model) {
         model.addAttribute("pId", pId);
         if (pId == 0) {
-            model.addAttribute("pName", "总部");
+            model.addAttribute("pName", "豆神信息");
         } else {
             model.addAttribute("pName", deptService.get(pId).getDeptName());
         }
@@ -76,6 +77,46 @@ public class DeptController extends BaseController {
     @GetMapping("/treeView")
     String treeView() {
         return  TEMPLATE_PREFIX + "deptTree";
+    }
+
+    @Log("编辑部门")
+    @RequiresPermissions("system:dept:edit")
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable("id") Integer id, Model model) {
+        DeptEntity dept = deptService.get(id);
+        model.addAttribute("dept", dept);
+        if (dept.getParentId() != 0) {
+            DeptEntity parentDept = deptService.get(dept.getParentId());
+            model.addAttribute("parent", parentDept.getDeptName());
+        } else {
+            model.addAttribute("parent", "豆神信息");
+        }
+        return TEMPLATE_PREFIX + "edit";
+    }
+
+    @Log("更新部门")
+    @RequiresPermissions("system:dept:edit")
+    @PostMapping("/update")
+    @ResponseBody()
+    Result update(DeptEntity dept) {
+        dept.setUpdateBy(getUserId());
+        if (deptService.update(dept) > 0) {
+            return Result.ok();
+        } else {
+            return Result.error(1, "保存失败");
+        }
+    }
+
+    @Log("删除部门及其子部门")
+    @RequiresPermissions("system:dept:remove")
+    @PostMapping("/remove")
+    @ResponseBody()
+    Result remove(int id) {
+        if (deptService.remove(id) > 0) {
+            return Result.ok();
+        } else {
+            return Result.error(1, "删除失败");
+        }
     }
 
 }

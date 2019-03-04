@@ -1,5 +1,6 @@
 package info.doushen.system.mapper;
 
+import info.doushen.common.utils.Query;
 import info.doushen.system.entity.RoleEntity;
 
 import java.util.List;
@@ -14,12 +15,20 @@ import java.util.Map;
 public interface RoleMapper {
 
     /**
-     * 获取角色列表
+     * 获取角色记录数
      *
-     * @param params
+     * @param query
      * @return
      */
-    List<RoleEntity> list(Map<String, Object> params);
+    int count(Query query);
+
+    /**
+     * 获取角色列表
+     *
+     * @param query
+     * @return
+     */
+    List<RoleEntity> list(Query query);
 
     /**
      * 获取角色信息
