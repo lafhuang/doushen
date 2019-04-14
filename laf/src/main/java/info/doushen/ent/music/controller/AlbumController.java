@@ -135,7 +135,7 @@ public class AlbumController extends BaseController {
         songParams.put("limit", 200);
         songParams.put("offset", 0);
 
-        songParams.put("albumId", albumId);
+        songParams.put("albumId", String.valueOf(albumId));
 
         Query songQuery = new Query(songParams);
         Pager songPage = songService.pageSongList(songQuery);

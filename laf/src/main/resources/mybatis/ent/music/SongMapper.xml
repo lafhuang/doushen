@@ -56,7 +56,7 @@
                 order by ${sort} ${order}
             </when>
             <otherwise>
-                order by id
+                order by singer.name, album.issue_date, song.track_number
             </otherwise>
         </choose>
         <if test="offset != null and limit != null">
