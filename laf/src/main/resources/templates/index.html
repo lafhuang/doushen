@@ -129,7 +129,7 @@
             </a>
             <div class="sa-left-menu-outer">
                 <ul class="metismenu sa-left-menu" id="menu">
-                    <li>
+                    <li id="index">
                         <a href="index">
                             <span class="fa fa-lg fa-fw fa-home"></span><span class="menu-item-parent">主页</span>
                         </a>
@@ -259,15 +259,22 @@
     });
 
     $.get("main",function(data){
-　　　　  $("#main_iframe").html(data);
+        $("#main_iframe").html(data);
+        $("#index").addClass('active');
     });
 
     $(function () {
         $('.sa-sub-nav li').click(function() {
+
+            $('.metismenu li').removeClass('active');
+
             var $this = $(this), _clickTab = $this.find('a').attr('target'); // 找到链接a中的targer的值
             $.get(_clickTab, function(data){
                 $("#main_iframe").html(data);
             });
+
+            $this.addClass('active');
+            $this.parent().parent().addClass('active');
         });
     });
 </script>
