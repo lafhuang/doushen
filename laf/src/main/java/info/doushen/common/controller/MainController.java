@@ -34,42 +34,9 @@ public class MainController extends BaseController {
         List<Tree<MenuEntity>> menus = menuService.queryUserMenuTree(getUserId());
         model.addAttribute("menus", menus);
         model.addAttribute("name", getUser().getName());
-        /*
-        FileDO fileDO = fileService.get(getUser().getPicId());
-        if(fileDO!=null&&fileDO.getUrl()!=null){
-            if(fileService.isExist(fileDO.getUrl())){
-                model.addAttribute("picUrl",fileDO.getUrl());
-            }else {
-                model.addAttribute("picUrl","/img/photo_s.jpg");
-            }
-        }else {
-            model.addAttribute("picUrl","/img/photo_s.jpg");
-        }
-        */
+
         model.addAttribute("username", getUser().getUserName());
         return "index";
-    }
-
-    @Log("请求访问主页")
-    @GetMapping({ "/index_bak" })
-    String index_bak(Model model) {
-        List<Tree<MenuEntity>> menus = menuService.queryUserMenuTree(getUserId());
-        model.addAttribute("menus", menus);
-        model.addAttribute("name", getUser().getName());
-        /*
-        FileDO fileDO = fileService.get(getUser().getPicId());
-        if(fileDO!=null&&fileDO.getUrl()!=null){
-            if(fileService.isExist(fileDO.getUrl())){
-                model.addAttribute("picUrl",fileDO.getUrl());
-            }else {
-                model.addAttribute("picUrl","/img/photo_s.jpg");
-            }
-        }else {
-            model.addAttribute("picUrl","/img/photo_s.jpg");
-        }
-        */
-        model.addAttribute("username", getUser().getUserName());
-        return "index_bak";
     }
 
     @GetMapping("/main")
