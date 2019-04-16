@@ -33,3 +33,7 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: mybatis/**/*Mapper.xml
   typeAliasesPackage: info.doushen.**.entity
+
+pagehelper:
+  helper-dialect: postgresql
+  support-methods-arguments: true
