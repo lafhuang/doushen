@@ -107,18 +107,6 @@ function load_singer_dict(dict_type) {
     });
 }
 
-function reLoad() {
-    load();
-}
-
-function add() {
-	// iframe层
-	layer.open({
-		type : 2,
-		title : '添加歌手',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
-		content : request_prefix + '/add'
-	});
+function add(target) {
+	getTarget(target);
 }

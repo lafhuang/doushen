@@ -1,9 +1,13 @@
 $().ready(function() {
 
-	laydate.render({
-		elem: '#birthday'
-		,theme: 'molv'
-	});
+    $('#birthday').datepicker({
+        dateFormat : 'yyyy-mm-dd',
+        prevText : '<i class="fa fa-chevron-left"></i>',
+        nextText : '<i class="fa fa-chevron-right"></i>',
+        onSelect : function(selectedDate) {
+            $('#birthday').datepicker('option', 'minDate', selectedDate);
+        }
+    });
 
     $('#star').rating({
         language: 'zh',
@@ -17,8 +21,6 @@ $().ready(function() {
     loadDict();
 
     initFileUpload();
-
-	validateRule();
 
     $(".fileinput-remove-button").click(function() {
         $("#photo").val("");
@@ -40,18 +42,14 @@ function initFileUpload() {
     });
 }
 
-$.validator.setDefaults({
-	submitHandler : function() {
-		save();
-	}
-});
-
 function save() {
+    // validate
+
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/ent/music/singer/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : $('#singerForm').serialize(),
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -70,59 +68,6 @@ function save() {
 		}
 	});
 
-}
-
-function validateRule() {
-
-    var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			},
-			enName : {
-				required : true
-			},
-			region : {
-				required : true
-			},
-			initial : {
-				required : true
-			},
-			birthday : {
-				required : true
-			},
-			type : {
-				required : true
-			},
-			photo : {
-			    required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入歌手姓名"
-			},
-			enName : {
-				required : icon + "请输入歌手英文名"
-			},
-			region : {
-				required : icon + "请选择歌手所在国家/地区"
-			},
-			initial : {
-				required : icon + "请选择歌手首字母"
-			},
-			birthday : {
-            	required : icon + "请选择歌手出生日期"
-            },
-            type : {
-                required : icon + "请选择歌手类型"
-            },
-            photo : {
-                required : icon + "请上传歌手照片"
-            }
-		}
-	})
 }
 
 function loadDict() {
@@ -144,12 +89,21 @@ function load_singer_dict(dict_type) {
             parent.layer.alert("Connection error");
         },success : function(result) {
             //加载数据
+            if ("singer_initial" == dict_type) {
+                html += '<option value="">请选择歌手首字母</option>'
+            } else if ("singer_region" == dict_type) {
+                html += '<option value="">请选择歌手所在地区</option>'
+            } else if ("singer_type" == dict_type) {
+                html += '<option value="">请选择歌手类型</option>'
+            }
             for (var i = 0; i < result.length; i++) {
                 html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
             }
-
             $("#"+dict_type).html(html);
-            $("#"+dict_type).selectpicker();
         }
     });
+}
+
+function goBack(target) {
+    getTarget(target);
 }
