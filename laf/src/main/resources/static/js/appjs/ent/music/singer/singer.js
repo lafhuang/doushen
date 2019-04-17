@@ -1,6 +1,10 @@
 var request_prefix = "/ent/music/singer";
 
 $(function() {
+
+    var icon = $(".open i:eq(0)").attr("class");
+    changeTitle("<li>音乐</li><li>歌手</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class=\"" + icon + "\"></i> 音乐 <span>> 歌手</span></h1>");
+
     loadDict();
     load();
 
@@ -9,6 +13,11 @@ $(function() {
         $(this).addClass("singer_tag__item--select");
 
         load();
+    });
+
+    $("article").on("click", ".singer_list__item_box a", function() {
+        var target = $(this).attr("target");
+        getTarget(target);
     });
 
 });
@@ -51,11 +60,11 @@ function load() {
                     var singer = result[idx];
                     singerHtml += "    <li class='singer_list__item'>";
                     singerHtml += "        <div class='singer_list__item_box'>";
-                    singerHtml += "            <a href='/ent/music/singer/info/" + singer.id + "' class='singer_list__cover js_singer' title='" + singer.name + "'>";
+                    singerHtml += "            <a target='/ent/music/singer/info/" + singer.id + "' class='singer_list__cover js_singer' title='" + singer.name + "'>";
                     singerHtml += "                <img onerror='imgError();' class='singer_list__pic' alt='" + singer.name + "' src='" + singer.photo + "'>";
                     singerHtml += "            </a>";
                     singerHtml += "            <h3 class='singer_list__title'>";
-                    singerHtml += "                <a href='/ent/music/singer/info/" + singer.id + "' class='js_singer' title='" + singer.name + "'>" + singer.name + "</a>";
+                    singerHtml += "                <a target='/ent/music/singer/info/" + singer.id + "' class='js_singer' title='" + singer.name + "'>" + singer.name + "</a>";
                     singerHtml += "            </h3>";
                     singerHtml += "        </div>";
                     singerHtml += "    </li>";
