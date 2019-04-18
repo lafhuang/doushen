@@ -1,11 +1,11 @@
 $().ready(function() {
 
     $('#birthday').datepicker({
-        dateFormat : 'yyyy-mm-dd',
+        dateFormat : 'yy-mm-dd',
         prevText : '<i class="fa fa-chevron-left"></i>',
         nextText : '<i class="fa fa-chevron-right"></i>',
         onSelect : function(selectedDate) {
-            $('#birthday').datepicker('option', 'minDate', selectedDate);
+
         }
     });
 
