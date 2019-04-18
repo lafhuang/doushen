@@ -1,81 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  id="extr-page">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>DOUDOU</title>
-    <meta name="keywords" content="豆豆啥都管系统">
-    <meta name="description" content="豆豆啥都管系统">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/login.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <meta http-equiv="refresh" content="0;ie.html"/>
-    <![endif]-->
-    <script>
-        if (window.top !== window.self) {
-            window.top.location = window.location;
-        }
-    </script>
+    <title> SmartAdmin</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/smart_admin/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/smart_admin/css/font-awesome.min.css">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="/smart_admin/css/smartadmin-production-plugins.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/smart_admin/css/smartadmin-production.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="/smart_admin/css/smartadmin-skins.min.css">
+
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="/smart_admin/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/smart_admin/img/favicon/favicon.ico" type="image/x-icon">
 
 </head>
 
-<body class="signin">
-<div class="signinpanel">
-    <div class="row">
-        <div class="col-sm-7">
-            <div class="signin-info">
-                <div class="logopanel m-b">
-                    <h1>DOUDOU</h1>
+<body class="animated fadeInDown">
+
+<header id="header">
+    <div id="logo-group">
+        <span id="logo"> <img src="/smart_admin/img/logo.png" alt="SmartAdmin"> </span>
+    </div>
+</header>
+
+<div id="main" role="main">
+
+    <!-- MAIN CONTENT -->
+    <div id="content" class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                <h1 class="txt-color-red login-header-big">DOUDOU</h1>
+                <div class="hero">
+
+                    <div class="pull-left login-desc-box-l">
+                        <h4 class="paragraph-header">欢迎使用 <strong>豆豆啥都管系统</strong></h4>
+                        <ul class="m-b">
+                            <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;硬盘</li>
+                            <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;音乐</li>
+                            <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;电影</li>
+                            <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;电视剧</li>
+                            <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;记录片</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="m-b"></div>
-                <h3>
-                    欢迎使用 <strong>豆豆啥都管系统</strong>
-                </h3>
-                <ul class="m-b">
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;硬盘</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;音乐</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;电影</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;电视剧</li>
-                    <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i>&nbsp;&nbsp;记录片</li>
-                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                <div class="well no-padding">
+                    <form id="login-form" class="smart-form client-form" autocomplete="off">
+                        <header>
+                            用户登录
+                        </header>
+                        <fieldset>
+                            <section>
+                                <label class="label">用户名</label>
+                                <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="username" value="huangdou">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> 请输入用户名</b></label>
+                            </section>
+                            <section>
+                                <label class="label">密码</label>
+                                <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="password" value="huangdou">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> 请输入密码</b> </label>
+                                <div class="note">
+                                    <a href="forgotpassword.html">忘记密码?</a>
+                                </div>
+                            </section>
+
+                            <section>
+                                <small class="help-block" style="display: none;" id="errorMsg"></small>
+                            </section>
+                        </fieldset>
+                        <footer>
+                            <button type="button" class="btn btn-primary" id="login">
+                                登录
+                            </button>
+                        </footer>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="col-sm-5">
-            <form id="signupForm">
-                <h3 class="text-center">用户登录</h3>
-                <p class="m-t-md text-center">欢迎登录豆豆啥都管系统</p>
-                <input type="text" name="username" class="form-control uname" placeholder="请输入用户名" value="huangdou"/>
-                <input type="password" name="password" class="form-control pword m-b" placeholder="请输入密码" value="huangdou"/>
-                <a id="login" class="btn btn-login btn-block">登录</a>
-            </form>
-        </div>
     </div>
-    <div class="signup-footer">
-        <div class="pull-left">&copy; Copyright 2018 - All rights reserved. doushen.info
-        </div>
-    </div>
+
 </div>
+
+<!--================================================== -->
 <script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
-<!-- 全局js -->
-<script src="/js/jquery.min.js?v=2.1.4" th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6" th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
 
-<!-- 自定义js -->
-<script src="/js/content.js?v=1.0.0" th:src="@{/js/content.js?v=1.0.0}"></script>
+<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+<script src="/smart_admin/js/plugin/pace/pace.min.js"></script>
 
-<!-- jQuery Validation plugin javascript-->
-<script src="/js/ajax-util.js"></script>
-<script src="/js/plugins/validate/jquery.validate.min.js" th:src="@{/js/plugins/validate/jquery.validate.min.js}"></script>
-<script src="/js/plugins/validate/messages_zh.min.js" th:src="@{/js/plugins/validate/messages_zh.min.js}"></script>
-<script src="/js/plugins/layer/layer.min.js" th:src="@{/js/plugins/layer/layer.min.js}"></script>
-<script type="text/javascript">
+<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+<script src="/smart_admin/js/libs/jquery-3.2.1.min.js"></script>
+<script src="/smart_admin/js/libs/jquery-ui-1.10.3.min.js"></script>
+
+<!-- IMPORTANT: APP CONFIG -->
+<script src="/smart_admin/js/app.config.js"></script>
+
+<!-- BOOTSTRAP JS -->
+<script src="/smart_admin/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- JQUERY VALIDATE -->
+<script src="/smart_admin/js/plugin/jquery-validate/jquery.validate.min.js"></script>
+
+<!-- JQUERY MASKED INPUT -->
+<script src="/smart_admin/js/plugin/masked-input/jquery.maskedinput.min.js"></script>
+
+<!--[if IE 8]>
+
+<h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+<![endif]-->
+
+<!-- MAIN APP JS FILE -->
+<script src="/smart_admin/js/app.min.js"></script>
+
+<script>
+
+    $("input").focus(function () {
+        $("#errorMsg").hide();
+    });
+
     $(document).ready(function () {
-        $("#login").on('click',function(){$("#signupForm").submit();});
+        $("#login").on('click',function(){$("#login-form").submit();});
         validateRule();
     });
 
@@ -89,41 +145,41 @@
         $.ajax({
             type: "POST",
             url: ctx+"login",
-            data: $('#signupForm').serialize(),
+            data: $('#login-form').serialize(),
             success: function (r) {
-                 if (r.code == 0) {
-                    var index = layer.load(1, {
-                        shade: [0.1,'#fff'] //0.1透明度的白色背景
-                    });
+                if (r.code == 0) {
                     parent.location.href = '/index';
                 } else {
-                    layer.msg(r.msg);
+                    $("#errorMsg").html(r.msg).show();
                 }
             },
         });
     }
 
     function validateRule() {
-        var icon = "<i class='fa fa-times-circle'></i> ";
-        $("#signupForm").validate({
-            rules: {
-                username: {
-                    required: true
+        $("#login-form").validate({
+            rules : {
+                username : {
+                    required : true
                 },
-                password: {
-                    required: true
+                password : {
+                    required : true
                 }
             },
-            messages: {
-                username: {
-                    required: icon + "请输入您的用户名",
+            messages : {
+                username : {
+                    required : '请输入用户名'
                 },
-                password: {
-                    required: icon + "请输入您的密码",
+                password : {
+                    required : '请输入密码'
                 }
+            },
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
             }
-        })
+        });
     }
 </script>
+
 </body>
 </html>
