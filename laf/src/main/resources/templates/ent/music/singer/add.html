@@ -1,121 +1,80 @@
 <link type="text/css" rel="stylesheet" href="/css/plugins/rate/star-rating.css" />
-<link type="text/css" rel="stylesheet" href="/css/plugins/fileinput/fileinput.css" />
 <link type="text/css" rel="stylesheet" href="/js/plugins/datepicker/css/bootstrap-datepicker.min.css" />
 <div class="row">
 	<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
-		<div class="jarviswidget jarviswidget-color-blueDark" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-sortable="false" role="widget">
+		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
 			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
 				<h2>添加歌手 </h2>
-			</header>
-			<!-- widget div-->
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 			<div role="content">
-				<!-- widget content -->
-				<div class="widget-body">
-					<form class="form-horizontal bv-form" novalidate="novalidate" autocomplete="off" id="singerForm">
-						<button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
-
-						<fieldset>
-							<legend>添加歌手</legend>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">姓名 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<input type="text" class="form-control" name="name" id="name">
-									<small class="help-block" style="display: none;">请输入歌手姓名</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">英文名 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<input type="text" class="form-control" name="enName" id="enName">
-									<small class="help-block" style="display: none;">请输入歌手英文名</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">国家/地区 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<select class="form-control" id="singer_region" name="region">
-									</select>
-									<small class="help-block" style="display: none;">请选择歌手所在地区</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">首字母 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<select class="form-control" id="singer_initial" name="initial">
-									</select>
-									<small class="help-block" style="display: none;">请选择歌手首字母</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">出生日期 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<input type="text" id="birthday" name="birthday" data-date-format="yyyy-mm-dd" class="form-control">
-									<small class="help-block" style="display: none;">请选择歌手出生日期</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">类型 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<select class="form-control" id="singer_type" name="type">
-									</select>
-									<small class="help-block" style="display: none;">请选择歌手类型</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">星级 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<input id="star" name="star" class="rating-loading" data-size="sm">
-									<small class="help-block" style="display: none;">请选择歌手星级</small>
-								</div>
-							</div>
-						</fieldset>
-						<fieldset>
-							<div class="form-group has-feedback">
-								<label class="col-lg-3 control-label">图片 <sup>*</sup></label>
-								<div class="col-lg-6">
-									<input id="photo" name="photo" type="hidden">
-									<div class="file-loading">
-										<input id="img" name="images" type="file" multiple>
-									</div>
-									<small class="help-block" style="display: none;">请上传歌手图片</small>
-								</div>
-							</div>
-						</fieldset>
-						<div class="form-actions">
-							<div class="row">
-								<div class="col-md-12">
-									<button type="submit" class="btn btn-primary">保存</button>
-									<button type="button" class="btn btn-default" onclick="goBack('ent/music/singer');">返回</button>
-								</div>
-							</div>
-						</div>
-					</form>
-
+				<div class="jarviswidget-editbox">
 				</div>
-				<!-- end widget content -->
-
+				<div class="widget-body no-padding">
+					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
+						<header>
+							添加歌手
+						</header>
+						<fieldset>
+							<section>
+								<label class="input">
+									<input type="text" name="name" placeholder="姓名">
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" name="enName" placeholder="英文名">
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<select id="singer_region" name="region">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<select id="singer_initial" name="initial">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" class="form-control" readonly>
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<select id="singer_type" name="type">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input id="star" name="star"class="form-control rating-loading" data-size="sm">
+								</label>
+							</section>
+							<section>
+								<div class="input input-file">
+									<span class="button">
+										<input id="file2" type="file" name="file2" onchange="uploadFile(this.value);">浏览
+									</span>
+									<input type="text" id="photo" name="photo" placeholder="上传歌手图片" readonly="">
+								</div>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary" id="saveSinger">保存</button>
+							<button type="button" class="btn btn-default" onclick="goBack('ent/music/singer');">返回</button>
+						</footer>
+					</form>
+				</div>
 			</div>
-			<!-- end widget div -->
-
 		</div>
 	</article>
 </div>
 <script type="text/javascript" src="/js/plugins/rate/star-rating.js" />
 <script type="text/javascript" src="/js/plugins/rate/zh.js" />
-<script type="text/javascript" src="/js/plugins/fileinput/fileinput.js" />
-<script type="text/javascript" src="/js/plugins/fileinput/zh.js" />
 <script type="text/javascript" src="/js/plugins/datepicker/js/bootstrap-datepicker.min.js" />
 <script type="text/javascript" src="/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
 <script type="text/javascript" src="/js/appjs/ent/music/singer/add.js" />
