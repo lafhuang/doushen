@@ -1,18 +1,29 @@
 $().ready(function() {
 
+    initFileInput();
+    initDatepicker();
+    initStar();
+    initDict();
+    formValidate();
+
+});
+
+function initFileInput() {
     $("#img").fileinput({
-        language : 'zh',
-        uploadUrl : "/upload/music_singer",
+        language: 'zh',
+        uploadUrl: "/upload/music_singer",
         showPreview: false,
         allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
         elErrorContainer: "#errorBlock"
-    }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+    }).on("fileuploaded", function (e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
         var res = data.response;
         if (res.code == '0') {
             $("#photo").val(res.msg);
         }
     });
+}
 
+function initDatepicker() {
     $.fn.datepicker.dates['cn'] = {   //切换为中文显示
         days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
         daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
@@ -43,7 +54,9 @@ $().ready(function() {
         todayHighlight: false,    //今天高亮
         weekStart: 0              //星期几是开始
     });
+}
 
+function initStar() {
     $('#star').rating({
         language: 'zh',
         min: 0,
@@ -51,127 +64,9 @@ $().ready(function() {
         step: 1,
         stars: 5
     });
-
-    loadDict();
-
-    var errorClass = 'invalid';
-    var errorElement = 'em';
-
-    var $singerForm = $('#singerForm').validate({
-        errorClass		: errorClass,
-        errorElement	: errorElement,
-        highlight: function(element) {
-            if ("star" == $(element).attr("name")) {
-                $(element).parent().parent().parent().removeClass('state-success').addClass("state-error");
-                $(element).removeClass('valid');
-            } else {
-                $(element).parent().removeClass('state-success').addClass("state-error");
-                $(element).removeClass('valid');
-            }
-        },
-        unhighlight: function(element) {
-            if ("star" == $(element).attr("name")) {
-                $(element).parent().parent().parent().removeClass("state-error").addClass('state-success');
-                $(element).addClass('valid');
-            } else {
-                $(element).parent().removeClass("state-error").addClass('state-success');
-                $(element).addClass('valid');
-            }
-        },
-        rules : {
-            name : {
-                required : true
-            },
-            enName : {
-                required : true
-            },
-            region : {
-                required : true
-            },
-            initial : {
-                required : true
-            },
-            birthday : {
-                required : true
-            },
-            type : {
-                required : true
-            },
-            star : {
-                required : true
-            },
-            photo : {
-                required : true
-            }
-        },
-        messages : {
-            name : {
-                required : '请输入歌手姓名'
-            },
-            enName : {
-                required : '请输入歌手英文名'
-            },
-            region : {
-                required : '请选择歌手所在地区'
-            },
-            initial : {
-                required : '请选择歌手首字母'
-            },
-            birthday : {
-                required : '请选择歌手出生日期'
-            },
-            type : {
-                required : '请选择歌手类型'
-            },
-            star : {
-                required : '请选择歌手星级'
-            },
-            photo : {
-                required : '请上传歌手图片'
-            }
-        },
-        submitHandler : function(form) {
-            $(form).ajaxSubmit({
-                success : function() {
-                    save();
-                }
-            });
-        },
-        errorPlacement : function(error, element) {
-            if ("star" == element.attr("name")) {
-                error.insertAfter(element.parent().parent().parent());
-            } else {
-                error.insertAfter(element.parent());
-            }
-        }
-    });
-
-});
-
-function save() {
-
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/ent/music/singer/save",
-		data : $('#singerForm').serialize(),
-		async : false,
-		error : function(request) {
-			alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				alert(data.msg)
-			} else {
-				alert(data.msg)
-			}
-
-		}
-	});
-
 }
 
-function loadDict() {
+function initDict() {
     load_singer_dict("singer_initial");
     load_singer_dict("singer_region");
     load_singer_dict("singer_type");
@@ -205,10 +100,124 @@ function load_singer_dict(dict_type) {
     });
 }
 
+function formValidate() {
+    $('#singerForm').validate({
+        ignore: [],
+        errorClass: 'invalid',
+        errorElement: 'em',
+        highlight: function (element) {
+            console.log($(element).attr("name"));
+            if ("star" == $(element).attr("name")) {
+                $(element).parent().parent().parent().removeClass('state-success').addClass("state-error");
+                $(element).removeClass('valid');
+            } else {
+                $(element).parent().removeClass('state-success').addClass("state-error");
+                $(element).removeClass('valid');
+            }
+        },
+        unhighlight: function (element) {
+            if ("star" == $(element).attr("name")) {
+                $(element).parent().parent().parent().removeClass("state-error").addClass('state-success');
+                $(element).addClass('valid');
+            } else {
+                $(element).parent().removeClass("state-error").addClass('state-success');
+                $(element).addClass('valid');
+            }
+        },
+        rules: {
+            name: {
+                required: true
+            },
+            enName: {
+                required: true
+            },
+            region: {
+                required: true
+            },
+            initial: {
+                required: true
+            },
+            birthday: {
+                required: true
+            },
+            type: {
+                required: true
+            },
+            star: {
+                required: true
+            },
+            photo: {
+                required: true
+            }
+        },
+        messages: {
+            name: {
+                required: '请输入歌手姓名'
+            },
+            enName: {
+                required: '请输入歌手英文名'
+            },
+            region: {
+                required: '请选择歌手所在地区'
+            },
+            initial: {
+                required: '请选择歌手首字母'
+            },
+            birthday: {
+                required: '请选择歌手出生日期'
+            },
+            type: {
+                required: '请选择歌手类型'
+            },
+            star: {
+                required: '请选择歌手星级'
+            },
+            photo: {
+                required: '请上传歌手图片'
+            }
+        },
+        submitHandler: function () {
+            save();
+        },
+        errorPlacement: function (error, element) {
+            if ("star" == element.attr("name")) {
+                error.insertAfter(element.parent().parent().parent());
+            } else {
+                error.insertAfter(element.parent());
+            }
+        }
+    });
+}
+
+function save() {
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : "/ent/music/singer/save",
+        data : $('#singerForm').serialize(),
+        async : false,
+        error : function(request) {
+            alert("Connection error");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+
+            } else {
+
+            }
+
+            $("#doudou_modal_title").text("添加歌手");
+            $("#doudou_modal_body p").text(data.msg);
+            $("#doudou_modal_footer").html("");
+
+            $("#doudou_modal").modal();
+
+        }
+    });
+}
+
 function goBack(target) {
     getTarget(target);
 }
 
-function uploadFile(file) {
-    alert(file);
-}
+//# sourceURL=add.js

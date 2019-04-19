@@ -1,7 +1,7 @@
 var request_prefix = "/ent/video/movie";
 
 $(function() {
-    //loadDict();
+    //initDict();
     load();
 });
 
