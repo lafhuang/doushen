@@ -1,7 +1,10 @@
-<link type="text/css" rel="stylesheet" href="/css/plugins/rate/star-rating.css" />
-<link type="text/css" rel="stylesheet" href="/js/plugins/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="/plugins/rate/css/star-rating.css" />
+<link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
+<link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
 <div class="row">
-	<article class="col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
+	<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
 		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
 			<header role="heading">
 				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
@@ -10,7 +13,7 @@
 			<div role="content">
 				<div class="jarviswidget-editbox">
 				</div>
-				<div class="widget-body no-padding">
+				<section class="widget-body no-padding">
 					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<header>
 							添加歌手
@@ -55,12 +58,12 @@
 								</label>
 							</section>
 							<section>
-								<div class="input input-file">
-									<span class="button">
-										<input id="file2" type="file" name="file2" onchange="uploadFile(this.value);">浏览
-									</span>
-									<input type="text" id="photo" name="photo" placeholder="上传歌手图片" readonly="">
-								</div>
+								<label class="input">
+									<input id="photo" name="photo" type="hidden">
+									<div class="file-loading">
+										<input id="img" name="images" type="file" multiple>
+									</div>
+								</label>
 							</section>
 						</fieldset>
 						<footer>
@@ -72,10 +75,14 @@
 			</div>
 		</div>
 	</article>
+	<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+	</article>
 </div>
-<script type="text/javascript" src="/js/plugins/rate/star-rating.js" />
-<script type="text/javascript" src="/js/plugins/rate/zh.js" />
-<script type="text/javascript" src="/js/plugins/datepicker/js/bootstrap-datepicker.min.js" />
-<script type="text/javascript" src="/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
-<script type="text/javascript" src="/js/appjs/ent/music/singer/add.js" />
+<script type="text/javascript" src="/plugins/rate/js/star-rating.js" />
+<script type="text/javascript" src="/plugins/rate/js/zh.js" />
+<script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" ></script>
+<script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
+<script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
+<script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
+<script type="text/javascript" src="/js/ent/music/singer/add.js" />
 

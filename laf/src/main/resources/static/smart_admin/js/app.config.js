@@ -59,12 +59,12 @@
 	debugStyle_success = 'background-color:green; font-weight:bold; color:#fff;',
 	debugStyle_error = 'background-color:#ed1c24; font-weight:bold; color:#fff;',
 /*
- * Impacts the responce rate of some of the responsive elements (lower 
+ * Impacts the responce css of some of the responsive elements (lower 
  * value affects CPU but improves speed)
  */
 	throttle_delay = 350,
 /*
- * The rate at which the menu expands revealing child elements on click
+ * The css at which the menu expands revealing child elements on click
  */
 	menu_speed = 235,	
 /*
