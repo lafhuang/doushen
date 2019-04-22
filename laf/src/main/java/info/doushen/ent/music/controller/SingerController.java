@@ -86,7 +86,7 @@ public class SingerController extends BaseController {
         model.addAttribute("singer", singer);
 
         Map<String, Object> albumParams = new HashMap<>();
-        albumParams.put("limit", 5);
+        albumParams.put("limit", 10);
         albumParams.put("offset", 0);
 
         albumParams.put("singerId", String.valueOf(singerId));
@@ -97,7 +97,7 @@ public class SingerController extends BaseController {
         model.addAttribute("albumPage", albumPage);
 
         Map<String, Object> songParams = new HashMap<>();
-        songParams.put("limit", 10);
+        songParams.put("limit", 20);
         songParams.put("offset", 0);
 
         songParams.put("singerId", String.valueOf(singerId));

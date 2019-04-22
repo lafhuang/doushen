@@ -43,20 +43,13 @@ function load_dict(dict_type) {
     });
 }
 
-function edit(id) {
+function edit() {
     var id = $("#id").val();
-	layer.open({
-		type : 2,
-		title : '修改歌手信息',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '80%', '80%' ],
-		content : request_prefix + '/edit/' + id // iframe的url
-	});
+	getTarget(request_prefix + '/edit/' + id)
 }
 
-function reLoad() {
-	window.location.reload();
+function goBack() {
+    getTarget(request_prefix);
 }
 
 function loadAllAlbum() {

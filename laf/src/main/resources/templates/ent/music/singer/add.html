@@ -2,18 +2,19 @@
 <link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
 <link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
 <div class="row">
-	<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
 	</article>
-	<article class="col-sm-12 col-md-12 col-lg-6 sortable-grid ui-sortable">
+	<article class="col-sm-12 col-md-12 col-lg-8 sortable-grid ui-sortable">
 		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
 			<header role="heading">
 				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
 				<h2>添加歌手 </h2>
-				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+			</header>
 			<div role="content">
 				<div class="jarviswidget-editbox">
 				</div>
-				<section class="widget-body no-padding">
+				<div class="widget-body no-padding">
 					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<header>
 							添加歌手
@@ -67,7 +68,7 @@
 							</section>
 						</fieldset>
 						<footer>
-							<button type="submit" class="btn btn-primary" id="saveSinger">保存</button>
+							<button type="submit" class="btn btn-primary">保存</button>
 							<button type="button" class="btn btn-default" onclick="goBack('ent/music/singer');">返回</button>
 						</footer>
 					</form>
@@ -75,7 +76,7 @@
 			</div>
 		</div>
 	</article>
-	<article class="col-sm-12 col-md-12 col-lg-3 sortable-grid ui-sortable">
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
 	</article>
 </div>
 <script type="text/javascript" src="/plugins/rate/js/star-rating.js" />
@@ -84,5 +85,6 @@
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
 <script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
 <script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
+<script type="text/javascript" src="/js/ent/music/singer/singerEdit.js" />
 <script type="text/javascript" src="/js/ent/music/singer/add.js" />
 

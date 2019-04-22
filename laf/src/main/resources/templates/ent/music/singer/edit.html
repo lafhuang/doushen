@@ -1,98 +1,95 @@
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link type="text/css" rel="stylesheet" href="/css/plugins/rate/star-rating.css" />
-<link type="text/css" rel="stylesheet" href="/css/plugins/fileinput/fileinput.css" />
-<style type="text/css">
-	.bg-yellow{
-		background:yellow
-	}
-</style>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+<link type="text/css" rel="stylesheet" href="/plugins/rate/css/star-rating.css" />
+<link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
+<link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
+<div class="row">
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-8 sortable-grid ui-sortable">
+		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+				<h2>编辑歌手 </h2>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+			</header>
+			<div role="content">
+				<div class="jarviswidget-editbox">
+				</div>
+				<div class="widget-body no-padding">
+					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<input id="id" name="id" type="hidden" th:value="${singer.id}">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">姓名：</label>
-							<div class="col-sm-8">
-								<input id="name" name="name" class="form-control" type="text" th:value="${singer.name}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">英文名：</label>
-							<div class="col-sm-8">
-								<input id="enName" name="enName" class="form-control" type="text" th:value="${singer.enName}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">国家/地区：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="singer_region_" th:value="${singer.region}">
-								<select id="singer_region" name="region" title="选择国家地区" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">首字母：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="singer_initial_" th:value="${singer.initial}">
-								<select id="singer_initial" name="initial" title="选择首字母" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">出生日期：</label>
-							<div class="col-sm-8">
-								<input type="text" class="laydate-icon layer-date form-control" id="birthday" name="birthday" placeholder="请选择出生日期"
-									   style="background-color: #fff;" readonly="readonly" th:value="${#dates.format(singer.birthday, 'yyyy-MM-dd')}"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">类型：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="singer_type_" th:value="${singer.type}">
-								<select id="singer_type" name="type" title="选择类别" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">星级：</label>
-							<div class="col-sm-8">
-								<input id="star" name="star" class="rating-loading" th:value="${singer.star}" data-size="sm">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">图片：</label>
-							<div class="col-sm-8">
-								<input id="photo" name="photo" type="hidden" th:value="${singer.photo}">
-								<img id="singer_photo" th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
-								<input type="file" id="img" name="images" class="projectfile" />
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8 col-sm-offset-3">
-								<button type="submit" class="btn btn-primary">提交</button>
-							</div>
-						</div>
+						<header>
+							编辑歌手
+						</header>
+						<fieldset>
+							<section>
+								<label class="input">
+									<input type="text" name="name" placeholder="姓名" th:value="${singer.name}">
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" name="enName" placeholder="英文名" th:value="${singer.enName}">
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="singer_region_" th:value="${singer.region}">
+									<select id="singer_region" name="region">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="singer_initial_" th:value="${singer.initial}">
+									<select id="singer_initial" name="initial">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" class="form-control" th:value="${#dates.format(singer.birthday, 'yyyy-MM-dd')}" readonly>
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="singer_type_" th:value="${singer.type}">
+									<select id="singer_type" name="type">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input id="star" name="star"class="form-control rating-loading" data-size="sm" th:value="${singer.star}">
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input id="photo" name="photo" type="hidden" th:value="${singer.photo}">
+									<img id="singer_photo" th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
+									<div class="file-loading">
+										<input id="img" name="images" type="file" multiple>
+									</div>
+								</label>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="button" class="btn btn-default" onclick="goBack('ent/music/singer');">返回</button>
+						</footer>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
-
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
 </div>
-<div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/plugins/rate/star-rating.js" ></script>
-<script type="text/javascript" src="/js/plugins/rate/zh.js" ></script>
-<script type="text/javascript" src="/js/plugins/fileinput/fileinput.js" ></script>
-<script type="text/javascript" src="/js/plugins/fileinput/zh.js" ></script>
-<script type="text/javascript" src="/js/plugins/layer/laydate/laydate.js" ></script>
-<script type="text/javascript" src="/js/appjs/ent/music/singer/edit.js">
-</script>
-</body>
-</html>
+<script type="text/javascript" src="/plugins/rate/js/star-rating.js" />
+<script type="text/javascript" src="/plugins/rate/js/zh.js" />
+<script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" ></script>
+<script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
+<script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
+<script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
+<script type="text/javascript" src="/js/ent/music/singer/singerEdit.js" />
+<script type="text/javascript" src="/js/ent/music/singer/edit.js" />
+
