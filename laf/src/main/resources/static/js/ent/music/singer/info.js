@@ -2,6 +2,11 @@ var request_prefix = "/ent/music/singer"
 
 $().ready(function() {
     initRegionType();
+
+    $("article a").on("click", function() {
+        var target = $(this).attr("target");
+        getTarget(target);
+    });
 });
 
 function initRegionType() {
@@ -74,14 +79,14 @@ function loadAllAlbum() {
                 html += "<li class='playlist__item' onmouseover='this.className=(this.className+\" playlist__item--hover\")'>";
                 html += "    <div class='playlist__item_box'>";
                 html += "        <div class='playlist__cover mod_cover'>";
-                html += "            <a href='/ent/music/album/info/" + album.id + "' class='js_album'>";
-                html += "                <img src='" + album.cover + "' alt='" + album.name + "' class='playlist__pic' onerror='imgError();'>";
+                html += "            <a target='/ent/music/album/info/" + album.id + "' class='js_album'>";
+                html += "                <img src='" + album.cover + "' alt='" + album.name + "' class='playlist__pic'>";
                 html += "                <i class=' js_play'></i>";
                 html += "            </a>";
                 html += "        </div>";
                 html += "        <h4 class='playlist__title'>"
                 html += "            <span class='playlist__title_txt'>";
-                html += "                <a href='/ent/music/album/info/" + album.id + "' title='" + album.name + "' class='js_album'>" + album.name + "</a>"
+                html += "                <a target='/ent/music/album/info/" + album.id + "' title='" + album.name + "' class='js_album'>" + album.name + "</a>"
                 html += "            </span>";
                 html += "        </h4>";
                 html += "        <div class='playlist__other'>" + (album.issueDate)?(album.issueDate).substr(0,10):'-' + "</div>"
@@ -117,10 +122,10 @@ function loadAllSong() {
                 html += "        </div>";
                 html += "        <div class=\"songlist__number\">" + (idx+1) + "</div>";
                 html += "        <div class=\"songlist__songname\">";
-                html += "            <span class=\"songlist__songname_txt\"><a href='/ent/music/song/info/" + song.id + "' class=\"js_song\" title='" + song.name + "'>" + song.name + "</a></span>";
+                html += "            <span class=\"songlist__songname_txt\"><a target='/ent/music/song/info/" + song.id + "' class=\"js_song\" title='" + song.name + "'>" + song.name + "</a></span>";
                 html += "        </div>";
                 html += "        <div class=\"songlist__album\">";
-                html += "            <a href='/ent/music/album/info/" + song.albumId + "' title='" + song.albumName + "' class=\"album_name\" >" + song.albumName + "</a>";
+                html += "            <a target='/ent/music/album/info/" + song.albumId + "' title='" + song.albumName + "' class=\"album_name\" >" + song.albumName + "</a>";
                 html += "        </div>";
                 html += "        <div class=\"songlist__time\">" + song.length + "</div>";
                 html += "        <div class=\"songlist__type\">" + song.audioType + "</div>";
@@ -156,3 +161,5 @@ function importSong() {
 		content : request_prefix + '/importSong/' + id // iframe的url
 	});
 }
+
+//# sourceURL=info.js

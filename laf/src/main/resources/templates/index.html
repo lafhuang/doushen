@@ -35,7 +35,7 @@
 <header id="header">
     <div id="logo-group">
         <!-- PLACE YOUR LOGO HERE -->
-        <span id="logo"> <img src="/smart_admin/img/logo.png" alt="SmartAdmin"> </span>
+        <span id="logo"> <img src="/smart_admin/img/logo.png" alt="doudou"> </span>
         <!-- END LOGO PLACEHOLDER -->
         <!-- Note: The activity badge color changes when clicked and resets the number to 0
         Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
@@ -256,7 +256,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeBtn">
                         &times;
                     </button>
                     <h4 class="modal-title" id="doudou_modal_title"></h4>
@@ -276,7 +276,7 @@
 <div class="page-footer">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
-            <span class="txt-color-white">SmartAdmin 1.9.0 <span class="hidden-xs"> - Web Application Framework</span> © 2017-2019</span>
+            <span class="txt-color-white">DOUDOU's family entertainment management system  <span class="hidden-xs"> - doushen info CO.,LTD</span> © 2019</span>
         </div>
     </div>
 </div>
@@ -336,6 +336,15 @@
 <script src="/smart_admin/js/plugin/moment/moment.min.js"></script>
 <script src="/smart_admin/js/plugin/fullcalendar/fullcalendar.min.js"></script>
 <script>
+
+    document.addEventListener("error", function (e) {
+
+        var elem = e.target;
+        if (elem.tagName.toLowerCase() == 'img') {
+            elem.src = "/img/laf.jpg";
+        }
+    }, true);
+
     $('#sys_menu a').unbind('click').click(function() {
 
         var $this = $(this);

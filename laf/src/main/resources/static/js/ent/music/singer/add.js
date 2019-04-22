@@ -60,9 +60,10 @@ function initStar() {
     $('#star').rating({
         language: 'zh',
         min: 0,
-        max: 5,
+        max: 6,
         step: 1,
-        stars: 5
+        stars: 6,
+        starCaptions: {1: '无所谓', 2: '随便听听', 3: '还不错', 4: '喜欢', 5: '超爱', 6 : '偶像'}
     });
 }
 
@@ -197,27 +198,39 @@ function save() {
         data : $('#singerForm').serialize(),
         async : false,
         error : function(request) {
-            alert("Connection error");
+            $("#doudou_modal_title").text("添加歌手失败");
+            $("#doudou_modal_body p").text("添加歌手失败");
+            activateModal();
         },
         success : function(data) {
-            if (data.code == 0) {
-
-            } else {
-
-            }
-
             $("#doudou_modal_title").text("添加歌手");
             $("#doudou_modal_body p").text(data.msg);
-            $("#doudou_modal_footer").html("");
-
-            $("#doudou_modal").modal();
-
+            activateModal();
         }
     });
 }
 
 function goBack(target) {
     getTarget(target);
+}
+
+function activateModal() {
+    var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
+        "<button type='button' class='btn btn-primary' id='addBtn'>继续添加</button>";
+
+    $("#doudou_modal_footer").html(btn);
+
+    $("#doudou_modal").modal();
+
+    $("#backBtn").click(function () {
+        $("#closeBtn").click();
+        getTarget("/ent/music/singer");
+    });
+
+    $("#addBtn").click(function () {
+        $("#closeBtn").click();
+        getTarget("/ent/music/singer/add");
+    });
 }
 
 //# sourceURL=add.js

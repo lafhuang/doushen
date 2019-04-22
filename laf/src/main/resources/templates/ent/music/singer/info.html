@@ -1,9 +1,4 @@
 <link href="/css/music_singer_info.css" rel="stylesheet" />
-<style type="text/css">
-    h1, ul, li {
-        margin:0; padding:0
-    }
-</style>
 <div class="row">
     <article class="col-sm-12">
         <!-- Widget ID (each widget will need unique ID)-->
@@ -20,14 +15,14 @@
                             <div class="mod_data">
                         <span class="data__cover">
                             <input type="hidden" id="id" th:value="${singer.id}">
-                            <a class="js_goto_tab js_none_index" data-stat="y_new.singer.thistab.singer_pic" data-tab="index" th:href="@{'/ent/music/singer/info/'+${singer.id}}" style="display:none;">
-                                <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo" onerror="imgError();">
+                            <a class="js_goto_tab js_none_index" data-stat="y_new.singer.thistab.singer_pic" data-tab="index" th:target="@{'/ent/music/singer/info/'+${singer.id}}" style="display:none;">
+                                <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
                             </a>
-                            <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo js_index" onerror="imgError();">
+                            <img th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo js_index">
                         </span>
                                 <div class="data__cont">
                                     <div class="data__name">
-                                        <h1 class="data__name_txt js_none_index" style="display:none;"><a class="js_goto_tab" data-stat="y_new.singer.thistab.singer_name" th:title="${singer.enName}" data-tab="index" th:href="@{'/ent/music/singer/info/'+${singer.id}}" th:text="${singer.name}"></a></h1>
+                                        <h1 class="data__name_txt js_none_index" style="display:none;"><a class="js_goto_tab" data-stat="y_new.singer.thistab.singer_name" th:title="${singer.enName}" data-tab="index" th:target="@{'/ent/music/singer/info/'+${singer.id}}" th:text="${singer.name}"></a></h1>
                                         <h1 style="margin:0; padding:0;" class="data__name_txt js_index" th:title="${singer.name}" th:text="@{' ' + ${singer.name}}"></h1>
                                     </div>
                                     <div class="data__desc" id="singer_desc">
@@ -95,10 +90,10 @@
                                                     <div class="songlist__number" th:text="${songStat.index+1}"></div>
 
                                                     <div class="songlist__songname">
-                                                        <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
+                                                        <span class="songlist__songname_txt"><a th:target="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
                                                     </div>
                                                     <div class="songlist__album">
-                                                        <a th:href="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>
+                                                        <a th:target="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" class="album_name" th:text="${song.albumName}"></a>
                                                     </div>
                                                     <div class="songlist__time" th:text="${song.length}"></div>
                                                     <div class="songlist__type" th:text="${song.audioType}"></div>
@@ -125,14 +120,14 @@
                                             <li th:each="album : ${albumPage.rows}" class="playlist__item" onmouseover="this.className=(this.className+' playlist__item--hover')">
                                                 <div class="playlist__item_box">
                                                     <div class="playlist__cover mod_cover">
-                                                        <a th:href="@{'/ent/music/album/info/'+${album.id}}" class="js_album">
-                                                            <img th:src="${album.cover}" th:alt="${album.name}" class="playlist__pic" onerror="imgError();">
+                                                        <a th:target="@{'/ent/music/album/info/'+${album.id}}" class="js_album">
+                                                            <img th:src="${album.cover}" th:alt="${album.name}" class="playlist__pic">
                                                             <i class=" js_play"></i>
                                                         </a>
                                                     </div>
                                                     <h4 class="playlist__title">
                                                 <span class="playlist__title_txt">
-                                                    <a th:href="@{'/ent/music/album/info/'+${album.id}}" th:title="${album.name}" class="js_album" th:text="${album.name}"></a>
+                                                    <a th:target="@{'/ent/music/album/info/'+${album.id}}" th:title="${album.name}" class="js_album" th:text="${album.name}"></a>
                                                 </span>
                                                     </h4>
                                                     <div class="playlist__other" th:text="${#dates.format(album.issueDate, 'yyyy-MM-dd')}"></div>
@@ -152,4 +147,4 @@
         <!-- end widget -->
     </article>
 </div>
-<script type="text/javascript" src="/js/appjs/ent/music/singer/info.js" />
+<script type="text/javascript" src="/js/ent/music/singer/info.js" />
