@@ -61,9 +61,13 @@
             </div>
         </div>
     </article>
-    <article class="col-sm-12">
+    <article class="col-sm-12" id="singer_song">
         <div class="jarviswidget jarviswidget-color-blueDark">
             <header role="heading" class="ui-sortable-handle">
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="loadAllSong();">&nbsp;&nbsp;全&nbsp;部&nbsp;&nbsp;</a>
+                    <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="reload();">&nbsp;&nbsp;重新加载&nbsp;&nbsp;</a>
+                </div>
                 <h2>歌曲 </h2>
             </header>
             <div role="content">
@@ -79,8 +83,8 @@
                                 <th> <i class="fa fa-slack"></i> 类型</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr class="table-success" th:each="song,songStat : ${songPage.rows}" id="song_part">
+                            <tbody id="songList">
+                            <tr class="table-success" th:each="song,songStat : ${songPage.rows}">
                                 <td th:text="${songStat.index+1}"></td>
                                 <td><a th:target="@{'/ent/music/song/info/'+${song.id}}" th:title="${song.name}" th:text="${song.name}"></a></td>
                                 <td><a th:target="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" th:text="${song.albumName}"></a></td>
@@ -94,13 +98,17 @@
             </div>
         </div>
     </article>
-    <article class="col-sm-12">
+    <article class="col-sm-12" id="singer_album">
         <div class="jarviswidget jarviswidget-color-blueDark">
             <header role="heading" class="ui-sortable-handle">
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="loadAllAlbum();">&nbsp;&nbsp;全&nbsp;部&nbsp;&nbsp;</a>
+                    <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="reload();">&nbsp;&nbsp;重新加载&nbsp;&nbsp;</a>
+                </div>
                 <h2>专辑 </h2>
             </header>
             <div role="content">
-                <div class="mod_part" id="album_part">
+                <div class="mod_part">
                     <div class="mod_playlist">
                         <ul id="albumlist" style="padding-left: 0px;">
                             <li th:each="album : ${albumPage.rows}" class="playlist__item" onmouseover="this.className=(this.className+' playlist__item--hover')">

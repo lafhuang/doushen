@@ -116,7 +116,6 @@ function formValidate() {
         errorClass: 'invalid',
         errorElement: 'em',
         highlight: function (element) {
-            console.log($(element).attr("name"));
             if ("star" == $(element).attr("name")) {
                 $(element).parent().parent().parent().removeClass('state-success').addClass("state-error");
                 $(element).removeClass('valid');

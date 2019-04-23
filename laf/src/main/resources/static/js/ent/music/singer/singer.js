@@ -107,8 +107,8 @@ function load_singer_dict(dict_type) {
     });
 }
 
-function add(target) {
-	getTarget(target);
+function add() {
+	getTarget(request_prefix + '/add');
 }
 
 //# sourceURL=singer.js

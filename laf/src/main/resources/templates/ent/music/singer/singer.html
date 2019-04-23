@@ -4,10 +4,8 @@
         <!-- Widget ID (each widget will need unique ID)-->
         <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
             <header role="heading" class="ui-sortable-handle">
-                <div class="jarviswidget-ctrls" shiro:hasPermission="ent:music:singer:add">
-                    <a href="javascript:void(0);" class="button-icon jarviswidget-toggle-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Collapse" onclick="add('ent/music/singer/add');">
-                        <i class="fa fa-plus "></i>
-                    </a>
+                <div class="jarviswidget-ctrls">
+                    <a shiro:hasPermission="ent:music:singer:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
                 </div>
                 <h2>歌手 </h2>
             </header>

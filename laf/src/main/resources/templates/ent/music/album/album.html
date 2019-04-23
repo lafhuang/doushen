@@ -1,36 +1,59 @@
-<div class="col-sm-12">
-    <div class="ibox">
-        <div class="ibox-body">
-            <div class="fixed-table-toolbar">
-                <div class="columns pull-left">
-                    <button shiro:hasPermission="ent:music:album:add" type="button"
-                            class="btn btn-primary" onclick="add()">
-                        <i class="fa fa-plus" aria-hidden="true"></i>添加
-                    </button>
-                    <button shiro:hasPermission="ent:music:album:batchRemove" type="button"
-                            class="btn btn-danger" onclick="batchRemove()">
-                        <i class="fa fa-trash" aria-hidden="true"></i>删除
-                    </button>
+<link href="/plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet">
+<div class="row">
+    <article class="col-sm-12">
+        <div class="jarviswidget jarviswidget-color-blueDark">
+            <header role="heading" class="ui-sortable-handle">
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a shiro:hasPermission="ent:music:album:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
+                    <a shiro:hasPermission="ent:music:album:batchRemove" class="btn btn-danger btn-sm " href="javascript:void(0);" onclick="batchRemove();">&nbsp;<i class="fa fa-trash"></i>&nbsp;删&nbsp;除&nbsp;&nbsp;</a>
                 </div>
-                <div class="columns pull-right">
-                    <button class="btn btn-success" onclick="reLoad()">查询</button>
-                </div>
+                <h2>专辑 </h2>
+            </header>
+            <div role="content">
+                <div class="widget-body no-padding">
+                    <form id="checkout-form" class="smart-form" novalidate="novalidate">
+                        <fieldset>
+                            <div class="row">
+                                <section class="col col-3">
+                                    <label class="select">
+                                        <select id="album_singer">
+                                        </select> <i></i>
+                                    </label>
+                                </section>
+                                <section class="col col-3">
+                                    <label class="input">
+                                        <input type="text" id="albumName" placeholder="专辑名">
+                                    </label>
+                                </section>
+                                <div class="col col-2">
+                                    <a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="reLoad();">&nbsp;&nbsp;查&nbsp;询&nbsp;&nbsp;</a>
+                                </div>
+                            </div>
+                        </fieldset>
 
-                <div class="columns pull-right col-md-2 nopadding">
-                    <input id="albumName" type="text" class="form-control"
-                           placeholder="专辑名">
-                </div>
+                        <fieldset>
+                            <div class="table-responsive">
+                                <table class="table" id="exampleTable">
 
-                <div class="columns pull-right col-md-2 nopadding">
-                    <select data-placeholder="选择歌手" class="form-control chosen-select" data-actions-box="true" data-live-search="true" id="album_singer">
-                    </select>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
-            <table id="exampleTable" data-mobile-responsive="true">
-            </table>
         </div>
-    </div>
+    </article>
 </div>
+
+<!--<button shiro:hasPermission="ent:music:album:add" type="button"-->
+        <!--class="btn btn-primary" onclick="add()">-->
+    <!--<i class="fa fa-plus" aria-hidden="true"></i>添加-->
+<!--</button>-->
+<!--<button shiro:hasPermission="ent:music:album:batchRemove" type="button"-->
+        <!--class="btn btn-danger" onclick="batchRemove()">-->
+    <!--<i class="fa fa-trash" aria-hidden="true"></i>删除-->
+<!--</button>-->
+
 <!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 <div>
     <script type="text/javascript">
@@ -48,5 +71,6 @@
             var s_remove_h = '';
         </script>
 </div>
-
-<script type="text/javascript" src="/js/appjs/ent/music/album/album.js" />
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table.min.js" />
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js" />
+<script type="text/javascript" src="/js/ent/music/album/album.js" />

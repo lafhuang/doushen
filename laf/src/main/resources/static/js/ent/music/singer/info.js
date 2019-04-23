@@ -5,7 +5,9 @@ $().ready(function() {
 
     $("article a").on("click", function() {
         var target = $(this).attr("target");
-        getTarget(target);
+        if (target) {
+            getTarget(target);
+        }
     });
 });
 
@@ -53,8 +55,7 @@ function goBack() {
 }
 
 function loadAllAlbum() {
-    $("#song_part").remove();
-    $("#all_album_button").remove();
+    $("#singer_song").hide();
 
     $.ajax({
         url : "/ent/music/album/list",
@@ -62,7 +63,7 @@ function loadAllAlbum() {
         data : {
             'singerId' : $("#id").val(),
             'offset' : 0,
-            'limit' : 1000
+            'limit' : 10000
         },
         success : function(result) {
             var albumList = result.rows;
@@ -92,8 +93,7 @@ function loadAllAlbum() {
 }
 
 function loadAllSong() {
-    $("#album_part").remove();
-    $("#all_song_button").remove();
+    $("#singer_album").hide();
 
     $.ajax({
         url : "/ent/music/song/list",
@@ -101,32 +101,22 @@ function loadAllSong() {
         data : {
             'singerId' : $("#id").val(),
             'offset' : 0,
-            'limit' : 1000
+            'limit' : 10000
         },
         success : function(result) {
             var songList = result.rows;
             var html = "";
             for (var idx = 0; idx < songList.length; idx++) {
                 var song = songList[idx];
-                html += "<li>";
-                html += "    <div class=\"songlist__item\" onmouseover=\"this.className=(this.className+' songlist__item--hover')\" onmouseout=\"this.className=this.className.replace(/ songlist__item--hover/, '')\">";
-                html += "        <div class=\"songlist__edit songlist__edit--check sprite\">";
-                html += "            <input type=\"checkbox\" class=\"songlist__checkbox\">";
-                html += "        </div>";
-                html += "        <div class=\"songlist__number\">" + (idx+1) + "</div>";
-                html += "        <div class=\"songlist__songname\">";
-                html += "            <span class=\"songlist__songname_txt\"><a target='/ent/music/song/info/" + song.id + "' class=\"js_song\" title='" + song.name + "'>" + song.name + "</a></span>";
-                html += "        </div>";
-                html += "        <div class=\"songlist__album\">";
-                html += "            <a target='/ent/music/album/info/" + song.albumId + "' title='" + song.albumName + "' class=\"album_name\" >" + song.albumName + "</a>";
-                html += "        </div>";
-                html += "        <div class=\"songlist__time\">" + song.length + "</div>";
-                html += "        <div class=\"songlist__type\">" + song.audioType + "</div>";
-                html += "        <div class=\"songlist__other\"></div>";
-                html += "     </div>"
-                html += "</li>";
+                html += "<tr class='table-success'>";
+                html += "<td>" + (idx + 1) + "</td>";
+                html += "<td><a target='/ent/music/song/info/'" + song.id + "title='" + song.name + "'>" + song.name + "</a></td>";
+                html += "<td><a target='/ent/music/album/info/'" + song.albumId + "title='" + song.albumName + "'>" + song.albumName + "</a></td>";
+                html += "<td>" + song.length + "</td>";
+                html += "<td>" + song.audioType + "</td>";
+                html += "</tr>";
             }
-            $("#songlist").html(html);
+            $("#songList").html(html);
         }
     });
 }
@@ -153,6 +143,11 @@ function importSong() {
 		area : [ '65%', '65%' ],
 		content : request_prefix + '/importSong/' + id // iframe的url
 	});
+}
+
+function reload() {
+    var id = $("#id").val();
+    getTarget(request_prefix + '/info/' + id)
 }
 
 //# sourceURL=info.js
