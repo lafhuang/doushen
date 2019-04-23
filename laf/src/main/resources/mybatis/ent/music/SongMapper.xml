@@ -149,4 +149,8 @@
             id = #{id}
     </update>
 
+    <delete id="removeByAlbum" parameterType="java.lang.Integer">
+        DELETE FROM ent_music_song WHERE album_id = #{albumId}
+    </delete>
+
 </mapper>

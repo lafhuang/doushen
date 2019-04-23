@@ -34,3 +34,5 @@ function load_dict(dict_type) {
         }
     });
 }
+
+//# sourceURL=info.js

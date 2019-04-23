@@ -54,4 +54,12 @@ public interface SongMapper {
      */
     int update(SongEntity song);
 
+    /**
+     * 删除专辑歌曲
+     *
+     * @param albumId
+     * @return
+     */
+    int removeByAlbum(int albumId);
+
 }

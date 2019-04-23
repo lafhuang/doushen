@@ -186,9 +186,9 @@ function loadSinger() {
 			}
 			$("#song_singer").html(html);
 
-			$("#song_singer").selectpicker().on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-				loadAlbum();
-			});
+            $("#song_singer").on('change',function(){
+                loadAlbum();
+            });
 
 		}
 	});
@@ -228,7 +228,6 @@ function loadAlbum() {
 		});
 	}
 	$("#song_album").html(html);
-	$("#song_album").selectpicker('refresh');
 }
 
 function reLoad() {
@@ -309,3 +308,5 @@ function batchRemove() {
 		});
 	}, function() {});
 }
+
+//# sourceURL=song.js

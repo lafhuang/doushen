@@ -105,4 +105,9 @@ public class SongServiceImpl implements SongService {
         return songList.size();
     }
 
+    @Override
+    public int removeByAlbum(int albumId) {
+        return songMapper.removeByAlbum(albumId);
+    }
+
 }

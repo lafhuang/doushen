@@ -105,32 +105,6 @@ public class AlbumController extends BaseController {
         SingerEntity singer = singerService.get(album.getSingerId());
         model.addAttribute("singer", singer);
 
-        /*
-        List<DictEntity> typeList = dictService.queryDictByType("album_type");
-        for (DictEntity dict : typeList) {
-            if (StringUtils.equals(dict.getDictValue(), album.getType())) {
-                model.addAttribute("albumType", dict.getDictName());
-                break;
-            }
-        }
-
-        List<DictEntity> styleList = dictService.queryDictByType("album_style");
-        for (DictEntity dict : styleList) {
-            if (StringUtils.equals(dict.getDictValue(), album.getStyle())) {
-                model.addAttribute("albumStyle", dict.getDictName());
-                break;
-            }
-        }
-
-        List<DictEntity> languageList = dictService.queryDictByType("album_language");
-        for (DictEntity dict : languageList) {
-            if (StringUtils.equals(dict.getDictValue(), album.getLanguage())) {
-                model.addAttribute("albumLanguage", dict.getDictName());
-                break;
-            }
-        }
-        */
-
         Map<String, Object> songParams = new HashMap<>();
         songParams.put("limit", 200);
         songParams.put("offset", 0);
@@ -143,6 +117,17 @@ public class AlbumController extends BaseController {
         model.addAttribute("songPage", songPage);
 
         return TEMPLATE_PREFIX + "info";
+    }
+
+    @RequiresPermissions("ent:music:album:remove")
+    @Log("删除专辑")
+    @PostMapping("/remove")
+    @ResponseBody
+    Result remove(int id) {
+        if (albumService.remove(id) > 0) {
+            return Result.ok();
+        }
+        return Result.error();
     }
 
 }

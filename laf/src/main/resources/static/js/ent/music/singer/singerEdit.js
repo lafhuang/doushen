@@ -82,19 +82,19 @@ function load_singer_dict(dict_type) {
 
             if (singer_region || singer_initial || singer_type) {
                 if ("singer_initial" == dict_type) {
-                    html += '<option disabled="">歌手首字母</option>'
+                    html += '<option>--歌手首字母--</option>'
                 } else if ("singer_region" == dict_type) {
-                    html += '<option disabled="">歌手所在地区</option>'
+                    html += '<option>--歌手所在地区--</option>'
                 } else if ("singer_type" == dict_type) {
-                    html += '<option disabled="">歌手类型</option>'
+                    html += '<option>--歌手类型--</option>'
                 }
             } else {
                 if ("singer_initial" == dict_type) {
-                    html += '<option selected="" disabled="">歌手首字母</option>'
+                    html += '<option selected="">--歌手首字母--</option>'
                 } else if ("singer_region" == dict_type) {
-                    html += '<option selected="" disabled="">歌手所在地区</option>'
+                    html += '<option selected="">--歌手所在地区--</option>'
                 } else if ("singer_type" == dict_type) {
-                    html += '<option selected="" disabled="">歌手类型</option>'
+                    html += '<option selected="">--歌手类型--</option>'
                 }
             }
 
@@ -201,6 +201,10 @@ function formValidate() {
             }
         }
     });
+}
+
+function goBack() {
+    getTarget('/ent/music/singer');
 }
 
 //# sourceURL=singerEdit.js

@@ -3,6 +3,7 @@ package info.doushen.ent.music.biz.impl;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
+import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.mapper.AlbumMapper;
 import info.doushen.system.biz.DictService;
@@ -29,6 +30,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Autowired
     private DictService dictService;
+
+    @Autowired
+    private SongService songService;
 
     @Override
     public Pager pageAlbumList(Query query) {
@@ -97,6 +101,12 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public AlbumEntity querySingerAlbum(Map<String, Object> params) {
         return albumMapper.querySingerAlbum(params);
+    }
+
+    @Override
+    public int remove(int id) {
+        songService.removeByAlbum(id);
+        return albumMapper.remove(id);
     }
 
 }

@@ -11,6 +11,14 @@ $(function() {
     loadDict();
 
 	setTimeout("load();",500);
+
+	$("article").on("click", "a", function() {
+        var target = $(this).attr("target");
+        if (target) {
+            getTarget(target);
+        }
+    });
+
 });
 
 function loadSinger() {
@@ -133,21 +141,25 @@ function load() {
 						field : 'name',
 						title : '专辑名',
                         formatter : function(value, row, index) {
-                            return "<a href='/ent/music/album/info/" + row.id + "'>" + value + "</a>"
+                            return "<a target='/ent/music/album/info/" + row.id + "' id='album_" + row.id + "'>" + value + "</a>"
                         }
 					},
 					{
 						field : 'singerId',
 						title : '歌手',
 						formatter : function(value, row, index) {
-						    return "<a href='/ent/music/singer/info/" + value + "'>" + singerMap[value] + "</a>"
+						    return "<a target='/ent/music/singer/info/" + value + "' id='singer_" + row.id + "'>" + singerMap[value] + "</a>"
 						}
 					},
 					{
 						field : 'issueDate',
 						title : '发行日期',
 						formatter : function(value, row, index) {
-						    return value.replace(" 00:00:00", "");
+						    if (value) {
+						        return value.replace(" 00:00:00", "");
+						    } else {
+						        return "";
+						    }
 						}
 					},
 					{
@@ -176,10 +188,10 @@ function load() {
 						field : 'id',
 						align : 'center',
 						formatter : function(value, row, index) {
-							var e = '<a class="btn btn-warning btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+							var e = '<a class="btn btn-warning btn-sm ' + s_edit_h + '" href="#" title="编辑" onclick="edit(\''
 								+ row.id
 								+ '\')"><i class="fa fa-edit"></i></a> ';
-							var d = '<a class="btn btn-danger btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+							var d = '<a class="btn btn-danger btn-sm ' + s_remove_h + '" href="#" title="删除" onclick="remove(\''
 								+ row.id
 								+ '\')"><i class="fa fa-remove"></i></a> ';
 							return e + d;
@@ -197,25 +209,48 @@ function add() {
 }
 
 function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : request_prefix + "/remove",
-			type : "post",
-			data : {
-				'id' : id
-			},
-			success : function(r) {
-				if (r.code === 0) {
-					layer.msg("删除成功");
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
+
+    var singerName = $("#singer_"+id).text();
+    var albumName = $("#album_"+id).text();
+
+    $("#doudou_modal_title").text("删除专辑");
+    $("#doudou_modal_body p").text("是否要删除["+singerName+"]的专辑["+albumName+"]?");
+
+    var btn = "<button type='button' class='btn btn-danger' id='delBtn'><i class='fa fa-trash-o'></i>&nbsp; 删除</button>" +
+              "<button type='button' class='btn btn-default' id='cancelBtn'><i class='fa fa-times'></i>&nbsp; 取消</button>";
+
+    $("#doudou_modal_footer").html(btn);
+
+    $("#doudou_modal").modal();
+
+    $("#delBtn").click(function () {
+        $("#closeBtn").click();
+
+        $.ajax({
+            url : request_prefix + "/remove",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(data) {
+                $("#doudou_modal_body p").text(data.msg);
+                var sucBtn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa  fa-times-circle'></i>&nbsp; 关闭</button>";
+
+                $("#doudou_modal_footer").html(sucBtn);
+                $("#doudou_modal").modal();
+
+                $("#close_Btn").click(function () {
+                    $("#closeBtn").click();
+                    getTarget(request_prefix);
+                });
+            }
+        });
+
+    });
+
+    $("#cancelBtn").click(function () {
+        $("#closeBtn").click();
+    });
 
 }
 

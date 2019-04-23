@@ -138,4 +138,8 @@
             and name = #{albumName}
     </select>
 
+    <delete id="remove" parameterType="java.lang.Integer">
+        DELETE FROM ent_music_album WHERE id = #{id}
+    </delete>
+
 </mapper>

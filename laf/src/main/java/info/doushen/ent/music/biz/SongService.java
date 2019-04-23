@@ -56,4 +56,12 @@ public interface SongService {
      */
     int saveSingerSong(int userId, List<SongVO> songList);
 
+    /**
+     * 删除专辑歌曲
+     *
+     * @param albumId
+     * @return
+     */
+    int removeByAlbum(int albumId);
+
 }

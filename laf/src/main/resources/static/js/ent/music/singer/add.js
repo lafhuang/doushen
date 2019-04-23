@@ -28,7 +28,7 @@ function save() {
     });
 }
 
-function goBack(target) {
+function goBack() {
     getTarget(target);
 }
 

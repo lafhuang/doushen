@@ -64,4 +64,12 @@ public interface AlbumService {
      */
     AlbumEntity querySingerAlbum(Map<String, Object> params);
 
+    /**
+     * 删除专辑
+     *
+     * @param id
+     * @return
+     */
+    int remove(int id);
+
 }

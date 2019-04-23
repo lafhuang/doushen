@@ -92,6 +92,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @Transactional
     public int remove(int id) {
         RoleVO role = new RoleVO();
         role.setId(id);
