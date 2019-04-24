@@ -62,12 +62,7 @@ function initSinger() {
         },success : function(result) {
 			//加载数据
 			var singerId = $("#singer_id").val();
-			if (singerId) {
-			    html += '<option>--专辑歌手--</option>'
-			} else {
-			    html += '<option selected="">--专辑歌手--</option>'
-			}
-
+			html += '<option value="">--专辑歌手--</option>';
 			for (var i = 0; i < result.length; i++) {
 			    if (singerId == result[i].id) {
 			        html += '<option value="' + result[i].id + '" selected>' + result[i].name + '</option>'
@@ -104,11 +99,11 @@ function load_album_dict(dict_type) {
             var album_style = $("#album_style_").val();
 
 			if ("album_language" == dict_type) {
-				html += '<option>--专辑语言--</option>'
+				html += '<option value="">--专辑语言--</option>'
 			} else if ("album_type" == dict_type) {
-				html += '<option>--专辑类型--</option>'
+				html += '<option value="">--专辑类型--</option>'
 			} else if ("album_style" == dict_type) {
-				html += '<option>--专辑风格--</option>'
+				html += '<option value="">--专辑风格--</option>'
 			}
 
             //加载数据

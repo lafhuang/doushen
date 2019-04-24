@@ -1,4 +1,5 @@
 var request_prefix = "/ent/music/singer"
+var singerId = $("#id").val();
 
 $().ready(function() {
     initRegionType();
@@ -46,8 +47,7 @@ function load_dict(dict_type) {
 }
 
 function edit() {
-    var id = $("#id").val();
-	getTarget(request_prefix + '/edit/' + id)
+	getTarget(request_prefix + '/edit/' + singerId)
 }
 
 function goBack() {
@@ -61,7 +61,7 @@ function loadAllAlbum() {
         url : "/ent/music/album/list",
         type : "get",
         data : {
-            'singerId' : $("#id").val(),
+            'singerId' : singerId,
             'offset' : 0,
             'limit' : 10000
         },
@@ -99,7 +99,7 @@ function loadAllSong() {
         url : "/ent/music/song/list",
         type : "get",
         data : {
-            'singerId' : $("#id").val(),
+            'singerId' : singerId,
             'offset' : 0,
             'limit' : 10000
         },
@@ -122,32 +122,15 @@ function loadAllSong() {
 }
 
 function importAlbum() {
-    var id = $("#id").val();
-	layer.open({
-		type : 2,
-		title : '导入专辑',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '65%', '65%' ],
-		content : request_prefix + '/importAlbum/' + id // iframe的url
-	});
+	getTarget(request_prefix + '/importAlbum/' + singerId);
 }
 
 function importSong() {
-    var id = $("#id").val();
-	layer.open({
-		type : 2,
-		title : '导入歌曲',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '65%', '65%' ],
-		content : request_prefix + '/importSong/' + id // iframe的url
-	});
+	getTarget(request_prefix + '/importSong/' + singerId);
 }
 
 function reload() {
-    var id = $("#id").val();
-    getTarget(request_prefix + '/info/' + id)
+    getTarget(request_prefix + '/info/' + singerId)
 }
 
 //# sourceURL=info.js

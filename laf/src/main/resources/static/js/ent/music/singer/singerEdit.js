@@ -81,11 +81,11 @@ function load_singer_dict(dict_type) {
             var singer_type = $("#singer_type_").val();
 
             if ("singer_initial" == dict_type) {
-                html += '<option>--歌手首字母--</option>'
+                html += '<option value="">--歌手首字母--</option>'
             } else if ("singer_region" == dict_type) {
-                html += '<option>--歌手所在地区--</option>'
+                html += '<option value="">--歌手所在地区--</option>'
             } else if ("singer_type" == dict_type) {
-                html += '<option>--歌手类型--</option>'
+                html += '<option value="">--歌手类型--</option>'
             }
 
             for (var i = 0; i < result.length; i++) {
