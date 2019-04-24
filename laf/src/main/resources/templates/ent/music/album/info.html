@@ -1,96 +1,73 @@
-<!DOCTYPE html>
-<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
-      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<link href="/css/music_layout.css" rel="stylesheet" />
 <link href="/css/music_album_info.css" rel="stylesheet" />
-<style type="text/css">
-    h1, ul, li {
-        margin:0; padding:0
-    }
-</style>
-<body class="white-bg" style="background:#fafafa;">
-    <div class="wrapper wrapper-content ">
-        <div class="col-sm-1">
-
-        </div>
-        <div class="col-sm-10">
-
-            <div class="mod_data">
-                <span class="data__cover">
-                    <img th:src="${album.cover}" onerror="imgError();" th:alt="${album.name}" class="data__photo">
-                </span>
-                <div class="data__cont">
-                    <div class="data__name">
-                        <h1 class="data__name_txt" th:title="${album.name}" th:text="${album.name}"></h1>
-                    </div>
-                    <div class="data__singer">
-                        <i class="fa fa-user-o"></i><a th:href="@{'/ent/music/singer/info/'+${album.singerId}}" class="js_singer data__singer_txt" itemprop="byArtist" data-stat="y_new.album.header.singername" th:title="${singer.name}" th:text="@{' ' + ${singer.name} + ' '}"></a>
-                    </div>
-                    <input type="hidden" id="album_language" th:value="${album.language}">
-                    <input type="hidden" id="album_style" th:value="${album.style}">
-                    <input type="hidden" id="album_type" th:value="${album.type}">
-                    <input type="hidden" id="album_language_">
-                    <input type="hidden" id="album_style_">
-                    <input type="hidden" id="album_type_">
-                    <ul class="data__info">
-                        <li class="data_info__item" id="album_style_li"></li>
-                        <li class="data_info__item data_info__item--even" id="album_language_li"></li>
-                        <li class="data_info__item" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}"></li>
-                        <li class="data_info__item" id="album_type_li"></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="detail_layout">
-                <div class="js_tab">
-
-                    <div class="mod_songlist">
-                        <ul class="songlist__header">
-                            <li class="songlist__edit songlist__edit--check sprite">
-                                <input type="checkbox" class="songlist__checkbox js_check_all">
-                            </li>
-                            <li class="songlist__header_name">歌曲</li>
-                            <li class="songlist__header_author">歌手</li>
-                            <li class="songlist__header_time">时长</li>
-                            <li class="songlist__header_time">类型</li>
-                        </ul>
-                        <ul class="songlist__list">
-                            <li>
-                                <div class="songlist__item songlist__item--musician"></div>
-                            </li>
-                            <li th:each="song : ${songPage.rows}">
-                                <div class="songlist__item" onmouseover="this.className=(this.className+' songlist__item--hover')" onmouseout="this.className=this.className.replace(/ songlist__item--hover/, '')">
-                                    <div class="songlist__edit songlist__edit--check sprite">
-                                        <input type="checkbox" class="songlist__checkbox">
-                                    </div>
-                                    <div class="songlist__number" th:text="${song.trackNumber}"></div>
-                                    <div class="songlist__songname">
-                                        <span class="songlist__songname_txt"><a th:href="@{'/ent/music/song/info/'+${song.id}}" class="js_song" th:title="${song.name}" th:text="${song.name}"></a></span>
-                                    </div>
-                                    <div class="songlist__artist" th:title="${singer.name}">
-                                        <a th:href="@{'/ent/music/singer/info/'+${singer.id}}" th:title="${singer.name}" class="singer_name" th:text="${singer.name}"></a>
-                                    </div>
-                                    <div class="songlist__time" th:text="${song.length}"></div>
-                                    <div class="songlist__type" th:text="${song.audioType}"></div>
-                                    <div class="songlist__other">
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+<div class="row">
+    <article class="col-sm-12">
+        <div class="jarviswidget jarviswidget-color-blueDark">
+            <header role="heading" class="ui-sortable-handle">
+                <h2>专辑信息 </h2>
+            </header>
+            <div role="content">
+                <div class="widget-body">
+                    <div class="mod_data">
+                        <span class="data__cover">
+                            <img th:src="${album.cover}" th:alt="${album.name}" class="data__photo">
+                        </span>
+                        <div class="data__cont">
+                            <div class="data__name">
+                                <h1 class="data__name_txt" th:title="${album.name}" th:text="${album.name}"></h1>
+                            </div>
+                            <div class="data__singer">
+                                <i class="fa fa-user"></i><a th:target="@{'/ent/music/singer/info/'+${album.singerId}}" th:title="${singer.name}" th:text="@{' ' + ${singer.name} + ' '}"></a>
+                            </div>
+                            <ul class="data__info" style="padding-left:0px;">
+                                <li class="data_info__item" id="album_style_li"></li>
+                                <li class="data_info__item data_info__item--even" id="album_language_li"></li>
+                                <li class="data_info__item" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}"></li>
+                                <li class="data_info__item" id="album_type_li"></li>
+                            </ul>
+                            <input type="hidden" id="album_language" th:value="${album.language}">
+                            <input type="hidden" id="album_style" th:value="${album.style}">
+                            <input type="hidden" id="album_type" th:value="${album.type}">
+                            <input type="hidden" id="album_language_">
+                            <input type="hidden" id="album_style_">
+                            <input type="hidden" id="album_type_">
+                        </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-        <div class="col-sm-1">
-
+    </article>
+    <article class="col-sm-12" id="singer_song">
+        <div class="jarviswidget jarviswidget-color-blueDark">
+            <header role="heading" class="ui-sortable-handle">
+                <h2>专辑歌曲 </h2>
+            </header>
+            <div role="content">
+                <div class="widget-body p-0">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th> <i class="fa fa-music"></i> 歌曲名</th>
+                                <th> <i class="fa fa-dot-circle-o"></i> 所属专辑</th>
+                                <th> <i class="fa fa-clock-o"></i> 时长</th>
+                                <th> <i class="fa fa-slack"></i> 类型</th>
+                            </tr>
+                            </thead>
+                            <tbody id="songList">
+                            <tr class="table-success" th:each="song,songStat : ${songPage.rows}">
+                                <td th:text="${songStat.index+1}"></td>
+                                <td><a th:target="@{'/ent/music/song/info/'+${song.id}}" th:title="${song.name}" th:text="${song.name}"></a></td>
+                                <td><a th:target="@{'/ent/music/album/info/'+${song.albumId}}" th:title="${song.albumName}" th:text="${song.albumName}"></a></td>
+                                <td th:text="${song.length}"></td>
+                                <td th:text="${song.audioType}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </div>
-    <div th:include="include :: footer"></div>
-    <script type="text/javascript" src="/js/appjs/ent/music/album/info.js"></script>
-</body>
-</html>
+    </article>
+</div>
+<script type="text/javascript" src="/js/ent/music/album/info.js" />

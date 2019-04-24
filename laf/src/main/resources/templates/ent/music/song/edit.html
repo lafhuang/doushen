@@ -1,95 +1,91 @@
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-	<div class="row">
-		<div class="col-sm-12">
-			<div class="ibox float-e-margins">
-				<div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm">
+<link type="text/css" rel="stylesheet" href="/plugins/summernote/summernote.css" />
+<div class="row">
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-8 sortable-grid ui-sortable">
+		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+				<h2>添加歌曲 </h2>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+			</header>
+			<div role="content">
+				<div class="jarviswidget-editbox">
+				</div>
+				<div class="widget-body no-padding">
+					<form id="songForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<input type="hidden" id="id" name="id" th:value="${song.id}">
-						<div class="form-group">
-							<label class="col-sm-3 control-label">歌曲：</label>
-							<div class="col-sm-8">
-								<input id="name" name="name" class="form-control" type="text" th:value="${song.name}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">歌手：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="song_singer" th:value="${song.singerId}">
-								<select id="singerId" name="singerId" title="选择歌手" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">专辑：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="song_album" th:value="${song.albumId}">
-								<select id="albumId" name="albumId" title="选择专辑" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">音轨号：</label>
-							<div class="col-sm-8">
-								<input id="trackNumber" name="trackNumber" class="form-control"
-									   type="text" th:value="${song.trackNumber}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">语言：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="album_language_" th:value="${song.language}">
-								<select id="album_language" name="language" title="选择语言" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">时长：</label>
-							<div class="col-sm-8">
-								<input id="length" name="length" class="form-control"
-									   type="text" th:value="${song.length}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">文件大小：</label>
-							<div class="col-sm-8">
-								<input id="size" name="size" class="form-control"
-									   type="text" th:value="${song.size}">
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">音频类型：</label>
-							<div class="col-sm-8">
-								<input type="hidden" id="audio_type_" th:value="${song.audioType}">
-								<select id="audio_type" name="audioType" title="选择类别" class="selectpicker show-menu-arrow" data-actions-box="true" data-style="btn-info" data-live-search="true" data-width="100%">
-								</select>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">歌词：</label>
-							<div class="col-sm-8">
+						<header>
+							添加歌曲
+						</header>
+						<fieldset>
+							<section>
+								<label class="input">
+									<input type="text" name="name" placeholder="歌曲名" th:value="${song.name}">
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="song_singer" th:value="${song.singerId}">
+									<select id="singer">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="song_album" th:value="${song.albumId}">
+									<select name="albumId" id="albumId">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" name="trackNumber" placeholder="音轨" th:value="${song.trackNumber}">
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="album_language_" th:value="${song.language}">
+									<select name="language" id="album_language">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" name="length" placeholder="时长" th:value="${song.length}">
+								</label>
+							</section>
+							<section>
+								<label class="input">
+									<input type="text" name="size" placeholder="大小" th:value="${song.size}">
+								</label>
+							</section>
+							<section>
+								<label class="select">
+									<input type="hidden" id="audio_type_" th:value="${song.audioType}">
+									<select name="audioType" id="audio_type">
+									</select> <i></i>
+								</label>
+							</section>
+							<section>
 								<input type="hidden" id="lyrics" name="lyrics" th:value="${song.lyrics}">
-								<div id="lyricsContext" class="click2edit"></div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-8 col-sm-offset-3">
-								<button type="submit" class="btn btn-primary">提交</button>
-							</div>
-						</div>
+								<div class="summernote">
+								</div>
+							</section>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="button" class="btn btn-default" onclick="goBack();">返回</button>
+						</footer>
 					</form>
 				</div>
 			</div>
 		</div>
-	</div>
-
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
 </div>
-<div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/ent/music/song/edit.js">
-</script>
-</body>
-</html>
+<script type="text/javascript" src="/plugins/summernote/summernote.min.js" />
+<script type="text/javascript" src="/plugins/summernote/lang/summernote-zh-CN.min.js" />
+<script type="text/javascript" src="/js/ent/music/song/songEdit.js" />
+<script type="text/javascript" src="/js/ent/music/song/edit.js" />

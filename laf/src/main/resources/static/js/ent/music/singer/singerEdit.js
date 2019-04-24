@@ -5,7 +5,7 @@ function initFileInput() {
         showPreview: false,
         allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
         elErrorContainer: "#errorBlock"
-    }).on("fileuploaded", function (e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+    }).on("fileuploaded", function (e, data) {
         var res = data.response;
         if (res.code == '0') {
             $("#photo").val(res.msg);
@@ -14,7 +14,7 @@ function initFileInput() {
 }
 
 function initDatepicker() {
-    $.fn.datepicker.dates['cn'] = {   //切换为中文显示
+    $.fn.datepicker.dates['cn'] = {
         days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
         daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
         daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
@@ -25,24 +25,24 @@ function initDatepicker() {
     };
 
     $('#birthday').datepicker({
-        autoclose: true, //自动关闭
-        beforeShowDay: $.noop,    //在显示日期之前调用的函数
-        calendarWeeks: false,     //是否显示今年是第几周
-        clearBtn: false,          //显示清除按钮
-        daysOfWeekDisabled: [],   //星期几不可选
-        endDate: Infinity,        //日历结束日期
-        forceParse: true,         //是否强制转换不符合格式的字符串
-        format: 'yyyy-mm-dd',     //日期格式
-        keyboardNavigation: true, //是否显示箭头导航
-        language: 'cn',           //语言
+        autoclose: true,
+        beforeShowDay: $.noop,
+        calendarWeeks: false,
+        clearBtn: false,
+        daysOfWeekDisabled: [],
+        endDate: Infinity,
+        forceParse: true,
+        format: 'yyyy-mm-dd',
+        keyboardNavigation: true,
+        language: 'cn',
         minViewMode: 0,
-        orientation: "auto",      //方向
+        orientation: "auto",
         rtl: false,
-        startDate: -Infinity,     //日历开始日期
-        startView: 0,             //开始显示
-        todayBtn: false,          //今天按钮
-        todayHighlight: false,    //今天高亮
-        weekStart: 0              //星期几是开始
+        startDate: -Infinity,
+        startView: 0,
+        todayBtn: false,
+        todayHighlight: false,
+        weekStart: 0
     });
 }
 
@@ -73,29 +73,19 @@ function load_singer_dict(dict_type) {
         async:false,
         contentType:"application/json",
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },success : function(result) {
             //加载数据
             var singer_region = $("#singer_region_").val();
             var singer_initial = $("#singer_initial_").val();
             var singer_type = $("#singer_type_").val();
 
-            if (singer_region || singer_initial || singer_type) {
-                if ("singer_initial" == dict_type) {
-                    html += '<option>--歌手首字母--</option>'
-                } else if ("singer_region" == dict_type) {
-                    html += '<option>--歌手所在地区--</option>'
-                } else if ("singer_type" == dict_type) {
-                    html += '<option>--歌手类型--</option>'
-                }
-            } else {
-                if ("singer_initial" == dict_type) {
-                    html += '<option selected="">--歌手首字母--</option>'
-                } else if ("singer_region" == dict_type) {
-                    html += '<option selected="">--歌手所在地区--</option>'
-                } else if ("singer_type" == dict_type) {
-                    html += '<option selected="">--歌手类型--</option>'
-                }
+            if ("singer_initial" == dict_type) {
+                html += '<option>--歌手首字母--</option>'
+            } else if ("singer_region" == dict_type) {
+                html += '<option>--歌手所在地区--</option>'
+            } else if ("singer_type" == dict_type) {
+                html += '<option>--歌手类型--</option>'
             }
 
             for (var i = 0; i < result.length; i++) {

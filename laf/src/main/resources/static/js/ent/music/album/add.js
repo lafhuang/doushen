@@ -2,8 +2,8 @@ $().ready(function() {
 
 	initDatepicker();
     initFileUpload();
-    loadSinger();
-    loadDict();
+    initSinger();
+    initDict();
 	formValidate();
 
 });

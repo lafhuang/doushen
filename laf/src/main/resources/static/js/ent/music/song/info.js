@@ -6,6 +6,13 @@ function initDict() {
     load_dict("album_language");
 
     $("#album_language_li").text("语言：" + $("#album_language_").val());
+
+    $("article a").on("click", function() {
+        var target = $(this).attr("target");
+        if (target) {
+            getTarget(target);
+        }
+    });
 }
 
 function load_dict(dict_type) {
@@ -17,7 +24,7 @@ function load_dict(dict_type) {
         async:false,
         contentType:"application/json",
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },success : function(result) {
             //加载数据
             var dictValue = $("#"+dict_type).val();
@@ -30,3 +37,5 @@ function load_dict(dict_type) {
         }
     });
 }
+
+//# sourceURL=info.js

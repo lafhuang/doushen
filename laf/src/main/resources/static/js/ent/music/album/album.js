@@ -7,11 +7,10 @@ var album_style;
 var album_language;
 
 $(function() {
+
     loadSinger();
     loadDict();
-
-	setTimeout("load();",500);
-
+	load();
 	$("article").on("click", "a", function() {
         var target = $(this).attr("target");
         if (target) {

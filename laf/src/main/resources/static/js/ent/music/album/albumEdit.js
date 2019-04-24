@@ -1,5 +1,5 @@
 function initDatepicker() {
-	$.fn.datepicker.dates['cn'] = {   //切换为中文显示
+	$.fn.datepicker.dates['cn'] = {
 		days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
 		daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
 		daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
@@ -11,23 +11,23 @@ function initDatepicker() {
 
 	$('#issueDate').datepicker({
 		autoclose: true, //自动关闭
-		beforeShowDay: $.noop,    //在显示日期之前调用的函数
-		calendarWeeks: false,     //是否显示今年是第几周
-		clearBtn: false,          //显示清除按钮
-		daysOfWeekDisabled: [],   //星期几不可选
-		endDate: Infinity,        //日历结束日期
-		forceParse: true,         //是否强制转换不符合格式的字符串
-		format: 'yyyy-mm-dd',     //日期格式
-		keyboardNavigation: true, //是否显示箭头导航
-		language: 'cn',           //语言
+		beforeShowDay: $.noop,
+		calendarWeeks: false,
+		clearBtn: false,
+		daysOfWeekDisabled: [],
+		endDate: Infinity,
+		forceParse: true,
+		format: 'yyyy-mm-dd',
+		keyboardNavigation: true,
+		language: 'cn',
 		minViewMode: 0,
-		orientation: "auto",      //方向
+		orientation: "auto",
 		rtl: false,
-		startDate: -Infinity,     //日历开始日期
-		startView: 0,             //开始显示
-		todayBtn: false,          //今天按钮
-		todayHighlight: false,    //今天高亮
-		weekStart: 0              //星期几是开始
+		startDate: -Infinity,
+		startView: 0,
+		todayBtn: false,
+		todayHighlight: false,
+		weekStart: 0
 	});
 }
 
@@ -38,7 +38,7 @@ function initFileUpload() {
         showPreview: false,
         allowedFileExtensions: ["jpg", "jpeg", "gif", "png"],
         elErrorContainer: "#errorBlock"
-    }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
+    }).on("fileuploaded", function(e, data) {
         var res = data.response;
         if (res.code == '0') {
             $("#cover").val(res.msg);
@@ -46,7 +46,7 @@ function initFileUpload() {
     });
 }
 
-function loadSinger() {
+function initSinger() {
 	var html = "";
     var data = {};
     $.ajax({
@@ -58,7 +58,7 @@ function loadSinger() {
         async:false,
         contentType:"application/json",
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },success : function(result) {
 			//加载数据
 			var singerId = $("#singer_id").val();
@@ -80,7 +80,7 @@ function loadSinger() {
 	});
 }
 
-function loadDict() {
+function initDict() {
     load_album_dict("album_language");
     load_album_dict("album_type");
     load_album_dict("album_style");
@@ -96,31 +96,20 @@ function load_album_dict(dict_type) {
         async:false,
         contentType:"application/json",
         error : function(request) {
-            parent.layer.alert("Connection error");
+			// TODO
         },success : function(result) {
-            var singerId = $("#singer_id").val();
 
             var album_language = $("#album_language_").val();
             var album_type = $("#album_type_").val();
             var album_style = $("#album_style_").val();
 
-            if (album_language || album_type || album_style) {
-                if ("album_language" == dict_type) {
-                    html += '<option>--专辑语言--</option>'
-                } else if ("album_type" == dict_type) {
-                    html += '<option>--专辑类型--</option>'
-                } else if ("album_style" == dict_type) {
-                    html += '<option>--专辑风格--</option>'
-                }
-            } else {
-                if ("album_language" == dict_type) {
-                    html += '<option selected="">--专辑语言--</option>'
-                } else if ("album_type" == dict_type) {
-                    html += '<option selected="">--专辑类型--</option>'
-                } else if ("album_style" == dict_type) {
-                    html += '<option selected="">--专辑风格--</option>'
-                }
-            }
+			if ("album_language" == dict_type) {
+				html += '<option>--专辑语言--</option>'
+			} else if ("album_type" == dict_type) {
+				html += '<option>--专辑类型--</option>'
+			} else if ("album_style" == dict_type) {
+				html += '<option>--专辑风格--</option>'
+			}
 
             //加载数据
             for (var i = 0; i < result.length; i++) {
@@ -212,6 +201,5 @@ function formValidate() {
 function goBack() {
     getTarget('/ent/music/album');
 }
-
 
 //# sourceURL=albumEdit.js
