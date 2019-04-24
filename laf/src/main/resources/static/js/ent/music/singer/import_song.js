@@ -18,6 +18,13 @@ $().ready(function() {
         $("#exampleTable").html("");
     })
 
+    $("article a").on("click", function() {
+        var target = $(this).attr("target");
+        if (target) {
+            getTarget(target);
+        }
+    });
+
 });
 
 function initFileUpload() {
@@ -35,43 +42,40 @@ function initFileUpload() {
         var result = data.response;
         var code = result.code;
         if (code != 0) {
-            parent.layer.alert(result.msg);
+            // TODO
         } else {
             var songList = result.songList;
             if (songList.length == 0) {
-                parent.layer.alert("歌曲模板没有数据!");
+                // TODO
             } else {
                 var html = "";
-                html += "<thead>";
-                html += "    <tr>";
-                html += "        <th><div class=\"th-inner\">歌曲名</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">专辑</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">音轨号</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">语言</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">时长</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">文件大小</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">音频类型</div><div class=\"fht-cell\"></div></th>";
-                html += "    </tr>";
-                html += "</thead>";
-                html += "<tbody>";
+
                 for (var idx = 0; idx <= songList.length; idx++) {
                     var song = songList[idx];
                     if (!song) {
                         break;
                     }
 
-                    html += "    <tr>";
-                    html += "        <td>" + song.name + "</td>";
-                    html += "        <td>" + song.albumName + "</td>";
-                    html += "        <td>" + song.trackNumber + "</td>";
-                    html += "        <td>" + song.language + "</td>";
-                    html += "        <td>" + song.length + "</td>";
-                    html += "        <td>" + song.size + "</td>";
-                    html += "        <td>" + song.audioType + "</td>";
-                    html += "    </tr>";
+                    html += "<tr class='table-success'>";
+                    html += "<td>" + (idx + 1) + "</td>";
+                    html += "<td>" + song.name + "</td>";
+                    html += "<td>" + song.albumName + "</td>";
+                    html += "<td>" + song.length + "</td>";
+                    html += "<td>" + song.audioType + "</td>";
+                    html += "</tr>";
+
+//                    html += "    <tr>";
+//                    html += "        <td>" + song.name + "</td>";
+//                    html += "        <td>" + song.albumName + "</td>";
+//                    html += "        <td>" + song.trackNumber + "</td>";
+//                    html += "        <td>" + song.language + "</td>";
+//                    html += "        <td>" + song.length + "</td>";
+//                    html += "        <td>" + song.size + "</td>";
+//                    html += "        <td>" + song.audioType + "</td>";
+//                    html += "    </tr>";
                 }
-                html += "</tbody>";
-                $("#exampleTable").html(html);
+
+                $("#songList").html(html);
             }
         }
     });
@@ -105,7 +109,7 @@ function saveSong() {
     });
 
     if (songList.length == 0) {
-        parent.layer.alert("未导入歌曲数据!");
+        // TODO
         return;
     }
 
@@ -116,19 +120,13 @@ function saveSong() {
         data : "songList="+JSON.stringify(songList),
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },
         success : function(data) {
-            if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-            } else {
-                parent.layer.alert(data.msg)
-            }
-
+            // TODO
         }
     });
 
 }
+
+//# sourceURL=import_song.js

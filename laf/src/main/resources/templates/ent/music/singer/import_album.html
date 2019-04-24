@@ -1,33 +1,86 @@
 <link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
-
 <div class="row">
-	<div class="col-sm-12">
-		<div class="ibox float-e-margins">
-			<div class="ibox-content">
-				<form class="form-horizontal m-t" id="signupForm">
-					<input type="hidden" id="singerId" th:value="${singerId}">
-					<div class="form-group">
-						<div class="col-sm-2">
-							<a href="/download/album" class="btn btn-info">专辑模板下载</a>
-						</div>
-						<div class="col-sm-8">
-							<div class="file-loading">
-								<input id="template" name="template" type="file" multiple>
+	<article class="col-sm-12">
+		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+			<header role="heading">
+				<div class="jarviswidget-ctrls">
+					<a href="/download/album">&nbsp;<i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;模&nbsp;板&nbsp;&nbsp;</a>
+				</div>
+				<h2>导入专辑 </h2>
+			</header>
+			<div role="content">
+				<div class="jarviswidget-editbox">
+				</div>
+				<div class="widget-body">
+					<form class="form-horizontal bv-form" novalidate="novalidate" autocomplete="off">
+						<input type="hidden" id="singerId" th:value="${singerId}">
+						<fieldset>
+							<legend>
+								导入专辑
+							</legend>
+						</fieldset>
+						<fieldset>
+							<label class="col-lg-5">
+								<input id="photo" name="photo" type="hidden">
+								<div class="file-loading">
+									<input id="template" name="template" type="file" multiple>
+								</div>
+							</label>
+							<div class="col-lg-2">
+								<button type="button" class="btn btn-success" id="import-btn">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
+								<button type="button" class="btn btn-danger" id="reset-btn">&nbsp;&nbsp;清&nbsp;空&nbsp;&nbsp;</button>
+								<a th:target="@{'/ent/music/singer/info/'+${singerId}}" class="btn btn-info">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</a>
 							</div>
-						</div>
-						<div class="col-sm-2">
-							<button type="button" class="btn btn-danger" id="reset-btn">清空</button>
-							<button type="button" class="btn btn-warning" id="import-btn">导入</button>
-						</div>
-					</div>
-				</form>
-				<table id="exampleTable" data-mobile-responsive="true" class="table table-hover table-striped">
-				</table>
+						</fieldset>
+					</form>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	</article>
 
+	<article class="col-sm-12" id="singer_album">
+		<div class="jarviswidget jarviswidget-color-blueDark">
+			<header role="heading" class="ui-sortable-handle">
+				<h2>专辑 </h2>
+			</header>
+			<div role="content">
+				<div class="mod_part">
+					<div class="mod_playlist">
+						<ul id="albumlist" style="padding-left: 0px;">
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+
+	<!--<div class="col-sm-12">-->
+		<!--<div class="ibox float-e-margins">-->
+			<!--<div class="ibox-content">-->
+				<!--<form class="form-horizontal m-t" id="signupForm">-->
+					<!--<input type="hidden" id="singerId" th:value="${singerId}">-->
+					<!--<div class="form-group">-->
+						<!--<div class="col-sm-2">-->
+							<!--<a href="/download/album" class="btn btn-info">专辑模板下载</a>-->
+						<!--</div>-->
+						<!--<div class="col-sm-8">-->
+							<!--<div class="file-loading">-->
+								<!--<input id="template" name="template" type="file" multiple>-->
+							<!--</div>-->
+						<!--</div>-->
+						<!--<div class="col-sm-2">-->
+							<!--<button type="button" class="btn btn-danger" id="reset-btn">清空</button>-->
+							<!--<button type="button" class="btn btn-warning" id="import-btn">导入</button>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</form>-->
+				<!--<table id="exampleTable" data-mobile-responsive="true" class="table table-hover table-striped">-->
+				<!--</table>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+</div>
 <script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" ></script>
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
 <script type="text/javascript" src="/js/ent/music/singer/import_album.js" />

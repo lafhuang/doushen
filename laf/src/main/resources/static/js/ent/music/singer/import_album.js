@@ -1,4 +1,5 @@
 var import_flag = true;
+var singerId = $("#singerId").val();
 
 $().ready(function() {
 
@@ -18,6 +19,13 @@ $().ready(function() {
         $("#exampleTable").html("");
     })
 
+    $("article a").on("click", function() {
+        var target = $(this).attr("target");
+        if (target) {
+            getTarget(target);
+        }
+    });
+
 });
 
 function initFileUpload() {
@@ -34,50 +42,71 @@ function initFileUpload() {
 
         var result = data.response;
         var code = result.code;
+
         if (code != 0) {
-            parent.layer.alert(result.msg);
+            $("#doudou_modal_title").text("导入专辑");
+            $("#doudou_modal_body p").text("导入专辑模板失败");
+
+            var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
+                      "<button type='button' class='btn btn-primary' id='close_Btn'>关闭</button>";
+
+            $("#doudou_modal_footer").html(btn);
+            $("#doudou_modal").modal();
+
+            $("#backBtn").click(function () {
+                $("#closeBtn").click();
+                getTarget("/ent/music/singer/info/"+singerId);
+            });
+
+            $("#close_Btn").click(function () {
+                $("#closeBtn").click();
+            });
         } else {
             var albumList = result.albumList;
             if (albumList.length == 0) {
-                parent.layer.alert("专辑模板没有数据!");
+                $("#doudou_modal_title").text("导入专辑");
+                $("#doudou_modal_body p").text("专辑模板无有效数据");
+
+                var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
+                          "<button type='button' class='btn btn-primary' id='close_Btn'>关闭</button>";
+
+                $("#doudou_modal_footer").html(btn);
+                $("#doudou_modal").modal();
+
+                $("#backBtn").click(function () {
+                    $("#closeBtn").click();
+                    getTarget("/ent/music/singer/info/"+singerId);
+                });
+
+                $("#close_Btn").click(function () {
+                    $("#closeBtn").click();
+                });
             } else {
                 var html = "";
-                html += "<thead>";
-                html += "    <tr>";
-                html += "        <th><div class=\"th-inner\">专辑名</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">发行日期</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">语言</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">类型</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">风格</div><div class=\"fht-cell\"></div></th>";
-                html += "        <th><div class=\"th-inner\">封面</div><div class=\"fht-cell\"></div></th>";
-                html += "    </tr>";
-                html += "</thead>";
-                html += "<tbody>";
                 for (var idx = 0; idx <= albumList.length; idx++) {
                     var album = albumList[idx];
                     if (!album) {
                         break;
                     }
-
-                    html += "    <tr>";
-                    html += "        <td>" + album.name + "</td>";
-                    var issueDate = album.issueDate ? album.issueDate.substr(0, 10) : '-';
-                    html += "        <td>" + issueDate + "</td>";
-                    html += "        <td>" + album.language + "</td>";
-                    html += "        <td>" + album.type + "</td>";
-                    html += "        <td>" + album.style + "</td>";
-                    html += "        <td><img src=\"" + album.cover + "\" style=\"height:100px;width:100px;margin:5px;\"></td>";
-                    html += "    </tr>";
+                    html += "<li class='playlist__item' onmouseover='this.className=(this.className+\" playlist__item--hover\")'>";
+                    html += "    <div class='playlist__item_box'>";
+                    html += "        <div class='playlist__cover mod_cover'>";
+                    html += "            <img src='" + album.cover + "' alt='" + album.name + "' class='playlist__pic'>";
+                    html += "        </div>";
+                    html += "        <h4 class='playlist__title'>"
+                    html += "            <span class='playlist__title_txt'>" + album.name + "</span>";
+                    html += "        </h4>";
+                    html += "        <div class='playlist__other'>" + (album.issueDate)?(album.issueDate).substr(0,10):'-' + "</div>"
+                    html += "    </div>";
+                    html += "</li>";
                 }
-                html += "</tbody>";
-                $("#exampleTable").html(html);
+                $("#albumlist").html(html);
             }
         }
     });
 }
 
 function saveAlbum() {
-    var singerId = $("#singerId").val();
     var albumList = [];
 
     $("#exampleTable tbody tr").each(function() {
@@ -102,7 +131,7 @@ function saveAlbum() {
     });
 
     if (albumList.length == 0) {
-        parent.layer.alert("未导入专辑数据!");
+        // TODO
         return;
     }
 
@@ -113,19 +142,13 @@ function saveAlbum() {
         data : "albumList="+JSON.stringify(albumList),
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },
         success : function(data) {
-            if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-            } else {
-                parent.layer.alert(data.msg)
-            }
-
+            // TODO
         }
     });
 
 }
+
+//# sourceURL=import_album.js
