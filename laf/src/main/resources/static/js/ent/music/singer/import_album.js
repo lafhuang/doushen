@@ -2,6 +2,11 @@ var singerId = $("#singerId").val();
 
 $().ready(function() {
 
+    var singerName = $("#singerName").val();
+    var title = "<li>音乐</li><li>歌手</li><li>"+singerName+"</li><li>导入专辑</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span><span>>&nbsp;导入专辑&nbsp;</span>";
+    changeTitle(title, menu_head);
+
     initFileUpload();
 
     $("#reset-btn").click(function() {

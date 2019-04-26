@@ -68,4 +68,4 @@
 </div>
 <script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table.min.js" />
 <script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/song/song.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/song/song.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

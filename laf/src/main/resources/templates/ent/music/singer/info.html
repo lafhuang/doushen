@@ -134,4 +134,4 @@
         </div>
     </article>
 </div>
-<script type="text/javascript" src="/js/ent/music/singer/info.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/info.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

@@ -85,6 +85,6 @@
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
 <script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
 <script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/singer/singerEdit.js?v=<%=Math.random()%" />
-<script type="text/javascript" src="/js/ent/music/singer/add.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/singerEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/add.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
 

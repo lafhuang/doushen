@@ -17,6 +17,7 @@
 				<div class="widget-body no-padding">
 					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<input id="id" name="id" type="hidden" th:value="${singer.id}">
+						<input type="hidden" id="singerName" th:value="${singer.name}">
 						<header>
 							编辑歌手
 						</header>
@@ -90,6 +91,6 @@
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
 <script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
 <script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/singer/singerEdit.js?v=<%=Math.random()%" />
-<script type="text/javascript" src="/js/ent/music/singer/edit.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/singerEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/edit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
 

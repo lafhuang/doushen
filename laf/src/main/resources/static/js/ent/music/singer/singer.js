@@ -1,8 +1,10 @@
 var request_prefix = "/ent/music/singer";
 
-$(function() {
+$().ready(function() {
 
-    changeTitle("<li>音乐</li><li>歌手</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class='fa fa-lg fa-fw fa-music'></i> 音乐 <span>> 歌手</span></h1>");
+    var title = "<li>音乐</li><li>歌手</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span>";
+    changeTitle(title, menu_head);
 
     loadDict();
     load();

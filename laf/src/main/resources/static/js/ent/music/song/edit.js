@@ -1,5 +1,10 @@
 $().ready(function() {
 
+    var songName = $("#songName").val();
+    var title = "<li>音乐</li><li>歌曲</li><li>"+songName+"</li><li>编辑</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span><span>>&nbsp;"+songName+"&nbsp;</span><span>>&nbsp;编辑&nbsp;</span>";
+    changeTitle(title, menu_head);
+
 	initEditor();
 	initSinger();
 	initAlbum();

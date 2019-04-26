@@ -13,7 +13,8 @@
 				</div>
 				<div class="widget-body">
 					<form class="form-horizontal bv-form" novalidate="novalidate" autocomplete="off">
-						<input type="hidden" id="singerId" th:value="${singerId}">
+						<input type="hidden" id="singerId" th:value="${singer.id}">
+						<input type="hidden" id="singerName" th:value="${singer.name}">
 						<fieldset>
 							<legend>
 								导入歌曲
@@ -29,7 +30,7 @@
 							<div class="col-lg-2">
 								<button type="button" class="btn btn-success" onclick="saveSong();">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
 								<button type="button" class="btn btn-danger" id="reset-btn">&nbsp;&nbsp;清&nbsp;空&nbsp;&nbsp;</button>
-								<a th:target="@{'/ent/music/singer/info/'+${singerId}}" class="btn btn-info">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</a>
+								<a th:target="@{'/ent/music/singer/info/'+${singer.id}}" class="btn btn-info">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</a>
 							</div>
 						</fieldset>
 					</form>
@@ -68,4 +69,4 @@
 </div>
 <script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" />
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" />
-<script type="text/javascript" src="/js/ent/music/singer/import_song.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/import_song.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

@@ -40,4 +40,4 @@
         <!-- end widget -->
     </article>
 </div>
-<script type="text/javascript" src="/js/ent/music/singer/singer.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/singer/singer.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

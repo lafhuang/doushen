@@ -15,6 +15,7 @@
 				<div class="widget-body no-padding">
 					<form id="songForm" class="smart-form" novalidate="novalidate" autocomplete="off">
 						<input type="hidden" id="id" name="id" th:value="${song.id}">
+						<input type="hidden" id="songName" th:value="${song.name}">
 						<header>
 							添加歌曲
 						</header>
@@ -87,5 +88,5 @@
 </div>
 <script type="text/javascript" src="/plugins/summernote/summernote.min.js" />
 <script type="text/javascript" src="/plugins/summernote/lang/summernote-zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/song/songEdit.js?v=<%=Math.random()%" />
-<script type="text/javascript" src="/js/ent/music/song/edit.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/song/songEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
+<script type="text/javascript" th:src="@{'/js/ent/music/song/edit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

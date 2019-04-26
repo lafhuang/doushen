@@ -15,13 +15,14 @@
 				</div>
 				<div class="widget-body no-padding">
 					<form id="albumForm" class="smart-form" novalidate="novalidate" autocomplete="off">
+						<input type="hidden" id="id" name="id" th:value="${album.id}">
+						<input type="hidden" id="albumName" th:value="${album.name}">
 						<header>
 							编辑专辑
 						</header>
 						<fieldset>
 							<section>
 								<label class="input">
-									<input type="hidden" id="id" name="id" th:value="${album.id}">
 									<input type="text" name="name" placeholder="专辑名" th:value="${album.name}">
 								</label>
 							</section>
@@ -85,5 +86,5 @@
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
 <script type="text/javascript" src="/plugins/datepicker/js/bootstrap-datepicker.min.js" />
 <script type="text/javascript" src="/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/album/albumEdit.js?v=<%=Math.random()%" />
-<script type="text/javascript" src="/js/ent/music/album/edit.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/album/albumEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
+<script type="text/javascript" th:src="@{'/js/ent/music/album/edit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

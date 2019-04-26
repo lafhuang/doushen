@@ -194,7 +194,12 @@ function formValidate() {
 }
 
 function goBack() {
-    getTarget('/ent/music/singer');
+    var singerId = $("#id").val();
+    if (singerId) {
+        getTarget('/ent/music/singer/info/'+singerId);
+    } else {
+        getTarget('/ent/music/singer');
+    }
 }
 
 //# sourceURL=singerEdit.js

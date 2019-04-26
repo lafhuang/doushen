@@ -3,6 +3,12 @@ $().ready(function() {
 });
 
 function initDict() {
+
+    var songName = $(".data__name_txt").text();
+    var title = "<li>音乐</li><li>歌曲</li><li>"+songName+"</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span><span>>&nbsp;"+songName+"&nbsp;</span>";
+    changeTitle(title, menu_head);
+
     load_dict("album_language");
 
     $("#album_language_li").text("语言：" + $("#album_language_").val());

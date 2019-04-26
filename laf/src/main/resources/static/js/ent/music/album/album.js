@@ -8,6 +8,10 @@ var album_language;
 
 $(function() {
 
+    var title = "<li>音乐</li><li>专辑</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;专辑&nbsp;</span>";
+    changeTitle(title, menu_head);
+
     loadSinger();
     loadDict();
 	load();

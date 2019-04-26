@@ -136,7 +136,8 @@ public class SingerController extends BaseController {
     @Log("歌手导入专辑")
     @GetMapping("/importAlbum/{id}")
     String importAlbum(Model model, @PathVariable("id") int id) {
-        model.addAttribute("singerId", id);
+        SingerEntity singer = singerService.get(id);
+        model.addAttribute("singer", singer);
         return TEMPLATE_PREFIX + "import_album";
     }
 
@@ -161,7 +162,8 @@ public class SingerController extends BaseController {
     @Log("歌手导入歌曲")
     @GetMapping("/importSong/{id}")
     String importSong(Model model, @PathVariable("id") int id) {
-        model.addAttribute("singerId", id);
+        SingerEntity singer = singerService.get(id);
+        model.addAttribute("singer", singer);
         return TEMPLATE_PREFIX + "import_song";
     }
 

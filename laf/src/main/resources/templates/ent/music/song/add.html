@@ -82,5 +82,5 @@
 </div>
 <script type="text/javascript" src="/plugins/summernote/summernote.min.js" />
 <script type="text/javascript" src="/plugins/summernote/lang/summernote-zh-CN.min.js" />
-<script type="text/javascript" src="/js/ent/music/song/songEdit.js?v=<%=Math.random()%" />
-<script type="text/javascript" src="/js/ent/music/song/add.js?v=<%=Math.random()%" />
+<script type="text/javascript" th:src="@{'/js/ent/music/song/songEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
+<script type="text/javascript" th:src="@{'/js/ent/music/song/add.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
