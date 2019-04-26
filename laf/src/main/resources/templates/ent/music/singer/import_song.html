@@ -27,7 +27,7 @@
 								</div>
 							</label>
 							<div class="col-lg-2">
-								<button type="button" class="btn btn-success" id="import-btn">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
+								<button type="button" class="btn btn-success" onclick="saveSong();">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
 								<button type="button" class="btn btn-danger" id="reset-btn">&nbsp;&nbsp;清&nbsp;空&nbsp;&nbsp;</button>
 								<a th:target="@{'/ent/music/singer/info/'+${singerId}}" class="btn btn-info">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</a>
 							</div>
@@ -37,26 +37,27 @@
 			</div>
 		</div>
 	</article>
-	<article class="col-sm-12" id="singer_song">
+	<article class="col-sm-12">
 		<div class="jarviswidget jarviswidget-color-blueDark">
 			<header role="heading" class="ui-sortable-handle">
 				<h2>歌曲 </h2>
 			</header>
 			<div role="content">
-				<div class="widget-body p-0">
+				<div class="widget-body">
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table table-bordered">
 							<thead>
 							<tr>
-								<th>#</th>
-								<th> <i class="fa fa-music"></i> 歌曲名</th>
-								<th> <i class="fa fa-dot-circle-o"></i> 所属专辑</th>
-								<th> <i class="fa fa-clock-o"></i> 时长</th>
-								<th> <i class="fa fa-slack"></i> 类型</th>
+								<th>歌曲名</th>
+								<th>专辑</th>
+								<th>音轨号</th>
+								<th>语言</th>
+								<th>时长</th>
+								<th>文件大小</th>
+								<th>音频类型</th>
 							</tr>
 							</thead>
 							<tbody id="songList">
-
 							</tbody>
 						</table>
 					</div>
@@ -67,4 +68,4 @@
 </div>
 <script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" />
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" />
-<script type="text/javascript" src="/js/ent/music/singer/import_song.js" />
+<script type="text/javascript" src="/js/ent/music/singer/import_song.js?v=<%=Math.random()%" />

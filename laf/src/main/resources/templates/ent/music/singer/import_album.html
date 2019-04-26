@@ -27,7 +27,7 @@
 								</div>
 							</label>
 							<div class="col-lg-2">
-								<button type="button" class="btn btn-success" id="import-btn">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
+								<button type="button" class="btn btn-success" onclick="saveAlbum();">&nbsp;&nbsp;导&nbsp;入&nbsp;&nbsp;</button>
 								<button type="button" class="btn btn-danger" id="reset-btn">&nbsp;&nbsp;清&nbsp;空&nbsp;&nbsp;</button>
 								<a th:target="@{'/ent/music/singer/info/'+${singerId}}" class="btn btn-info">&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;</a>
 							</div>
@@ -38,49 +38,34 @@
 		</div>
 	</article>
 
-	<article class="col-sm-12" id="singer_album">
+	<article class="col-sm-12">
 		<div class="jarviswidget jarviswidget-color-blueDark">
 			<header role="heading" class="ui-sortable-handle">
 				<h2>专辑 </h2>
 			</header>
 			<div role="content">
-				<div class="mod_part">
-					<div class="mod_playlist">
-						<ul id="albumlist" style="padding-left: 0px;">
-
-						</ul>
+				<div class="widget-body">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+							<tr>
+								<th>专辑名</th>
+								<th>发行日期</th>
+								<th>语言</th>
+								<th>类型</th>
+								<th>风格</th>
+								<th>封面</th>
+							</tr>
+							</thead>
+							<tbody id="albumlist">
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
 		</div>
 	</article>
-
-	<!--<div class="col-sm-12">-->
-		<!--<div class="ibox float-e-margins">-->
-			<!--<div class="ibox-content">-->
-				<!--<form class="form-horizontal m-t" id="signupForm">-->
-					<!--<input type="hidden" id="singerId" th:value="${singerId}">-->
-					<!--<div class="form-group">-->
-						<!--<div class="col-sm-2">-->
-							<!--<a href="/download/album" class="btn btn-info">专辑模板下载</a>-->
-						<!--</div>-->
-						<!--<div class="col-sm-8">-->
-							<!--<div class="file-loading">-->
-								<!--<input id="template" name="template" type="file" multiple>-->
-							<!--</div>-->
-						<!--</div>-->
-						<!--<div class="col-sm-2">-->
-							<!--<button type="button" class="btn btn-danger" id="reset-btn">清空</button>-->
-							<!--<button type="button" class="btn btn-warning" id="import-btn">导入</button>-->
-						<!--</div>-->
-					<!--</div>-->
-				<!--</form>-->
-				<!--<table id="exampleTable" data-mobile-responsive="true" class="table table-hover table-striped">-->
-				<!--</table>-->
-			<!--</div>-->
-		<!--</div>-->
-	<!--</div>-->
 </div>
 <script type="text/javascript" src="/plugins/fileinput/js/fileinput.min.js" ></script>
 <script type="text/javascript" src="/plugins/fileinput/js/locales/zh.js" ></script>
-<script type="text/javascript" src="/js/ent/music/singer/import_album.js" />
+<script type="text/javascript" src="/js/ent/music/singer/import_album.js?v=<%=Math.random()%" />

@@ -2,6 +2,11 @@ var request_prefix = "/ent/music/singer"
 var singerId = $("#id").val();
 
 $().ready(function() {
+
+    var icon = $(".open i:eq(0)").attr("class");
+    var singerName = $("#singerName").attr("title");
+    changeTitle("<li>音乐</li><li>歌手</li><li>" + singerName + "</li>", "<h1 class='page-title txt-color-blueDark'><i class=''" + icon + "'></i> 音乐 <span>> 歌手</span><span>> " + singerName + "</span></h1>");
+
     initRegionType();
 
     $("article a").on("click", function() {

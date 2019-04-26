@@ -11,6 +11,7 @@ import info.doushen.system.entity.DictEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,9 +105,19 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
+    @Transactional
     public int remove(int id) {
         songService.removeByAlbum(id);
         return albumMapper.remove(id);
+    }
+
+    @Override
+    @Transactional
+    public int batchRemove(int[] albumIdList) {
+        for (int albumId : albumIdList) {
+            remove(albumId);
+        }
+        return albumIdList.length;
     }
 
 }

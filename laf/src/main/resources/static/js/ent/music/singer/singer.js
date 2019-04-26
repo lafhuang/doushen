@@ -2,8 +2,7 @@ var request_prefix = "/ent/music/singer";
 
 $(function() {
 
-    var icon = $(".open i:eq(0)").attr("class");
-    changeTitle("<li>音乐</li><li>歌手</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class=\"" + icon + "\"></i> 音乐 <span>> 歌手</span></h1>");
+    changeTitle("<li>音乐</li><li>歌手</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class='fa fa-lg fa-fw fa-music'></i> 音乐 <span>> 歌手</span></h1>");
 
     loadDict();
     load();

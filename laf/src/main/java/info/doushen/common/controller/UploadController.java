@@ -9,10 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import java.util.UUID;
 
 /**
  * UploadController
@@ -43,14 +40,8 @@ public class UploadController {
             }
             //获取文件后缀名
             String end = FilenameUtils.getExtension(file.getOriginalFilename());
-            DateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-            //图片名称 采取时间拼接随机数
-            String name = df.format(new Date());
-            Random r = new Random();
-            for(int i = 0 ;i < 3 ;i++){
-                name += r.nextInt(10);
-            }
-            String diskFileName = name + "." +end; //目标文件的文件名
+
+            String diskFileName = UUID.randomUUID() + "." +end; //目标文件的文件名
             pathname = uploadFile.getPath()+ "/" + diskFileName;
 
             returnPath = imagePath + dir + diskFileName;//这里是我自己做返回的字符串

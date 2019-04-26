@@ -1,21 +1,9 @@
-var import_flag = true;
-
 $().ready(function() {
 
     initFileUpload();
 
-    $("#import-btn").click(function() {
-        if (!import_flag) {
-            return;
-        }
-        import_flag = false;
-
-        saveSong();
-    })
-
     $("#reset-btn").click(function() {
-        import_flag = true;
-        $("#exampleTable").html("");
+        $("#songList").html("");
     })
 
     $("article a").on("click", function() {
@@ -37,16 +25,14 @@ function initFileUpload() {
         elErrorContainer: "#errorBlock"
     }).on("fileuploaded", function(e, data) {//文件上传成功的回调函数，还有其他的一些回调函数，比如上传之前...
 
-        import_flag = true;
-
         var result = data.response;
         var code = result.code;
         if (code != 0) {
-            // TODO
+            activateModal("导入歌曲失败", result.msg);
         } else {
             var songList = result.songList;
             if (songList.length == 0) {
-                // TODO
+                activateModal("导入歌曲", "歌曲模板无有效数据!");
             } else {
                 var html = "";
 
@@ -55,26 +41,16 @@ function initFileUpload() {
                     if (!song) {
                         break;
                     }
-
-                    html += "<tr class='table-success'>";
-                    html += "<td>" + (idx + 1) + "</td>";
+                    html += "<tr>";
                     html += "<td>" + song.name + "</td>";
                     html += "<td>" + song.albumName + "</td>";
+                    html += "<td>" + song.trackNumber + "</td>";
+                    html += "<td>" + song.language + "</td>";
                     html += "<td>" + song.length + "</td>";
+                    html += "<td>" + song.size + "</td>";
                     html += "<td>" + song.audioType + "</td>";
                     html += "</tr>";
-
-//                    html += "    <tr>";
-//                    html += "        <td>" + song.name + "</td>";
-//                    html += "        <td>" + song.albumName + "</td>";
-//                    html += "        <td>" + song.trackNumber + "</td>";
-//                    html += "        <td>" + song.language + "</td>";
-//                    html += "        <td>" + song.length + "</td>";
-//                    html += "        <td>" + song.size + "</td>";
-//                    html += "        <td>" + song.audioType + "</td>";
-//                    html += "    </tr>";
                 }
-
                 $("#songList").html(html);
             }
         }
@@ -85,7 +61,7 @@ function saveSong() {
     var singerId = $("#singerId").val();
     var songList = [];
 
-    $("#exampleTable tbody tr").each(function() {
+    $("#songList").find("tr").each(function() {
         var name = $(this).find("td:eq(0)").text();
         var albumName = $(this).find("td:eq(1)").text();
         var trackNumber = $(this).find("td:eq(2)").text();
@@ -109,7 +85,7 @@ function saveSong() {
     });
 
     if (songList.length == 0) {
-        // TODO
+        activateModal("导入歌曲", "歌曲模板无有效数据!");
         return;
     }
 
@@ -120,13 +96,32 @@ function saveSong() {
         data : "songList="+JSON.stringify(songList),
         async : false,
         error : function(request) {
-            // TODO
+            activateModal("保存歌曲失败", request.msg);
         },
         success : function(data) {
-            // TODO
+            activateModal("保存歌曲", data.msg);
         }
     });
+}
 
+function activateModal(title, msg) {
+    $("#doudou_modal_title").text(title);
+    $("#doudou_modal_body p").text(msg);
+
+    var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
+        "<button type='button' class='btn btn-primary' id='close_Btn'>关闭</button>";
+
+    $("#doudou_modal_footer").html(btn);
+    $("#doudou_modal").modal();
+
+    $("#backBtn").click(function () {
+        $("#closeBtn").click();
+        getTarget("/ent/music/singer/info/"+singerId);
+    });
+
+    $("#close_Btn").click(function () {
+        $("#closeBtn").click();
+    });
 }
 
 //# sourceURL=import_song.js

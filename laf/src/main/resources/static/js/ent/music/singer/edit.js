@@ -1,5 +1,3 @@
-var singer_photo = $("#singer_photo").attr("src");
-
 $().ready(function() {
 
 	initFileInput();

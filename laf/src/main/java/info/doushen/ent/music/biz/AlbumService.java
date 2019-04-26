@@ -72,4 +72,12 @@ public interface AlbumService {
      */
     int remove(int id);
 
+    /**
+     * 批量删除专辑
+     *
+     * @param albumIdList
+     * @return
+     */
+    int batchRemove(int[] albumIdList);
+
 }

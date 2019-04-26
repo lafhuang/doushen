@@ -130,4 +130,16 @@ public class AlbumController extends BaseController {
         return Result.error();
     }
 
+    @RequiresPermissions("ent:music:album:batchRemove")
+    @Log("批量删除专辑")
+    @PostMapping("/batchRemove")
+    @ResponseBody
+    Result batchRemove(@RequestParam("ids[]") int[] albumIdList) {
+        int result = albumService.batchRemove(albumIdList);
+        if (result > 0) {
+            return Result.ok();
+        }
+        return Result.error();
+    }
+
 }

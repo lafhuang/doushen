@@ -18,7 +18,7 @@
                         <div class="data__cont">
                             <div class="data__name">
                                 <h1 class="data__name_txt js_none_index" style="display:none;"><a class="js_goto_tab" data-stat="y_new.singer.thistab.singer_name" th:title="${singer.enName}" data-tab="index" th:target="@{'/ent/music/singer/info/'+${singer.id}}" th:text="${singer.name}"></a></h1>
-                                <h1 style="margin:0; padding:0;" class="data__name_txt js_index" th:title="${singer.name}" th:text="@{' ' + ${singer.name}}"></h1>
+                                <h1 style="margin:0; padding:0;" class="data__name_txt js_index" th:title="${singer.name}" th:text="@{' ' + ${singer.name}}" id="singerName"></h1>
                             </div>
                             <div class="data__desc" id="singer_desc">
                                 <input type="hidden" id="singer_region" th:value="${singer.region}">
@@ -134,4 +134,4 @@
         </div>
     </article>
 </div>
-<script type="text/javascript" src="/js/ent/music/singer/info.js" />
+<script type="text/javascript" src="/js/ent/music/singer/info.js?v=<%=Math.random()%" />

@@ -1,5 +1,7 @@
 $().ready(function() {
 
+    changeTitle("<li>音乐</li><li>歌手</li><li>添加歌手</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class='fa fa-lg fa-fw fa-music'></i> 音乐 <span>> 歌手 </span><span>> 添加歌手</span></h1>");
+
     initFileInput();
     initDatepicker();
     initStar();
@@ -29,7 +31,7 @@ function save() {
 }
 
 function goBack() {
-    getTarget(target);
+    getTarget('/ent/music/singer');
 }
 
 function activateModal() {
