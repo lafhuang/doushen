@@ -15,140 +15,140 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="movieForm" class="smart-form form-horizontal" novalidate="novalidate" autocomplete="off">
+					<form id="movieForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<fieldset>
 							<legend>添加电影</legend>
-						</fieldset>
-						<fieldset>
-							<div class="form-group">
-								<label class="col-md-1 control-label">片名</label>
-								<div class="col-md-1"></div>
-								<label class="input col-md-8">
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">片名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input class="form-control" placeholder="片名" name="name" type="text">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">译名&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input class="form-control" placeholder="译名" name="cnName" type="text">
 								</label>
-								<div class="col-md-2"></div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">源文件名&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input class="form-control" placeholder="源文件名" name="sourceName" type="text">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">海报&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input id="poster" name="poster" type="hidden">
+									<input id="img" name="images" type="file" multiple>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">文件大小(GB)&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input class="form-control" placeholder="文件大小(GB)" name="size" type="text">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">时长(分钟)&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input class="form-control" placeholder="时长(分钟)" name="length" type="text">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">上映日期&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" id="releaseDate" name="releaseDate" placeholder="上映日期" data-date-format="yyyy-mm-dd" class="form-control" readonly>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">媒介&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_medium" name="medium">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">编码&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_encode" name="encode">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">音频编码&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_audioEncode" name="audioEncode">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">分辨率&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_definition" name="definition">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">地区&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_region" name="region">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">类别&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="movie_type" name="movieType">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
+								<label class="select col-md-8">
+									<select id="video_language" name="language">
+									</select> <i></i>
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">中文字幕&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" name="cnSubtitles" placeholder="中文字幕TODO">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">IMDB链接&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" name="imdbUrl" placeholder="IMDB链接">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">IMDB评分&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" name="imdbScore" placeholder="IMDB评分">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">豆瓣链接&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" name="doubanUrl" placeholder="豆瓣链接">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">豆瓣评分&nbsp;&nbsp;</label>
+								<label class="input col-md-8">
+									<input type="text" name="doubanScore" placeholder="豆瓣评分">
+								</label>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">简介&nbsp;&nbsp;</label>
+								<input type="hidden" id="discribe" name="discribe">
+								<label class="col-md-8">
+									<div class="summernote col-md-8">
+									</div>
+								</label>
 							</div>
 						</fieldset>
-
-						<!--<header>-->
-							<!--添加电影-->
-						<!--</header>-->
-						<!--<fieldset>-->
-							<!--<section>-->
-								<!--<label class="col-6">XXX</label>-->
-								<!--<label class="input col-6">-->
-									<!--<input type="text" name="name" placeholder="片名">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="cnName" placeholder="译名">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="sourceName" placeholder="源文件名">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input id="poster" name="poster" type="hidden">-->
-									<!--<div class="file-loading">-->
-										<!--<input id="img" name="images" type="file" multiple>-->
-									<!--</div>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="size" placeholder="文件大小(GB)">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="length" placeholder="时长(分钟)">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" id="releaseDate" name="releaseDate" placeholder="上映日期" data-date-format="yyyy-mm-dd" class="form-control" readonly>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_medium" name="medium">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_encode" name="encode">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_audioEncode" name="audioEncode">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_definition" name="definition">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_region" name="region">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="movie_type" name="movieType">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="select">-->
-									<!--<select id="video_language" name="language">-->
-									<!--</select> <i></i>-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--&lt;!&ndash; TODO &ndash;&gt;-->
-									<!--<input type="text" name="cnSubtitles" placeholder="中文字幕TODO">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="imdbUrl" placeholder="IMDB链接">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="imdbScore" placeholder="IMDB评分">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="doubanUrl" placeholder="豆瓣链接">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<label class="input">-->
-									<!--<input type="text" name="doubanScore" placeholder="豆瓣评分">-->
-								<!--</label>-->
-							<!--</section>-->
-							<!--<section>-->
-								<!--<input type="hidden" id="discribe" name="discribe">-->
-								<!--<div class="summernote">-->
-								<!--</div>-->
-							<!--</section>-->
-
-
-						<!--</fieldset>-->
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>
 							<button type="button" class="btn btn-default" onclick="goBack();">返回</button>
