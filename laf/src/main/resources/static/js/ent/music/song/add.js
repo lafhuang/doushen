@@ -2,7 +2,7 @@ $().ready(function() {
 
     var title = "<li>音乐</li><li>歌曲</li><li>添加</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span><span>>&nbsp;添加&nbsp;</span>";
-    changeTitle(title, menu_head);
+    changeTitle(title, menu_head, 'ent/music/song');
 
     initEditor();
     initSinger();

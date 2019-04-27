@@ -6,7 +6,7 @@ $().ready(function() {
     var singerName = $("#singerName").attr("title");
     var title = "<li>音乐</li><li>歌手</li><li>"+singerName+"</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span>";
-    changeTitle(title, menu_head);
+    changeTitle(title, menu_head,'ent/music/singer');
 
     initRegionType();
 
@@ -61,6 +61,8 @@ function goBack() {
 }
 
 function loadAllAlbum() {
+    $("#reload_btn_2").show();
+    $("#all_album_btn").hide();
     $("#singer_song").hide();
 
     $.ajax({
@@ -99,6 +101,8 @@ function loadAllAlbum() {
 }
 
 function loadAllSong() {
+    $("#reload_btn_1").show();
+    $("#all_song_btn").hide();
     $("#singer_album").hide();
 
     $.ajax({

@@ -1,15 +1,17 @@
+var singerId = $("#singerId").val();
+
 $().ready(function() {
 
     var singerName = $("#singerName").val();
     var title = "<li>音乐</li><li>歌手</li><li>"+singerName+"</li><li>导入歌曲</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span><span>>&nbsp;导入歌曲&nbsp;</span>";
-    changeTitle(title, menu_head);
+    changeTitle(title, menu_head, 'ent/music/singer');
 
     initFileUpload();
 
     $("#reset-btn").click(function() {
-        $("#songList").html("");
-    })
+        getTarget( '/ent/music/singer/importSong/' + singerId);
+    });
 
     $("article a").on("click", function() {
         var target = $(this).attr("target");
@@ -63,7 +65,6 @@ function initFileUpload() {
 }
 
 function saveSong() {
-    var singerId = $("#singerId").val();
     var songList = [];
 
     $("#songList").find("tr").each(function() {

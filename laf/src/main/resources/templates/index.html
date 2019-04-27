@@ -356,7 +356,9 @@
         $('#sys_menu li').removeClass("open").removeClass('active');
 
         if ("main" == target) {
-            changeTitle("<li>Home</li><li>Dashboard</li>", "<h1 class=\"page-title txt-color-blueDark\"><i class=\"fa fa-lg fa-fw fa-home\"></i> Dashboard <span>> My Dashboard</span></h1>");
+            var title = "<li>DOUDOU</li><li>我的主页</li>";
+            var menu_head = "<i class='fa fa-lg fa-fw fa-home'></i>&nbsp;DOUDOU&nbsp;<span>>&nbsp;我的主页&nbsp;</span>";
+            changeTitle(title, menu_head, target);
             $("#sys_menu ul").attr("style", "display: none;");
             $("#sys_menu em").attr("class", "fa fa-plus-square-o");
         }
@@ -367,9 +369,18 @@
         $this.parent().parent().parent().addClass('open active');
     });
 
-    function changeTitle(title, menu_head) {
+    function changeTitle(title, menu_head, target) {
         $("#title").html(title);
         $("#menu_head").html(menu_head);
+
+        $('#sys_menu li').removeClass("open").removeClass('active');
+
+        $("#sys_menu a").each(function () {
+            if ($(this).attr("target") == target) {
+                $(this).parent().addClass('active');
+                $(this).parent().parent().parent().addClass('open active');
+            }
+        })
     }
 
     function getTarget(target) {

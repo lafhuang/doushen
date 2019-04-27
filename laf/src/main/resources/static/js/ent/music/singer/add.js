@@ -2,7 +2,7 @@ $().ready(function() {
 
     var title = "<li>音乐</li><li>歌手</li><li>添加</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;添加&nbsp;</span>";
-    changeTitle(title, menu_head);
+    changeTitle(title, menu_head, 'ent/music/singer');
 
     initFileInput();
     initDatepicker();
@@ -19,7 +19,7 @@ function save() {
         url : "/ent/music/singer/save",
         data : $('#singerForm').serialize(),
         async : false,
-        error : function(request) {
+        error : function() {
             $("#doudou_modal_title").text("添加歌手失败");
             $("#doudou_modal_body p").text("添加歌手失败");
             activateModal();

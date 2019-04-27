@@ -1,26 +1,49 @@
 $().ready(function() {
 
-    laydate.render({
-        elem: '#releaseDate'
-        ,theme: 'molv'
-    });
+    var title = "<li>视频</li><li>电影</li><li>添加</li>";
+    var menu_head = "<i class='fa fa-lg fa-fw fa-film'></i>&nbsp;视频&nbsp;<span>>&nbsp;电影&nbsp;</span><span>>&nbsp;添加&nbsp;</span>";
+    changeTitle(title, menu_head, 'ent/video/movie');
 
+    initDatepicker();
     initFileUpload();
+    initEditor();
+    initDict();
+    formValidate();
 
-    $('.summernote').summernote({
-        height : '250px',
-        lang : 'zh-CN',
-        callbacks: {
-            onImageUpload: function(files) {
-                sendFile(files);
-            }
-        }
-    });
-
-    loadDict();
-
-    validateRule();
 });
+
+function initDatepicker() {
+    $.fn.datepicker.dates['cn'] = {
+        days: ["周日", "周一", "周二", "周三", "周四", "周五", "周六", "周日"],
+        daysShort: ["日", "一", "二", "三", "四", "五", "六", "七"],
+        daysMin: ["日", "一", "二", "三", "四", "五", "六", "七"],
+        months: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        monthsShort: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+        today: "今天",
+        clear: "清除"
+    };
+
+    $('#releaseDate').datepicker({
+        autoclose: true, //自动关闭
+        beforeShowDay: $.noop,
+        calendarWeeks: false,
+        clearBtn: false,
+        daysOfWeekDisabled: [],
+        endDate: Infinity,
+        forceParse: true,
+        format: 'yyyy-mm-dd',
+        keyboardNavigation: true,
+        language: 'cn',
+        minViewMode: 0,
+        orientation: "auto",
+        rtl: false,
+        startDate: -Infinity,
+        startView: 0,
+        todayBtn: false,
+        todayHighlight: false,
+        weekStart: 0
+    });
+}
 
 function initFileUpload() {
     $("#img").fileinput({
@@ -37,7 +60,25 @@ function initFileUpload() {
     });
 }
 
-function loadDict() {
+function initEditor() {
+    var discribe = $("#discribe").val();
+    $('.summernote').html(discribe);
+
+    $('.summernote').summernote({
+        height : 300,
+        lang : 'zh-CN',
+        toolbar: [
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['height', ['height']],
+            ['view', ['codeview']]
+        ]
+    });
+}
+
+function initDict() {
     load_movie_dict("video_medium");
     load_movie_dict("video_encode");
     load_movie_dict("video_audioEncode");
@@ -56,25 +97,35 @@ function load_movie_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
+        error : function() {
+            // TODO
         },success : function(result) {
             //加载数据
+
+            if ("video_medium" == dict_type) {
+                html += "<option value=''>--媒介--</option>";;
+            } else if ("video_encode" == dict_type) {
+                html += "<option value=''>--编码--</option>";;
+            } else if ("video_audioEncode" == dict_type) {
+                html += "<option value=''>--音频编码--</option>";;
+            } else if ("video_definition" == dict_type) {
+                html += "<option value=''>--分辨率--</option>";;
+            } else if ("video_region" == dict_type) {
+                html += "<option value=''>--地区--</option>";;
+            } else if ("movie_type" == dict_type) {
+                html += "<option value=''>--类别--</option>";;
+            } else if ("video_language" == dict_type) {
+                html += "<option value=''>--语言--</option>";;
+            }
+
             for (var i = 0; i < result.length; i++) {
                 html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
             }
-
             $("#"+dict_type).html(html);
-            $("#"+dict_type).selectpicker();
         }
     });
 }
 
-$.validator.setDefaults({
-    submitHandler : function() {
-        save();
-    }
-});
 
 function save() {
 
@@ -87,29 +138,27 @@ function save() {
         data : $('#signupForm').serialize(),// 你的formid
         async : false,
         error : function(request) {
-            parent.layer.alert("Connection error");
+            // TODO
         },
         success : function(data) {
-            if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-
-            } else {
-                parent.layer.alert(data.msg)
-            }
-
+            // TODO
         }
     });
-
 }
 
-function validateRule() {
-
-    var icon = "<i class='fa fa-times-circle'></i> ";
-    $("#signupForm").validate({
-        ignore : [],
+function formValidate() {
+    $('#movieForm').validate({
+        ignore: [],
+        errorClass: 'invalid',
+        errorElement: 'em',
+        highlight: function (element) {
+            $(element).parent().removeClass('state-success').addClass("state-error");
+            $(element).removeClass('valid');
+        },
+        unhighlight: function (element) {
+            $(element).parent().removeClass("state-error").addClass('state-success');
+            $(element).addClass('valid');
+        },
         rules : {
             name : {
                 required : true
@@ -157,45 +206,60 @@ function validateRule() {
         },
         messages : {
             name : {
-                required : icon + "请输入片名"
+                required : "请输入片名"
             },
             sourceName : {
-                required : icon + "请输入源文件名"
+                required : "请输入源文件名"
             },
             poster : {
-                required : icon + "请上传海报"
+                required : "请上传海报"
             },
             size : {
-                required : icon + "请输入文件大小"
+                required : "请输入文件大小"
             },
             medium : {
-                required : icon + "请选择媒介"
+                required : "请选择媒介"
             },
             encode : {
-                required : icon + "请选择编码"
+                required : "请选择编码"
             },
             audioEncode : {
-                required : icon + "请选择音频编码"
+                required : "请选择音频编码"
             },
             definition : {
-                required : icon + "请选择分辨率"
+                required : "请选择分辨率"
             },
             releaseDate : {
-                required : icon + "请输入上映日期"
+                required : "请输入上映日期"
             }
             /*,
             region : {
-                required : icon + "请选择地区"
+                required : "请选择地区"
             },
             movieType : {
-                required : icon + "请选择类别"
+                required : "请选择类别"
             },
             language : {
-                required : icon + "请选择语言"
+                required : "请选择语言"
             }*/,
             length : {
-                required : icon + "请输入时长"
+                required : "请输入时长"
             }
+        },
+        submitHandler: function () {
+            var songId = $("#id").val();
+            if (songId) {
+                update();
+            } else {
+                save();
+            }
+        },
+        errorPlacement: function (error, element) {
+            error.insertAfter(element.parent());
         }
-    })
+    });
+}
+
+function goBack() {
+    getTarget('ent/video/movie');
 }

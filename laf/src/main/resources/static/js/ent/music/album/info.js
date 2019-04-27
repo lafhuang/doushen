@@ -7,7 +7,7 @@ function initDict() {
     var albumName = $(".data__name_txt").text();
     var title = "<li>音乐</li><li>专辑</li><li>"+albumName+"</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;专辑&nbsp;</span><span>>&nbsp;"+albumName+"&nbsp;</span>";
-    changeTitle(title, menu_head);
+    changeTitle(title, menu_head, 'ent/music/album');
 
     load_dict("album_language");
     load_dict("album_type");
