@@ -27,20 +27,19 @@ function load() {
 	$('#exampleTable')
 		.bootstrapTable(
 			{
-				method : 'get', // 服务器数据的请求方式 get or post
-				url : request_prefix + "/list", // 服务器数据的加载地址
+				method : 'get',
+				url : request_prefix + "/list",
 				iconSize : 'outline',
-				striped : true, // 设置为true会有隔行变色效果
-				dataType : "json", // 服务器返回的数据类型
-				pagination : true, // 设置为true会在底部显示分页条
-				singleSelect : false, // 设置为true将禁止多选
-				pageSize : 10, // 如果设置了分页，每页数据条数
-				pageNumber : 1, // 如果设置了分布，首页页码
-				showColumns : false, // 是否显示内容下拉框（选择显示的列）
-				sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+				striped : true,
+				dataType : "json",
+				pagination : true,
+				singleSelect : false,
+				pageSize : 10,
+				pageNumber : 1,
+				showColumns : false,
+				sidePagination : "server",
 				queryParams : function(params) {
 					return {
-						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
                         dictType : $("#dict_type").val()
@@ -52,20 +51,29 @@ function load() {
 					},
 					{
 						field : 'dictName',
-						title : '标签名'
+						title : '数据字典名',
+                        formatter : function(value, row, index) {
+                            return "<a id='dictName_" + row.id + "'>" + value + "</a>"
+                        }
 					},
 					{
 						field : 'dictValue',
-						title : '数据值',
-						width : '100px'
+						title : '数据字典值',
+                        formatter : function(value, row, index) {
+                            return "<a id='dictValue_" + row.id + "'>" + value + "</a>"
+                        }
 					},
 					{
 						field : 'dictType',
-						title : '类型'
+						title : '数据字典类型'
 					},
 					{
 						field : 'description',
-						title : '描述'
+						title : '数据字典描述'
+					},
+					{
+						field : 'sort',
+						title : '排序'
 					},
 					{
 						title : '操作',
@@ -105,25 +113,47 @@ function edit(id) {
 }
 
 function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : request_prefix + "/remove",
-			type : "post",
-			data : {
-				'id' : id
-			},
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
+
+    var dictName = $("#dictName_"+id).text();
+    var dictValue = $("#dictValue_"+id).text();
+	$("#doudou_modal_title").text("删除数据字典");
+    $("#doudou_modal_body p").text("是否要删除数据字典:"+dictName+"["+dictValue+"]?");
+
+    var btn = "<button type='button' class='btn btn-danger' id='delBtn'><i class='fa fa-trash-o'></i>&nbsp; 删除</button>" +
+              "<button type='button' class='btn btn-default' id='cancelBtn'><i class='fa fa-times'></i>&nbsp; 取消</button>";
+
+    $("#doudou_modal_footer").html(btn);
+
+    $("#doudou_modal").modal();
+
+    $("#delBtn").click(function () {
+        $("#closeBtn").click();
+
+        $.ajax({
+            url : request_prefix + "/remove",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            success : function(data) {
+                $("#doudou_modal_body p").text(data.msg);
+                var sucBtn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa  fa-times-circle'></i>&nbsp; 关闭</button>";
+
+                $("#doudou_modal_footer").html(sucBtn);
+                $("#doudou_modal").modal();
+
+                $("#close_Btn").click(function () {
+                    $("#closeBtn").click();
+                    reLoad();
+                });
+            }
+        });
+    });
+
+    $("#cancelBtn").click(function () {
+        $("#closeBtn").click();
+    });
+
 }
 
 function addD(type) {
