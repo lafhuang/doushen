@@ -158,25 +158,25 @@ function formValidate() {
 		},
 		messages : {
 			name : {
-				required : "请输入专辑名"
+				required : "&nbsp;&nbsp;请输入专辑名"
 			},
 			singerId : {
-				required : "请选择专辑所属歌手"
+				required : "&nbsp;&nbsp;请选择专辑所属歌手"
 			},
 			issueDate : {
-				required : "请输入专辑发行日期"
+				required : "&nbsp;&nbsp;请输入专辑发行日期"
 			},
 			language : {
-				required : "请选择专辑语言"
+				required : "&nbsp;&nbsp;请选择专辑语言"
 			},
 			type : {
-				required : "请选择专辑类型"
+				required : "&nbsp;&nbsp;请选择专辑类型"
 			},
 			style : {
-				required : "请选择专辑风格"
+				required : "&nbsp;&nbsp;请选择专辑风格"
 			},
 			cover : {
-				required : "请上传专辑封面"
+				required : "&nbsp;&nbsp;请上传专辑封面"
 			}
 		},
 		submitHandler: function () {

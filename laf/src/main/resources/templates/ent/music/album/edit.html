@@ -14,61 +14,68 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="albumForm" class="smart-form" novalidate="novalidate" autocomplete="off">
+					<form id="albumForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<input type="hidden" id="id" name="id" th:value="${album.id}">
 						<input type="hidden" id="albumName" th:value="${album.name}">
-						<header>
-							编辑专辑
-						</header>
 						<fieldset>
-							<section>
-								<label class="input">
-									<input type="text" name="name" placeholder="专辑名" th:value="${album.name}">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+							<legend>编辑专辑</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">专辑名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input placeholder="专辑名" name="name" type="text" th:value="${album.name}">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">歌手&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="singer_id" th:value="${album.singerId}">
 									<select id="singerId" name="singerId">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input type="text" id="issueDate" name="issueDate" placeholder="发行日期" data-date-format="yyyy-mm-dd" class="form-control" th:value="${#dates.format(album.issueDate, 'yyyy-MM-dd')}" readonly>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">发行日期&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" id="issueDate" name="issueDate" placeholder="发行日期" data-date-format="yyyy-mm-dd" th:value="${#dates.format(album.issueDate, 'yyyy-MM-dd')}" readonly>
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="album_language_" th:value="${album.language}">
 									<select id="album_language" name="language">
 									</select> <i></i>
-								</label>
-							</section>
-
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="album_type_" th:value="${album.type}">
 									<select id="album_type" name="type">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">风格&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="album_style_" th:value="${album.style}">
 									<select id="album_style" name="style">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label"></label>
+								<img id="album_cover" th:src="${album.cover}" th:alt="${album.name}" class="data__photo">
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">封面&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input id="cover" name="cover" type="hidden" th:value="${album.cover}">
-									<img id="album_cover" th:src="${album.cover}" th:alt="${album.name}" class="data__photo">
 									<div class="file-loading">
 										<input id="img" name="images" type="file" multiple>
 									</div>
-								</label>
-							</section>
+								</div>
+							</div>
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>

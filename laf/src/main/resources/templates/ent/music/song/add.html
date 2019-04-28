@@ -13,60 +13,69 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="songForm" class="smart-form" novalidate="novalidate" autocomplete="off">
-						<header>
-							添加歌曲
-						</header>
+					<form id="songForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<fieldset>
-							<section>
-								<label class="input">
+							<legend>添加歌曲</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">歌曲名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="name" placeholder="歌曲名">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">歌手&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="singer">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">专辑&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select name="albumId" id="albumId">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input type="text" name="trackNumber" placeholder="音轨">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">音轨号&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" name="trackNumber" placeholder="音轨号">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select name="language" id="album_language">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">时长&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="length" placeholder="时长">
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">大小&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="size" placeholder="大小">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">音频类型&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select name="audioType" id="audio_type">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<input type="hidden" id="lyrics" name="lyrics">
-								<div class="summernote">
 								</div>
-							</section>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">歌词&nbsp;&nbsp;</label>
+								<input type="hidden" id="lyrics" name="lyrics">
+								<label class="col-md-8">
+									<div class="summernote">
+									</div>
+								</label>
+							</div>
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>

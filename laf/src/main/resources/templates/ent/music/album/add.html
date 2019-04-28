@@ -14,55 +14,58 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="albumForm" class="smart-form" novalidate="novalidate" autocomplete="off">
-						<header>
-							添加专辑
-						</header>
+					<form id="albumForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<fieldset>
-							<section>
-								<label class="input">
-									<input type="text" name="name" placeholder="专辑名">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+							<legend>添加专辑</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">专辑名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input placeholder="专辑名" name="name" type="text">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">歌手&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="singerId" name="singerId">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input type="text" id="issueDate" name="issueDate" placeholder="发行日期" data-date-format="yyyy-mm-dd" class="form-control" readonly>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">发行日期&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" id="issueDate" name="issueDate" placeholder="发行日期" data-date-format="yyyy-mm-dd" readonly>
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="album_language" name="language">
 									</select> <i></i>
-								</label>
-							</section>
-
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="album_type" name="type">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">风格&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="album_style" name="style">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">封面&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input id="cover" name="cover" type="hidden">
 									<div class="file-loading">
 										<input id="img" name="images" type="file" multiple>
 									</div>
-								</label>
-							</section>
-						</fieldset>
+								</div>
+							</div>
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>
 							<button type="button" class="btn btn-default" onclick="goBack();">返回</button>

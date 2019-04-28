@@ -227,6 +227,13 @@ function loadAlbum() {
 	$("#song_album").html(html);
 }
 
+function resert() {
+    $("#songName").val("");
+    $("#song_album").val("");
+    $("#song_singer").val("");
+    $('#exampleTable').bootstrapTable('refresh');
+}
+
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }

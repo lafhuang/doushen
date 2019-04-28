@@ -175,25 +175,25 @@ function formValidate() {
         },
         messages : {
             name : {
-                required : "请输入歌曲名"
+                required : "&nbsp;&nbsp;请输入歌曲名"
             },
             albumId : {
-                required : "请选择所属专辑"
+                required : "&nbsp;&nbsp;请选择所属专辑"
             },
             trackNumber : {
-                required : "请输入音轨号"
+                required : "&nbsp;&nbsp;请输入音轨号"
             },
             language : {
-                required : "请选择歌曲语言"
+                required : "&nbsp;&nbsp;请选择歌曲语言"
             },
             length : {
-                required : "请输入歌曲时长"
+                required : "&nbsp;&nbsp;请输入歌曲时长"
             },
             size : {
-                required : "请输入文件大小"
+                required : "&nbsp;&nbsp;请输入文件大小"
             },
             audioType : {
-                required : "请选择音频格式"
+                required : "&nbsp;&nbsp;请选择音频格式"
             }
         },
         submitHandler: function () {

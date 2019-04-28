@@ -151,28 +151,28 @@ function formValidate() {
         },
         messages: {
             name: {
-                required: '请输入歌手姓名'
+                required: '&nbsp;&nbsp;请输入歌手姓名'
             },
             enName: {
-                required: '请输入歌手英文名'
+                required: '&nbsp;&nbsp;请输入歌手英文名'
             },
             region: {
-                required: '请选择歌手所在地区'
+                required: '&nbsp;&nbsp;请选择歌手所在地区'
             },
             initial: {
-                required: '请选择歌手首字母'
+                required: '&nbsp;&nbsp;请选择歌手首字母'
             },
             birthday: {
-                required: '请选择歌手出生日期'
+                required: '&nbsp;&nbsp;请选择歌手出生日期'
             },
             type: {
-                required: '请选择歌手类型'
+                required: '&nbsp;&nbsp;请选择歌手类型'
             },
             star: {
-                required: '请选择歌手星级'
+                required: '&nbsp;&nbsp;请选择歌手星级'
             },
             photo: {
-                required: '请上传歌手图片'
+                required: '&nbsp;&nbsp;请上传歌手图片'
             }
         },
         submitHandler: function () {

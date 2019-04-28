@@ -203,6 +203,12 @@ function load() {
 			});
 }
 
+function resert() {
+    $("#album_singer").val("");
+    $("#albumName").val("");
+    $('#exampleTable').bootstrapTable('refresh');
+}
+
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }

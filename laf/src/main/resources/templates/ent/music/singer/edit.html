@@ -15,63 +15,72 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
+					<form id="singerForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<input id="id" name="id" type="hidden" th:value="${singer.id}">
 						<input type="hidden" id="singerName" th:value="${singer.name}">
-						<header>
-							编辑歌手
-						</header>
 						<fieldset>
-							<section>
-								<label class="input">
+							<legend>编辑歌手</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">姓名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="name" placeholder="姓名" th:value="${singer.name}">
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">英文名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="enName" placeholder="英文名" th:value="${singer.enName}">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">地区&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="singer_region_" th:value="${singer.region}">
 									<select id="singer_region" name="region">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">首字母&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="singer_initial_" th:value="${singer.initial}">
 									<select id="singer_initial" name="initial">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" class="form-control" th:value="${#dates.format(singer.birthday, 'yyyy-MM-dd')}" readonly>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">出生日期&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" th:value="${#dates.format(singer.birthday, 'yyyy-MM-dd')}" readonly>
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<input type="hidden" id="singer_type_" th:value="${singer.type}">
 									<select id="singer_type" name="type">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input id="star" name="star"class="form-control rating-loading" data-size="sm" th:value="${singer.star}">
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">星级&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input id="star" name="star" class="rating-loading" data-size="sm" th:value="${singer.star}">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label"></label>
+								<img id="singer_photo" th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">照片&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input id="photo" name="photo" type="hidden" th:value="${singer.photo}">
-									<img id="singer_photo" th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
 									<div class="file-loading">
 										<input id="img" name="images" type="file" multiple>
 									</div>
-								</label>
-							</section>
+								</div>
+							</div>
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>

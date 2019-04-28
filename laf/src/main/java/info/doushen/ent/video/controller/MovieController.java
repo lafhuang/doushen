@@ -45,7 +45,7 @@ public class MovieController extends BaseController {
         return pageMovie;
     }
 
-    @RequiresPermissions("ent:video:movie:add")
+    //@RequiresPermissions("ent:video:movie:add")
     @Log("添加电影")
     @GetMapping("/add")
     String add() {

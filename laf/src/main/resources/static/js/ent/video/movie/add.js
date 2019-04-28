@@ -188,17 +188,7 @@ function formValidate() {
             releaseDate : {
                 required : true,
                 digits : true
-            }
-            /*,
-            region : {
-                required : true
             },
-            movieType : {
-                required : true
-            },
-            language : {
-                required : true
-            }*/,
             length : {
                 required : true,
                 digits : true
@@ -206,44 +196,34 @@ function formValidate() {
         },
         messages : {
             name : {
-                required : "请输入片名"
+                required : "&nbsp;&nbsp;请输入片名"
             },
             sourceName : {
-                required : "请输入源文件名"
+                required : "&nbsp;&nbsp;请输入源文件名"
             },
             poster : {
-                required : "请上传海报"
+                required : "&nbsp;&nbsp;请上传海报"
             },
             size : {
-                required : "请输入文件大小"
+                required : "&nbsp;&nbsp;请输入文件大小"
             },
             medium : {
-                required : "请选择媒介"
+                required : "&nbsp;&nbsp;请选择媒介"
             },
             encode : {
-                required : "请选择编码"
+                required : "&nbsp;&nbsp;请选择编码"
             },
             audioEncode : {
-                required : "请选择音频编码"
+                required : "&nbsp;&nbsp;请选择音频编码"
             },
             definition : {
-                required : "请选择分辨率"
+                required : "&nbsp;&nbsp;请选择分辨率"
             },
             releaseDate : {
-                required : "请输入上映日期"
-            }
-            /*,
-            region : {
-                required : "请选择地区"
+                required : "&nbsp;&nbsp;请输入上映日期"
             },
-            movieType : {
-                required : "请选择类别"
-            },
-            language : {
-                required : "请选择语言"
-            }*/,
             length : {
-                required : "请输入时长"
+                required : "&nbsp;&nbsp;请输入时长"
             }
         },
         submitHandler: function () {

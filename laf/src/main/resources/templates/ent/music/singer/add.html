@@ -15,57 +15,63 @@
 				<div class="jarviswidget-editbox">
 				</div>
 				<div class="widget-body no-padding">
-					<form id="singerForm" class="smart-form" novalidate="novalidate" autocomplete="off">
-						<header>
-							添加歌手
-						</header>
+					<form id="singerForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
 						<fieldset>
-							<section>
-								<label class="input">
-									<input type="text" name="name" placeholder="姓名">
-								</label>
-							</section>
-							<section>
-								<label class="input">
+							<legend>添加歌手</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">姓名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input placeholder="姓名" name="name" type="text">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">英文名&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input type="text" name="enName" placeholder="英文名">
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">地区&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="singer_region" name="region">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">首字母&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="singer_initial" name="initial">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" class="form-control" readonly>
-								</label>
-							</section>
-							<section>
-								<label class="select">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">出生日期&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" id="birthday" name="birthday" placeholder="出生日期" data-date-format="yyyy-mm-dd" readonly>
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
+								<div class="select col-md-8">
 									<select id="singer_type" name="type">
 									</select> <i></i>
-								</label>
-							</section>
-							<section>
-								<label class="input">
-									<input id="star" name="star"class="form-control rating-loading" data-size="sm">
-								</label>
-							</section>
-							<section>
-								<label class="input">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">星级&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input id="star" name="star" class="rating-loading" data-size="sm">
+								</div>
+							</div>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">照片&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
 									<input id="photo" name="photo" type="hidden">
 									<div class="file-loading">
 										<input id="img" name="images" type="file" multiple>
 									</div>
-								</label>
-							</section>
+								</div>
+							</div>
 						</fieldset>
 						<footer>
 							<button type="submit" class="btn btn-primary">保存</button>
