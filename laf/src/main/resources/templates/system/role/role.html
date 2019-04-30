@@ -1,61 +1,59 @@
-<!DOCTYPE html>
-<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org"
-	xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<meta charset="utf-8">
-<head th:include="include::header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content ">
-		<div class="col-sm-12">
-			<div class="ibox">
-				<div class="ibox-body">
-					<div class="fixed-table-toolbar">
-						<div class="columns pull-left">
-							<button shiro:hasPermission="system:role:add" type="button"
-									class="btn btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button>
-							<button shiro:hasPermission="system:role:batchRemove" type="button"
-									class="btn btn-danger" onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
-							</button>
-						</div>
-						<div class="columns pull-right">
-							<button class="btn btn-success" onclick="reLoad()">查询</button>
-						</div>
+<link href="/plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet">
+<div class="row">
+	<article class="col-sm-12">
+		<div class="jarviswidget jarviswidget-color-blueDark">
+			<header role="heading" class="ui-sortable-handle">
+				<div class="jarviswidget-ctrls" role="menu">
+					<a shiro:hasPermission="system:role:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
+					<a shiro:hasPermission="system:role:batchRemove" class="btn btn-danger btn-sm " href="javascript:void(0);" onclick="batchRemove();">&nbsp;<i class="fa fa-trash"></i>&nbsp;删&nbsp;除&nbsp;&nbsp;</a>
+				</div>
+				<h2>角色 </h2>
+			</header>
+			<div role="content">
+				<div class="widget-body no-padding">
+					<form id="checkout-form" class="smart-form" novalidate="novalidate" autocomplete="off">
+						<fieldset>
+							<div class="row">
+								<section class="col col-3">
+									<label class="input">
+										<input type="text" id="roleName" placeholder="角色名">
+									</label>
+								</section>
+								<div class="col col-2">
+									<a class="btn btn-default btn-sm" href="javascript:void(0);" onclick="resert();">&nbsp;&nbsp;重&nbsp;置&nbsp;&nbsp;</a>
+									<a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="reLoad();">&nbsp;&nbsp;查&nbsp;询&nbsp;&nbsp;</a>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset>
+							<div class="table-responsive">
+								<table class="table" id="exampleTable">
 
-						<div class="columns pull-right col-md-2 nopadding">
-							<input id="roleName" type="text" class="form-control"
-								   placeholder="角色名">
-						</div>
-					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+								</table>
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</div>
-		<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-		<div>
-			<script type="text/javascript">
+	</article>
+</div>
+<div>
+	<script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
 			</script>
-		</div>
-		<div shiro:hasPermission="system:role:edit">
-			<script type="text/javascript">
+</div>
+<div shiro:hasPermission="system:role:edit">
+	<script type="text/javascript">
 				s_edit_h = '';
 			</script>
-		</div>
-		<div shiro:hasPermission="system:role:remove">
-			<script type="text/javascript">
+</div>
+<div shiro:hasPermission="system:role:remove">
+	<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
-		</div>
-
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/role/role.js">
-		
-	</script>
-</body>
-
-</html>
+</div>
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table.min.js" />
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js" />
+<script type="text/javascript" th:src="@{'/js/system/role/role.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

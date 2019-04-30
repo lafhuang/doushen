@@ -1,3 +1,5 @@
+var songId = $("#id").val();
+
 $().ready(function() {
     initDict();
 });
@@ -42,6 +44,14 @@ function load_dict(dict_type) {
             }
         }
     });
+}
+
+function edit() {
+    getTarget('ent/music/song/edit/'+songId);
+}
+
+function goBack() {
+    getTarget('ent/music/song');
 }
 
 //# sourceURL=info.js

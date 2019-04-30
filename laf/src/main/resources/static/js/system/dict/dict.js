@@ -161,36 +161,65 @@ function addD(type) {
 }
 
 function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var rows = $('#exampleTable').bootstrapTable('getSelections');
 	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
+		$("#doudou_modal_title").text("批量删除数据字典");
+        $("#doudou_modal_body p").text("未选中数据字典");
+
+        var btn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa fa-trash-o'></i>&nbsp; 关闭</button>";
+
+        $("#doudou_modal_footer").html(btn);
+
+        $("#doudou_modal").modal();
+
+        $("#close_Btn").click(function () {
+            $("#closeBtn").click();
+        });
+        return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
-		});
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : request_prefix + '/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {});
+
+	$("#doudou_modal_title").text("批量删除数据字典");
+    $("#doudou_modal_body p").text("是否要删除选中的数据字典?");
+
+    var btn = "<button type='button' class='btn btn-danger' id='delBtn'><i class='fa fa-trash-o'></i>&nbsp; 删除</button>" +
+              "<button type='button' class='btn btn-default' id='cancelBtn'><i class='fa fa-times'></i>&nbsp; 取消</button>";
+
+    $("#doudou_modal_footer").html(btn);
+
+    $("#doudou_modal").modal();
+
+    $("#delBtn").click(function () {
+        $("#closeBtn").click();
+
+        var ids = new Array();
+        $.each(rows, function(i, row) {
+            ids[i] = row['id'];
+        });
+        $.ajax({
+            type : 'POST',
+            data : {
+                "ids" : ids
+            },
+            url : request_prefix + '/batchRemove',
+            success : function(r) {
+                $("#doudou_modal_body p").text(data.msg);
+                var sucBtn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa  fa-times-circle'></i>&nbsp; 关闭</button>";
+
+                $("#doudou_modal_footer").html(sucBtn);
+                $("#doudou_modal").modal();
+
+                $("#close_Btn").click(function () {
+                    $("#closeBtn").click();
+                    reLoad();
+                });
+            }
+        });
+
+        $("#cancelBtn").click(function () {
+            $("#closeBtn").click();
+        });
+    });
+
 }
 
 //# sourceURL=dict.js

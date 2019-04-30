@@ -1,3 +1,5 @@
+var albumId = $("#id").val();
+
 $().ready(function() {
     initDict();
 });
@@ -46,6 +48,14 @@ function load_dict(dict_type) {
             }
         }
     });
+}
+
+function edit() {
+    getTarget('ent/music/album/edit/'+albumId);
+}
+
+function goBack() {
+    getTarget('ent/music/album');
 }
 
 //# sourceURL=info.js

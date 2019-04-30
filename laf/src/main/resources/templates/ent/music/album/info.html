@@ -8,6 +8,7 @@
             <div role="content">
                 <div class="widget-body">
                     <div class="mod_data">
+                        <input type="hidden" id="id" th:value="${album.id}">
                         <span class="data__cover">
                             <img th:src="${album.cover}" th:alt="${album.name}" class="data__photo">
                         </span>
@@ -15,15 +16,23 @@
                             <div class="data__name">
                                 <h1 class="data__name_txt" th:title="${album.name}" th:text="${album.name}"></h1>
                             </div>
-                            <div class="data__singer">
+                            <div class="data__singer" style="font-size:18px; height:30px;">
                                 <i class="fa fa-user"></i><a th:target="@{'/ent/music/singer/info/'+${album.singerId}}" th:title="${singer.name}" th:text="@{' ' + ${singer.name} + ' '}"></a>
                             </div>
-                            <ul class="data__info" style="padding-left:0px;">
+                            <ul class="data__info" style="padding-left:0px; padding-top:2px;">
                                 <li class="data_info__item" id="album_style_li"></li>
                                 <li class="data_info__item data_info__item--even" id="album_language_li"></li>
                                 <li class="data_info__item" th:text="@{'发行时间：'+${#dates.format(album.issueDate, 'yyyy-MM-dd')}}"></li>
                                 <li class="data_info__item" id="album_type_li"></li>
                             </ul>
+                            <div class="data__desc">
+                                <button type="button" class="btn btn-primary" onclick="edit();">
+                                    <i class="fa fa-edit" aria-hidden="true"></i>编辑
+                                </button>
+                                <button type="button" class="btn btn-success" onclick="goBack();">
+                                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>返回
+                                </button>
+                            </div>
                             <input type="hidden" id="album_language" th:value="${album.language}">
                             <input type="hidden" id="album_style" th:value="${album.style}">
                             <input type="hidden" id="album_type" th:value="${album.type}">

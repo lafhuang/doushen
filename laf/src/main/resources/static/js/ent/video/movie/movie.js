@@ -7,6 +7,13 @@ $(function() {
     changeTitle(title, menu_head, 'ent/video/movie');
 
     load();
+
+    $("article").on("click", "a", function() {
+        var target = $(this).attr("target");
+        if (target) {
+            getTarget(target);
+        }
+    });
 });
 
 function load() {
@@ -39,7 +46,7 @@ function load() {
                         field : 'name',
                         title : '片名',
                         formatter : function(value, row, index) {
-                            return "<a href='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
+                            return "<a target='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
                         }
                     },
                     {
@@ -47,7 +54,7 @@ function load() {
                         title : '译名',
                         formatter : function(value, row, index) {
                             if (value != null) {
-                                return "<a href='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
+                                return "<a target='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
                             } else {
                                 return "";
                             }
@@ -57,7 +64,7 @@ function load() {
                         field : 'sourceName',
                         title : '源文件名',
                         formatter : function(value, row, index) {
-                            return "<a href='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
+                            return "<a target='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
                         }
                     },
                     {
