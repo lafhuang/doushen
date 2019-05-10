@@ -1,50 +1,48 @@
 var request_prefix = "/system/user"
+
 $(function() {
 	var deptId = '';
 	getTreeData();
 	load(deptId);
+
+
+	$('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+	$('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function(e) {
+		var children = $(this).parent('li.parent_li').find(' > ul > li');
+		if (children.is(':visible')) {
+			children.hide('fast');
+			$(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+		} else {
+			children.show('fast');
+			$(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+		}
+		e.stopPropagation();
+	});
 });
 
 function load(deptId) {
 	$('#exampleTable')
 		.bootstrapTable(
 			{
-				method : 'get', // 服务器数据的请求方式 get or post
-				url : request_prefix + "/list", // 服务器数据的加载地址
-				// showRefresh : true,
-				// showToggle : true,
-				// showColumns : true,
+				method : 'get',
+				url : request_prefix + "/list",
 				iconSize : 'outline',
-				toolbar : '#exampleToolbar',
-				striped : true, // 设置为true会有隔行变色效果
-				dataType : "json", // 服务器返回的数据类型
-				pagination : true, // 设置为true会在底部显示分页条
-				// queryParamsType : "limit",
-				// //设置为limit则会发送符合RESTFull格式的参数
-				singleSelect : false, // 设置为true将禁止多选
-				// contentType : "application/x-www-form-urlencoded",
-				// //发送到服务器的数据编码类型
-				pageSize : 10, // 如果设置了分页，每页数据条数
-				pageNumber : 1, // 如果设置了分布，首页页码
-				// search : true, // 是否显示搜索框
-				showColumns : false, // 是否显示内容下拉框（选择显示的列）
-				sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-				// "server"
+				striped : true,
+				dataType : "json",
+				pagination : true,
+				singleSelect : false,
+				pageSize : 10,
+				pageNumber : 1,
+				showColumns : false,
+				sidePagination : "server",
 				queryParams : function(params) {
 					return {
-						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
 						name : $('#searchName').val(),
 						deptId : deptId
 					};
 				},
-				// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
-				// queryParamsType = 'limit' ,返回参数必须包含
-				// limit, offset, search, sort, order 否则, 需要包含:
-				// pageSize, pageNumber, searchText, sortName,
-				// sortOrder.
-				// 返回false将会终止请求
 				columns : [
 					{
 						checkbox : true
@@ -92,20 +90,15 @@ function load(deptId) {
 					} ]
 			});
 }
+
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+
 function add() {
-	// iframe层
-	layer.open({
-		type : 2,
-		title : '增加用户',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
-		content : request_prefix + '/add'
-	});
+	getTarget(request_prefix + '/add');
 }
+
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
@@ -127,16 +120,11 @@ function remove(id) {
 		});
 	})
 }
+
 function edit(id) {
-	layer.open({
-		type : 2,
-		title : '用户修改',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '60%', '60%' ],
-		content : request_prefix + '/edit/' + id // iframe的url
-	});
+	getTarget(request_prefix + '/edit/' + id);
 }
+
 function resetPwd(id) {
 	layer.open({
 		type : 2,
@@ -147,6 +135,7 @@ function resetPwd(id) {
 		content : request_prefix + '/resetPwd/' + id // iframe的url
 	});
 }
+
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
@@ -179,6 +168,7 @@ function batchRemove() {
 		});
 	}, function() {});
 }
+
 function getTreeData() {
 	$.ajax({
 		type : "GET",
@@ -188,6 +178,7 @@ function getTreeData() {
 		}
 	});
 }
+
 function loadTree(tree) {
 
     var setting = {
@@ -227,5 +218,4 @@ function zTreeOnClick(event, treeId, treeNode) {
 		}
 	}
 	$('#exampleTable').bootstrapTable('refresh',opt);
-
 }
