@@ -50,10 +50,10 @@ function initStar() {
     $('#star').rating({
         language: 'zh',
         min: 0,
-        max: 6,
+        max: 5,
         step: 1,
-        stars: 6,
-        starCaptions: {1: '无所谓', 2: '随便听听', 3: '还不错', 4: '喜欢', 5: '超爱', 6 : '偶像'}
+        stars: 5,
+        starCaptions: {1: '无所谓', 2: '随便听听', 3: '还不错', 4: '喜欢', 5: '超爱'}
     });
 }
 
