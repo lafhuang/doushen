@@ -1,0 +1,16 @@
+.select2-container-multi .select2-choices .select2-search-choice, .select2-selection__choice {
+    padding: 1px 28px 1px 8px;
+    margin: 4px 0 3px 5px;
+}
+.select2-selection__choice__remove {
+    margin: 0;
+}
+.select2-container-multi .select2-search-choice-close, .select2-selection__choice__remove {
+    padding: 3px 4px 3px 4px;
+}
+.select2-container .select2-choice, .select2-selection {
+    padding: 0 8px;
+}
+.select2-selection__rendered {
+    padding: 0;
+}

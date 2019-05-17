@@ -1,5 +1,6 @@
 <link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
 <link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="/css/select_style.css" />
 <div class="row">
 	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
 	</article>
@@ -59,8 +60,8 @@
 								<label class="col-md-2 control-label">风格&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="album_style_" th:value="${album.style}">
-									<select id="album_style" name="style">
-									</select> <i></i>
+									<select multiple style="display:none;" class="select2" id="album_style" name="style">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">

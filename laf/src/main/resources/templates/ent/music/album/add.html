@@ -1,5 +1,6 @@
 <link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
 <link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="/css/select_style.css" />
 <div class="row">
 	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
 	</article>
@@ -26,8 +27,8 @@
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">歌手&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
-									<select id="singerId" name="singerId">
-									</select> <i></i>
+									<select id="singerId" name="singerId" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
@@ -39,22 +40,22 @@
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
-									<select id="album_language" name="language">
-									</select> <i></i>
+									<select id="album_language" name="language" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
-									<select id="album_type" name="type">
-									</select> <i></i>
+									<select id="album_type" name="type" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">风格&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
-									<select id="album_style" name="style">
-									</select> <i></i>
+									<select multiple style="display:none;" class="select2" id="album_style" name="style">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
