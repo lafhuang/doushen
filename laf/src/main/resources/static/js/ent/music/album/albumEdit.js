@@ -108,16 +108,29 @@ function load_album_dict(dict_type) {
 
             //加载数据
             for (var i = 0; i < result.length; i++) {
+                if ("album_language" == dict_type) {
+                    if (result[i].dictValue == album_language) {
+                        html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
+                    } else {
+                        html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                    }
+                }
+                if ("album_type" == dict_type) {
+                    if (result[i].dictValue == album_type) {
+                        html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
+                    } else {
+                        html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                    }
+                }
                 if ("album_style" == dict_type) {
+                    var selected_flg = false;
                     for (var idx = 0; idx < album_style.length; idx++) {
                         if (album_style[idx] == result[i].dictValue) {
-                            html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
-                        } else {
-                            html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                            selected_flg = true;
+                            break;
                         }
                     }
-                } else {
-                    if (result[i].dictValue == album_language || result[i].dictValue == album_type) {
+                    if (selected_flg) {
                         html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
                     } else {
                         html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
