@@ -22,6 +22,16 @@ $(function() {
         }
     });
 
+    $.fn.select2&&$("select.select2").each(function(){
+        var e=$(this),
+        t = e.attr("data-select-width")||"100%";
+        e.select2({
+            allowClear:!0,
+            width:t
+        }),
+        e=null
+    })
+
 });
 
 function loadSinger() {
@@ -206,6 +216,7 @@ function load() {
 function resert() {
     $("#album_singer").val("");
     $("#albumName").val("");
+    $("#select2-album_singer-container").text("选择歌手");
     $('#exampleTable').bootstrapTable('refresh');
 }
 

@@ -1,6 +1,7 @@
 <link type="text/css" rel="stylesheet" href="/plugins/rate/css/star-rating.css" />
 <link type="text/css" rel="stylesheet" href="/plugins/fileinput/css/fileinput.min.css" />
 <link type="text/css" rel="stylesheet" href="/plugins/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="/css/select_style.css" />
 <div class="row">
 	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
 	</article>
@@ -36,16 +37,16 @@
 								<label class="col-md-2 control-label">地区&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="singer_region_" th:value="${singer.region}">
-									<select id="singer_region" name="region">
-									</select> <i></i>
+									<select id="singer_region" name="region" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">首字母&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="singer_initial_" th:value="${singer.initial}">
-									<select id="singer_initial" name="initial">
-									</select> <i></i>
+									<select id="singer_initial" name="initial" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
@@ -58,8 +59,8 @@
 								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="singer_type_" th:value="${singer.type}">
-									<select id="singer_type" name="type">
-									</select> <i></i>
+									<select id="singer_type" name="type" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
@@ -68,7 +69,7 @@
 									<input id="star" name="star" class="rating-loading" data-size="lg" th:value="${singer.star}">
 								</div>
 							</div>
-							<div class="form-group row" style="margin-bottom: 15px;">
+							<div class="form-group row" style="margin-bottom: 15px;" th:if="${singer.photo != null and singer.photo != ''}">
 								<label class="col-md-2 control-label"></label>
 								<img id="singer_photo" th:src="${singer.photo}" th:alt="${singer.name}" class="data__photo">
 							</div>

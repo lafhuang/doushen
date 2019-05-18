@@ -21,6 +21,16 @@ $(function() {
 		}
 	});
 
+	$.fn.select2&&$("select.select2").each(function(){
+        var e=$(this),
+        t = e.attr("data-select-width")||"100%";
+        e.select2({
+            allowClear:!0,
+            width:t
+        }),
+        e=null
+    })
+
 });
 
 function loadDict() {
@@ -231,6 +241,8 @@ function resert() {
     $("#songName").val("");
     $("#song_album").val("");
     $("#song_singer").val("");
+    $("#select2-song_singer-container").text("选择歌手");
+    $("#select2-song_album-container").text("选择专辑");
     $('#exampleTable').bootstrapTable('refresh');
 }
 

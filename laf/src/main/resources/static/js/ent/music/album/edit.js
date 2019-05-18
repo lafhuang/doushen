@@ -11,7 +11,15 @@ $().ready(function() {
     initDict();
     formValidate();
 
-    $.fn.select2&&$("select.select2").each(function(){var e=$(this),t=e.attr("data-select-width")||"100%";e.select2({allowClear:!0,width:t}),e=null})
+    $.fn.select2&&$("select.select2").each(function(){
+        var e=$(this),
+        t = e.attr("data-select-width")||"100%";
+        e.select2({
+            allowClear:!0,
+            width:t
+        }),
+        e=null
+    })
 
 });
 
