@@ -96,7 +96,7 @@ function load_album_dict(dict_type) {
 
             var album_language = $("#album_language_").val();
             var album_type = $("#album_type_").val();
-            var album_style = $("#album_style_").val();
+            var album_style = $("#album_style_").val().split(",");
 
 			if ("album_language" == dict_type) {
 				html += '<option value="">--专辑语言--</option>'
@@ -108,10 +108,20 @@ function load_album_dict(dict_type) {
 
             //加载数据
             for (var i = 0; i < result.length; i++) {
-                if (result[i].dictValue == album_language || result[i].dictValue == album_type || result[i].dictValue == album_style) {
-                    html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
+                if ("album_style" == dict_type) {
+                    for (var idx = 0; idx < album_style.length; idx++) {
+                        if (album_style[idx] == result[i].dictValue) {
+                            html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
+                        } else {
+                            html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                        }
+                    }
                 } else {
-                    html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                    if (result[i].dictValue == album_language || result[i].dictValue == album_type) {
+                        html += '<option value="' + result[i].dictValue + '" selected>' + result[i].dictName + '</option>'
+                    } else {
+                        html += '<option value="' + result[i].dictValue + '">' + result[i].dictName + '</option>'
+                    }
                 }
 
             }

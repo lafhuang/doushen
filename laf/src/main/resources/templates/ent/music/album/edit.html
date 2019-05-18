@@ -30,8 +30,8 @@
 								<label class="col-md-2 control-label">歌手&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="singer_id" th:value="${album.singerId}">
-									<select id="singerId" name="singerId">
-									</select> <i></i>
+									<select id="singerId" name="singerId" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
@@ -44,16 +44,16 @@
 								<label class="col-md-2 control-label">语言&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="album_language_" th:value="${album.language}">
-									<select id="album_language" name="language">
-									</select> <i></i>
+									<select id="album_language" name="language" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">
 								<label class="col-md-2 control-label">类型&nbsp;&nbsp;</label>
 								<div class="select col-md-8">
 									<input type="hidden" id="album_type_" th:value="${album.type}">
-									<select id="album_type" name="type">
-									</select> <i></i>
+									<select id="album_type" name="type" style="display:none;" class="select2">
+									</select>
 								</div>
 							</div>
 							<div class="form-group row" style="margin-bottom: 15px;">

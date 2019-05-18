@@ -50,7 +50,7 @@ function loadSinger() {
         },success : function(result) {
 			singerMap = {};
 
-			var html = "<option value=''>选择歌手</option>";
+			var html = "<option value=''>--歌手--</option>";
 			//加载数据
 			for (var i = 0; i < result.length; i++) {
 			    singerMap[result[i].id] = result[i].name;
@@ -193,7 +193,13 @@ function load() {
 						field : 'style',
 						title : '风格',
                         formatter : function(value, row, index) {
-                            return album_style[value];
+                            var display_style = "";
+                            var styles = value.split(",")
+                            for (var idx = 0; idx < styles.length - 1; idx++) {
+                                display_style += album_style[styles[idx]] + ", ";
+                            }
+                            display_style += album_style[styles[styles.length-1]];
+                            return display_style;
                         }
 					},
 					{
@@ -216,7 +222,7 @@ function load() {
 function resert() {
     $("#album_singer").val("");
     $("#albumName").val("");
-    $("#select2-album_singer-container").text("选择歌手");
+    $("#select2-album_singer-container").text("--歌手--");
     $('#exampleTable').bootstrapTable('refresh');
 }
 

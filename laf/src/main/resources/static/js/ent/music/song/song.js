@@ -173,7 +173,7 @@ function load() {
 
 function loadSinger() {
 
-	var html = "<option value=''>选择歌手</option>";
+	var html = "<option value=''>--歌手--</option>";
 	var data = {};
 
 	$.ajax({
@@ -206,7 +206,7 @@ function loadAlbum() {
 	$("#song_album").html("");
 	var singerId = $("#song_singer").val();
 
-	var html = "<option value=''>选择专辑</option>";
+	var html = "<option value=''>--专辑--</option>";
 
 	if (singerId != "") {
 		var data = {
@@ -241,8 +241,8 @@ function resert() {
     $("#songName").val("");
     $("#song_album").val("");
     $("#song_singer").val("");
-    $("#select2-song_singer-container").text("选择歌手");
-    $("#select2-song_album-container").text("选择专辑");
+    $("#select2-song_singer-container").text("--歌手--");
+    $("#select2-song_album-container").text("--专辑--");
     $('#exampleTable').bootstrapTable('refresh');
 }
 
