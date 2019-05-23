@@ -1,11 +1,15 @@
 package info.doushen.system.biz.impl;
 
+import info.doushen.common.utils.TreeUtils;
 import info.doushen.system.biz.DeptService;
 import info.doushen.system.entity.DeptEntity;
 import info.doushen.system.mapper.DeptMapper;
+import info.doushen.system.utils.Tree;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,8 +32,22 @@ public class DeptServiceImpl implements DeptService {
     }
 
     @Override
-    public List<DeptEntity> getDeptTree() {
-        return deptMapper.list(new HashMap<>());
+    public List<Tree<DeptEntity>> getDeptTree() {
+        List<DeptEntity> depts = deptMapper.list(new HashMap<>());
+        List<Tree<DeptEntity>> deptList = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(depts)) {
+            for (DeptEntity deptEntity : depts) {
+                Tree<DeptEntity> tree = new Tree<>();
+                tree.setId(String.valueOf(deptEntity.getId()));
+                tree.setParentId(String.valueOf(deptEntity.getParentId()));
+                //TODO
+                // tree.setText(deptEntity.getId());
+                deptList.add(tree);
+            }
+        }
+        List<Tree<DeptEntity>> tree = TreeUtils.buildList(deptList, "0");
+        return tree;
+
     }
 
     @Override

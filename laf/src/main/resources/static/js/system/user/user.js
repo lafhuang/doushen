@@ -174,48 +174,41 @@ function getTreeData() {
 		type : "GET",
 		url : "/system/dept/tree",
 		success : function(tree) {
-			loadTree(tree);
+		    var parent = $("<ul></ul>");
+		    loadTree(tree[0].children, parent);
 		}
 	});
 }
 
-function loadTree(tree) {
+function loadTree(childList, parent) {
 
-    var setting = {
-        data: {
-            simpleData: {
-                enable: true
-            }
-        },
-        callback: {
-            onClick: zTreeOnClick
+    console.log(childList);
+
+    for (var idx = 0; idx < childList.length; idx++) {
+        var child = childList[idx];
+        var li = $("<li></li>");
+
+        if (child.children) {
+            console.log('Y:' + child.id + '==' + child.children);
+        } else {
+            console.log('N:' + child.id);
         }
-    };
-
-    var zNodes =[];
+    }
+    /*
+    html += '<ul>';
     for (var idx = 0; idx < tree.length; idx++) {
         var dept = tree[idx];
-        var node = {
-            id : dept.id,
-            pId : dept.parentId,
-            name : dept.deptName,
-            open : true
-        };
-        zNodes.push(node);
+        html += '<li>';
+        html += '<span><i class="fa fa-lg fa-folder-open"></i> '+dept.deptName+'</span>';
+        if (dept.hasChildren) {
+            html += loadTree(html, dept.children);
+        }
+        html += '</li>';
     }
 
-    $.fn.zTree.init($("#deptTree"), setting, zNodes);
+    html += '</ul>';
+    */
 
 }
 
-function zTreeOnClick(event, treeId, treeNode) {
-    var deptId = treeNode.tId;
-    deptId = deptId.replace("deptTree_", "");
-
-	var opt = {
-		query : {
-			deptId : deptId,
-		}
-	}
-	$('#exampleTable').bootstrapTable('refresh',opt);
-}
+//# sourceURL=user.js

@@ -5,6 +5,7 @@ import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
 import info.doushen.system.biz.DeptService;
 import info.doushen.system.entity.DeptEntity;
+import info.doushen.system.utils.Tree;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public class DeptController extends BaseController {
 
     @GetMapping("/tree")
     @ResponseBody
-    public List<DeptEntity> tree() {
+    public List<Tree<DeptEntity>> tree() {
         return deptService.getDeptTree();
     }
 

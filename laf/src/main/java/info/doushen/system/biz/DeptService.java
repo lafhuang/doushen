@@ -1,6 +1,7 @@
 package info.doushen.system.biz;
 
 import info.doushen.system.entity.DeptEntity;
+import info.doushen.system.utils.Tree;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public interface DeptService {
      *
      * @return
      */
-    List<DeptEntity> getDeptTree();
+    List<Tree<DeptEntity>> getDeptTree();
 
     /**
      * 获取部门信息

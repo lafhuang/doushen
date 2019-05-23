@@ -8,22 +8,15 @@ $(function() {
 	initDictType();
 	load();
 
-	$.fn.select2&&$("select.select2").each(function(){
-        var e=$(this),
-        t = e.attr("data-select-width")||"100%";
-        e.select2({
-            allowClear:!0,
-            width:t
-        }),
-        e=null
-    })
+	initSelect();
+
 });
 
 function initDictType() {
-	var html = "<option value=\"\">--数据字典类型--</option>";
 	$.ajax({
 		url : request_prefix + '/type',
 		success : function(data) {
+		    var html = "<option value=''>--字典类型--</option>";
 			//加载数据
 			for (var i = 0; i < data.length; i++) {
 				html += '<option value="' + data[i].dictType + '">' + data[i].description + '</option>'
