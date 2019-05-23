@@ -65,9 +65,9 @@ function load(deptId) {
 						align : 'center',
 						formatter : function(value, row, index) {
 							if (value == '0') {
-								return '<span class="label label-danger">禁用</span>';
+								return '<span class="btn btn-danger">禁用</span>';
 							} else if (value == '1') {
-								return '<span class="label label-primary">正常</span>';
+								return '<span class="btn btn-primary">正常</span>';
 							}
 						}
 					},
@@ -175,39 +175,31 @@ function getTreeData() {
 		url : "/system/dept/tree",
 		success : function(tree) {
 		    var parent = $("<ul></ul>");
-		    loadTree(tree[0].children, parent);
+		    loadDeptTree(tree, parent);
+		    $('.tree').html(parent);
 		}
 	});
 }
 
-function loadTree(childList, parent) {
-
-    console.log(childList);
+function loadDeptTree(childList, parent) {
 
     for (var idx = 0; idx < childList.length; idx++) {
         var child = childList[idx];
         var li = $("<li></li>");
-
-        if (child.children) {
-            console.log('Y:' + child.id + '==' + child.children);
+        if (child.children.length > 0) {
+            var span = '';
+            if (child.id == 1) {
+                span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='fa fa-lg fa-home'></i> "+child.text+"</span>");
+            } else {
+                span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='fa fa-lg fa-minus-circle'></i> "+child.text+"</span>");
+            }
+            $(li).append(span).append("<ul></ul>").appendTo(parent);
+            loadDeptTree(child.children, $(li).children().eq(1));
         } else {
-            console.log('N:' + child.id);
+            var span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='icon-leaf'></i> "+child.text+"</span>");
+            $(li).append(span).appendTo(parent);
         }
     }
-    /*
-    html += '<ul>';
-    for (var idx = 0; idx < tree.length; idx++) {
-        var dept = tree[idx];
-        html += '<li>';
-        html += '<span><i class="fa fa-lg fa-folder-open"></i> '+dept.deptName+'</span>';
-        if (dept.hasChildren) {
-            html += loadTree(html, dept.children);
-        }
-        html += '</li>';
-    }
-
-    html += '</ul>';
-    */
 
 }
 

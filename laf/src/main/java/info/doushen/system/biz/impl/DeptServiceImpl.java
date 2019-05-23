@@ -40,8 +40,7 @@ public class DeptServiceImpl implements DeptService {
                 Tree<DeptEntity> tree = new Tree<>();
                 tree.setId(String.valueOf(deptEntity.getId()));
                 tree.setParentId(String.valueOf(deptEntity.getParentId()));
-                //TODO
-                // tree.setText(deptEntity.getId());
+                tree.setText(deptEntity.getDeptName());
                 deptList.add(tree);
             }
         }
