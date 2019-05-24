@@ -1,11 +1,12 @@
 var request_prefix = "/system/dict";
 
 $(function() {
+	initDictType();
+
     var title = "<li>系统管理</li><li>数据字典</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-desktop'></i>&nbsp;系统管理&nbsp;<span>>&nbsp;数据字典&nbsp;</span>";
     changeTitle(title, menu_head, 'system/dict');
 
-	initDictType();
 	load();
 
 	initSelect();
@@ -16,12 +17,13 @@ function initDictType() {
 	$.ajax({
 		url : request_prefix + '/type',
 		success : function(data) {
-		    var html = "<option value=''>--字典类型--</option>";
+		    var html = "<option value=''>--类型--</option>";
 			//加载数据
 			for (var i = 0; i < data.length; i++) {
-				html += '<option value="' + data[i].dictType + '">' + data[i].description + '</option>'
+				html += '<option value="' + data[i].dictType + '">' + data[i].description + '</option>';
 			}
 			$("#dict_type").html(html);
+			$("#select2-dict_type-container").text("--类型--");
 		}
 	});
 }
@@ -100,6 +102,7 @@ function load() {
 
 function resert() {
     $("#dict_type").val("");
+    $("#select2-dict_type-container").text("--类型--");
     $('#exampleTable').bootstrapTable('refresh');
 }
 
