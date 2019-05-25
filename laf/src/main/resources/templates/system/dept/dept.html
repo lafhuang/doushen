@@ -1,27 +1,26 @@
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-<div class="wrapper wrapper-content ">
-    <div class="col-sm-12">
-        <div class="ibox">
-            <div class="ibox-body">
-                <div class="fixed-table-toolbar">
-                    <div class="columns pull-left">
-                        <button shiro:hasPermission="system:dept:add" type="button" class="btn  btn-primary"
-                                onclick="add(0)">
-                            <i class="fa fa-plus" aria-hidden="true"></i>添加
-                        </button>
+<div class="row">
+    <article class="col-sm-2">
+    </article>
+    <article class="col-sm-8">
+        <div class="jarviswidget jarviswidget-color-blueDark">
+            <header role="heading" class="ui-sortable-handle">
+                <div class="jarviswidget-ctrls" role="menu">
+                    <a shiro:hasPermission="system:dept:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
+                </div>
+                <h2>部门 </h2>
+            </header>
+            <div role="content">
+                <div class="widget-body no-padding">
+                    <input id="pId" type="hidden" value="3">
+                    <div class="tree smart-form">
                     </div>
                 </div>
-                <table id="exampleTable" data-mobile-responsive="true">
-                </table>
             </div>
         </div>
-    </div>
+    </article>
+    <article class="col-sm-2">
+    </article>
 </div>
-<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 <div>
     <script type="text/javascript">
         var s_add_h = 'hidden';
@@ -45,8 +44,4 @@
         var s_remove_h = '';
     </script>
 </div>
-</div>
-<div th:include="include :: footer"></div>
-<script type="text/javascript" src="/js/appjs/system/dept/dept.js"></script>
-</body>
-</html>
+<script type="text/javascript" th:src="@{'/js/system/dept/dept.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

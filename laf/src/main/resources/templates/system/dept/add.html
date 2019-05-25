@@ -1,51 +1,51 @@
-<!DOCTYPE html>
-<html>
-<meta charset="utf-8">
-<head th:include="include :: header"></head>
-<body class="gray-bg">
-	<div class="wrapper wrapper-content animated fadeInRight">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="ibox float-e-margins">
-					<div class="ibox-content">
-						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">
-								<label class="col-sm-3 control-label">上级部门：</label>
-								<div class="col-sm-8">
-									<input id="parentId" name="parentId" th:value="${pId}"
-										class="form-control hidden" type="text">
-								</div>
-								<div class="col-sm-8">
-									<input id="pName" name="pName" th:value="${pName}"
-										class="form-control" type="text" readonly>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">部门名称：</label>
-								<div class="col-sm-8">
-									<input id="deptName" name="deptName" class="form-control" type="text">
+<div class="row">
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-8 sortable-grid ui-sortable">
+		<div class="jarviswidget jarviswidget-color-blueDark jarviswidget-sortable" data-widget-editbutton="false" data-widget-custombutton="false" role="widget">
+			<header role="heading">
+				<span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+				<h2>添加部门 </h2>
+				<span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+			</header>
+			<div role="content">
+				<div class="jarviswidget-editbox">
+				</div>
+				<div class="widget-body no-padding">
+					<form id="deptForm" class="form-horizontal smart-form" novalidate="novalidate" autocomplete="off">
+						<fieldset>
+							<legend>添加部门</legend>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">上级部门&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input name="parentId" th:value="${pId}" type="hidden">
+									<input name="pName" th:value="${pName}" type="text" readonly>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label">排序：</label>
-								<div class="col-sm-8">
-									<input id="sort" name="sort" class="form-control"
-										type="text">
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">部门名称&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input name="deptName" type="text" placeholder="部门名称">
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-3">
-									<button type="submit" class="btn btn-primary">提交</button>
+							<div class="form-group row" style="margin-bottom: 15px;">
+								<label class="col-md-2 control-label">排序(升序)&nbsp;&nbsp;</label>
+								<div class="input col-md-8">
+									<input type="text" name="sort" placeholder="排序(升序)">
 								</div>
 							</div>
-						</form>
-					</div>
+						</fieldset>
+						<footer>
+							<button type="submit" class="btn btn-primary">保存</button>
+							<button type="button" class="btn btn-default" onclick="goBack();">返回</button>
+						</footer>
+					</form>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/dept/add.js">
-	</script>
-</body>
-</html>
+	</article>
+	<article class="col-sm-12 col-md-12 col-lg-2 sortable-grid ui-sortable">
+	</article>
+</div>
+<script type="text/javascript" th:src="@{'/js/system/dept/deptEdit.js?v=' + ${#strings.randomAlphanumeric(8)}}" />
+<script type="text/javascript" th:src="@{'/js/system/dept/add.js?v=' + ${#strings.randomAlphanumeric(8)}}" />

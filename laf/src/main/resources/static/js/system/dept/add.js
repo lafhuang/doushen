@@ -1,18 +1,13 @@
 $().ready(function() {
-	validateRule();
+	formValidate();
 });
 
-$.validator.setDefaults({
-	submitHandler : function() {
-		save();
-	}
-});
 function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/system/dept/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : $('#deptForm').serialize(),
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -30,20 +25,4 @@ function save() {
 
 		}
 	});
-
-}
-function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			deptName : {
-				required : true
-			}
-		},
-		messages : {
-			deptName : {
-				required : icon + "请输入部门名称"
-			}
-		}
-	})
 }

@@ -1,80 +1,58 @@
 var request_prefix = "/system/dept"
 
 $(function() {
-	load();
+	loadDept();
 });
 
-function load() {
-	$('#exampleTable')
-		.bootstrapTreeTable(
-			{
-				id: 'id',
-				code: 'id',
-				parentCode: 'parentId',
-				type: "GET", // 请求数据的ajax类型
-				url: request_prefix + '/list', // 请求数据的ajax的url
-				ajaxParams: {sort:'sort'}, // 请求数据的ajax的data属性
-				expandColumn: '0',// 在哪一列上面显示展开按钮
-				striped: true, // 是否各行渐变色
-				bordered: true, // 是否显示边框
-				expandAll: false, // 是否全部展开
-				singleSelect : false, // 设置为true将禁止多选
-				columns : [
-					{
-						field : 'deptName',
-						title : '部门名称',
-                        valign : 'center',
-						witth :20
-					},
-					{
-						field : 'sort',
-						title : '排序',
-                        align : 'center',
-                        valign : 'center',
-					},
-					{
-						title : '操作',
-						field : 'id',
-						align : 'center',
-                        valign : 'center',
-						formatter : function(item, index) {
-							var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ item.id
-								+ '\')"><i class="fa fa-edit"></i></a> ';
-							var a = '<a class="btn btn-primary btn-sm ' + s_add_h + '" href="#" title="增加下級"  mce_href="#" onclick="add(\''
-								+ item.id
-								+ '\')"><i class="fa fa-plus"></i></a> ';
-							var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-								+ item.id
-								+ '\')"><i class="fa fa-remove"></i></a> ';
-							return e + a + d;
-						}
-					} ]
-			});
+function loadDept() {
+	$.ajax({
+        type : "GET",
+        url : "/system/dept/tree",
+        success : function(tree) {
+            var parent = $("<ul></ul>");
+            loadDeptTree(tree, parent);
+            $('.tree').html(parent);
+        }
+    });
 }
-function reLoad() {
-	load();
+
+function loadDeptTree(childList, parent) {
+    for (var idx = 0; idx < childList.length; idx++) {
+        var child = childList[idx];
+        var li = $("<li></li>");
+        if (child.children.length > 0) {
+            var span = '';
+            if (child.id == 1) {
+                span = $("<span name='dept_node' onclick='showDept("+child.id+")'><i class='fa fa-lg fa-home'></i> "+child.text+"</span>");
+            } else {
+                span = $("<span name='dept_node' onclick='showDept("+child.id+")'><i class='fa fa-lg fa-minus-circle'></i> "+child.text+"</span>");
+            }
+            $(li).append(span).append("<ul></ul>").appendTo(parent);
+            loadDeptTree(child.children, $(li).children().eq(1));
+        } else {
+            var span = $("<span name='dept_node' onclick='showDept("+child.id+")'><i class='icon-leaf'></i> "+child.text+"</span>");
+            $(li).append(span).appendTo(parent);
+        }
+    }
+
 }
-function add(pId) {
-	layer.open({
-		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
-		content : request_prefix + '/add/' + pId
-	});
+
+function showDept(deptId) {
+    $("#pId").val(deptId);
 }
+
+function add() {
+    var pId = $("#pId").val();
+    if (pId == '') {
+        pId = 1;
+    }
+	getTarget(request_prefix + '/add/' + pId);
+}
+
 function edit(id) {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '60%', '60%' ],
-		content : request_prefix + '/edit/' + id // iframe的url
-	});
+	getTarget(request_prefix + '/edit/' + id);
 }
+
 function remove(id) {
 	layer.confirm('确定要删除选中的部门及其子部门？', {
 		btn : [ '确定', '取消' ]
@@ -97,3 +75,4 @@ function remove(id) {
 	})
 }
 
+//# sourceURL=dict.js
