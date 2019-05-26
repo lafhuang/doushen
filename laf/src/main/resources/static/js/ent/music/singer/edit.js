@@ -27,6 +27,7 @@ function update() {
 			$("#doudou_modal_title").text("编辑歌手失败");
             $("#doudou_modal_body p").text("编辑歌手失败");
             activateModal();
+            showDialog("编辑歌手失败", "编辑歌手失败", "返回", "btn btn-default", "/ent/music/singer", "关闭", "btn btn-primary", "/ent/music/singer/add");
 		},
 		success : function(data) {
 			$("#doudou_modal_title").text("编辑歌手");

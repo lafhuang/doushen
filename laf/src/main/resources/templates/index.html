@@ -259,12 +259,15 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeBtn">
                         &times;
                     </button>
-                    <h4 class="modal-title" id="doudou_modal_title"></h4>
+                    <h4 class="modal-title" id="modal_title"></h4>
                 </div>
-                <div class="modal-body" id="doudou_modal_body">
+                <div class="modal-body" id="modal_body">
                     <p></p>
                 </div>
-                <div class="modal-footer" id="doudou_modal_footer"></div>
+                <div class="modal-footer">
+                    <button type="button" id="modal_btn1"></button>
+                    <button type="button" id="modal_btn2"></button>
+                </div>
             </div>
         </div>
     </div>
@@ -400,6 +403,39 @@
             e=null
         })
     }
+
+    function showDialog(title, body, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url) {
+        $("#modal_title").text(title);
+        $("#modal_body p").text(body);
+
+        if ('' == btn1Url) {
+            $("#modal_btn1").hide();
+        } else {
+            $("#modal_btn1").attr("class", btn1Class);
+            $("#modal_btn1").text(btn1Text);
+            $("#modal_btn1").show();
+            $("#modal_btn1").click(function() {
+                getTarget(btn1Url);
+                $("#doudou_modal").hide();
+                $('.modal-backdrop').remove();
+            });
+        }
+
+        $("#modal_btn2").attr("class", btn2Class);
+        $("#modal_btn2").text(btn2Text);
+        $("#modal_btn2").click(function() {
+            getTarget(btn2Url);
+            $("#doudou_modal").hide();
+            $('.modal-backdrop').remove();
+        });
+
+        $("#doudou_modal").modal();
+    }
+
+    $("#closeBtn").click(function() {
+        $("#doudou_modal").hide();
+        $('.modal-backdrop').remove();
+    });
 
 </script>
 </body>

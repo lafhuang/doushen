@@ -22,39 +22,17 @@ function save() {
         data : $('#singerForm').serialize(),
         async : false,
         error : function() {
-            $("#doudou_modal_title").text("添加歌手失败");
-            $("#doudou_modal_body p").text("添加歌手失败");
-            activateModal();
+            showDialog("添加歌手失败", "添加歌手失败", "返回", "btn btn-default", "/ent/music/singer", "继续添加", "btn btn-primary", "/ent/music/singer/add");
         },
         success : function(data) {
-            $("#doudou_modal_title").text("添加歌手");
-            $("#doudou_modal_body p").text(data.msg);
-            activateModal();
+            var singerName = $("#singerName").val();
+            showDialog("添加歌手", "添加歌手["+singerName+"]成功", "返回", "btn btn-default", "/ent/music/singer", "继续添加", "btn btn-primary", "/ent/music/singer/add");
         }
     });
 }
 
 function goBack() {
     getTarget('/ent/music/singer');
-}
-
-function activateModal() {
-    var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
-        "<button type='button' class='btn btn-primary' id='addBtn'>继续添加</button>";
-
-    $("#doudou_modal_footer").html(btn);
-
-    $("#doudou_modal").modal();
-
-    $("#backBtn").click(function () {
-        $("#closeBtn").click();
-        getTarget("/ent/music/singer");
-    });
-
-    $("#addBtn").click(function () {
-        $("#closeBtn").click();
-        getTarget("/ent/music/singer/add");
-    });
 }
 
 //# sourceURL=add.js
