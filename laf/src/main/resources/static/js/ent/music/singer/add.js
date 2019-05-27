@@ -9,7 +9,6 @@ $().ready(function() {
     initStar();
     initDict();
     formValidate();
-
     initSelect();
 
 });
@@ -22,11 +21,27 @@ function save() {
         data : $('#singerForm').serialize(),
         async : false,
         error : function() {
-            showDialog("添加歌手失败", "添加歌手失败", "返回", "btn btn-default", "/ent/music/singer", "继续添加", "btn btn-primary", "/ent/music/singer/add");
+            var title = "<i class='fa fa-warning'></i>添加歌手失败";
+            var msg = "添加歌手失败";
+            var btn1Text = "返回";
+            var btn1Class = "btn btn-default";
+            var btn1Url = "/ent/music/singer";
+            var btn2Text = "继续添加";
+            var btn2Class = "btn btn-primary";
+            var btn2Url = "/ent/music/singer/add";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
             var singerName = $("#singerName").val();
-            showDialog("添加歌手", "添加歌手["+singerName+"]成功", "返回", "btn btn-default", "/ent/music/singer", "继续添加", "btn btn-primary", "/ent/music/singer/add");
+            var title = "添加歌手";
+            var msg = "添加歌手["+singerName+"]成功";
+            var btn1Text = "返回";
+            var btn1Class = "btn btn-default";
+            var btn1Url = "/ent/music/singer";
+            var btn2Text = "继续添加";
+            var btn2Class = "btn btn-primary";
+            var btn2Url = "/ent/music/singer/add";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         }
     });
 }

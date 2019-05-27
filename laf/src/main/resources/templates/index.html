@@ -404,9 +404,9 @@
         })
     }
 
-    function showDialog(title, body, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url) {
-        $("#modal_title").text(title);
-        $("#modal_body p").text(body);
+    function showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url) {
+        $("#modal_title").html(title);
+        $("#modal_body p").text(msg);
 
         if ('' == btn1Url) {
             $("#modal_btn1").hide();
@@ -415,7 +415,9 @@
             $("#modal_btn1").text(btn1Text);
             $("#modal_btn1").show();
             $("#modal_btn1").click(function() {
-                getTarget(btn1Url);
+                if ("close" != btn1Url) {
+                    getTarget(btn1Url);
+                }
                 $("#doudou_modal").hide();
                 $('.modal-backdrop').remove();
             });
@@ -424,7 +426,9 @@
         $("#modal_btn2").attr("class", btn2Class);
         $("#modal_btn2").text(btn2Text);
         $("#modal_btn2").click(function() {
-            getTarget(btn2Url);
+            if ("close" != btn2Url) {
+                getTarget(btn2Url);
+            }
             $("#doudou_modal").hide();
             $('.modal-backdrop').remove();
         });
