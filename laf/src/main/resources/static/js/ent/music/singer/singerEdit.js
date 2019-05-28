@@ -72,9 +72,7 @@ function load_singer_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(result) {
+        success : function(result) {
             //加载数据
             var singer_region = $("#singer_region_").val();
             var singer_initial = $("#singer_initial_").val();

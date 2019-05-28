@@ -37,9 +37,7 @@ function loadSinger() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
+        success : function(result) {
 			singerMap = {};
 
 			var html = "<option value=''>--歌手--</option>";
@@ -61,13 +59,8 @@ function loadDict() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
+        success : function(result) {
             album_type = {};
-
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 album_type[result[i].dictValue] = result[i].dictName;
             }
@@ -81,13 +74,8 @@ function loadDict() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
+        success : function(result) {
             album_style = {};
-
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 album_style[result[i].dictValue] = result[i].dictName;
             }
@@ -101,13 +89,8 @@ function loadDict() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
+        success : function(result) {
             album_language = {};
-
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 album_language[result[i].dictValue] = result[i].dictName;
             }
@@ -119,17 +102,17 @@ function load() {
 	$('#exampleTable')
 		.bootstrapTable(
 			{
-				method : 'get', // 服务器数据的请求方式 get or post
-				url : request_prefix + "/list", // 服务器数据的加载地址
+				method : 'get',
+				url : request_prefix + "/list",
 				iconSize : 'outline',
-				striped : true, // 设置为true会有隔行变色效果
-				dataType : "json", // 服务器返回的数据类型
-				pagination : true, // 设置为true会在底部显示分页条
-				singleSelect : false, // 设置为true将禁止多选
-				pageSize : 10, // 如果设置了分页，每页数据条数
-				pageNumber : 1, // 如果设置了分布，首页页码
-				showColumns : false, // 是否显示内容下拉框（选择显示的列）
-				sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+				striped : true,
+				dataType : "json",
+				pagination : true,
+				singleSelect : false,
+				pageSize : 10,
+				pageNumber : 1,
+				showColumns : false,
+				sidePagination : "server",
 				queryParams : function(params) {
 					return {
 						limit : params.limit,
@@ -231,19 +214,17 @@ function remove(id) {
     var singerName = $("#singer_"+id).text();
     var albumName = $("#album_"+id).text();
 
-    $("#doudou_modal_title").text("删除专辑");
-    $("#doudou_modal_body p").text("是否要删除["+singerName+"]的专辑["+albumName+"]?");
-
-    var btn = "<button type='button' class='btn btn-danger' id='delBtn'><i class='fa fa-trash-o'></i>&nbsp; 删除</button>" +
-              "<button type='button' class='btn btn-default' id='cancelBtn'><i class='fa fa-times'></i>&nbsp; 取消</button>";
-
-    $("#doudou_modal_footer").html(btn);
-
-    $("#doudou_modal").modal();
+    var title = "删除专辑";
+    var msg = "是否要删除歌手["+singerName+"]的专辑["+albumName+"]?";
+    var btn1Text = "删除";
+    var btn1Class = "btn btn-danger";
+    var btn1Url = "function_delAlbum";
+    var btn2Text = "取消";
+    var btn2Class = "btn btn-primary";
+    var btn2Url = "close";
+    showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
 
     $("#delBtn").click(function () {
-        $("#closeBtn").click();
-
         $.ajax({
             url : request_prefix + "/remove",
             type : "post",
@@ -263,11 +244,6 @@ function remove(id) {
                 });
             }
         });
-
-    });
-
-    $("#cancelBtn").click(function () {
-        $("#closeBtn").click();
     });
 
 }

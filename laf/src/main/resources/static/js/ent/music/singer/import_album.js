@@ -1,8 +1,14 @@
 var singerId = $("#singerId").val();
+var singerName = $("#singerName").val();
+var btn1Text = "返回";
+var btn1Class = "btn btn-default";
+var btn1Url = "/ent/music/singer/info/"+singerId;
+var btn2Text = "关闭";
+var btn2Class = "btn btn-primary";
+var btn2Url = "close";
 
 $().ready(function() {
 
-    var singerName = $("#singerName").val();
     var title = "<li>音乐</li><li>歌手</li><li>"+singerName+"</li><li>导入专辑</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span><span>>&nbsp;导入专辑&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/singer');
@@ -36,11 +42,15 @@ function initFileUpload() {
         var code = result.code;
 
         if (code != 0) {
-            activateModal("导入专辑失败", result.msg);
+            var title = "<i class='fa fa-warning'></i>导入专辑失败";
+            var msg = "导入歌手["+singerName+"]专辑失败";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         } else {
             var albumList = result.albumList;
             if (albumList.length == 0) {
-                activateModal("导入专辑", "专辑模板无有效数据!");
+                var title = "导入专辑";
+                var msg = "专辑模板无有效数据!";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
             } else {
                 var html = "";
                 for (var idx = 0; idx <= albumList.length; idx++) {
@@ -90,7 +100,9 @@ function saveAlbum() {
     });
 
     if (albumList.length == 0) {
-        activateModal("导入专辑", "专辑模板无有效数据!");
+        var title = "导入专辑";
+        var msg = "专辑模板无有效数据!";
+        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         return;
     }
 
@@ -101,33 +113,17 @@ function saveAlbum() {
         data : "albumList="+JSON.stringify(albumList),
         async : false,
         error : function(request) {
-            activateModal("保存专辑失败", request.msg);
+            var title = "<i class='fa fa-warning'></i>保存专辑失败";
+            var msg = "保存歌手["+singerName+"]专辑失败";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
-            activateModal("保存专辑", data.msg);
+            var title = "保存专辑";
+            var msg = "保存歌手["+singerName+"]专辑成功";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         }
     });
 
-}
-
-function activateModal(title, msg) {
-    $("#doudou_modal_title").text(title);
-    $("#doudou_modal_body p").text(msg);
-
-    var btn = "<button type='button' class='btn btn-default' id='backBtn'>返回</button>" +
-        "<button type='button' class='btn btn-primary' id='close_Btn'>关闭</button>";
-
-    $("#doudou_modal_footer").html(btn);
-    $("#doudou_modal").modal();
-
-    $("#backBtn").click(function () {
-        $("#closeBtn").click();
-        getTarget("/ent/music/singer/info/"+singerId);
-    });
-
-    $("#close_Btn").click(function () {
-        $("#closeBtn").click();
-    });
 }
 
 //# sourceURL=import_album.js

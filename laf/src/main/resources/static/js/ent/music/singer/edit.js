@@ -1,4 +1,10 @@
 var singerName = $("#singerName").val();
+var btn1Text = "返回";
+var btn1Class = "btn btn-default";
+var btn1Url = "/ent/music/singer";
+var btn2Text = "关闭";
+var btn2Class = "btn btn-primary";
+var btn2Url = "close";
 
 $().ready(function() {
 
@@ -25,23 +31,11 @@ function update() {
 		error : function(request) {
 			var title = "<i class='fa fa-warning'></i>编辑歌手失败";
             var msg = "编辑歌手["+singerName+"]失败";
-            var btn1Text = "返回";
-            var btn1Class = "btn btn-default";
-            var btn1Url = "/ent/music/singer";
-            var btn2Text = "关闭";
-            var btn2Class = "btn btn-primary";
-            var btn2Url = "close";
             showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
 		},
 		success : function(data) {
 			var title = "编辑歌手";
             var msg = "编辑歌手["+singerName+"]成功";
-            var btn1Text = "返回";
-            var btn1Class = "btn btn-default";
-            var btn1Url = "/ent/music/singer";
-            var btn2Text = "关闭";
-            var btn2Class = "btn btn-primary";
-            var btn2Url = "close";
             showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
 		}
 	});

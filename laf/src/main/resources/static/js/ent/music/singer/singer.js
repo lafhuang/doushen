@@ -52,9 +52,7 @@ function load() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
+        success : function(result) {
             if (result) {
                 var singerHtml = "<ul class='singer_list__list js_avtar_list'>";
                 for (var idx = 0; idx < result.length; idx++) {
@@ -94,9 +92,7 @@ function load_singer_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
+        success : function(result) {
             //加载数据
             html += '<a href="javascript:;" class="singer_tag__item singer_tag__item--all singer_tag__item--select" data-key="' + dict_type + '" data-id="-100" hidefocus="">全部</a>';
             for (var i = 0; i < result.length; i++) {
