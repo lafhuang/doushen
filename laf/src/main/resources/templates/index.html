@@ -418,8 +418,7 @@
                 if ("close" != btn1Url) {
                     getTarget(btn1Url);
                 }
-                $("#doudou_modal").hide();
-                $('.modal-backdrop').remove();
+                $("#doudou_modal").modal('hide');
             });
         }
 
@@ -429,16 +428,14 @@
             if ("close" != btn2Url) {
                 getTarget(btn2Url);
             }
-            $("#doudou_modal").hide();
-            $('.modal-backdrop').remove();
+            $("#doudou_modal").modal('hide');
         });
 
         $("#doudou_modal").modal();
     }
 
     $("#closeBtn").click(function() {
-        $("#doudou_modal").hide();
-        $('.modal-backdrop').remove();
+        $("#doudou_modal").modal('hide');
     });
 
 </script>

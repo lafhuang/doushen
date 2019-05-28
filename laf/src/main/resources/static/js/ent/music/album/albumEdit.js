@@ -10,7 +10,7 @@ function initDatepicker() {
 	};
 
 	$('#issueDate').datepicker({
-		autoclose: true, //自动关闭
+		autoclose: true,
 		beforeShowDay: $.noop,
 		calendarWeeks: false,
 		clearBtn: false,
@@ -57,10 +57,7 @@ function initSinger() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(result) {
-			//加载数据
+        success : function(result) {
 			var singerId = $("#singer_id").val();
 			html += '<option value="">--专辑歌手--</option>';
 			for (var i = 0; i < result.length; i++) {
@@ -90,9 +87,7 @@ function load_album_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-			// TODO
-        },success : function(result) {
+        success : function(result) {
 
             var album_language = $("#album_language_").val();
             var album_type = $("#album_type_").val();
@@ -106,7 +101,6 @@ function load_album_dict(dict_type) {
 				html += '<option value="">--专辑风格--</option>'
 			}
 
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 if ("album_language" == dict_type) {
                     if (result[i].dictValue == album_language) {
