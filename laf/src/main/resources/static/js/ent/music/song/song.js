@@ -33,13 +33,8 @@ function loadDict() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
+        success : function(result) {
             audio_type = {};
-
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 audio_type[result[i].dictValue] = result[i].dictName;
             }
@@ -53,13 +48,8 @@ function loadDict() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },success : function(result) {
-
+        success : function(result) {
             song_language = {};
-
-            //加载数据
             for (var i = 0; i < result.length; i++) {
                 song_language[result[i].dictValue] = result[i].dictName;
             }
@@ -71,20 +61,19 @@ function load() {
 	$('#exampleTable')
 		.bootstrapTable(
 			{
-				method : 'get', // 服务器数据的请求方式 get or post
-				url : request_prefix + "/list", // 服务器数据的加载地址
+				method : 'get',
+				url : request_prefix + "/list",
 				iconSize : 'outline',
-				striped : true, // 设置为true会有隔行变色效果
-				dataType : "json", // 服务器返回的数据类型
-				pagination : true, // 设置为true会在底部显示分页条
-				singleSelect : false, // 设置为true将禁止多选
-				pageSize : 10, // 如果设置了分页，每页数据条数
-				pageNumber : 1, // 如果设置了分布，首页页码
-				showColumns : false, // 是否显示内容下拉框（选择显示的列）
-				sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+				striped : true,
+				dataType : "json",
+				pagination : true,
+				singleSelect : false,
+				pageSize : 10,
+				pageNumber : 1,
+				showColumns : false,
+				sidePagination : "server",
 				queryParams : function(params) {
 					return {
-						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
 						offset : params.offset,
 						name : $('#songName').val(),
@@ -100,21 +89,21 @@ function load() {
 						field : 'name',
 						title : '歌曲',
 						formatter : function(value, row, index) {
-						    return "<a target='/ent/music/song/info/" + row.id + "'>" + value + "</a>"
+						    return "<a target='/ent/music/song/info/" + row.id + "' id='song_" + row.id + "'>" + value + "</a>"
 						}
 					},
 					{
 						field : 'albumName',
 						title : '专辑',
 						formatter : function(value, row, index) {
-                            return "<a target='/ent/music/album/info/" + row.albumId + "'>" + value + "</a>"
+                            return "<a target='/ent/music/album/info/" + row.albumId + "' id='album_" + row.id + "'>" + value + "</a>"
                         }
 					},
 					{
 						field : 'singerName',
 						title : '歌手',
                         formatter : function(value, row, index) {
-                            return "<a target='/ent/music/singer/info/" + row.singerId + "'>" + value + "</a>"
+                            return "<a target='/ent/music/singer/info/" + row.singerId + "' id='singer_" + row.id + "'>" + value + "</a>"
                         }
 					},
 					{
@@ -176,10 +165,7 @@ function loadSinger() {
 		cache:false,
 		async:false,
 		contentType:"application/json",
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},success : function(data) {
-			//加载数据
+		success : function(data) {
 			for (var i = 0; i < data.length; i++) {
 				html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
 			}
@@ -188,7 +174,6 @@ function loadSinger() {
             $("#song_singer").on('change',function(){
                 loadAlbum();
             });
-
 		}
 	});
 }
@@ -215,10 +200,7 @@ function loadAlbum() {
 			cache:false,
 			async:false,
 			contentType:"application/json",
-			error : function(request) {
-				parent.layer.alert("Connection error");
-			},success : function(result) {
-				//加载数据
+			success : function(result) {
 				var data = result.rows;
 				for (var i = 0; i < data.length; i++) {
 					html += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
@@ -241,29 +223,62 @@ function resert() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
+
 function add() {
 	getTarget(request_prefix + '/add');
 }
+
 function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : request_prefix + "/remove",
-			type : "post",
-			data : {
-				'id' : id
-			},
-			success : function(r) {
-				if (r.code === 0) {
-					layer.msg("删除成功");
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
+
+    var singerName = $("#singer_"+id).text();
+    var albumName = $("#album_"+id).text();
+    var songName = $("#sona_"+id).text();
+
+    $("#modal_title").html("删除歌曲");
+    $("#modal_body p").text("是否要删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]?");
+    $("#modal_btn1").attr("class", "btn btn-danger");
+    $("#modal_btn1").text("删除");
+    $("#modal_btn1").show();
+    $("#modal_btn1").click(function() {
+        $.ajax({
+            url : request_prefix + "/remove",
+            type : "post",
+            data : {
+                'id' : id
+            },
+            error : function(request) {
+                var title = "<i class='fa fa-warning'></i>删除歌曲失败";
+                var msg = "删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]失败";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "close";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            },
+            success : function(data) {
+                var title = "删除歌曲";
+                var msg = "删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]成功";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "/ent/music/song";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            }
+        });
+    });
+
+    $("#modal_btn2").attr("class", "btn btn-primary");
+    $("#modal_btn2").text("取消");
+    $("#modal_btn2").click(function() {
+        $("#doudou_modal").modal('hide');
+        $('.modal-backdrop').remove();
+    });
+
+    $("#doudou_modal").modal();
 
 }
 
@@ -275,62 +290,69 @@ function batchRemove() {
 	
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		$("#doudou_modal_title").text("批量删除歌曲");
-        $("#doudou_modal_body p").text("未选中歌曲");
-
-        var btn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa fa-trash-o'></i>&nbsp; 关闭</button>";
-
-        $("#doudou_modal_footer").html(btn);
-
-        $("#doudou_modal").modal();
-
-        $("#close_Btn").click(function () {
-            $("#closeBtn").click();
-        });
+	    var title = "批量删除歌曲";
+        var msg = "未选中歌曲";
+        var btn1Text = "关闭";
+        var btn1Class = "btn btn-default";
+        var btn1Url = "";
+        var btn2Text = "关闭";
+        var btn2Class = "btn btn-default";
+        var btn2Url = "close";
+        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         return;
 	}
 
-	$("#doudou_modal_title").text("批量删除歌曲");
-    $("#doudou_modal_body p").text("是否要删除选中的歌曲?");
+    $("#modal_title").html("批量删除歌曲");
+    $("#modal_body p").text("是否要删除选中的歌曲?");
+    $("#modal_btn1").attr("class", "btn btn-danger");
+    $("#modal_btn1").text("删除");
+    $("#modal_btn1").show();
 
-    var btn = "<button type='button' class='btn btn-danger' id='delBtn'><i class='fa fa-trash-o'></i>&nbsp; 删除</button>" +
-    		  "<button type='button' class='btn btn-default' id='cancelBtn'><i class='fa fa-times'></i>&nbsp; 取消</button>";
-
-    $("#doudou_modal_footer").html(btn);
-
-    $("#doudou_modal").modal();
-
-    $("#delBtn").click(function () {
-        $("#closeBtn").click();
-
+    $("#modal_btn1").click(function() {
         var ids = new Array();
         $.each(rows, function(i, row) {
             ids[i] = row['id'];
         });
+
         $.ajax({
             type : 'POST',
             data : {
                 "ids" : ids
             },
             url : request_prefix + '/batchRemove',
-            success : function(r) {
-                $("#doudou_modal_body p").text(data.msg);
-                var sucBtn = "<button type='button' class='btn btn-default' id='close_Btn'><i class='fa  fa-times-circle'></i>&nbsp; 关闭</button>";
-
-                $("#doudou_modal_footer").html(sucBtn);
-                $("#doudou_modal").modal();
-
-                $("#close_Btn").click(function () {
-                    $("#closeBtn").click();
-                    reLoad();
-                });
+            error : function(data) {
+                var title = "<i class='fa fa-warning'></i>批量删除歌曲失败";
+                var msg = "批量删除歌曲失败";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "close";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            },
+            success : function(data) {
+                var title = "批量删除歌曲";
+                var msg = "批量删除歌曲成功";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "/ent/music/song";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
             }
         });
-
-        $("#cancelBtn").click(function () {
-            $("#closeBtn").click();
-        });
     });
+
+    $("#modal_btn2").attr("class", "btn btn-primary");
+    $("#modal_btn2").text("取消");
+    $("#modal_btn2").click(function() {
+        $("#doudou_modal").modal('hide');
+        $('.modal-backdrop').remove();
+    });
+
+    $("#doudou_modal").modal();
 
 }
 

@@ -17,9 +17,7 @@ function initEditor() {
 }
 
 function initSinger() {
-
     var data = {};
-
     $.ajax({
         type: 'post',
         url : "/ent/music/singer/list",
@@ -28,12 +26,8 @@ function initSinger() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(data) {
-            //加载数据
+        success : function(data) {
             var html = "<option value=''>--歌手--</option>";
-
             var singer = $("#song_singer").val();
             for (var i = 0; i < data.length; i++) {
                 if (singer == data[i].id) {
@@ -53,9 +47,7 @@ function initSinger() {
 }
 
 function initAlbum() {
-
     var singerId = $("#singer").val();
-
     if (!singerId || '' == singerId) {
         $("#albumId").html("<option value=''>--专辑--</option>");
         return;
@@ -75,10 +67,7 @@ function initAlbum() {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(result) {
-            //加载数据
+        success : function(result) {
             var html = "<option value=''>--专辑--</option>";
             var data = result.rows;
             var album = $("#song_album").val();
@@ -111,10 +100,7 @@ function load_song_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(result) {
-            //加载数据
+        success : function(result) {
             if ("album_language" == dict_type) {
                 html += "<option value=''>--语言--</option>";;
             } else {

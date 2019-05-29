@@ -1,3 +1,12 @@
+var request_prefix = "/ent/video/movie";
+
+var btn1Text = "返回";
+var btn1Class = "btn btn-default";
+var btn1Url = request_prefix;
+var btn2Text = "继续添加";
+var btn2Class = "btn btn-primary";
+var btn2Url = request_prefix+"/add";
+
 $().ready(function() {
 
     var title = "<li>视频</li><li>电影</li><li>添加</li>";
@@ -99,11 +108,7 @@ function load_movie_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function() {
-            // TODO
-        },success : function(result) {
-            //加载数据
-
+        success : function(result) {
             if ("video_medium" == dict_type) {
                 html += "<option value=''>--媒介--</option>";;
             } else if ("video_encode" == dict_type) {
@@ -128,22 +133,23 @@ function load_movie_dict(dict_type) {
     });
 }
 
-
 function save() {
-
     $("#discribe").val($(".note-editable").html());
-
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/ent/video/movie/save",
-        data : $('#signupForm').serialize(),// 你的formid
+        url : request_prefix+"/save",
+        data : $('#signupForm').serialize(),
         async : false,
         error : function(request) {
-            // TODO
+            var title = "<i class='fa fa-warning'></i>添加影片失败";
+            var msg = "添加影片失败";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
-            // TODO
+            var title = "添加影片";
+            var msg = "添加影片成功";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         }
     });
 }

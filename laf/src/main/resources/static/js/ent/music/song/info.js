@@ -31,10 +31,7 @@ function load_dict(dict_type) {
         cache:false,
         async:false,
         contentType:"application/json",
-        error : function(request) {
-            // TODO
-        },success : function(result) {
-            //加载数据
+        success : function(result) {
             var dictValue = $("#"+dict_type).val();
             for (var i = 0; i < result.length; i++) {
                 if (dictValue == result[i].dictValue) {

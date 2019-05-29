@@ -243,7 +243,7 @@ function remove(id) {
                 var btn1Url = "";
                 var btn2Text = "关闭";
                 var btn2Class = "btn btn-default";
-                var btn2Url = "/ent/music/album";
+                var btn2Url = request_prefix;
                 showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
             }
         });
@@ -296,6 +296,17 @@ function batchRemove() {
                 "ids" : ids
             },
             url : request_prefix + '/batchRemove',
+            error : function(data) {
+                var title = "<i class='fa fa-warning'></i>批量删除专辑失败";
+                var msg = "批量删除专辑失败";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "close";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            },
             success : function(data) {
                 var title = "批量删除专辑";
                 var msg = "批量删除专辑成功";

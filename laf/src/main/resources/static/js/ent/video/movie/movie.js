@@ -46,7 +46,7 @@ function load() {
                         field : 'name',
                         title : '片名',
                         formatter : function(value, row, index) {
-                            return "<a target='/ent/video/movie/info/" + row.id + "'>" + value + "</a>"
+                            return "<a target='/ent/video/movie/info/" + row.id + "' id='movie_"+row.id+"'>" + value + "</a>"
                         }
                     },
                     {
@@ -105,61 +105,127 @@ function reLoad() {
 function add() {
     getTarget(request_prefix + '/add');
 }
+
 function remove(id) {
-    layer.confirm('确定要删除选中的记录？', {
-        btn : [ '确定', '取消' ]
-    }, function() {
+    var movieName = $("#movie_"+id).text();
+
+    $("#modal_title").html("删除电影");
+    $("#modal_body p").text("是否要删除电影["+movieName+"]?");
+    $("#modal_btn1").attr("class", "btn btn-danger");
+    $("#modal_btn1").text("删除");
+    $("#modal_btn1").show();
+    $("#modal_btn1").click(function() {
         $.ajax({
             url : request_prefix + "/remove",
             type : "post",
             data : {
                 'id' : id
             },
-            success : function(r) {
-                if (r.code === 0) {
-                    layer.msg("删除成功");
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
+            error : function(request) {
+                var title = "<i class='fa fa-warning'></i>删除电影失败";
+                var msg = "删除电影["+movieName+"]失败";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "close";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            },
+            success : function(data) {
+                var title = "删除电影";
+                var msg = "删除电影["+movieName+"]成功";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = request_prefix;
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
             }
         });
-    })
+    });
 
+    $("#modal_btn2").attr("class", "btn btn-primary");
+    $("#modal_btn2").text("取消");
+    $("#modal_btn2").click(function() {
+        $("#doudou_modal").modal('hide');
+        $('.modal-backdrop').remove();
+    });
+
+    $("#doudou_modal").modal();
 }
 function edit(id) {
     getTarget(request_prefix + '/edit/' + id);
 }
+
 function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     if (rows.length == 0) {
-        layer.msg("请选择要删除的数据");
+        var title = "批量删除电影";
+        var msg = "未选中电影;
+        var btn1Text = "关闭";
+        var btn1Class = "btn btn-default";
+        var btn1Url = "";
+        var btn2Text = "关闭";
+        var btn2Class = "btn btn-default";
+        var btn2Url = "close";
+        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
         return;
     }
-    layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-        btn : [ '确定', '取消' ]
-    }, function() {
+
+    $("#modal_title").html("批量删除电影");
+    $("#modal_body p").text("是否要删除选中的电影?");
+    $("#modal_btn1").attr("class", "btn btn-danger");
+    $("#modal_btn1").text("删除");
+    $("#modal_btn1").show();
+
+    $("#modal_btn1").click(function() {
         var ids = new Array();
         $.each(rows, function(i, row) {
             ids[i] = row['id'];
         });
-        console.log(ids);
+
         $.ajax({
             type : 'POST',
             data : {
                 "ids" : ids
             },
             url : request_prefix + '/batchRemove',
-            success : function(r) {
-                if (r.code == 0) {
-                    layer.msg(r.msg);
-                    reLoad();
-                } else {
-                    layer.msg(r.msg);
-                }
+            error : function(data) {
+                var title = "<i class='fa fa-warning'></i>批量删除电影失败";
+                var msg = "批量删除电影失败";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = "close";
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            },
+            success : function(data) {
+                var title = "批量删除电影";
+                var msg = "批量删除电影成功";
+                var btn1Text = "关闭";
+                var btn1Class = "btn btn-default";
+                var btn1Url = "";
+                var btn2Text = "关闭";
+                var btn2Class = "btn btn-default";
+                var btn2Url = request_prefix;
+                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
             }
         });
-    }, function() {});
+    });
+
+    $("#modal_btn2").attr("class", "btn btn-primary");
+    $("#modal_btn2").text("取消");
+    $("#modal_btn2").click(function() {
+        $("#doudou_modal").modal('hide');
+        $('.modal-backdrop').remove();
+    });
+
+    $("#doudou_modal").modal();
+
 }
 
 //# sourceURL=movie.js
