@@ -1,0 +1,19 @@
+icon:
+
+删除
+btn btn-danger
+
+返回
+btn btn-info
+
+关闭
+btn btn-default
+
+添加
+btn btn-primary
+
+OK
+fa fa-check
+
+warning
+fa fa-warning
