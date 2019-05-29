@@ -36,12 +36,12 @@ function update() {
 		error : function(request) {
 			var title = "<i class='fa fa-warning'></i>编辑歌曲失败";
             var msg = "编辑歌曲["+songName+"]失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
 		},
 		success : function(data) {
 			var title = "编辑歌曲";
             var msg = "编辑歌曲["+songName+"]成功";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
 		}
 	});
 

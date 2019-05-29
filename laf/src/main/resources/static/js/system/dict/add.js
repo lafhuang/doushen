@@ -9,7 +9,6 @@ $().ready(function() {
 	formValidate();
 
 	initSelect();
-
 });
 
 function save() {
@@ -20,44 +19,28 @@ function save() {
 		data : $('#dictForm').serialize(),
 		async : false,
 		error : function() {
-			$("#doudou_modal_title").text("添加数据字典");
-			$("#doudou_modal_body p").text("添加数据字典失败");
-
-			var btn = "<button type='button' class='btn btn-danger' id='close_Btn'><i class='fa fa-trash-o'></i>&nbsp; 关闭</button>" +
-				"<button type='button' class='btn btn-default' id='backBtn'><i class='fa fa-times'></i>&nbsp; 返回</button>";
-
-			$("#doudou_modal_footer").html(btn);
-
-			$("#doudou_modal").modal();
-
-			$("#close_Btn").click(function () {
-				$("#closeBtn").click();
-			});
-
-			$("#backBtn").click(function () {
-				$("#closeBtn").click();
-				getTarget(request_prefix);
-			});
+		    var title = "<i class='fa fa-warning'></i>添加数据字典失败";
+            var msg = "添加数据字典失败";
+            var btn1Text = "关闭";
+            var btn1Class = "btn btn-default";
+            var btn1Url = "close";
+            var btn2Text = "返回";
+            var btn2Class = "btn btn-primary";
+            var btn2Url = "/system/dict";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
 		},
 		success : function(data) {
-			$("#doudou_modal_title").text("添加数据字典");
-			$("#doudou_modal_body p").text("添加数据字典失败");
-
-			var btn = "<button type='button' class='btn btn-danger' id='close_Btn'><i class='fa fa-trash-o'></i>&nbsp; 关闭</button>" +
-				"<button type='button' class='btn btn-default' id='backBtn'><i class='fa fa-times'></i>&nbsp; 返回</button>";
-
-			$("#doudou_modal_footer").html(btn);
-
-			$("#doudou_modal").modal();
-
-			$("#close_Btn").click(function () {
-				$("#closeBtn").click();
-			});
-
-			$("#backBtn").click(function () {
-				$("#closeBtn").click();
-				getTarget(request_prefix);
-			});
+		    var title = "添加数据字典";
+            var msg = "添加数据字典成功";
+            var btn1Text = "返回";
+            var btn1Class = "btn btn-default";
+            var btn1Url = "/system/dict";
+            var btn2Text = "继续添加";
+            var btn2Class = "btn btn-primary";
+            var btn2Url = "/system/dict/add";
+            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
 		}
 	});
 }
+
+//# sourceURL=add.js

@@ -44,13 +44,13 @@ function initFileUpload() {
         if (code != 0) {
             var title = "<i class='fa fa-warning'></i>导入专辑失败";
             var msg = "导入歌手["+singerName+"]专辑失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         } else {
             var albumList = result.albumList;
             if (albumList.length == 0) {
                 var title = "导入专辑";
                 var msg = "专辑模板无有效数据!";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             } else {
                 var html = "";
                 for (var idx = 0; idx <= albumList.length; idx++) {
@@ -102,7 +102,7 @@ function saveAlbum() {
     if (albumList.length == 0) {
         var title = "导入专辑";
         var msg = "专辑模板无有效数据!";
-        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+        showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         return;
     }
 
@@ -115,12 +115,12 @@ function saveAlbum() {
         error : function(request) {
             var title = "<i class='fa fa-warning'></i>保存专辑失败";
             var msg = "保存歌手["+singerName+"]专辑失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
             var title = "保存专辑";
             var msg = "保存歌手["+singerName+"]专辑成功";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         }
     });
 

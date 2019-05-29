@@ -144,12 +144,12 @@ function save() {
         error : function(request) {
             var title = "<i class='fa fa-warning'></i>添加影片失败";
             var msg = "添加影片失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
             var title = "添加影片";
             var msg = "添加影片成功";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         }
     });
 }

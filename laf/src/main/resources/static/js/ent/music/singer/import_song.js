@@ -43,13 +43,13 @@ function initFileUpload() {
         if (code != 0) {
             var title = "<i class='fa fa-warning'></i>导入歌曲失败";
             var msg = "导入歌手["+singerName+"]歌曲失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         } else {
             var songList = result.songList;
             if (songList.length == 0) {
                 var title = "导入歌曲";
                 var msg = "歌曲模板无有效数据!";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             } else {
                 var html = "";
 
@@ -103,7 +103,7 @@ function saveSong() {
     if (songList.length == 0) {
         var title = "导入歌曲";
         var msg = "歌曲模板无有效数据!";
-        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+        showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         return;
     }
 
@@ -116,12 +116,12 @@ function saveSong() {
         error : function(request) {
             var title = "<i class='fa fa-warning'></i>保存歌曲失败";
             var msg = "保存歌手["+singerName+"]歌曲失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
             var title = "保存歌曲";
             var msg = "保存歌手["+singerName+"]歌曲成功";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         }
     });
 }

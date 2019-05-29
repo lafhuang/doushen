@@ -126,6 +126,10 @@
 
 <script>
 
+    if ($("#idx_body")) {
+        top.location.href = window.location.href;
+    }
+
     $("input").focus(function () {
         $("#errorMsg").hide();
     });

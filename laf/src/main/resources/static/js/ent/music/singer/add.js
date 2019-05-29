@@ -30,13 +30,13 @@ function save() {
         error : function() {
             var title = "<i class='fa fa-warning'></i>添加歌手失败";
             var msg = "添加歌手失败";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         },
         success : function(data) {
             var singerName = $("#singerName").val();
             var title = "添加歌手成功";
             var msg = "添加歌手成功";
-            showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+            showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
         }
     });
 }

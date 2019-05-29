@@ -255,7 +255,7 @@ function remove(id) {
                 var btn2Text = "关闭";
                 var btn2Class = "btn btn-default";
                 var btn2Url = "close";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             },
             success : function(data) {
                 var title = "删除歌曲";
@@ -266,7 +266,7 @@ function remove(id) {
                 var btn2Text = "关闭";
                 var btn2Class = "btn btn-default";
                 var btn2Url = "/ent/music/song";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             }
         });
     });
