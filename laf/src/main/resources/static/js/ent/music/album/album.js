@@ -316,6 +316,7 @@ function batchRemove() {
                 $("#album_btn2").click(function() {
                     $("#album_modal").modal('hide');
                     $('.modal-backdrop').remove();
+                    getTarget("/ent/music/album")；
                 });
                 $("#album_modal").modal();
             }

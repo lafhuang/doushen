@@ -4,7 +4,6 @@ var song_language;
 var audio_type;
 
 $(function() {
-
     var title = "<li>音乐</li><li>歌曲</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/song');
@@ -22,7 +21,6 @@ $(function() {
 	});
 
 	initSelect();
-
 });
 
 function loadDict() {
@@ -153,7 +151,6 @@ function load() {
 }
 
 function loadSinger() {
-
 	var html = "<option value=''>--歌手--</option>";
 	var data = {};
 
@@ -179,7 +176,6 @@ function loadSinger() {
 }
 
 function loadAlbum() {
-
 	$("#song_album").html("");
 	var singerId = $("#song_singer").val();
 
@@ -229,57 +225,58 @@ function add() {
 }
 
 function remove(id) {
-
     var singerName = $("#singer_"+id).text();
     var albumName = $("#album_"+id).text();
     var songName = $("#sona_"+id).text();
 
-    $("#modal_title").html("删除歌曲");
-    $("#modal_body p").text("是否要删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]?");
-    $("#modal_btn1").attr("class", "btn btn-danger");
-    $("#modal_btn1").text("删除");
-    $("#modal_btn1").show();
-    $("#modal_btn1").click(function() {
+    $("#song_title").html("删除歌曲");
+    $("#song_body p").text("是否要删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]?");
+    $("#song_btn1").attr("class", "btn btn-danger");
+    $("#song_btn1").text("删除");
+    $("#song_btn1").show();
+    $("#song_btn1").click(function() {
         $.ajax({
-            url : request_prefix + "/remove",
+            url : "/ent/music/song/remove",
             type : "post",
             data : {
                 'id' : id
             },
             error : function(request) {
-                var title = "<i class='fa fa-warning'></i>删除歌曲失败";
-                var msg = "删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]失败";
-                var btn1Text = "关闭";
-                var btn1Class = "btn btn-default";
-                var btn1Url = "";
-                var btn2Text = "关闭";
-                var btn2Class = "btn btn-default";
-                var btn2Url = "close";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
+                $("#song_title").html("<i class='fa fa-warning'></i>删除歌曲失败");
+                $("#song_body p").text("删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]失败");
+                $("#song_btn1").hide();
+                $("#song_btn2").attr("class", "btn btn-default");
+                $("#song_btn2").text("关闭");
+                $("#song_btn2").click(function() {
+                    $("#song_modal").modal('hide');
+                    $('.modal-backdrop').remove();
+                });
+                $("#song_modal").modal();
             },
             success : function(data) {
-                var title = "删除歌曲";
-                var msg = "删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]成功";
-                var btn1Text = "关闭";
-                var btn1Class = "btn btn-default";
-                var btn1Url = "";
-                var btn2Text = "关闭";
-                var btn2Class = "btn btn-default";
-                var btn2Url = "/ent/music/song";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
+                $("#song_title").html("删除歌曲");
+                $("#song_body p").text("删除歌手["+singerName+"]专辑["+albumName+"]的歌曲["+songName+"]成功");
+                $("#song_btn1").hide();
+                $("#song_btn2").attr("class", "btn btn-default");
+                $("#song_btn2").text("关闭");
+                $("#song_btn2").click(function() {
+                    $("#song_modal").modal('hide');
+                    $('.modal-backdrop').remove();
+                    getTarget("/ent/music/song");
+                });
+                $("#song_modal").modal();
             }
         });
     });
 
-    $("#modal_btn2").attr("class", "btn btn-primary");
-    $("#modal_btn2").text("取消");
-    $("#modal_btn2").click(function() {
-        $("#doudou_modal").modal('hide');
+    $("#song_btn2").attr("class", "btn btn-primary");
+    $("#song_btn2").text("取消");
+    $("#song_btn2").click(function() {
+        $("#song_modal").modal('hide');
         $('.modal-backdrop').remove();
     });
 
-    $("#doudou_modal").modal();
-
+    $("#song_modal").modal();
 }
 
 function edit(id) {
@@ -287,28 +284,28 @@ function edit(id) {
 }
 
 function batchRemove() {
-	
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-	    var title = "批量删除歌曲";
-        var msg = "未选中歌曲";
-        var btn1Text = "关闭";
-        var btn1Class = "btn btn-default";
-        var btn1Url = "";
-        var btn2Text = "关闭";
-        var btn2Class = "btn btn-default";
-        var btn2Url = "close";
-        showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+        $("#song_title").html("批量删除歌曲");
+        $("#song_body p").text("未选中歌曲");
+        $("#song_btn1").hide();
+        $("#song_btn2").attr("class", "btn btn-default");
+        $("#song_btn2").text("关闭");
+        $("#song_btn2").click(function() {
+            $("#song_modal").modal('hide');
+            $('.modal-backdrop').remove();
+        });
+        $("#song_modal").modal();
         return;
 	}
 
-    $("#modal_title").html("批量删除歌曲");
-    $("#modal_body p").text("是否要删除选中的歌曲?");
-    $("#modal_btn1").attr("class", "btn btn-danger");
-    $("#modal_btn1").text("删除");
-    $("#modal_btn1").show();
+    $("#song_title").html("批量删除歌曲");
+    $("#song_body p").text("是否要删除选中的歌曲?");
+    $("#song_btn1").attr("class", "btn btn-danger");
+    $("#song_btn1").text("删除");
+    $("#song_btn1").show();
 
-    $("#modal_btn1").click(function() {
+    $("#song_btn1").click(function() {
         var ids = new Array();
         $.each(rows, function(i, row) {
             ids[i] = row['id'];
@@ -321,38 +318,41 @@ function batchRemove() {
             },
             url : request_prefix + '/batchRemove',
             error : function(data) {
-                var title = "<i class='fa fa-warning'></i>批量删除歌曲失败";
-                var msg = "批量删除歌曲失败";
-                var btn1Text = "关闭";
-                var btn1Class = "btn btn-default";
-                var btn1Url = "";
-                var btn2Text = "关闭";
-                var btn2Class = "btn btn-default";
-                var btn2Url = "close";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                $("#song_title").html("<i class='fa fa-warning'></i>批量删除歌曲失败");
+                $("#song_body p").text("批量删除歌曲失败");
+                $("#song_btn1").hide();
+                $("#song_btn2").attr("class", "btn btn-default");
+                $("#song_btn2").text("关闭");
+                $("#song_btn2").click(function() {
+                    $("#song_modal").modal('hide');
+                    $('.modal-backdrop').remove();
+                });
+                $("#song_modal").modal();
             },
             success : function(data) {
-                var title = "批量删除歌曲";
-                var msg = "批量删除歌曲成功";
-                var btn1Text = "关闭";
-                var btn1Class = "btn btn-default";
-                var btn1Url = "";
-                var btn2Text = "关闭";
-                var btn2Class = "btn btn-default";
-                var btn2Url = "/ent/music/song";
-                showDialog(title, msg, btn1Text, btn1Class, btn1Class, btn2Text, btn2Class, btn2Url);
+                $("#song_title").html("批量删除歌曲");
+                $("#song_body p").text("批量删除歌曲成功");
+                $("#song_btn1").hide();
+                $("#song_btn2").attr("class", "btn btn-default");
+                $("#song_btn2").text("关闭");
+                $("#song_btn2").click(function() {
+                    $("#song_modal").modal('hide');
+                    $('.modal-backdrop').remove();
+                    getTarget("/ent/music/song")；
+                });
+                $("#song_modal").modal();
             }
         });
     });
 
-    $("#modal_btn2").attr("class", "btn btn-primary");
-    $("#modal_btn2").text("取消");
-    $("#modal_btn2").click(function() {
-        $("#doudou_modal").modal('hide');
+    $("#song_btn2").attr("class", "btn btn-primary");
+    $("#song_btn2").text("取消");
+    $("#song_btn2").click(function() {
+        $("#song_modal").modal('hide');
         $('.modal-backdrop').remove();
     });
 
-    $("#doudou_modal").modal();
+    $("#song_modal").modal();
 
 }
 
