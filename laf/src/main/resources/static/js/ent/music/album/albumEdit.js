@@ -91,7 +91,10 @@ function load_album_dict(dict_type) {
 
             var album_language = $("#album_language_").val();
             var album_type = $("#album_type_").val();
-            var album_style = $("#album_style_").val().split(",");
+            var album_style = $("#album_style_").val();
+            if (album_style) {
+                album_style = album_style.split(",");
+            }
 
 			if ("album_language" == dict_type) {
 				html += '<option value="">--专辑语言--</option>'
@@ -118,10 +121,12 @@ function load_album_dict(dict_type) {
                 }
                 if ("album_style" == dict_type) {
                     var selected_flg = false;
-                    for (var idx = 0; idx < album_style.length; idx++) {
-                        if (album_style[idx] == result[i].dictValue) {
-                            selected_flg = true;
-                            break;
+                    if (album_style) {
+                        for (var idx = 0; idx < album_style.length; idx++) {
+                            if (album_style[idx] == result[i].dictValue) {
+                                selected_flg = true;
+                                break;
+                            }
                         }
                     }
                     if (selected_flg) {
