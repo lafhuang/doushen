@@ -1,7 +1,6 @@
 var request_prefix = "/ent/music/singer";
 
 $().ready(function() {
-
     var title = "<li>音乐</li><li>歌手</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/singer');
@@ -20,11 +19,9 @@ $().ready(function() {
         var target = $(this).attr("target");
         getTarget(target);
     });
-
 });
 
 function load() {
-
     var initial = $("#singer_initial_div").find("a.singer_tag__item--select").attr("data-id");
     if (initial == "-100") {
         initial = '';
@@ -74,7 +71,6 @@ function load() {
             }
         }
     });
-
 }
 
 function loadDict() {
