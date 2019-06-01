@@ -61,3 +61,5 @@ function update() {
 		}
 	});
 }
+
+//# sourceURL=edit.js

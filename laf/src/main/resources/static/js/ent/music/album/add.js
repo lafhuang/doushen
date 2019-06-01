@@ -8,7 +8,6 @@ $().ready(function() {
     initSinger();
     initDict();
 	formValidate();
-
     initSelect();
 });
 

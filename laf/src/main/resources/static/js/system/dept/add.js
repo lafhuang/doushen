@@ -26,3 +26,5 @@ function save() {
 		}
 	});
 }
+
+//# sourceURL=add.js

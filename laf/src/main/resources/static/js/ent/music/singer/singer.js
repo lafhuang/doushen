@@ -5,9 +5,6 @@ $().ready(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/singer');
 
-    loadDict();
-    load();
-
     $(".singer_tag__item").click(function(){
         $(this).siblings().removeClass("singer_tag__item--select");
         $(this).addClass("singer_tag__item--select");
@@ -19,6 +16,9 @@ $().ready(function() {
         var target = $(this).attr("target");
         getTarget(target);
     });
+
+    loadDict();
+    load();
 });
 
 function load() {

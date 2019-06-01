@@ -60,7 +60,6 @@ function update() {
             $("#song_edit_modal").modal();
 		}
 	});
-
 }
 
 //# sourceURL=edit.js

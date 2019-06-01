@@ -1,6 +1,6 @@
 var singerId = $("#id").val();
 var singerName = $("#singerName").val();
-v
+
 $().ready(function() {
     var title = "<li>音乐</li><li>歌手</li><li>"+singerName+"</li><li>编辑</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span><span>>&nbsp;编辑&nbsp;</span>";

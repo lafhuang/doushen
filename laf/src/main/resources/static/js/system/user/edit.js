@@ -121,3 +121,5 @@ function loadDept( deptId,deptName){
 	$("#deptId").val(deptId);
 	$("#deptName").val(deptName);
 }
+
+//# sourceURL=edit.js

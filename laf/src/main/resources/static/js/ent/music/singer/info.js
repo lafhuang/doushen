@@ -7,14 +7,14 @@ $().ready(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span>";
     changeTitle(title, menu_head,'ent/music/singer');
 
-    initRegionType();
-
     $("article a").on("click", function() {
         var target = $(this).attr("target");
         if (target) {
             getTarget(target);
         }
     });
+
+    initRegionType();
 });
 
 function initRegionType() {

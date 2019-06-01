@@ -107,3 +107,5 @@ function formValidate() {
 function goBack() {
     getTarget(request_prefix);
 }
+
+//# sourceURL=dictEdit.js

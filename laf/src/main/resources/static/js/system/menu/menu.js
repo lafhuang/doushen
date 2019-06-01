@@ -165,3 +165,5 @@ function batchRemove() {
 		});*/
 	}, function() {});
 }
+
+//# sourceURL=menu.js

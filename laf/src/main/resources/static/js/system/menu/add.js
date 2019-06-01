@@ -65,3 +65,5 @@ function validateRule() {
 		}
 	})
 }
+
+//# sourceURL=add.js

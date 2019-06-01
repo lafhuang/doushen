@@ -90,3 +90,5 @@ function validateRule() {
 		}
 	})
 }
+
+//# sourceURL=edit.js

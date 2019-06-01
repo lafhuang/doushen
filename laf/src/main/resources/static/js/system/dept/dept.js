@@ -75,4 +75,4 @@ function remove(id) {
 	})
 }
 
-//# sourceURL=dict.js
+//# sourceURL=dept.js

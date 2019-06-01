@@ -17,3 +17,11 @@ fa fa-check
 
 warning
 fa fa-warning
+
+
+btn-default
+btn-primary
+btn-success
+btn-info
+btn-warning
+btn-danger

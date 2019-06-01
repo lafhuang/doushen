@@ -131,3 +131,5 @@ function batchRemove() {
 		});
 	}, function() {});
 }
+
+//# sourceURL=role.js

@@ -251,3 +251,5 @@ function formValidate() {
 function goBack() {
     getTarget('ent/video/movie');
 }
+
+//# sourceURL=add.js

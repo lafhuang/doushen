@@ -9,10 +9,6 @@ $(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;专辑&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/album');
 
-    loadSinger();
-    loadDict();
-	load();
-
 	$("article").on("click", "a", function() {
         var target = $(this).attr("target");
         if (target) {
@@ -20,6 +16,9 @@ $(function() {
         }
     });
 
+    loadSinger();
+    loadDict();
+	load();
     initSelect();
 });
 

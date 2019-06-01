@@ -8,11 +8,6 @@ $(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/song');
 
-    loadDict();
-	load();
-	loadSinger();
-	loadAlbum();
-
 	$("article").on("click", "a", function() {
 		var target = $(this).attr("target");
 		if (target) {
@@ -20,6 +15,10 @@ $(function() {
 		}
 	});
 
+    loadDict();
+	load();
+	loadSinger();
+	loadAlbum();
 	initSelect();
 });
 
@@ -353,7 +352,6 @@ function batchRemove() {
     });
 
     $("#song_modal").modal();
-
 }
 
 //# sourceURL=song.js

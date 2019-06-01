@@ -6,8 +6,6 @@ $().ready(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span><span>>&nbsp;"+singerName+"&nbsp;</span><span>>&nbsp;导入专辑&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/singer');
 
-    initFileUpload();
-
     $("#reset-btn").click(function() {
         getTarget( '/ent/music/singer/importAlbum/' + singerId);
     });
@@ -18,6 +16,8 @@ $().ready(function() {
             getTarget(target);
         }
     });
+
+    initFileUpload();
 });
 
 function initFileUpload() {

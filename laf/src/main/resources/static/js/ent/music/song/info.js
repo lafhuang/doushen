@@ -10,8 +10,6 @@ function initDict() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌曲&nbsp;</span><span>>&nbsp;"+songName+"&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/song');
 
-    load_dict("album_language");
-
     $("#album_language_li").text("语言：" + $("#album_language_").val());
 
     $("article a").on("click", function() {
@@ -20,6 +18,8 @@ function initDict() {
             getTarget(target);
         }
     });
+
+    load_dict("album_language");
 }
 
 function load_dict(dict_type) {
