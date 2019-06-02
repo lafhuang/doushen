@@ -22,7 +22,7 @@
 									</label>
 								</section>
 								<div class="col col-2">
-									<a class="btn btn-default btn-sm" href="javascript:void(0);" onclick="resert();">&nbsp;&nbsp;重&nbsp;置&nbsp;&nbsp;</a>
+									<a class="btn btn-default btn-sm" href="javascript:void(0);" onclick="reset();">&nbsp;&nbsp;重&nbsp;置&nbsp;&nbsp;</a>
 									<a class="btn btn-info btn-sm" href="javascript:void(0);" onclick="reLoad();">&nbsp;&nbsp;查&nbsp;询&nbsp;&nbsp;</a>
 								</div>
 							</div>
@@ -38,6 +38,27 @@
 			</div>
 		</div>
 	</article>
+	<!-- modal start -->
+	<div class="modal fade" id="dict_modal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="closeBtn">
+						&times;
+					</button>
+					<h4 class="modal-title" id="dict_title"></h4>
+				</div>
+				<div class="modal-body" id="dict_body">
+					<p></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="dict_btn1"></button>
+					<button type="button" id="dict_btn2"></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal end -->
 </div>
 <div>
 	<script type="text/javascript">

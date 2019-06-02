@@ -1,7 +1,4 @@
-var request_prefix = "/ent/video/movie";
-
 $(function() {
-
     var title = "<li>视频</li><li>电影</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-film'></i>&nbsp;视频&nbsp;<span>>&nbsp;电影&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/video/movie');
@@ -21,7 +18,7 @@ function load() {
         .bootstrapTable(
             {
                 method : 'get',
-                url : request_prefix + "/list",
+                url : "/ent/video/movie/list",
                 iconSize : 'outline',
                 striped : true,
                 dataType : "json",
@@ -103,7 +100,7 @@ function reLoad() {
 }
 
 function add() {
-    getTarget(request_prefix + '/add');
+    getTarget('/ent/video/movie/add');
 }
 
 function remove(id) {
@@ -116,7 +113,7 @@ function remove(id) {
     $("#modal_btn1").show();
     $("#modal_btn1").click(function() {
         $.ajax({
-            url : request_prefix + "/remove",
+            url : "/ent/video/movie/remove",
             type : "post",
             data : {
                 'id' : id
@@ -140,7 +137,7 @@ function remove(id) {
                 var btn1Url = "";
                 var btn2Text = "关闭";
                 var btn2Class = "btn btn-default";
-                var btn2Url = request_prefix;
+                var btn2Url = '/ent/video/movie';
                 showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             }
         });
@@ -156,7 +153,7 @@ function remove(id) {
     $("#doudou_modal").modal();
 }
 function edit(id) {
-    getTarget(request_prefix + '/edit/' + id);
+    getTarget(requestefix + '/ent/video/movie/edit/' + id);
 }
 
 function batchRemove() {
@@ -191,7 +188,7 @@ function batchRemove() {
             data : {
                 "ids" : ids
             },
-            url : request_prefix + '/batchRemove',
+            url : '/ent/video/movie/batchRemove',
             error : function(data) {
                 var title = "<i class='fa fa-warning'></i>批量删除电影失败";
                 var msg = "批量删除电影失败";
@@ -211,7 +208,7 @@ function batchRemove() {
                 var btn1Url = "";
                 var btn2Text = "关闭";
                 var btn2Class = "btn btn-default";
-                var btn2Url = request_prefix;
+                var btn2Url = '/ent/video/movie';
                 showDialog(title, msg, btn1Text, btn1Class, btn1Url, btn2Text, btn2Class, btn2Url);
             }
         });

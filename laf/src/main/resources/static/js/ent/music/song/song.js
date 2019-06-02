@@ -1,5 +1,3 @@
-var request_prefix = "/ent/music/song";
-
 var song_language;
 var audio_type;
 
@@ -59,7 +57,7 @@ function load() {
 		.bootstrapTable(
 			{
 				method : 'get',
-				url : request_prefix + "/list",
+				url : "/ent/music/song/list",
 				iconSize : 'outline',
 				striped : true,
 				dataType : "json",
@@ -220,7 +218,7 @@ function reLoad() {
 }
 
 function add() {
-	getTarget(request_prefix + '/add');
+	getTarget('/ent/music/song/add');
 }
 
 function remove(id) {
@@ -279,7 +277,7 @@ function remove(id) {
 }
 
 function edit(id) {
-    getTarget(request_prefix + '/edit/' + id);
+    getTarget('/ent/music/song/edit/' + id);
 }
 
 function batchRemove() {
@@ -315,7 +313,7 @@ function batchRemove() {
             data : {
                 "ids" : ids
             },
-            url : request_prefix + '/batchRemove',
+            url : '/ent/music/song/batchRemove',
             error : function(data) {
                 $("#song_title").html("<i class='fa fa-warning'></i>批量删除歌曲失败");
                 $("#song_body p").text("批量删除歌曲失败");
@@ -337,7 +335,7 @@ function batchRemove() {
                 $("#song_btn2").click(function() {
                     $("#song_modal").modal('hide');
                     $('.modal-backdrop').remove();
-                    getTarget("/ent/music/song")；
+                    getTarget("/ent/music/song");
                 });
                 $("#song_modal").modal();
             }

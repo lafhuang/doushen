@@ -1,10 +1,9 @@
-var request_prefix = "/system/dict";
 var dictMap;
 
 function initDictType() {
 	var html = "";
 	$.ajax({
-		url : request_prefix + '/type',
+		url : '/system/dict/type',
 		success : function(data) {
 			dictMap = {};
 			var dictType = $("#dictType").val();
@@ -105,7 +104,7 @@ function formValidate() {
 }
 
 function goBack() {
-    getTarget(request_prefix);
+    getTarget('/system/dict');
 }
 
 //# sourceURL=dictEdit.js

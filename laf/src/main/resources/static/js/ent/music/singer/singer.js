@@ -1,5 +1,3 @@
-var request_prefix = "/ent/music/singer";
-
 $().ready(function() {
     var title = "<li>音乐</li><li>歌手</li>";
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span>";
@@ -43,7 +41,7 @@ function load() {
 
     $.ajax({
         type: 'post',
-        url : request_prefix + "/list",
+        url : "/ent/music/singer/list",
         data: JSON.stringify(data),
         dataType: 'json',
         cache:false,
@@ -101,7 +99,7 @@ function load_singer_dict(dict_type) {
 }
 
 function add() {
-	getTarget(request_prefix + '/add');
+	getTarget('/ent/music/singer/add');
 }
 
 //# sourceURL=singer.js

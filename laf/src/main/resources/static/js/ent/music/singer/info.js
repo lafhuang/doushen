@@ -1,4 +1,3 @@
-var request_prefix = "/ent/music/singer"
 var singerId = $("#id").val();
 
 $().ready(function() {
@@ -49,11 +48,11 @@ function load_dict(dict_type) {
 }
 
 function edit() {
-	getTarget(request_prefix + '/edit/' + singerId)
+	getTarget('/ent/music/singer/edit/' + singerId)
 }
 
 function goBack() {
-    getTarget(request_prefix);
+    getTarget('/ent/music/singer');
 }
 
 function loadAllAlbum() {
@@ -128,15 +127,15 @@ function loadAllSong() {
 }
 
 function importAlbum() {
-	getTarget(request_prefix + '/importAlbum/' + singerId);
+	getTarget('/ent/music/singer/importAlbum/' + singerId);
 }
 
 function importSong() {
-	getTarget(request_prefix + '/importSong/' + singerId);
+	getTarget('/ent/music/singer/importSong/' + singerId);
 }
 
 function reload() {
-    getTarget(request_prefix + '/info/' + singerId)
+    getTarget('/ent/music/singer/info/' + singerId)
 }
 
 //# sourceURL=info.js

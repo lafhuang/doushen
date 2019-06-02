@@ -1,11 +1,9 @@
-var request_prefix = "/ent/video/movie";
-
 var btn1Text = "返回";
 var btn1Class = "btn btn-default";
-var btn1Url = request_prefix;
+var btn1Url = '/ent/video/movie';
 var btn2Text = "继续添加";
 var btn2Class = "btn btn-primary";
-var btn2Url = request_prefix+"/add";
+var btn2Url = "/ent/video/movie/add";
 
 $().ready(function() {
 
@@ -138,7 +136,7 @@ function save() {
     $.ajax({
         cache : true,
         type : "POST",
-        url : request_prefix+"/save",
+        url : "/ent/video/movie/save",
         data : $('#signupForm').serialize(),
         async : false,
         error : function(request) {
