@@ -16,40 +16,40 @@ function update() {
 		data : $('#dictForm').serialize(),
 		async : false,
 		error : function(request) {
-			$("#dict_add_title").html("<i class='fa fa-warning'></i>编辑数据字典失败");
-            $("#dict_add_body p").text("编辑数据字典失败");
-            $("#dict_add_btn1").attr("class", "btn btn-primary");
-            $("#dict_add_btn1").text("返回");
-            $("#dict_add_btn1").click(function() {
-                $("#dict_add_modal").modal('hide');
+			$("#dict_edit_title").html("<i class='fa fa-warning'></i>编辑数据字典失败");
+            $("#dict_edit_body p").text("编辑数据字典失败");
+            $("#dict_edit_btn1").attr("class", "btn btn-primary");
+            $("#dict_edit_btn1").text("返回");
+            $("#dict_edit_btn1").click(function() {
+                $("#dict_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
                 getTarget("/system/dict");
             });
-            $("#dict_add_btn2").attr("class", "btn btn-default");
-            $("#dict_add_btn2").text("关闭");
-            $("#dict_add_btn2").click(function() {
-                $("#dict_add_modal").modal('hide');
+            $("#dict_edit_btn2").attr("class", "btn btn-default");
+            $("#dict_edit_btn2").text("关闭");
+            $("#dict_edit_btn2").click(function() {
+                $("#dict_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
             });
-            $("#dict_add_modal").modal();
+            $("#dict_edit_modal").modal();
 		},
 		success : function(data) {
-			$("#dict_add_title").html("编辑数据字典");
-            $("#dict_add_body p").text("编辑数据字典成功");
-            $("#dict_add_btn1").attr("class", "btn btn-primary");
-            $("#dict_add_btn1").text("返回");
-            $("#dict_add_btn1").click(function() {
-                $("#dict_add_modal").modal('hide');
+			$("#dict_edit_title").html("编辑数据字典");
+            $("#dict_edit_body p").text("编辑数据字典成功");
+            $("#dict_edit_btn1").attr("class", "btn btn-primary");
+            $("#dict_edit_btn1").text("返回");
+            $("#dict_edit_btn1").click(function() {
+                $("#dict_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
                 getTarget("/system/dict");
             });
-            $("#dict_add_btn2").attr("class", "btn btn-default");
-            $("#dict_add_btn2").text("关闭");
-            $("#dict_add_btn2").click(function() {
-                $("#dict_add_modal").modal('hide');
+            $("#dict_edit_btn2").attr("class", "btn btn-default");
+            $("#dict_edit_btn2").text("关闭");
+            $("#dict_edit_btn2").click(function() {
+                $("#dict_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
             });
-            $("#dict_add_modal").modal();
+            $("#dict_edit_modal").modal();
 		}
 	});
 }

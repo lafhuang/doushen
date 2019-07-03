@@ -31,10 +31,12 @@ function initDictType() {
 
 			$("#dictType_").on('change',function(){
 			    dictType = $("#dictType_").val();
+			    $("#dictType").val(dictType);
                 $("#description").val(dictMap[dictType]);
             });
 
             if (dictType) {
+                $("#dictType").val(dictType);
                 $("#description").val(dictMap[dictType]);
             }
 		}
@@ -86,7 +88,8 @@ function formValidate() {
                 required : "&nbsp;&nbsp;请输入字典描述"
             },
             sort : {
-                required : "&nbsp;&nbsp;请输入字典排序"
+                required : "&nbsp;&nbsp;请输入字典排序",
+                digits : "&nbsp;&nbsp;请输入正整数"
             }
         },
         submitHandler: function () {
@@ -106,5 +109,20 @@ function formValidate() {
 function goBack() {
     getTarget('/system/dict');
 }
+
+$("#dictType").change(function() {
+    var dictType = $.trim($(this).val());
+    $(this).val(dictType);
+    var desc = dictMap[dictType];
+    if (desc) {
+        $("#select2-dictType_-container").text(dictType);
+        $("#description").val(desc);
+        $("#dictType_").val(dictType);
+    } else {
+        $("#select2-dictType_-container").text("--字典类型--");
+        $("#description").val("");
+        $("#dictType_").val("");
+    }
+});
 
 //# sourceURL=dictEdit.js

@@ -167,7 +167,8 @@ function formValidate() {
                 required : "&nbsp;&nbsp;请选择所属专辑"
             },
             trackNumber : {
-                required : "&nbsp;&nbsp;请输入音轨号"
+                required : "&nbsp;&nbsp;请输入音轨号",
+                digits : "&nbsp;&nbsp;请输入正整数"
             },
             language : {
                 required : "&nbsp;&nbsp;请选择歌曲语言"
@@ -176,7 +177,8 @@ function formValidate() {
                 required : "&nbsp;&nbsp;请输入歌曲时长"
             },
             size : {
-                required : "&nbsp;&nbsp;请输入文件大小"
+                required : "&nbsp;&nbsp;请输入文件大小",
+                number : "&nbsp;&nbsp;请输入有效数字"
             },
             audioType : {
                 required : "&nbsp;&nbsp;请选择音频格式"

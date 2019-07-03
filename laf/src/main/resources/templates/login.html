@@ -125,11 +125,22 @@
 <script src="/smart_admin/js/app.min.js"></script>
 
 <script>
+
+    $(document).keyup(function (event) {
+        if(event.keyCode == 13) {
+            $("#login").trigger("click");
+        }
+    });
+
     $("input").focus(function () {
         $("#errorMsg").hide();
     });
 
     $(document).ready(function () {
+        if(top.location!=self.location){
+            window.parent.location.reload()
+        }
+
         $("#login").on('click',function(){$("#login-form").submit();});
         validateRule();
     });

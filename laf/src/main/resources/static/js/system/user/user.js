@@ -65,9 +65,9 @@ function load(deptId) {
 						align : 'center',
 						formatter : function(value, row, index) {
 							if (value == '0') {
-								return '<span class="btn btn-danger">禁用</span>';
+								return '<span class="glyphicon glyphicon-ban-circle" style="font-size: 20px; color: red; "></span>';
 							} else if (value == '1') {
-								return '<span class="btn btn-primary">正常</span>';
+								return '<span class="glyphicon glyphicon-ok-circle" style="font-size: 20px; color: green; "></span>';
 							}
 						}
 					},
