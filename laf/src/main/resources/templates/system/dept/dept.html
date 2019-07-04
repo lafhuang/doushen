@@ -1,24 +1,35 @@
 <div class="row">
-    <article class="col-sm-2">
-    </article>
-    <article class="col-sm-8">
+    <article class="col-sm-4">
         <div class="jarviswidget jarviswidget-color-blueDark">
             <header role="heading" class="ui-sortable-handle">
                 <div class="jarviswidget-ctrls" role="menu">
                     <a shiro:hasPermission="system:dept:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
+                    <a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="expandAll();">&nbsp;<i class="fa fa-folder-open-o"></i>&nbsp;展&nbsp;开&nbsp;&nbsp;</a>
+                    <a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="collapseAll();">&nbsp;<i class="fa fa-folder-o"></i>&nbsp;收&nbsp;起&nbsp;&nbsp;</a>
                 </div>
                 <h2>部门 </h2>
             </header>
             <div role="content">
                 <div class="widget-body no-padding">
                     <input id="pId" type="hidden" value="3">
-                    <div class="tree smart-form">
-                    </div>
+                        <div class="tree smart-form col col-4">
+                        </div>
                 </div>
             </div>
         </div>
     </article>
-    <article class="col-sm-2">
+    <article class="col-sm-8">
+        <div class="jarviswidget jarviswidget-color-blueDark">
+            <header role="heading" class="ui-sortable-handle">
+                <h2>部门信息 </h2>
+            </header>
+            <div role="content">
+                <div class="widget-body no-padding">
+                    <div id="deptInfo">
+                    </div>
+                </div>
+            </div>
+        </div>
     </article>
 </div>
 <div>
@@ -44,4 +55,11 @@
         var s_remove_h = '';
     </script>
 </div>
+<style type="text/css">
+    .focus
+    {
+        border: 1px solid #f00;
+        background: #fcc;
+    }
+</style>
 <script type="text/javascript" th:src="@{'/js/system/dept/dept.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>

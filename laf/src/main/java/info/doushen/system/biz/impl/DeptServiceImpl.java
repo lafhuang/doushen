@@ -5,7 +5,9 @@ import info.doushen.system.biz.DeptService;
 import info.doushen.system.entity.DeptEntity;
 import info.doushen.system.mapper.DeptMapper;
 import info.doushen.system.utils.Tree;
+import info.doushen.system.vo.DeptVO;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +69,20 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public int remove(int id) {
         return deptMapper.delete(id);
+    }
+
+    @Override
+    public DeptVO getDeptInfo(int id) {
+        DeptVO dept = new DeptVO();
+        Map<String, Object> deptInfo = deptMapper.getDeptInfo(id);
+        if (MapUtils.isEmpty(deptInfo)) {
+            return dept;
+        }
+        dept.setId((Integer) deptInfo.get("ID"));
+        dept.setDeptName((String) deptInfo.get("DEPT_NAME"));
+        dept.setParentId((Integer) deptInfo.get("PARENT_ID"));
+        dept.setParentName((String) deptInfo.get("PARENT_NAME"));
+        return dept;
     }
 
 }

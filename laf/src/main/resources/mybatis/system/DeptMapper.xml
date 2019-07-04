@@ -119,4 +119,20 @@
 							t)
 	</delete>
 
+	<select id="getDeptInfo" parameterType="java.lang.Integer" resultType="java.util.Map">
+		SELECT
+			T.ID        AS "ID",
+			T.DEPT_NAME AS "DEPT_NAME",
+			T.PARENT_ID AS "PARENT_ID",
+			P.DEPT_NAME AS "PARENT_NAME"
+		FROM
+			SYS_DEPT T
+		LEFT JOIN
+			SYS_DEPT P
+		ON
+			T.PARENT_ID = P.ID
+		WHERE
+			T.ID = #{id}
+	</select>
+
 </mapper>

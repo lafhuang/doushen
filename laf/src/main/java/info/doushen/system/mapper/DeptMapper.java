@@ -53,4 +53,12 @@ public interface DeptMapper {
      */
     int delete(int id);
 
+    /**
+     * 获取部门信息
+     *
+     * @param id
+     * @return
+     */
+    Map<String, Object> getDeptInfo(int id);
+
 }

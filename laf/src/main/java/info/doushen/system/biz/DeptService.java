@@ -2,6 +2,7 @@ package info.doushen.system.biz;
 
 import info.doushen.system.entity.DeptEntity;
 import info.doushen.system.utils.Tree;
+import info.doushen.system.vo.DeptVO;
 
 import java.util.List;
 import java.util.Map;
@@ -60,5 +61,13 @@ public interface DeptService {
      * @return
      */
     int remove(int id);
+
+    /**
+     * 获取部门信息
+     *
+     * @param id
+     * @return
+     */
+    DeptVO getDeptInfo(int id);
 
 }

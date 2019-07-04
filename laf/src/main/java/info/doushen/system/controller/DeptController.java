@@ -6,6 +6,7 @@ import info.doushen.common.controller.BaseController;
 import info.doushen.system.biz.DeptService;
 import info.doushen.system.entity.DeptEntity;
 import info.doushen.system.utils.Tree;
+import info.doushen.system.vo.DeptVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,14 @@ public class DeptController extends BaseController {
         Map<String, Object> params = new HashMap<>(16);
         List<DeptEntity> deptList = deptService.list(params);
         return deptList;
+    }
+
+    @ResponseBody
+    @GetMapping("/get/{id}")
+    @RequiresPermissions("system:dept:dept")
+    public DeptVO get(@PathVariable("id") int id) {
+        DeptVO dept = deptService.getDeptInfo(id);
+        return dept;
     }
 
     @GetMapping("/add/{pId}")
