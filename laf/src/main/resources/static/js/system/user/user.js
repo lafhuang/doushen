@@ -1,26 +1,11 @@
 var request_prefix = "/system/user"
 
 $(function() {
-	var deptId = '';
 	getTreeData();
-	load(deptId);
-
-
-	$('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
-	$('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function(e) {
-		var children = $(this).parent('li.parent_li').find(' > ul > li');
-		if (children.is(':visible')) {
-			children.hide('fast');
-			$(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
-		} else {
-			children.show('fast');
-			$(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
-		}
-		e.stopPropagation();
-	});
+	load();
 });
 
-function load(deptId) {
+function load() {
 	$('#exampleTable')
 		.bootstrapTable(
 			{
@@ -40,7 +25,7 @@ function load(deptId) {
 						limit : params.limit,
 						offset : params.offset,
 						name : $('#searchName').val(),
-						deptId : deptId
+						deptId : $("#pId").val()
 					};
 				},
 				columns : [
@@ -92,7 +77,16 @@ function load(deptId) {
 }
 
 function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+    var opt = {
+        url: request_prefix + "/list",
+        silent: true,
+        query:{
+            name : $('#searchName').val(),
+            deptId : $("#pId").val()
+        }
+    };
+
+    $('#exampleTable').bootstrapTable('refresh', opt);
 }
 
 function add() {
@@ -177,6 +171,18 @@ function getTreeData() {
 		    var parent = $("<ul></ul>");
 		    loadDeptTree(tree, parent);
 		    $('.tree').html(parent);
+		    $('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+            $('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', '收起').find(' > i').on('click', function(e) {
+                var children = $(this).parent().parent('li.parent_li').find(' > ul > li');
+                if (children.is(':visible')) {
+                    children.hide('fast');
+                    $(this).parent().attr('title', '展开').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+                } else {
+                    children.show('fast');
+                    $(this).parent().attr('title', '收起').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+                }
+                e.stopPropagation();
+            });
 		}
 	});
 }
@@ -187,20 +193,39 @@ function loadDeptTree(childList, parent) {
         var child = childList[idx];
         var li = $("<li></li>");
         if (child.children.length > 0) {
-            var span = '';
-            if (child.id == 1) {
-                span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='fa fa-lg fa-home'></i> "+child.text+"</span>");
-            } else {
-                span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='fa fa-lg fa-minus-circle'></i> "+child.text+"</span>");
-            }
+            var span = $("<span id='dept_node_"+child.id+"' onclick='loadUser("+child.id+")'><i class='fa fa-lg fa-minus-circle'></i> "+child.text+"</span>");
             $(li).append(span).append("<ul></ul>").appendTo(parent);
             loadDeptTree(child.children, $(li).children().eq(1));
         } else {
-            var span = $("<span name='dept_node' dept_id='"+child.id+"'><i class='icon-leaf'></i> "+child.text+"</span>");
+            var span = $("<span id='dept_node_"+child.id+"' onclick='loadUser("+child.id+")'><i class='icon-leaf'></i> "+child.text+"</span>");
             $(li).append(span).appendTo(parent);
         }
     }
 
 }
 
+function loadUser(deptId) {
+    $("span[id^='dept_node_']").removeClass("focus");
+    $("#dept_node_"+deptId).addClass("focus");
+    $("#pId").val(deptId);
+    reLoad();
+}
+
+function expandAll() {
+    var children = $('.tree').find('li');
+    children.show('fast');
+    $('.tree').find('li.parent_li > span').attr('title', '收起').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+}
+
+function collapseAll() {
+    $("span[id^='dept_node_']").removeClass("focus");
+    $("#deptInfo").html("");
+    $('.tree').find('li').each(function () {
+        var deptId = $(this).find(" > span").attr("id");
+        if (deptId != "dept_node_1") {
+            $(this).hide('fast');
+        }
+    });
+    $('.tree').find('li.parent_li > span').attr('title', '展开').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+}
 //# sourceURL=user.js

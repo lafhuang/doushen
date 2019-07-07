@@ -51,7 +51,7 @@
 		    sys_user
 		<where>
 			<if test="name != null and name != ''"> and name like CONCAT('%',#{name},'%') </if>
-			<if test="deptId != null and deptId != ''"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
+			<if test="deptId != null and deptId != '' and deptId != '1'"> and dept_id = to_number(#{deptId}, '9999999999999999999') </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">

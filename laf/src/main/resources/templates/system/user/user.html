@@ -4,12 +4,16 @@
 		<div class="jarviswidget jarviswidget-color-blue" id="wid-id-1" data-widget-editbutton="false">
 			<header>
 				<span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+				<div class="jarviswidget-ctrls" role="menu">
+					<a class="btn btn-success btn-sm" href="javascript:void(0);" onclick="expandAll();">&nbsp;<i class="fa fa-folder-open-o"></i>&nbsp;展&nbsp;开&nbsp;&nbsp;</a>
+					<a class="btn btn-warning btn-sm" href="javascript:void(0);" onclick="collapseAll();">&nbsp;<i class="fa fa-folder-o"></i>&nbsp;收&nbsp;起&nbsp;&nbsp;</a>
+				</div>
 				<h2>组织架构 </h2>
 			</header>
 			<div>
 				<div class="widget-body">
+					<input id="pId" type="hidden">
 					<div class="tree smart-form">
-
 					</div>
 				</div>
 			</div>
@@ -76,6 +80,13 @@
 		s_resetPwd_h = '';
 	</script>
 </div>
+<style type="text/css">
+	.focus
+	{
+		border: 1px solid #f00;
+		background: #fcc;
+	}
+</style>
 <script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table.min.js" />
 <script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js" />
 <script type="text/javascript" th:src="@{'/js/system/user/user.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
