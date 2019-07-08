@@ -21,14 +21,6 @@ public interface DictMapper {
     List<DictEntity> listType();
 
     /**
-     * 获取数据字典记录数
-     *
-     * @param query
-     * @return
-     */
-    int count(Query query);
-
-    /**
      * 获取数据字典记录
      *
      * @param query

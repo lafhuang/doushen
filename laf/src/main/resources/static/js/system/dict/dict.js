@@ -30,6 +30,7 @@ function load() {
 				url : "/system/dict/list",
 				iconSize : 'outline',
 				striped : true,
+				contentType : "application/x-www-form-urlencoded",
 				dataType : "json",
 				pagination : true,
 				singleSelect : false,

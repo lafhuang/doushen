@@ -1,5 +1,6 @@
 package info.doushen.system.biz;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.entity.RoleEntity;
@@ -22,7 +23,7 @@ public interface RoleService {
      * @param query
      * @return
      */
-    Pager pageRoleList(Query query);
+    PageInfo<RoleEntity> pageRoleList(Query query);
 
     /**
      * 获取角色列表

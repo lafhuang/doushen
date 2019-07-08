@@ -3,21 +3,6 @@
 
 <mapper namespace="info.doushen.ent.music.mapper.SongMapper">
 
-    <select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
-        SELECT
-            count(1)
-        FROM
-            ent_music_song song
-        <if test="singerId != null and singerId != ''">
-            JOIN ent_music_album album on song.album_id = album.id
-        </if>
-        <where>
-            <if test="name != null and name != ''"> and song.name ~* #{name} </if>
-            <if test="albumId != null and albumId != ''"> and song.album_id = to_number(#{albumId}, '9999999999999999999') </if>
-            <if test="singerId != null and singerId != ''"> and album.singer_id = to_number(#{singerId}, '9999999999999999999') </if>
-        </where>
-    </select>
-
     <select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.ent.music.vo.SongVO">
         SELECT
             song.id,
@@ -59,9 +44,6 @@
                 order by singer.name, album.issue_date, song.track_number
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{limit} offset #{offset}
-        </if>
     </select>
 
     <insert id="save" parameterType="info.doushen.ent.music.entity.SongEntity" useGeneratedKeys="true" keyProperty="id">

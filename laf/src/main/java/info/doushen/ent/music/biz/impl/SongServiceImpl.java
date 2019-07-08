@@ -1,5 +1,7 @@
 package info.doushen.ent.music.biz.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
@@ -38,13 +40,11 @@ public class SongServiceImpl implements SongService {
     private DictService dictService;
 
     @Override
-    public Pager pageSongList(Query query) {
-        int count = songMapper.count(query);
-        if (count == 0) {
-            return new Pager(count, new ArrayList<SongVO>());
-        }
+    public PageInfo<SongVO> pageSongList(Query query) {
+        PageHelper.startPage(query.getOffset(), query.getLimit());
         List<SongVO> songList = songMapper.list(query);
-        return new Pager(count, songList);
+        PageInfo<SongVO> pageInfo = new PageInfo<>(songList);
+        return pageInfo;
     }
 
     @Override

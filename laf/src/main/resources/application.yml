@@ -37,5 +37,7 @@ mybatis:
   typeAliasesPackage: info.doushen.**.entity
 
 pagehelper:
-  helper-dialect: postgresql
-  support-methods-arguments: true
+  helperDialect: postgresql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

@@ -1,5 +1,6 @@
 package info.doushen.ent.music.controller;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
@@ -47,8 +48,8 @@ public class SongController extends BaseController {
     @RequiresPermissions("ent:music:song:song")
     Pager list(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
-        Pager pageSong = songService.pageSongList(query);
-        return pageSong;
+        PageInfo pageInfo = songService.pageSongList(query);
+        return new Pager(pageInfo.getTotal(), pageInfo.getList());
     }
 
     @RequiresPermissions("ent:music:song:add")

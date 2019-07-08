@@ -15,14 +15,6 @@ import java.util.Map;
 public interface AlbumMapper {
 
     /**
-     * 获取专辑记录数
-     *
-     * @param query
-     * @return
-     */
-    int count(Query query);
-
-    /**
      * 获取专辑列表
      *
      * @param query

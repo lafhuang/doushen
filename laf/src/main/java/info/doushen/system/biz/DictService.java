@@ -1,6 +1,6 @@
 package info.doushen.system.biz;
 
-import info.doushen.common.utils.Pager;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Query;
 import info.doushen.system.entity.DictEntity;
 
@@ -27,7 +27,7 @@ public interface DictService {
      * @param query
      * @return
      */
-    Pager pageDictList(Query query);
+    PageInfo<DictEntity> pageDictList(Query query);
 
     /**
      * 保存数据字典

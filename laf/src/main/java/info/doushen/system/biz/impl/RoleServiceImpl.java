@@ -1,10 +1,13 @@
 package info.doushen.system.biz.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleMenuService;
 import info.doushen.system.biz.RoleService;
 import info.doushen.system.biz.UserRoleService;
+import info.doushen.system.entity.DictEntity;
 import info.doushen.system.entity.RoleEntity;
 import info.doushen.system.mapper.RoleMapper;
 import info.doushen.system.vo.RoleVO;
@@ -34,13 +37,11 @@ public class RoleServiceImpl implements RoleService {
     private UserRoleService userRoleService;
 
     @Override
-    public Pager pageRoleList(Query query) {
-        int count = roleMapper.count(query);
-        if (count == 0) {
-            return new Pager(count, new ArrayList<RoleEntity>());
-        }
+    public PageInfo<RoleEntity> pageRoleList(Query query) {
+        PageHelper.startPage(query.getOffset(), query.getLimit());
         List<RoleEntity> roleList = roleMapper.list(query);
-        return new Pager(count, roleList);
+        PageInfo<RoleEntity> pageInfo = new PageInfo<>(roleList);
+        return pageInfo;
     }
 
     @Override

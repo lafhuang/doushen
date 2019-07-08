@@ -1,5 +1,6 @@
 package info.doushen.ent.music.biz;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.SongEntity;
@@ -21,7 +22,7 @@ public interface SongService {
      * @param query
      * @return
      */
-    Pager pageSongList(Query query);
+    PageInfo<SongVO> pageSongList(Query query);
 
     /**
      * 保存歌曲

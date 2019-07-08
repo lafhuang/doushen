@@ -15,14 +15,6 @@ import java.util.Map;
 public interface RoleMapper {
 
     /**
-     * 获取角色记录数
-     *
-     * @param query
-     * @return
-     */
-    int count(Query query);
-
-    /**
      * 获取角色列表
      *
      * @param query

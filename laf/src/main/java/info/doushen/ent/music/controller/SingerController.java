@@ -2,6 +2,7 @@ package info.doushen.ent.music.controller;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
@@ -92,7 +93,8 @@ public class SingerController extends BaseController {
         albumParams.put("singerId", String.valueOf(singerId));
 
         Query albumQuery = new Query(albumParams);
-        Pager albumPage = albumService.pageAlbumList(albumQuery);
+        PageInfo<AlbumEntity> albumPageInfo = albumService.pageAlbumList(albumQuery);
+        Pager albumPage = new Pager(albumPageInfo.getTotal(), albumPageInfo.getList());
 
         model.addAttribute("albumPage", albumPage);
 
@@ -103,7 +105,8 @@ public class SingerController extends BaseController {
         songParams.put("singerId", String.valueOf(singerId));
 
         Query songQuery = new Query(songParams);
-        Pager songPage = songService.pageSongList(songQuery);
+        PageInfo<SongVO> songPageInfo = songService.pageSongList(songQuery);
+        Pager songPage = new Pager(songPageInfo.getTotal(), songPageInfo.getList());
 
         model.addAttribute("songPage", songPage);
 

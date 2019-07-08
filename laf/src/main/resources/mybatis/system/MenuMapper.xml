@@ -73,9 +73,6 @@
                 order by id
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{limit} offset #{offset}
-        </if>
     </select>
 
     <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.MenuEntity">

@@ -3,16 +3,6 @@
 
 <mapper namespace="info.doushen.system.mapper.RoleMapper">
 
-    <select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
-        SELECT
-          COUNT(1)
-        FROM
-          sys_role
-        <where>
-            <if test="roleName != null and roleName != ''"> and role_name like CONCAT('%',#{roleName},'%') </if>
-        </where>
-    </select>
-
     <select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.system.entity.RoleEntity">
         SELECT
             id,
@@ -32,9 +22,6 @@
                 order by id
             </otherwise>
         </choose>
-        <if test="offset != null and limit != null">
-            limit #{limit} offset #{offset}
-        </if>
     </select>
 
     <select id="get" parameterType="java.lang.Integer" resultType="info.doushen.system.entity.RoleEntity">

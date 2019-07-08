@@ -1,5 +1,7 @@
 package info.doushen.ent.music.biz.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.biz.AlbumService;
@@ -36,13 +38,11 @@ public class AlbumServiceImpl implements AlbumService {
     private SongService songService;
 
     @Override
-    public Pager pageAlbumList(Query query) {
-        int count = albumMapper.count(query);
-        if (count == 0) {
-            return new Pager(count, new ArrayList<AlbumEntity>());
-        }
+    public PageInfo<AlbumEntity> pageAlbumList(Query query) {
+        PageHelper.startPage(query.getOffset(), query.getLimit());
         List<AlbumEntity> albumList = albumMapper.list(query);
-        return new Pager(count, albumList);
+        PageInfo<AlbumEntity> pageInfo = new PageInfo<>(albumList);
+        return pageInfo;
     }
 
     @Override

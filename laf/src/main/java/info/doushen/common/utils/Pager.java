@@ -14,20 +14,20 @@ public class Pager implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** 记录数 */
-    private int total;
+    private long total;
     /** 集合 */
     private List<?> rows;
 
-    public Pager(int total, List<?> rows) {
+    public Pager(long total, List<?> rows) {
         this.total = total;
         this.rows = rows;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 

@@ -1,5 +1,7 @@
 package info.doushen.system.biz.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DictService;
@@ -29,13 +31,11 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public Pager pageDictList(Query query) {
-        int count = dictMapper.count(query);
-        if (count == 0) {
-            return new Pager(count, new ArrayList<DictEntity>());
-        }
+    public PageInfo<DictEntity> pageDictList(Query query) {
+        PageHelper.startPage(query.getOffset(), query.getLimit());
         List<DictEntity> dictList = dictMapper.list(query);
-        return new Pager(count, dictList);
+        PageInfo<DictEntity> pageInfo = new PageInfo<>(dictList);
+        return pageInfo;
     }
 
     @Override

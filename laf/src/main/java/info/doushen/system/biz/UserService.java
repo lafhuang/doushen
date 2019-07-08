@@ -1,5 +1,6 @@
 package info.doushen.system.biz;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.entity.UserEntity;
@@ -29,7 +30,7 @@ public interface UserService {
      * @param query
      * @return
      */
-    Pager pageUserList(Query query);
+    PageInfo<UserEntity> pageUserList(Query query);
 
     /**
      * 获取用户信息

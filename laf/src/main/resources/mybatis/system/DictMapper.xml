@@ -16,16 +16,6 @@
 		    dict_type
 	</select>
 
-	<select id="count" parameterType="info.doushen.common.utils.Query" resultType="java.lang.Integer">
-		SELECT
-		    COUNT(1)
-		FROM
-		    sys_dict
-		<where>
-			<if test="dictType != null and dictType != ''"> and dict_type = #{dictType} </if>
-		</where>
-	</select>
-
 	<select id="list" parameterType="info.doushen.common.utils.Query" resultType="info.doushen.system.entity.DictEntity">
 		SELECT
 		    id,
@@ -51,9 +41,6 @@
 				order by dict_type, sort
 			</otherwise>
 		</choose>
-		<if test="offset != null and limit != null">
-			limit #{limit} offset #{offset}
-		</if>
 	</select>
 
 	<insert id="save" parameterType="info.doushen.system.entity.DictEntity" useGeneratedKeys="true" keyProperty="id">

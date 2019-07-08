@@ -15,14 +15,6 @@ import java.util.List;
 public interface SongMapper {
 
     /**
-     * 获取歌曲记录数
-     *
-     * @param query
-     * @return
-     */
-    int count(Query query);
-
-    /**
      * 分页获取歌曲列表
      *
      * @param query

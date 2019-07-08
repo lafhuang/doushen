@@ -1,5 +1,6 @@
 package info.doushen.ent.music.biz;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.ent.music.entity.AlbumEntity;
@@ -21,7 +22,7 @@ public interface AlbumService {
      * @param query
      * @return
      */
-    Pager pageAlbumList(Query query);
+    PageInfo<AlbumEntity> pageAlbumList(Query query);
 
     /**
      * 保存专辑

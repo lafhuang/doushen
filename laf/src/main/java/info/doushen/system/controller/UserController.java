@@ -1,5 +1,6 @@
 package info.doushen.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
@@ -8,7 +9,9 @@ import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleService;
 import info.doushen.system.biz.UserService;
+import info.doushen.system.entity.DictEntity;
 import info.doushen.system.entity.RoleEntity;
+import info.doushen.system.entity.UserEntity;
 import info.doushen.system.vo.UserVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +51,8 @@ public class UserController extends BaseController {
     Pager list(@RequestParam Map<String, Object> params) {
         // 查询列表数据
         Query query = new Query(params);
-        Pager userPage = userService.pageUserList(query);
-        return userPage;
+        PageInfo<UserEntity> pageUser = userService.pageUserList(query);
+        return new Pager(pageUser.getTotal(), pageUser.getList());
     }
 
     @RequiresPermissions("system:user:edit")

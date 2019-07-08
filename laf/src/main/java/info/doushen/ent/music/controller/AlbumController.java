@@ -1,5 +1,6 @@
 package info.doushen.ent.music.controller;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
@@ -10,6 +11,7 @@ import info.doushen.ent.music.biz.SingerService;
 import info.doushen.ent.music.biz.SongService;
 import info.doushen.ent.music.entity.AlbumEntity;
 import info.doushen.ent.music.entity.SingerEntity;
+import info.doushen.ent.music.vo.SongVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,8 +53,8 @@ public class AlbumController extends BaseController {
     @RequiresPermissions("ent:music:album:album")
     Pager list(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
-        Pager albumPage = albumService.pageAlbumList(query);
-        return albumPage;
+        PageInfo<AlbumEntity> pageInfo = albumService.pageAlbumList(query);
+        return new Pager(pageInfo.getTotal(), pageInfo.getList());
     }
 
     @RequiresPermissions("ent:music:album:add")
@@ -112,7 +114,8 @@ public class AlbumController extends BaseController {
         songParams.put("albumId", String.valueOf(albumId));
 
         Query songQuery = new Query(songParams);
-        Pager songPage = songService.pageSongList(songQuery);
+        PageInfo<SongVO> songPageInfo = songService.pageSongList(songQuery);
+        Pager songPage = new Pager(songPageInfo.getTotal(), songPageInfo.getList());
 
         model.addAttribute("songPage", songPage);
 

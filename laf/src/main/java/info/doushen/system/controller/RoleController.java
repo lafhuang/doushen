@@ -1,11 +1,13 @@
 package info.doushen.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import info.doushen.common.Result;
 import info.doushen.common.annotation.Log;
 import info.doushen.common.controller.BaseController;
 import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.RoleService;
+import info.doushen.system.entity.DictEntity;
 import info.doushen.system.entity.RoleEntity;
 import info.doushen.system.vo.RoleVO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -42,8 +44,8 @@ public class RoleController extends BaseController {
     @ResponseBody()
     Pager list(@RequestParam Map<String, Object> params) {
         Query query = new Query(params);
-        Pager rolePage = roleService.pageRoleList(query);
-        return rolePage;
+        PageInfo<RoleEntity> pageRole = roleService.pageRoleList(query);
+        return new Pager(pageRole.getTotal(), pageRole.getList());
     }
 
     @Log("编辑角色")
