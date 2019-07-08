@@ -1,25 +1,30 @@
 <link href="/plugins/bootstrap-table/css/bootstrap-table.min.css" rel="stylesheet">
+<link href="/plugins/bootstrap-treetable/css/bootstrap-treetable.min.css" rel="stylesheet">
 <div class="row">
-	<article class="col-sm-2">
+	<article class="col-sm-1">
 	</article>
-	<article class="col-sm-8">
+	<article class="col-sm-10">
 		<div class="jarviswidget jarviswidget-color-blueDark">
 			<header role="heading" class="ui-sortable-handle">
 				<div class="jarviswidget-ctrls" role="menu">
-					<a shiro:hasPermission="system:menu:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
+					<a shiro:hasPermission="system:menu:add" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add('0');">&nbsp;<i class="fa fa-plus"></i>&nbsp;添&nbsp;加&nbsp;&nbsp;</a>
 					<a shiro:hasPermission="system:menu:batchRemove" class="btn btn-primary btn-sm" href="javascript:void(0);" onclick="add();">&nbsp;<i class="fa fa-plus"></i>&nbsp;删&nbsp;除&nbsp;&nbsp;</a>
 				</div>
 				<h2>菜单 </h2>
 			</header>
 			<div role="content">
 				<div class="widget-body no-padding">
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+					<form id="checkout-form" class="smart-form" novalidate="novalidate" autocomplete="off">
+						<fieldset>
+							<table id="exampleTable">
+							</table>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</div>
 	</article>
-	<article class="col-sm-2">
+	<article class="col-sm-1">
 	</article>
 </div>
 <div>
@@ -44,4 +49,7 @@
 				var s_remove_h = '';
 			</script>
 </div>
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table.min.js" />
+<script type="text/javascript" src="/plugins/bootstrap-table/js/bootstrap-table-zh-CN.min.js" />
+<script type="text/javascript" src="/plugins/bootstrap-treetable/js/bootstrap-treetable.min.js" />
 <script type="text/javascript" th:src="@{'/js/system/menu/menu.js?v=' + ${#strings.randomAlphanumeric(8)}}"/>
