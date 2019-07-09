@@ -60,7 +60,6 @@ function loadDeptTree(childList, parent) {
             $(li).append(span).appendTo(parent);
         }
     }
-
 }
 
 function showDept(deptId) {

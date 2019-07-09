@@ -3,13 +3,6 @@ $().ready(function() {
     var menu_head = "<i class='fa fa-lg fa-fw fa-music'></i>&nbsp;音乐&nbsp;<span>>&nbsp;歌手&nbsp;</span>";
     changeTitle(title, menu_head, 'ent/music/singer');
 
-    $(".singer_tag__item").click(function(){
-        $(this).siblings().removeClass("singer_tag__item--select");
-        $(this).addClass("singer_tag__item--select");
-
-        load();
-    });
-
     $("article").on("click", ".singer_list__item_box a", function() {
         var target = $(this).attr("target");
         getTarget(target);
@@ -94,6 +87,12 @@ function load_singer_dict(dict_type) {
             }
 
             $("#"+dict_type+"_div").html(html);
+
+            $(".singer_tag__item").click(function(){
+                $(this).siblings().removeClass("singer_tag__item--select");
+                $(this).addClass("singer_tag__item--select");
+                load();
+            });
         }
     });
 }

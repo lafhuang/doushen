@@ -29,7 +29,7 @@ function update() {
             $("#singer_edit_btn1").click(function() {
                 $("#singer_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
-                getTarget("/ent/music/singer/"+singerId);
+                getTarget("/ent/music/singer/info/"+singerId);
             });
             $("#singer_edit_btn2").attr("class", "btn btn-default");
             $("#singer_edit_btn2").text("关闭");
@@ -47,7 +47,7 @@ function update() {
             $("#singer_edit_btn1").click(function() {
                 $("#singer_edit_modal").modal('hide');
                 $('.modal-backdrop').remove();
-                getTarget("/ent/music/singer/"+singerId);
+                getTarget("/ent/music/singer/info/"+singerId);
             });
             $("#singer_edit_btn2").attr("class", "btn btn-primary");
             $("#singer_edit_btn2").text("关闭");
