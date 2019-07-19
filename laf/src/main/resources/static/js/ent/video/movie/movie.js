@@ -160,7 +160,7 @@ function batchRemove() {
     var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
     if (rows.length == 0) {
         var title = "批量删除电影";
-        var msg = "未选中电影;
+        var msg = "未选中电影";
         var btn1Text = "关闭";
         var btn1Class = "btn btn-default";
         var btn1Url = "";

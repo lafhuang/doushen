@@ -1,9 +1,5 @@
 package info.doushen.common.cache;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import info.doushen.common.Constant;
-import info.doushen.common.redis.RedisUtil;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
 import org.apache.commons.collections.CollectionUtils;
@@ -50,14 +46,6 @@ public class InitCache implements ApplicationRunner {
                 }
                 typeList.add(dict);
                 dictGroupMap.put(dict.getDictType(), typeList);
-            }
-
-            for (Map.Entry dictEntry : dictGroupMap.entrySet()) {
-                String key = Constant.DICT_CACHE_PREFIX + dictEntry.getKey();
-                if (RedisUtil.hasKey(key)) {
-                    RedisUtil.delete(key);
-                }
-                RedisUtil.set(key, JSONArray.toJSONString(dictEntry.getValue()));
             }
         }
     }

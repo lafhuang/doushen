@@ -2,15 +2,15 @@ package info.doushen.system.biz.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import info.doushen.common.utils.Pager;
 import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
 import info.doushen.system.mapper.DictMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +20,7 @@ import java.util.List;
  * @date 2018/12/12
  */
 @Service
+@CacheConfig(cacheNames = {"dict"})
 public class DictServiceImpl implements DictService {
 
     @Autowired
@@ -67,6 +68,7 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
+    @Cacheable(key = "targetClass + methodName +#p0")
     public List<DictEntity> queryDictByType(String dictType) {
         return dictMapper.queryDictByType(dictType);
     }
