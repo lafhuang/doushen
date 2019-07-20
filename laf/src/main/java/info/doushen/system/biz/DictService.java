@@ -5,6 +5,7 @@ import info.doushen.common.utils.Query;
 import info.doushen.system.entity.DictEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * DictService
@@ -83,5 +84,21 @@ public interface DictService {
      * @return
      */
     List<DictEntity> queryAll();
+
+    /**
+     * 数据字典显示内容
+     *
+     * @param params
+     * @return
+     */
+    String dictDisplay(Map<String, Object> params);
+
+    /**
+     * 分组获取数据字典
+     *
+     * @param params
+     * @return
+     */
+    Map<String, Object> dictGroup(Map<String, Object> params);
 
 }

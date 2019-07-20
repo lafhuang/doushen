@@ -6,12 +6,14 @@ import info.doushen.common.utils.Query;
 import info.doushen.system.biz.DictService;
 import info.doushen.system.entity.DictEntity;
 import info.doushen.system.mapper.DictMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * DictServiceImpl
@@ -76,6 +78,28 @@ public class DictServiceImpl implements DictService {
     @Override
     public List<DictEntity> queryAll() {
         return dictMapper.queryAll();
+    }
+
+    @Override
+    @Cacheable(key = "targetClass + methodName +#p0")
+    public String dictDisplay(Map<String, Object> params) {
+        String dictType = (String) params.get("dictType");
+        String dictValue = (String) params.get("dictValue");
+        if (StringUtils.isEmpty(dictType) || StringUtils.isEmpty(dictValue)) {
+            return "";
+        }
+        String display = "";
+        try {
+            display = dictMapper.dictDisplay(params);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return display;
+    }
+
+    @Override
+    public Map<String, Object> dictGroup(Map<String, Object> params) {
+        return null;
     }
 
 }

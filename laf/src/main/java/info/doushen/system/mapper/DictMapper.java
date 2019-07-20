@@ -4,6 +4,7 @@ import info.doushen.common.utils.Query;
 import info.doushen.system.entity.DictEntity;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * DictMapper
@@ -74,5 +75,13 @@ public interface DictMapper {
      * @return
      */
     List<DictEntity> queryAll();
+
+    /**
+     * 数据字典显示值
+     *
+     * @param params
+     * @return
+     */
+    String dictDisplay(Map<String, Object> params);
 
 }

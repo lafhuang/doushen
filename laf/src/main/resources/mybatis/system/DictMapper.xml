@@ -139,4 +139,14 @@
 		    sort
 	</select>
 
+	<select id="dictDisplay" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT
+			T.DICT_NAME
+		FROM
+			SYS_DICT T
+		WHERE
+			T.DICT_TYPE = #{dictType}
+			AND T.DICT_VALUE = #{dictValue} LIMIT 1
+	</select>
+
 </mapper>
