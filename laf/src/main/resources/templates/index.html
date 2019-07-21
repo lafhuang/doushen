@@ -382,6 +382,25 @@
         })
     }
 
+    $(document).ready(function(){
+      initDict();
+    });
+
+    var dictMap;
+    function initDict() {
+        $.ajax({
+            type: 'get',
+            url : "/system/dict/group",
+            dataType: 'json',
+            cache:false,
+            async:false,
+            contentType:"application/json",
+            success : function(r) {
+                dictMap = r;
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

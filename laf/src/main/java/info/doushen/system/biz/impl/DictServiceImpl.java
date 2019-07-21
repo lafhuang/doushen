@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,8 +99,19 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public Map<String, Object> dictGroup(Map<String, Object> params) {
-        return null;
+    public Map<String, Map<String, String>> dictGroup() {
+        List<DictEntity> dictList = dictMapper.queryAll();
+        Map<String, Map<String, String>> dictMap = new HashMap<>();
+        for (DictEntity dict : dictList) {
+            if (dictMap.containsKey(dict.getDictType())) {
+                dictMap.get(dict.getDictType()).put(dict.getDictValue(), dict.getDictName());
+            } else {
+                Map<String, String> tmp = new HashMap<>();
+                tmp.put(dict.getDictValue(), dict.getDictName());
+                dictMap.put(dict.getDictType(), tmp);
+            }
+        }
+        return dictMap;
     }
 
 }

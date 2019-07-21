@@ -96,9 +96,8 @@ public interface DictService {
     /**
      * 分组获取数据字典
      *
-     * @param params
      * @return
      */
-    Map<String, Object> dictGroup(Map<String, Object> params);
+    Map<String, Map<String, String>> dictGroup();
 
 }
